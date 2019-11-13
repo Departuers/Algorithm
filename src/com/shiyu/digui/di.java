@@ -2,13 +2,18 @@ package com.shiyu.digui;
 
 public class di {
     public static void main(String[] args) {
-//        System.out.println(g(5));
-//        f(12, 155);
-//        int[] arr = {12, 12, 12, 13};
-//        System.out.println(he(arr, 0));
-//        System.out.println(fan("1234", 3));
+        System.out.println(g(5));
+        f(12, 155);
+        int[] arr = {11, 14, 12, 13};
+        System.out.println(he(arr, 0));
+        System.out.println(fan("1234", 3));
         System.out.println(fei(6));
-
+        System.out.println(zd(14, 7));
+        ca(arr, 3);
+        for (int i : arr) {
+            System.out.println(i);
+        }
+        han(3, "A", "B", "C");
     }
 
     /**
@@ -67,8 +72,47 @@ public class di {
      * f(N-1)+f(N-2)=f(N)
      */
     public static int fei(int K) {
-        if (K==1||K==2)
+        if (K == 1 || K == 2)
             return 1;
-        return fei(K-1)+fei(K-2);
+        return fei(K - 1) + fei(K - 2);
+    }
+
+    /**
+     * 6.最大公约数(辗转相除法)
+     */
+    public static int zd(int a, int b) {
+        if (a % b == 0)
+            return b;
+        return zd(b, a % b);
+    }
+
+    /**
+     * 3.插入排序递归写法...
+     */
+    public static void ca(int arr[], int k) {
+        if (k == 0)
+            return;
+        ca(arr, k - 1);
+        int x = arr[k];
+        int index = k - 1;
+        while (index > -1 && x < arr[index]) {
+            arr[index + 1] = arr[index];
+            index--;
+        }
+        arr[++index] = x;
+    }
+
+    /**
+     * 3.汉诺塔
+     */
+    public static void han(int N, String from, String to, String help) {
+        if (N == 1)
+            System.out.println(N + from + to);
+        else {
+            han(N - 1, from, help, to);
+            System.out.println(N + from + to);
+            han(N - 1, help, to, from);
+        }
+
     }
 }

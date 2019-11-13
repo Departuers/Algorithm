@@ -12,8 +12,13 @@ public class JuZhen {
         System.out.println(arr[3][1]);
     }
 
-
+    /**
+     * 顺时针打印二维数组
+     *
+     * @param arr
+     */
     public static void print(int[][] arr) {
-
+        int leftUpRow = 0, leftUpCol = 0, rightDownRow = arr.length - 1, rightDownCol = arr[0].length - 1;
+        
     }
 }
