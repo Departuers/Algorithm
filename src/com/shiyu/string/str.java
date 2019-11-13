@@ -36,6 +36,7 @@ public class str {
         return true;
     }
 
+
     //2.翻转字符串
     public static String reverse(String a) {
         return new StringBuilder(a).reverse().toString();
