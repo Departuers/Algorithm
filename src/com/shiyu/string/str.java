@@ -1,5 +1,7 @@
 package com.shiyu.string;
 
+import com.sun.source.tree.IfTree;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +11,10 @@ public class str {
     public static void main(String[] args) {
         // System.out.println(replace("12 34 "));
 //        System.out.println(tj("aadddd"));
-        System.out.println(check("123SFD","1112222233333FFSSD"));
+//        System.out.println(check("123SFD", "1112222233333FFSSD"));
+//        System.out.println(change("here you are"));
+//        System.out.println(qua("2999000,a000", 3));
+        hui();
 
     }
 
@@ -159,8 +164,9 @@ public class str {
     }
 
     /**
-     * 6.两个字符串的字符集是否相同
-     * 使用map
+     * 6.两个字符串是否由相同的字符组成
+     * 遍历第一个字符串，使用map，key为字符，value作为出现次数，有就行不用加，
+     * 遍历第二个字符串，看key有没有，没有就是false
      *
      * @param s1
      * @param s2
@@ -169,15 +175,136 @@ public class str {
     public static boolean check(String s1, String s2) {
         Map<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < s1.length(); i++) {
-            if (map.get(s1.charAt(i))==null)
-                map.put(s1.charAt(i),1);
+            if (map.get(s1.charAt(i)) == null)
+                map.put(s1.charAt(i), 1);
         }
         for (int i = 0; i < s2.length(); i++) {
             char charAt = s2.charAt(i);
-            if (map.get(charAt)==null){//说明s2此处不在key列表中
+            if (map.get(charAt) == null) {//说明s2此处不在key列表中
                 return false;
             }
         }
         return true;
+    }
+
+    /**
+     * 判断A串是否是B的旋转字符串，
+     * 给定两个字符串，判定s2能否s1通过作循环移位rotate得到的字符串包括
+     * 比如
+     * AEBCD -> EBCD A  ->  BCD AE  ->CD AEB  ->D AEBC  -> AEBCD
+     * 后面移位产生的字符串，s2是否是其旋转产生的子串。
+     * a->b
+     * b+b是否包含a
+     * 思路，b+b把移位的部分，移到前面去了，其中如果包含a，就说明可以通过循环移位得到
+     *
+     * @param A
+     * @param B
+     * @return
+     */
+    public static boolean xunhuan(String A, String B) {
+        if (A.length() != B.length())
+            return false;
+        StringBuilder sb = new StringBuilder(B).append(B);
+        return sb.toString().contains(A);
+    }
+
+    /**
+     * 判断A串是否是B的旋转字符串的子串，
+     * 给定两个字符串，判定s2能否s1通过作循环移位rotate得到的字符串包括
+     *
+     * @param A
+     * @param B
+     * @return
+     */
+    public static boolean xuanz(String A, String B) {
+        StringBuilder sb = new StringBuilder(B).append(B);
+        return sb.toString().contains(A);
+    }
+
+    /**
+     * 8.将字符串按单词翻转，如将：here you are翻转城are you here
+     * 思路：将整个字符串翻转，再根据空格分割成string数组，string数组就是存的单词的翻转形式
+     * 用stringbuilder，遍历一个单词，翻转一个单词添加进stringbuilder，再加上空格
+     *
+     * @param data
+     * @return
+     */
+    public static String change(String data) {
+        if (data == null || data.length() == 0) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder(data).reverse();
+        String[] split = sb.toString().split("\\s");
+        sb = new StringBuilder();
+        StringBuilder temp = new StringBuilder();
+        for (int i = 0; i < split.length; i++) {
+            sb.append(temp.append(split[i]).reverse());
+            if (i != split.length - 1)
+                sb.append(" ");
+            temp.delete(0, temp.length());
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 9.去掉字符串中连续出现k次的0，正则。。。
+     * 思路一 0{3}代表匹配连续出现3次的0
+     */
+    public static String qu(String s, int k) {
+        String regex = "0{" + k + "}";
+        return s.replaceAll(regex, "");
+    }
+
+    /**
+     * 9.去掉字符串中连续出现k次的0，
+     * 思路二，使用字符数组，遍历，判断找到0计数，else就往stringbuilder后面加count%k个0，
+     * 连续出现k次，多的次数，再stringbuilder后面加上
+     * 最后遍历数组的循环结束时，只走了if，else里面加的0但没走，所以最后要循环添加count%k个0
+     */
+    public static String qua(String s, int k) {
+        StringBuilder sb = new StringBuilder();
+        char[] chars = s.toCharArray();
+        int count = 0;
+        for (int i = 0; i < chars.length; i++) {
+            char aChar = chars[i];
+            if (aChar == '0')
+                count++;
+            else {
+                for (int j = 0; j < count % k; j++) {
+                    sb.append('0');
+                }
+                sb.append(aChar);
+                count = 0;
+            }
+        }
+        for (int j = 0; j < count % k; j++) {
+            sb.append('0');
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 10.回文串
+     * 翻转后和自己对比看是否相等
+     */
+    public static boolean hui(String s) {
+        if (s == null || s.length() == 0) {
+            return true;
+        }
+        return s.equals(new StringBuilder(s).reverse().toString());
+    }
+
+    /**
+     * 10.回文数字，比如1001,1221
+     * 枚举ijji，回文数字都是ijji的形式
+     * 不能暴力模拟分析会超时爆栈
+     */
+    public static void hui() {
+        //90个大概
+        for (int i = 1; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                System.out.println(i * 1000 + j * 100 + j * 10 + i);
+            }
+        }
     }
 }
