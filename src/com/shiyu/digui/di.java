@@ -2,18 +2,20 @@ package com.shiyu.digui;
 
 public class di {
     public static void main(String[] args) {
-        System.out.println(g(5));
-        f(12, 155);
-        int[] arr = {11, 14, 12, 13};
-        System.out.println(he(arr, 0));
-        System.out.println(fan("1234", 3));
-        System.out.println(fei(6));
-        System.out.println(zd(14, 7));
-        ca(arr, 3);
-        for (int i : arr) {
-            System.out.println(i);
-        }
-        han(3, "A", "B", "C");
+//        System.out.println(g(5));
+//        f(12, 155);
+//        int[] arr = {11, 14, 12, 13};
+//        System.out.println(he(arr, 0));
+//        System.out.println(fan("1234", 3));
+//        System.out.println(fei(6));
+//        System.out.println(zd(14, 7));
+//        ca(arr, 3);
+//        for (int i : arr) {
+//            System.out.println(i);
+//        }
+//        han(3, "A", "B", "C");
+        int []arr={1,4,6,7,8,23,64,88,99};
+        System.out.println(binSearch(arr, 0, arr.length-1, 4));
     }
 
     /**
@@ -114,5 +116,20 @@ public class di {
             han(N - 1, help, to, from);
         }
 
+    }
+
+    public static int binSearch(int[] arr, int left, int right, int key) {
+        if (left > right)
+            return -1;
+        if (left==right)
+            return left;
+        int mid=left+((right-left)>>1);
+        int midValue=arr[mid];
+        if (midValue>key)
+            return binSearch(arr,left,mid-1,key);
+        else if (midValue<key)
+            return binSearch(arr,mid+1,right,key);
+        else
+            return mid;
     }
 }

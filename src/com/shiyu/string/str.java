@@ -307,4 +307,20 @@ public class str {
             }
         }
     }
+
+    /**
+     *
+     */
+    public static void solve(String[] w, String[] keys) {
+        int begin=-1;
+        int end=-1;
+        int p2=-1;
+
+        int maxlen=Integer.MAX_VALUE;
+        int[] keyFount=new int[keys.length];
+
+        for (int i = 0; i < w.length; i++) {
+
+        }
+    }
 }
