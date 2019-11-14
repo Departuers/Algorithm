@@ -14,8 +14,9 @@ public class di {
 //            System.out.println(i);
 //        }
 //        han(3, "A", "B", "C");
-        int []arr={1,4,6,7,8,23,64,88,99};
-        System.out.println(binSearch(arr, 0, arr.length-1, 4));
+//        int[] arr = {1, 4, 6, 7, 8, 23, 64, 88, 99};
+//        System.out.println(binSearch(arr, 0, arr.length - 1, 4));
+        System.out.println(lou(3));
     }
 
     /**
@@ -121,15 +122,35 @@ public class di {
     public static int binSearch(int[] arr, int left, int right, int key) {
         if (left > right)
             return -1;
-        if (left==right)
+        if (left == right)
             return left;
-        int mid=left+((right-left)>>1);
-        int midValue=arr[mid];
-        if (midValue>key)
-            return binSearch(arr,left,mid-1,key);
-        else if (midValue<key)
-            return binSearch(arr,mid+1,right,key);
+        int mid = left + ((right - left) >> 1);
+        int midValue = arr[mid];
+        if (midValue > key)
+            return binSearch(arr, left, mid - 1, key);
+        else if (midValue < key)
+            return binSearch(arr, mid + 1, right, key);
         else
             return mid;
+    }
+
+    /**
+     * 小白上楼梯，假设有n阶台阶，小白一次走1阶，或者2阶，或者3阶，
+     * 计算有多少种走完楼梯的方式，
+     * 倒着设计，最后上去，跨1阶，2阶，或者3阶
+     * f(n)=f(n-1)+f(n-2)+f(n-3)
+     * 1阶有一种方法，2阶2种，3阶4种
+     * 设计出口比较重要
+     * @param n
+     * @return
+     */
+    public static int lou(int n) {
+        if (n == 0)
+            return 1;
+        if (n == 1)
+            return 1;
+        if (n == 2)
+            return 2;
+        return lou(n - 1) + lou(n - 2) + lou(n - 3);
     }
 }

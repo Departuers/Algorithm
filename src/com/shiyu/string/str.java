@@ -1,7 +1,5 @@
 package com.shiyu.string;
 
-import com.sun.source.tree.IfTree;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +12,10 @@ public class str {
 //        System.out.println(check("123SFD", "1112222233333FFSSD"));
 //        System.out.println(change("here you are"));
 //        System.out.println(qua("2999000,a000", 3));
-        hui();
+        //  hui();
+        String[] a = {"123", "sff", "ass", "sfa", "123"};
+        String[] n = {"sff", "ass"};
+        search(a, n);
 
     }
 
@@ -311,16 +312,67 @@ public class str {
     /**
      *
      */
-    public static void solve(String[] w, String[] keys) {
-        int begin=-1;
-        int end=-1;
-        int p2=-1;
+    public static void search(String[] w, String[] keys) {
+        int begin = -1;
+        int end = -1;
+        int p2 = -1;
 
-        int maxlen=Integer.MAX_VALUE;
-        int[] keyFount=new int[keys.length];
+        int minlen = Integer.MAX_VALUE;
+        int[] keyFound = new int[keys.length];
 
         for (int i = 0; i < w.length; i++) {
-
+            Arrays.fill(keyFound, 0);
+            String word = w[i];
+            int index = indexof(w, word);
+            if (index == -1)
+                continue;
+            else {
+                keyFound[index] = 1;
+            }
+            int j;
+            if (p2 != -1) {
+                j = p2;
+            } else {
+                j = i + 1;
+            }
+            for (; j < w.length; j++) {
+                String word2 = w[j];
+                int index1 = indexof(keys, word2);
+                if (index1 == -1 || keyFound[index1] == 1)
+                    continue;
+                else {
+                    keyFound[index1] = 1;
+                    if (sum(keyFound) == keys.length) {
+                        p2 = j;
+                        if (j - i + 1 < minlen) {
+                            minlen = j - i + 1;
+                            begin = i;
+                            end = j;
+                        }
+                        break;
+                    }
+                }
+            }
         }
+        System.out.println(begin);
+        System.out.println(end);
+        System.out.println(minlen);
+    }
+
+    //查看单词在数组中的位置
+    private static int indexof(String[] q, String word) {
+        for (int i = 0; i < q.length; i++) {
+            if (q[i].equals(word))
+                return i;
+        }
+        return -1;
+    }
+
+    private static int sum(int[] arr) {
+        int sum = 0;
+        for (int i : arr) {
+            sum += i;
+        }
+        return sum;
     }
 }
