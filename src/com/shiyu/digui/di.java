@@ -141,6 +141,7 @@ public class di {
      * f(n)=f(n-1)+f(n-2)+f(n-3)
      * 1阶有一种方法，2阶2种，3阶4种
      * 设计出口比较重要
+     *
      * @param n
      * @return
      */
