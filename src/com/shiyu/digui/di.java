@@ -16,7 +16,8 @@ public class di {
 //        han(3, "A", "B", "C");
 //        int[] arr = {1, 4, 6, 7, 8, 23, 64, 88, 99};
 //        System.out.println(binSearch(arr, 0, arr.length - 1, 4));
-        System.out.println(lou(3));
+        //   System.out.println(lou(3));
+        System.out.println(zda(4, 12));
     }
 
     /**
@@ -87,6 +88,12 @@ public class di {
         if (a % b == 0)
             return b;
         return zd(b, a % b);
+    }
+    /**
+     * 6.最大公约数(辗转相除法)
+     */
+    public static int zda(int a, int b) {
+        return b == 0?a:zda(b,a%b);
     }
 
     /**
