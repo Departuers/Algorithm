@@ -17,8 +17,20 @@ public class di {
 //        int[] arr = {1, 4, 6, 7, 8, 23, 64, 88, 99};
 //        System.out.println(binSearch(arr, 0, arr.length - 1, 4));
         //   System.out.println(lou(3));
-        System.out.println(zda(4, 12));
+//        System.out.println(zda(4, 12));
+
+//        int arr[] = {5, 1, 2, 3, 4};
+//        System.out.println(min(arr));
+
+//        int arr[] = {-1, 0, 1, 3, 8};
+//        System.out.println(moshu(arr));
+
+//        String[] arr = {"ab", "", "ac", "ad", "", "ae", ""};
+//        System.out.println(indexOf(arr, "ae"));
+        int[] arr = {1, 9, 2, 5, 6, 7, 8, 9, 3, 4, 6, 8, 0};
+        zui(arr);
     }
+
 
     /**
      * 1.求阶乘
@@ -89,11 +101,12 @@ public class di {
             return b;
         return zd(b, a % b);
     }
+
     /**
      * 6.最大公约数(辗转相除法)
      */
     public static int zda(int a, int b) {
-        return b == 0?a:zda(b,a%b);
+        return b == 0 ? a : zda(b, a % b);
     }
 
     /**
@@ -160,5 +173,115 @@ public class di {
         if (n == 2)
             return 2;
         return lou(n - 1) + lou(n - 2) + lou(n - 3);
+    }
+
+    /**
+     * 7.旋转数组的最小数字(改造二分法)有重复元素就失效，不能用，只能顺序扫描
+     * 把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转，
+     * 输入一个递增排序数组的一个旋转，输出该数组的最小元素，例如，数组3,4,5,1,2是
+     * 1,2,3,4,5的一个旋转，该数组的最小值为1
+     * <p>
+     * 比如5,1,2,3,4
+     * <p>
+     * 思路:观察发现，最小元素在无序的那一方，把无序那一方取出来，再找无序的那一方，
+     * 当只有2个元素的时候，一般是右边的那个元素是最小值
+     * 最大值右边一般是最小值
+     * <p>
+     * 精髓:通过中间元素与第一个元素对比，看哪方无序，缩小范围，找到最小值。
+     *
+     * @param arr
+     * @return
+     */
+    public static int min(int[] arr) {
+        int begin = 0;
+        int end = arr.length - 1;
+        if (arr[begin] < arr[end])
+            return arr[begin];
+        while (begin + 1 < end) {//begin和end相邻
+            int mid = begin + ((end - begin) >> 1);
+            if (arr[mid] >= arr[begin])//左侧有序
+                begin = mid;
+            else end = mid;
+        }
+        return arr[end];
+    }
+
+    /**
+     * 8.魔术索引
+     * 在数组A[0,1，...，n-1]中A[i]=i,满足数组下标，跟对应下标存的值相同，
+     * 给定一个有序整数数组，元素值各不相同，编写一个方法，在数组A中找出一个魔术索引，若存在的话，不存在返回-1。
+     */
+    public static int moshu(int arr[]) {
+        int begin = 0;
+        int end = arr.length - 1;
+        while (begin < end) {
+            if (arr[begin] == begin)
+                return begin;
+            if (arr[end] == end)
+                return end;
+            int mid = begin + ((end - begin) >> 1);
+            if (arr[mid] == mid) {
+                return mid;
+            } else if (arr[mid] < mid) {
+                begin = mid + 1;
+            } else
+                end = mid - 1;
+        }
+        return -1;
+    }
+
+    /**
+     * 9.在有空字符串的有序数组中查找(魔改二分查找)
+     * 有个排序后的字符串数组，其中散布着空字符串，
+     * 编写一个方法，找出给定字符串，(肯定不是空字符串)的索引
+     * 思路:先找中间元素，while判断如果中间元素是空串，往右走。
+     * 如果中间元素比给定元素大，说明在左半区间，
+     * 如果中间元素比给定元素小，说明在右半区间
+     *
+     * @param arr
+     * @param p
+     * @return
+     */
+    public static int indexOf(String[] arr, String p) {
+        int begin = 0;
+        int end = arr.length - 1;
+        while (begin <= end) {
+            int mid = begin + ((end - begin) >> 1);
+            while (arr[mid].equals(""))
+                mid++;
+            if (arr[mid].compareTo(p) > 0) {
+                end = mid - 1;
+            } else if (arr[mid].compareTo(p) < 0)
+                begin = mid + 1;
+            else
+                return mid;
+        }
+        return -1;
+    }
+
+    /**
+     * 10.求最长连续递增子序列
+     * 比如(1,9,2,5,7,3,4,6,8,0)的最长连续递增子序列是(3,4,6,8)
+     * 未完成...
+     */
+    public static void zui(int[] arr) {
+        int shao = 0;
+        int you = 0;
+        int count = -1;
+        int qi = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[you] < arr[i]) {
+                you++;
+            } else {
+                if (you - shao > count) {
+                    count = you - shao;
+                    qi = shao;
+                    shao = i;
+                }
+                you = i;
+            }
+        }
+        System.out.println(qi);
+        System.out.println(++count);
     }
 }

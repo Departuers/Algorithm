@@ -23,14 +23,16 @@ public class mathtest {
 //        boolean nim = Nim(arr);
 //        System.out.println(nim);
 //        System.out.println(119 - 73);
-        long start = System.nanoTime();
-        System.out.println(jiqiren(6, 6));
-        long end = System.nanoTime();
-        System.out.println(end - start);
-        long starts = System.nanoTime();
-        System.out.println(jiqire(6, 6));
-        long ends = System.nanoTime();
-        System.out.println(ends - starts);
+
+//        long start = System.nanoTime();
+//        System.out.println(jiqiren(6, 6));
+//        long end = System.nanoTime();
+//        System.out.println(end - start);
+//        long starts = System.nanoTime();
+//        System.out.println(jiqire(6, 6));
+//        long ends = System.nanoTime();
+//        System.out.println(ends - starts);
+        yingbi();
 
     }
 
@@ -199,5 +201,19 @@ public class mathtest {
             }
         }
         return state[x][y];
+    }
+
+    public static void yingbi() {
+        int count = 0;
+        for (int i = 0; i <= 10; i++) {
+            for (int j = 0; j <= 10; j++) {
+                for (int k = 0; k <= 10; k++) {
+                    if (i * 1 + j * 2 + k * 5 == 10)
+                        count++;
+                }
+            }
+
+        }
+        System.out.println(count);
     }
 }

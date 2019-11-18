@@ -13,10 +13,12 @@ public class str {
 //        System.out.println(change("here you are"));
 //        System.out.println(qua("2999000,a000", 3));
         //  hui();
-        String[] a = {"123", "sff", "ass", "sfa", "123"};
-        String[] n = {"sff", "ass"};
-        search(a, n);
 
+//        String[] a = {"123", "sff", "ass", "sfa", "123"};
+//        String[] n = {"sff", "ass"};
+//        search(a, n);
+
+        match();
     }
 
     /**
@@ -375,4 +377,64 @@ public class str {
         }
         return sum;
     }
+
+    public static void match() {
+        String s = "ADAABADSCccCC";
+        String p = "AAB" ;
+        Suff[] sa = getSa(s);
+        int l = 0;
+        int r = s.length() - 1;
+        while (r >= 1) {
+            int mid = l + ((r - l) >> 1);
+            Suff midSuff = sa[mid];
+            String tempmid = midSuff.str;
+            int compareRes;
+            if (tempmid.length() >= p.length()) {
+                compareRes = tempmid.substring(0, p.length()).compareTo(p);
+            } else
+                compareRes = tempmid.compareTo(p);
+            if (compareRes == 0) {
+                System.out.println(midSuff.index);
+                break;
+            } else if (compareRes < 0)
+                l = mid + 1;
+            else
+                r = mid - 1;
+        }
+    }
+
+    public static Suff[] getSa(String src) {
+        int strlength = src.length();
+        Suff[] suffs = new Suff[strlength];
+        for (int i = 0; i < strlength; i++) {
+            String suffi = src.substring(i);//截取后缀
+            suffs[i] = new Suff(suffi, i);
+        }
+        Arrays.sort(suffs);
+        return suffs;
+    }
+
+    private static class Suff implements Comparable<Suff> {
+        String str;
+        int index;
+
+        Suff(String str, int index) {
+            this.index = index;
+            this.str = str;
+        }
+
+        @Override
+        public int compareTo(Suff o) {
+            return this.str.compareTo(o.str);
+        }
+
+        @Override
+        public String toString() {
+            return "Suff{" +
+                    "str='" + str + '\'' +
+                    ", index=" + index +
+                    '}';
+        }
+    }
+
 }

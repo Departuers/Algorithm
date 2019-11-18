@@ -8,8 +8,9 @@ public class JuZhen {
                 {9, 10, 11, 12},
                 {13, 14, 15, 16}
         };
-        System.out.println(arr[1][0]);
-        System.out.println(arr[3][1]);
+//        System.out.println(arr[1][0]);
+        print(arr);
+//        System.out.println(arr[3][1]);
     }
 
     /**
@@ -19,6 +20,14 @@ public class JuZhen {
      */
     public static void print(int[][] arr) {
         int leftUpRow = 0, leftUpCol = 0, rightDownRow = arr.length - 1, rightDownCol = arr[0].length - 1;
-        
+
+        while (leftUpCol <= rightDownCol) {
+            System.out.println(arr[leftUpRow][leftUpCol++]);
+        }
+        leftUpCol = rightDownCol;
+        leftUpRow++;
+        while (leftUpRow <= rightDownRow) {
+            System.out.println(arr[leftUpRow++][leftUpCol]);
+        }
     }
 }
