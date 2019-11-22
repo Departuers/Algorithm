@@ -203,16 +203,21 @@ public class mathtest {
         return state[x][y];
     }
 
+    /**
+     * 1分，2分，5分的硬币三种，问组合成1角，共有多少种组合
+     * 1*x+2*y+5*z=10
+     */
     public static void yingbi() {
         int count = 0;
         for (int i = 0; i <= 10; i++) {
             for (int j = 0; j <= 10; j++) {
                 for (int k = 0; k <= 10; k++) {
-                    if (i * 1 + j * 2 + k * 5 == 10)
+                    if (i * 1 + j * 2 + k * 5 == 10) {
                         count++;
+                        System.out.println(i + " " + j + " " + k);
+                    }
                 }
             }
-
         }
         System.out.println(count);
     }

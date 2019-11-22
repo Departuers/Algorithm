@@ -27,7 +27,7 @@ public class di {
 
 //        String[] arr = {"ab", "", "ac", "ad", "", "ae", ""};
 //        System.out.println(indexOf(arr, "ae"));
-        int[] arr = {1, 9, 2, 5, 6, 7, 8, 9, 3, 4, 6, 8, 0};
+        int[] arr = {1, 9, 10, 11, 12, 13, 2, 5, 6, 3, 4, 6, 8, 0};
         zui(arr);
     }
 
@@ -269,19 +269,45 @@ public class di {
         int you = 0;
         int count = -1;
         int qi = 0;
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i <= arr.length; i++) {
+            if (i == arr.length - 1) {
+                if (you + 1 - shao > count) {
+                    qi = shao;
+                    System.out.println(count);
+                    count = i - shao;
+                }
+                break;
+            }
             if (arr[you] < arr[i]) {
                 you++;
             } else {
-                if (you - shao > count) {
-                    count = you - shao;
+                if (you + 1 - shao > count) {
                     qi = shao;
-                    shao = i;
+                    System.out.println(count);
+                    count = i - shao;
                 }
+                shao = you + 1;
                 you = i;
             }
         }
         System.out.println(qi);
-        System.out.println(++count);
+        System.out.println(count);
     }
+
+    /**
+     * 11.设计一个高效的求a的n次幂的算法
+     */
+    public static int cimi(int a, int n) {
+        if (a == 0) return 1;
+        int res = 0;
+        int ex = 1;
+        while ((ex << 1) <= n) {
+            //能翻
+            res = res * res;
+            ex <<= 1;
+        }
+        //翻不了交给下一次递归
+        return res * cimi(a, n - ex);
+    }
+
 }
