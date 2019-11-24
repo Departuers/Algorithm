@@ -22,13 +22,27 @@ public class di {
 //        int arr[] = {5, 1, 2, 3, 4};
 //        System.out.println(min(arr));
 
-        int arr[] = {-2, 0, 1, 2, 4};
-        System.out.println(moshu(arr));
+//        int arr[] = {-2, 0, 1, 2, 4};
+//        System.out.println(moshu(arr));
 
 //        String[] arr = {"ab", "", "ac", "ad", "", "ae", ""};
 //        System.out.println(indexOf(arr, "ae"));
 //        int[] arr = {1, 9, 10, 11, 12, 13, 2, 5, 6, 3, 4, 6, 8, 0};
 //        zui(arr);
+
+//        long l = System.nanoTime();
+//        System.out.println(cimi(3, 18));
+//        long r = System.nanoTime();
+//        long time = r - l;
+//        System.out.println(time);
+//
+//
+//        long ll = System.nanoTime();
+//        System.out.println(Math.pow(3, 18));
+//        long rr = System.nanoTime();
+//        long time1 = rr - ll;
+//        System.out.println(time1);
+
     }
 
 
@@ -298,8 +312,9 @@ public class di {
      * 11.设计一个高效的求a的n次幂的算法
      */
     public static int cimi(int a, int n) {
-        if (a == 0) return 1;
-        int res = 0;
+        if (n == 0)
+            return 1;
+        int res = a;
         int ex = 1;
         while ((ex << 1) <= n) {
             //能翻

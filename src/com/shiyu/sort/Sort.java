@@ -1,11 +1,11 @@
 package com.shiyu.sort;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Sort {
     public static void main(String[] args) {
-        int[] data = {31, 8, 3, 1, 11, 13, 19, 14, 123, 141, 15};
-        System.out.println(Arrays.toString(selectSort(data)));
+        int[] data = random(40, 200);
 //        long MAX = 59084709587505l;
 //        int count = 0;
 //        for (long i = 0; Math.pow(3, i) < MAX; ++i)
@@ -14,7 +14,21 @@ public class Sort {
 //                    if (Math.pow(3, i) * Math.pow(5, j) * Math.pow(7, k) < MAX)
 //                        count++;
 //        System.out.println(count);
+
+        quickSortByTwo(data, 0, data.length - 1);
+        System.out.println(Arrays.toString(data));
+
     }
+
+    public static int[] random(int size, int f) {
+        Random r = new Random();
+        int[] res = new int[size];
+        for (int i = 0; i < size; i++) {
+            res[i] = r.nextInt(f);
+        }
+        return res;
+    }
+
 
     /**
      * 希尔排序
@@ -44,7 +58,7 @@ public class Sort {
      * 冒泡排序法,外层循环i控制轮数，如果有N个元素一共就要进行N-1轮比较
      * 每轮比较出剩余最大的元素，并交换到最后，
      * 外层循环i控制轮数，并间接控制内层循环边界，每轮的边界就是num.length - i
-     * O(n^2)
+     * O(n²)
      *
      * @param arr
      * @return
@@ -75,6 +89,7 @@ public class Sort {
      * 每轮找出最小元素，放在数组前面，外层循环i控制边界，代表已经有序了的元素
      * 外层i还代表最小元素已经交换到哪个位置了
      * 内层循环，往后比较，找出剩余最小元素的索引，在外层循环交换元素
+     * O(n²)
      *
      * @param arr
      * @return
@@ -109,7 +124,7 @@ public class Sort {
             int temp = nums[i];
             int j = i;
             while (j > 0 && temp < nums[j - 1]) {
-                nums[j] = nums[j = 1];
+                nums[j] = nums[j - 1];
                 j--;
             }
             if (j != i) {
@@ -117,5 +132,130 @@ public class Sort {
             }
         }
         return nums;
+    }
+
+    /**
+     * 快速排序法，单边扫描法
+     *
+     * @param arr 要排序的数组
+     * @param l   左边界索引
+     * @param r   右边界索引
+     */
+    public static void quickSortByOne(int[] arr, int l, int r) {
+        if (l < r) {
+            int q = part(arr, l, r);
+            quickSortByOne(arr, l, q - 1);
+            quickSortByOne(arr, q + 1, r);
+        }
+    }
+
+    public static int part(int[] arr, int l, int r) {
+        int pivot = arr[l];
+        int search = l + 1;
+        int big = r;
+        while (search <= big) {
+            if (arr[search] <= pivot)
+                search++;
+            else {
+                swap(arr, search, big);
+                big--;
+            }
+        }
+        swap(arr, l, big);
+        return big;
+    }
+
+    //交换2个元素
+    public static void swap(int[] arr, int a, int b) {
+        int temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    }
+
+    /**
+     * 快速排序法，双向扫描分区法
+     *
+     * @param arr
+     * @param l
+     * @param r
+     */
+    public static void quickSortByTwo(int[] arr, int l, int r) {
+        if (l < r) {
+            int f = doubleParter(arr, l, r);
+            quickSortByTwo(arr, l, f - 1);
+            quickSortByTwo(arr, f + 1, r);
+        }
+    }
+
+    public static int doublePart(int[] arr, int l, int r) {
+        int pivot = arr[l];
+        int left = l + 1;
+        int right = r;
+        while (left <= right) {
+            //left一直往右走，循环退出left一定指向第一个大于基准元素的位置
+            while (left <= right && arr[left] <= pivot) {//要控制边界
+                left++;
+            }
+            //right一直往左走，循环退出left一定指向第一个大于基准元素的位置
+            while (left <= right && arr[right] > pivot) {//要控制边界
+                right--;
+            }
+            if (left < right)//要控制边界
+                swap(arr, left, right);
+        }
+        //最外层循环退出，right指向最后一个小于等于基准元素的位置，也是基准元素应该在的位置
+        swap(arr, l, right);
+        return right;
+    }
+
+    //快速排序法，三点中值优化
+    public static int doubleParter(int[] arr, int l, int r) {
+        int midIndex = l + ((r - l) >> 1);
+        int midValueIndex = -1;//中值的下标
+        if (arr[l] <= arr[midIndex] && arr[l] >= arr[r]) {
+            midValueIndex = l;
+        } else if (arr[r] <= arr[midIndex] && arr[r] >= arr[l]) {
+            midValueIndex = r;
+        } else {
+            midValueIndex = midIndex;
+        }
+        swap(arr, l, midValueIndex);
+        int pivot = arr[l];
+        int left = l + 1;
+        int right = r;
+        while (left <= right) {
+            //left一直往右走，循环退出left一定指向第一个大于基准元素的位置
+            while (left <= right && arr[left] <= pivot) {//要控制边界
+                left++;
+            }
+            //right一直往左走，循环退出left一定指向第一个大于基准元素的位置
+            while (left <= right && arr[right] > pivot) {//要控制边界
+                right--;
+            }
+            if (left < right)//要控制边界
+                swap(arr, left, right);
+        }
+        //最外层循环退出，right指向最后一个小于等于基准元素的位置，也是基准元素应该在的位置
+        swap(arr, l, right);
+        return right;
+    }
+
+    public static void mergeSort(int[] arr, int l, int r) {
+        if (l < r) {
+            int mid = l + ((r - l) >> 1);
+            mergeSort(arr, l, mid);
+            mergeSort(arr, mid + 1, r);
+            merge(arr, mid, l, r);
+        }
+    }
+
+    public static int[] help;
+
+    public static void merge(int[] arr, int mid, int l, int r) {
+        help = Arrays.copyOf(arr, arr.length);
+        int left = l;
+        int right = mid + 1;
+        int cur = l;
+
     }
 }
