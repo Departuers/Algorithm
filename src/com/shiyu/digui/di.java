@@ -22,13 +22,13 @@ public class di {
 //        int arr[] = {5, 1, 2, 3, 4};
 //        System.out.println(min(arr));
 
-//        int arr[] = {-1, 0, 1, 3, 8};
-//        System.out.println(moshu(arr));
+        int arr[] = {-2, 0, 1, 2, 4};
+        System.out.println(moshu(arr));
 
 //        String[] arr = {"ab", "", "ac", "ad", "", "ae", ""};
 //        System.out.println(indexOf(arr, "ae"));
-        int[] arr = {1, 9, 10, 11, 12, 13, 2, 5, 6, 3, 4, 6, 8, 0};
-        zui(arr);
+//        int[] arr = {1, 9, 10, 11, 12, 13, 2, 5, 6, 3, 4, 6, 8, 0};
+//        zui(arr);
     }
 
 
