@@ -16,8 +16,6 @@ public class Sort {
 //        System.out.println(count);
 
 
-
-
         for (int j = 0; j < 1000000; j++) {
             for (int i = 1; i < 20; i++) {
                 int[] data = random(20, 200);
@@ -281,5 +279,15 @@ public class Sort {
             cur++;
             left++;
         }
+    }
+
+    /**
+     * 计数排序
+     *
+     * @param arr
+     * @return
+     */
+    public static int[] countSort(int[] arr) {
+        return null;
     }
 }
