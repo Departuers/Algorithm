@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Sort {
     public static void main(String[] args) {
-        int[] data = random(40, 200);
+
 //        long MAX = 59084709587505l;
 //        int count = 0;
 //        for (long i = 0; Math.pow(3, i) < MAX; ++i)
@@ -15,9 +15,17 @@ public class Sort {
 //                        count++;
 //        System.out.println(count);
 
-        quickSortByTwo(data, 0, data.length - 1);
-        System.out.println(Arrays.toString(data));
 
+
+
+        for (int j = 0; j < 1000000; j++) {
+            for (int i = 1; i < 20; i++) {
+                int[] data = random(20, 200);
+                mergeSort(data, 0, 19);
+                if (data[i] < data[i - 1])
+                    System.out.println("错误");
+            }
+        }
     }
 
     public static int[] random(int size, int f) {
@@ -253,9 +261,25 @@ public class Sort {
 
     public static void merge(int[] arr, int mid, int l, int r) {
         help = Arrays.copyOf(arr, arr.length);
-        int left = l;
-        int right = mid + 1;
-        int cur = l;
+        int left = l;//左侧队伍的头部指针，指向待比较的元素
+        int right = mid + 1;//右侧队伍的头部指针，指向待比较的元素
+        int cur = l;//原数组的指针，指向待填入数据的位置
 
+        while (left <= mid && right <= r) {
+            if (help[left] <= help[right]) {
+                arr[cur] = help[left];
+                cur++;
+                left++;
+            } else {
+                arr[cur] = help[right];
+                cur++;
+                right++;
+            }
+        }
+        while (left <= mid) {
+            arr[cur] = help[left];
+            cur++;
+            left++;
+        }
     }
 }
