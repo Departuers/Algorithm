@@ -20,14 +20,6 @@ public class JuZhen {
      */
     public static void print(int[][] arr) {
         int leftUpRow = 0, leftUpCol = 0, rightDownRow = arr.length - 1, rightDownCol = arr[0].length - 1;
-
-        while (leftUpCol <= rightDownCol) {
-            System.out.println(arr[leftUpRow][leftUpCol++]);
-        }
-        leftUpCol = rightDownCol;
-        leftUpRow++;
-        while (leftUpRow <= rightDownRow) {
-            System.out.println(arr[leftUpRow++][leftUpCol]);
-        }
+        
     }
 }

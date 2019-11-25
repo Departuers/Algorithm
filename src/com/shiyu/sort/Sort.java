@@ -1,5 +1,6 @@
 package com.shiyu.sort;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -16,10 +17,10 @@ public class Sort {
 //        System.out.println(count);
 
 
-        for (int j = 0; j < 1000000; j++) {
+        for (int j = 0; j < 100; j++) {
             for (int i = 1; i < 20; i++) {
                 int[] data = random(20, 200);
-                mergeSort(data, 0, 19);
+                countSort(data);
                 if (data[i] < data[i - 1])
                     System.out.println("错误");
             }
@@ -283,11 +284,42 @@ public class Sort {
 
     /**
      * 计数排序
+     * 数组范围很大，会导致辅助空间很大，很稀疏，造成空间浪费,不能有负数
+     * 范围小的，重复元素多是最快的
+     * <p>
+     * O(2N+K)K是数组中的最大值
      *
      * @param arr
      * @return
      */
-    public static int[] countSort(int[] arr) {
-        return null;
+    public static void countSort(int[] arr) {
+        int max = -1;
+        for (int i : arr) {
+            if (i > max)
+                max = i;
+        }
+        int[] help = new int[max + 1];
+        for (int i : arr) {
+            help[i]++;
+        }
+        int k = 0;
+        for (int i = 0; i < help.length; i++) {
+            while (help[i] > 0) {
+                arr[k++] = i;
+                help[i]--;
+            }
+        }
+    }
+
+    public static ArrayList<Integer>[] radix;
+
+    /**
+     * 桶排序
+     *
+     * @param arr
+     */
+    public static void radixSort(int[] arr) {
+        radix=new ArrayList[10];
+
     }
 }
