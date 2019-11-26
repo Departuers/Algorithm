@@ -9,6 +9,7 @@ public class lizi {
         Arrays.sort(data);
         System.out.println(Arrays.toString(data));
 
+
     }
 
     /**
