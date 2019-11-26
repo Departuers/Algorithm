@@ -176,7 +176,7 @@ public class str {
      * @return
      */
     public static boolean check(String s1, String s2) {
-        Map<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
         for (int i = 0; i < s1.length(); i++) {
             if (map.get(s1.charAt(i)) == null)
                 map.put(s1.charAt(i), 1);
@@ -312,7 +312,7 @@ public class str {
     }
 
     /**
-     *
+     *  搜索最短摘要
      */
     public static void search(String[] w, String[] keys) {
         int begin = -1;

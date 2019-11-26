@@ -169,6 +169,8 @@ public class Sort {
             }
         }
         swap(arr, l, big);
+        //最后结束时，big指向最后一个小于等于基准元素的
+        //search指向第一个大于等于基准元素的
         return big;
     }
 
@@ -319,7 +321,7 @@ public class Sort {
      * @param arr
      */
     public static void radixSort(int[] arr) {
-        radix=new ArrayList[10];
+        radix = new ArrayList[10];
 
     }
 }

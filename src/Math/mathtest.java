@@ -63,7 +63,7 @@ public class mathtest {
         final String s = Integer.toString(n, 3);
         char[] arr = new StringBuilder(s).reverse().toString().toCharArray();
         System.out.println(arr);
-        List<Integer> list = new ArrayList<>();
+        List<Integer> list = new ArrayList<Integer>();
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == '2') {
                 list.add(0, -1);//-1插在开头
