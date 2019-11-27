@@ -5,7 +5,7 @@ public class Tanxin {
 
     }
 
-    public static int yingbu() {
+    public static int yingbu(int[] arr, int k, int cur) {
         return 0;
     }
 }

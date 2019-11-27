@@ -1,14 +1,12 @@
 package com.shiyu.sort;
 
-import java.util.Arrays;
-
 public class lizi {
     public static void main(String[] args) {
-        int[] data = {3, 2, 1, 4, 5, 7, 8};
-        // System.out.println(selectK(data, 0, data.length - 1, 7));
-        Arrays.sort(data);
-        System.out.println(Arrays.toString(data));
-
+        int[] data = {2, 2, 1, 2, 5, 2, 1};
+//        System.out.println(selectK(data, 0, data.length - 1, 7));
+//        Arrays.sort(data);
+//        System.out.println(Arrays.toString(data));
+        System.out.println(cha(data));
 
     }
 
@@ -104,4 +102,37 @@ public class lizi {
         swap(arr, l, right);
         return right;
     }
+
+    /**
+     * 3. 超过一半的数
+     * 数组中有一个数超过了数组长度的一半，找出这个元素
+     * 思路1:排序出来，找arr.length/2，
+     * 中间那个肯定是超过数组长度一半元素
+     * 思路2:或者用上题找第K个元素，找第arr.length/2大的元素，需要改动数组的内容
+     * 最佳思路3:消掉不同的数，将整个数组看做两类，
+     * 比如8出现次数超过数组一半，非8这一类，跟8对消，消到最后剩的肯定是那个超过一半的数
+     * <p>
+     * 思路4:hash统计
+     * 用超过一半的数，来消除其他数。
+     *
+     * @return
+     */
+    public static int cha(int[] arr) {
+        int candidate = arr[0];
+        int times = 1;
+        for (int i = 0; i < arr.length; i++) {
+            if (times == 0) {
+                candidate = arr[i];
+                times = 1;
+                continue;
+            }
+            if (arr[i] == candidate) {
+                times++;
+            } else {
+                times--;
+            }
+        }
+        return candidate;
+    }
+
 }
