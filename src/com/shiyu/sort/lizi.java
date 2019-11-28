@@ -1,12 +1,17 @@
 package com.shiyu.sort;
 
+import java.util.Arrays;
+
 public class lizi {
     public static void main(String[] args) {
-        int[] data = {2, 2, 1, 2, 5, 2, 1};
+        int[] data = {1, 1, 2, 2, 2, 2, 1, 3};
 //        System.out.println(selectK(data, 0, data.length - 1, 7));
 //        Arrays.sort(data);
 //        System.out.println(Arrays.toString(data));
-        System.out.println(cha(data));
+        //       System.out.println(shu(data));
+        int[] c = {1, 2, 5};
+        System.out.println(zui(c));
+
 
     }
 
@@ -120,7 +125,7 @@ public class lizi {
     public static int cha(int[] arr) {
         int candidate = arr[0];
         int times = 1;
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 1; i < arr.length; i++) {
             if (times == 0) {
                 candidate = arr[i];
                 times = 1;
@@ -135,4 +140,99 @@ public class lizi {
         return candidate;
     }
 
+    /**
+     * 4.发帖水王加强版
+     * 数组有一个数出现了数组长度的一半，找出这个数
+     * 思路:长度的一半说明数组长度为偶数。一般每隔一个数就是水王，那么两两不同相消除
+     * 最后会消成0，那么水王可能是最后一个元素，也可能是第一个元素。每次扫描多一个动作
+     * 和最后一个数作比较，单独计数。如果不是最后一个元素。那么水王就是留下的那个candidate。
+     *
+     * @param arr
+     * @return
+     */
+    public static int shu(int[] arr) {
+        int candidate = arr[0];
+        int nTimes = 0;
+        int countOfLast = 0;
+        int N = arr.length;
+        for (int i = 0; i < N; i++) {
+            if (arr[i] == arr[N - 1])
+                countOfLast++;//记录每个数与最后一个数相同的个数
+            if (nTimes == 0) {
+                candidate = arr[i];
+                nTimes = 1;
+                continue;
+            }
+            if (arr[i] == candidate) {
+                nTimes++;
+            } else {
+                nTimes--;
+            }
+        }
+        //如果最后一个元素出现次数是数组长度的一半
+        if (countOfLast == N / 2)
+            return arr[N - 1];
+        else
+            return candidate;
+    }
+
+    /**
+     * 最小可用ID
+     * 在非负数组中(乱序)找到最小可分配的ID，从1开始编号，数据量100万
+     * 比如，1,2,3,5,6,7最小可用id就是4。
+     * 如1,2,3,4,5最小可用ID就是6
+     * <p>
+     * 思路1:找一个辅助数组，找到最小id,浪费空间。出现大于数组长度值跳过。
+     *
+     * @return
+     */
+    public static int zui(int[] arr) {
+        int n = arr.length;
+        int[] help = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            if (arr[i] <= n)//出现大于数组长度值跳过!!!
+                help[arr[i]] = 1;
+        }
+        for (int i = 1; i <= n; i++) {
+            if (help[i] == 0)
+                return i;
+        }
+        return n + 1;
+    }
+
+    /**
+     * 最小可用ID,
+     * 思路2:先排序,再找，从1开始，所以对应下标，初始i+1=1对应arr[0]是1
+     *
+     * @param arr
+     * @return
+     */
+    public static int zuii(int[] arr) {
+        Arrays.sort(arr);//先排序
+        int i = 0;
+        while (i < arr.length) {
+            if (i + 1 != arr[i]) {//因为从1开始，所以对应下标，初始i+1=1对应arr[0]是1
+                return i + 1;//
+            }
+        }
+        return i + 1;
+    }
+
+    /**
+     * 最小可用ID,
+     * 最优思路3：
+     *
+     * @param arr
+     * @return
+     */
+    public static int zuiii(int[] arr, int l, int r) {
+        int mid = l + ((r - l) >> 1);
+        int t = mid + 1;//期望得到这个值
+        int q = selectK(arr, l, r, mid - l + 1);
+        if (q == t) {//右侧稀疏
+            return zuiii(arr, mid + 1, r);
+        } else {//左侧稀疏
+            return zuiii(arr, l, mid - 1);
+        }
+    }
 }
