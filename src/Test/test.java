@@ -2,6 +2,7 @@ package Test;
 
 public class test {
     public static void main(String[] args) {
+
         int i=6;//要分5次所以从6开始计算
         while(true)
         {

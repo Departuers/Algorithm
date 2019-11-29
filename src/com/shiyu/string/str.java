@@ -31,7 +31,7 @@ public class str {
      */
     public static boolean cf(String str) {
         if (str == null || str.length() == 0) {
-            System.out.println("hello");
+            System.out.println("空");
             return true;
         }
         int[] flag = new int[128];
@@ -312,7 +312,7 @@ public class str {
     }
 
     /**
-     *  搜索最短摘要
+     * 搜索最短摘要
      */
     public static void search(String[] w, String[] keys) {
         int begin = -1;
@@ -380,7 +380,7 @@ public class str {
 
     public static void match() {
         String s = "ADAABADSCccCC";
-        String p = "AAB" ;
+        String p = "AAB";
         Suff[] sa = getSa(s);
         int l = 0;
         int r = s.length() - 1;
@@ -436,5 +436,4 @@ public class str {
                     '}';
         }
     }
-
 }

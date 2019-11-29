@@ -10,7 +10,7 @@ public class lizi {
 //        System.out.println(Arrays.toString(data));
         //       System.out.println(shu(data));
         int[] c = {1, 2, 5};
-        System.out.println(zui(c));
+        System.out.println(zuiii(c,0,c.length-1));
 
 
     }
@@ -183,6 +183,7 @@ public class lizi {
      * 如1,2,3,4,5最小可用ID就是6
      * <p>
      * 思路1:找一个辅助数组，找到最小id,浪费空间。出现大于数组长度值跳过。
+     * 这个最垃圾，数据一大就暴毙
      *
      * @return
      */
@@ -203,6 +204,7 @@ public class lizi {
     /**
      * 最小可用ID,
      * 思路2:先排序,再找，从1开始，所以对应下标，初始i+1=1对应arr[0]是1
+     * O(nlogn)也很快，次优，但1000万级别数会超过1秒
      *
      * @param arr
      * @return
@@ -220,12 +222,22 @@ public class lizi {
 
     /**
      * 最小可用ID,
-     * 最优思路3：
+     * 最优思路3：但挺复杂。会改变原数组元素
+     * 最佳思路，用快排，分治思想，求出中间元素。查看对应值
+     * 1   2   40  60  61        假设数组有序，
+     * 0   1   2   3   4
+     * 找到索引2，本该对应3，却为4，说明左边稀疏，最小id在左边。
+     * 如果左侧稀疏。即使2的索引值为40，也不关键。它最小可用ID是1-3，因为有序。
+     * 找到索引2，如果对应了3，说明左侧都是稠密的，最小id在右边。
+     * 边界出口挺难推,能找到数组中，最后一个值对应数组下标的元素。l和r都会指向这个元素
+     * 返回l左边界+1就行了
      *
      * @param arr
      * @return
      */
     public static int zuiii(int[] arr, int l, int r) {
+        if (l > r)
+            return l + 1;
         int mid = l + ((r - l) >> 1);
         int t = mid + 1;//期望得到这个值
         int q = selectK(arr, l, r, mid - l + 1);
@@ -235,4 +247,15 @@ public class lizi {
             return zuiii(arr, l, mid - 1);
         }
     }
+
+    /**
+     * 6.合并有序数组:
+     * 给定两个排序后的数组A数组B,其中A的末端有足够的缓冲空间容纳B
+     * 编写一个方法，将B合并到A中去并排序。
+     * 思路:归并的思维，两个指针指向数值的最后一个。对比这两个指针，往数组末端放
+     */
+    public static void hebing() {
+
+    }
+
 }
