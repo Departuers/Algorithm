@@ -1,11 +1,27 @@
 package com.shiyu.digui;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Shenrudigui {
     private static int mod = 1000000007;
+    private static int[] data = {1, 5, 10, 25};
 
     public static void main(String[] args) {
-        System.out.println(fs(100000));
+//        long start = System.nanoTime();
+//        System.out.println(count(100, data));
+//        long end = System.nanoTime();
+//        System.out.println(end-start);
+//        long starts = System.nanoTime();
+//        System.out.println(countWays(100, data));
+//        long ends = System.nanoTime();
+//        System.out.println(ends-starts);
+
+//        System.out.println(check(3));
+
+
     }
+
 
     /**
      * 小白上楼梯，假设有n阶台阶，小白一次走1阶，或者2阶，或者3阶，
@@ -92,10 +108,11 @@ public class Shenrudigui {
      */
     public static void yingbi() {
         int count = 0;
+        //i代表1分，j代表2分，k代表5分
         for (int i = 0; i <= 10; i++) {
             for (int j = 0; j <= 10; j++) {
                 for (int k = 0; k <= 10; k++) {
-                    if (i * 1 + j * 2 + k * 5 == 10) {
+                    if (i + j * 2 + k * 5 == 10) {
                         count++;
                         System.out.println(i + " " + j + " " + k);
                     }
@@ -104,4 +121,89 @@ public class Shenrudigui {
         }
         System.out.println(count);
     }
+
+    /**
+     * --3.硬币表示
+     * <p>
+     * 假设有1元，2元，5元，10元，20元，50元，100元，200元
+     * 用给定硬币构成一个数值n
+     * 假如n=200,3*1+1*2+5+2*20+50+100
+     * 问一共有多少种可能的组合方式
+     * <p>
+     * 思路:把工作交给下一层循环递归写法，重点！！！
+     *
+     * @param n
+     * @param coins
+     * @return
+     */
+    public static int countWays(int n, int[] coins) {
+        if (n <= 0)
+            return 0;
+        return countWaysCore(n, coins, coins.length - 1);
+    }
+
+    public static int countWaysCore(int n, int[] coins, int cur) {
+        if (n <= 0) return 0;
+        if (cur == 0) return 1;
+        int res = 0;
+        for (int i = 0; i * coins[cur] <= n; i++) {
+            int shengyu = n - i * coins[cur];
+            res += countWaysCore(shengyu, coins, cur - 1);
+        }
+        return res;
+    }
+
+    /**
+     * 重点！！！
+     *
+     * @param n
+     * @param coins
+     * @return
+     */
+    public static int count(int n, int[] coins) {
+        int help[][] = new int[4][n + 1];
+        for (int i = 0; i < help.length; i++) {
+            help[i][0] = 1;//第一列初始化为1
+        }
+        for (int i = 0; i < help[1].length; i++) {
+            help[0][i] = 1;//第一行初始化为1
+        }
+        for (int i = 0; i < help.length; i++) {
+            for (int j = 0; j < help[i].length; j++) {
+                System.out.print(help[i][j]);
+            }
+            System.out.println();
+        }
+        for (int i = 1; i < help.length; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                for (int k = 0; k <= j / coins[i]; k++) {
+                    help[i][j] += help[i - 1][j - k * coins[i]];
+                }
+            }
+        }
+        System.out.println();
+        for (int i = 0; i < help.length; i++) {
+            for (int j = 0; j < help[i].length; j++) {
+                System.out.print(help[i][j]);
+            }
+            System.out.println();
+        }
+        return help[3][n - 1];
+    }
+
+    public static Set<String> check(int n) {
+        Set<String> s_n = new HashSet<>();
+        if (n == 1) {
+            s_n.add("()");
+            return s_n;
+        }
+        Set<String> s_n_1 = check(n - 1);
+        for (String s : s_n_1) {
+            s_n.add("()" + s);
+            s_n.add(s + "()");
+            s_n.add("(" + s + ")");
+        }
+        return s_n;
+    }
+
 }
