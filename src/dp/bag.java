@@ -1,18 +1,21 @@
 package dp;
 
+import java.util.Arrays;
+
 /**
  * 01背包问题
  */
 public class bag {
     public static void main(String[] args) {
-        System.out.println(dfs(0, 5));
         System.out.println(dp());
+        System.out.println();
+        System.out.println(dpByOne());
     }
 
     public static int n = 4;//物品数量
     public static int W = 5;//背包容量
-    public static int[] w = {2, 1, 3, 2};
-    public static int[] v = {3, 2, 4, 2};
+    public static int[] w = {2, 1, 3, 2};//重量
+    public static int[] v = {3, 2, 4, 2};//价值
 
     /**
      * 01背包问题
@@ -37,6 +40,7 @@ public class bag {
 
     /**
      * 非常重要
+     *
      * @return 总价值最高
      */
     public static int dp() {
@@ -68,5 +72,65 @@ public class bag {
             System.out.println();
         }
         return dp[n - 1][W];
+    }
+
+    /**
+     * 一维数组解动态规划
+     * 每次倒序更新,不然数据不能重用。
+     * 思路:定义
+     *
+     * @return
+     */
+    public static int dpByOne() {
+        int[] dp = new int[W + 1];
+        System.out.println(Arrays.toString(dp));
+        for (int i = 0; i < n; i++) {
+            for (int j = W; j >= w[i]; j--) {
+                dp[j] = Math.max(dp[j], v[i] + dp[j - w[i]]);
+            }
+            System.out.println(Arrays.toString(dp));
+        }
+        return dp[W];
+    }
+
+    /**
+     * 完全背包，但未经测试不知对错
+     *
+     * @return
+     */
+    public static int dpByWan() {
+        int[] dp = new int[W + 1];
+        System.out.println(Arrays.toString(dp));
+        for (int i = 0; i < n; i++) {
+            for (int j = w[i]; j <= n; j++) {
+                dp[j] = Math.max(dp[j], v[i] + dp[j - w[i]]);
+            }
+            System.out.println(Arrays.toString(dp));
+        }
+        return dp[W];
+    }
+
+    public static int part(int[] arr, int l, int r) {
+        int pri = l;
+        int left = l + 1;
+        int right = r;
+        while (left <= right) {
+            while (left <= right && arr[left] <= pri) {
+                left++;
+            }
+            while (left <= right && arr[right] > pri) {
+                right--;
+            }
+            if (left<right)
+                swap(arr,left,right);
+        }
+        swap(arr,l,right);
+        return right;
+    }
+
+    private static void swap(int[] arr, int left, int right) {
+        int t=arr[left];
+        arr[left]=arr[right];
+        arr[right]=t;
     }
 }

@@ -67,7 +67,7 @@ public class lizi {
             throw new IllegalArgumentException("out");
 
         int temp = part(arr, l, r);
-        int qK = temp - l + 1;
+        int qK = temp - l + 1;//期望值
         if (k == qK)
             return arr[temp];
         else if (k < qK) {

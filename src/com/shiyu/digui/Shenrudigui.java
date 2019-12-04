@@ -1,5 +1,7 @@
 package com.shiyu.digui;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,9 +21,10 @@ public class Shenrudigui {
 
 //        System.out.println(check(3));
 
-
+        //   System.out.println(getSubset2(new int[]{1, 2, 3}, 3));
+  //      System.out.println(getPermutation("abcd"));
+        System.out.println(getPer("ABC"));
     }
-
 
     /**
      * 小白上楼梯，假设有n阶台阶，小白一次走1阶，或者2阶，或者3阶，
@@ -191,6 +194,21 @@ public class Shenrudigui {
         return help[3][n - 1];
     }
 
+    /**
+     * 1.合法括号
+     * 实现一种算法:打印出n对括号的所有有效组合
+     * 如:输入3
+     * ((()))  (()()) (())() ()(()) ()()()
+     * 一生三，放进set里面去重
+     * 新增的括号可以放在左边，右边，里面
+     * n   |  组合
+     * 1      ()
+     * 2      (()) ()()
+     * 3    ((()))  (()()) (())() ()(()) ()()()
+     *
+     * @param n
+     * @return
+     */
     public static Set<String> check(int n) {
         Set<String> s_n = new HashSet<>();
         if (n == 1) {
@@ -204,6 +222,163 @@ public class Shenrudigui {
             s_n.add("(" + s + ")");
         }
         return s_n;
+    }
+
+    /**
+     * 编写一个方法，确定某集合的所有子集。
+     * {A,B,C}  有限集合
+     * {A} {B} {C} {A,B} {A,C} {B,C} {A,B,C}自身也是自身的子集
+     * <p>
+     * C3/1  C3/2  C3/3
+     * 子集生成就是选和不选的问题，要或者不要
+     *
+     * @param arr
+     * @param n
+     * @param cur
+     * @return
+     */
+    public static Set<Set<Integer>> getSubset(int[] arr, int n, int cur) {
+        Set<Set<Integer>> res = new HashSet<>();
+        if (cur == 0) {
+            Set<Integer> nil = new HashSet<>();//空集
+            Set<Integer> first = new HashSet<>();//包含第一个元素的集合
+            first.add(arr[0]);
+            res.add(nil);
+            res.add(first);
+            return res;
+        }
+        Set<Set<Integer>> oldSet = getSubset(arr, n, cur - 1);
+        for (int i = 0; i < n; i++) {
+            Set<Set<Integer>> resNew = new HashSet<>(res);
+            for (Set s : oldSet) {
+                Set clone = (Set) ((HashSet) s).clone();
+                clone.add(arr[i]);
+                resNew.add(clone);
+            }
+            res = resNew;
+        }
+        return res;
+    }
+
+    /**
+     * 子集生成之二进制        {A,B,C}
+     * 对于第一个值，选或者不选。
+     * 对于第二个值，选或者不选。
+     * 对于第三个值，选或者不选。
+     * 会形成一个选择树
+     * 去掉空集就是  2^n-1
+     * 从1-2^n-1把其中的二进制写出来
+     * 0   0   1
+     * 0   1   0
+     * 0   1   1
+     * 1   1   0
+     * C   B   A
+     * 只能这么对应
+     * 0代表不选，1代表选。映射成A，B，C
+     * 只能二进制高位开始对应A,B,C对应，数组低位
+     *
+     * @param arr
+     * @param n
+     * @return
+     */
+    public static ArrayList<ArrayList<Integer>> getSubset2(int[] arr, int n) {
+        //  Arrays.sort(arr);//正序排序
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();//大集合
+        for (int i = (int) (Math.pow(2, n) - 1); i > 0; i--) {
+            ArrayList<Integer> list = new ArrayList<>();//每一个i建立一个list
+            for (int j = n - 1; j >= 0; j--) {
+                if (((i >> j) & 1) == 1) {//检查哪个位上的二进制为1，从高位开始检查，高位对应着数组靠后的元素
+                    list.add(arr[j]);
+                }
+            }
+            res.add(list);
+        }
+
+        return res;
+    }
+
+    /**
+     * 全排列(N!)
+     * 全排列就没有要和不要的概念，全都要，对排列顺序有要求
+     * N!
+     * 某一位上，选谁的概念。
+     * {A,B,C}的全排列
+     * {A,B,C}     {A,C,B}
+     * {B,A,C}     {B,C,A}
+     * {C,A,B}     {C,B,A}
+     * 第一位有3个选择，第二位有2个选择，第一位只有一个选择
+     * 3*2*1=6
+     * <p>
+     * 整体上来说N!比2^n-1增长速度快
+     * 在4的时候，N!就超过2^n-1，超过子集
+     * <p>
+     * 1           A
+     * 2      B A     A  B      把A放在B的左边，右边
+     * 3 {A,B,C}     {A,C,B}    把C放在前一排元素的左边，右边，中间
+     * {B,A,C}     {B,C,A}
+     * {C,A,B}     {C,B,A}
+     *
+     * @param A
+     * @return
+     */
+    public static ArrayList<String> getPermutation(String A) {
+        int n = A.length();
+        ArrayList<String> res = new ArrayList<>();
+        res.add(A.charAt(0) + "");
+        for (int i = 1; i < n; i++) {
+            ArrayList<String> res_new = new ArrayList<>();
+            char c = A.charAt(i);
+            for (String str : res) {
+                String newStr = c + str;
+                res_new.add(newStr);
+                newStr = str + c;
+                res_new.add(newStr);
+                for (int j = 1; j < str.length(); j++) {
+                    newStr = str.substring(0, j) + c + str.substring(j);
+                    res_new.add(newStr);
+                }
+            }
+            res = res_new;
+        }
+        return res;
+    }
+
+    /**
+     * 回溯 全排列
+     * {A,B,C}  全排列就是打乱顺序
+     * 把每一个元素都放到第一个，
+     * nil
+     * A    B   C
+     * B C
+     * C   B
+     * 数组是共享的，因为不停的交换，已经乱了，所以每棵子树遍历结束，要回溯
+     *
+     * @param arr
+     * @param k
+     * @return
+     */
+    private static ArrayList<String> res=new ArrayList<>();
+
+    public static ArrayList<String> getPer(String A) {
+        char[] arr = A.toCharArray();
+        Arrays.sort(arr);
+        getPer(arr, 0);
+        return res;
+    }
+    public static void getPer(char[] arr, int k) {
+        if (k == arr.length) {//排好了一种情况，一条子树走到底了
+            res.add(new String(arr));
+        }
+        for (int i = k; i < arr.length; i++) {
+            swap(arr, k, i);
+            getPer(arr, k + 1);
+            swap(arr, k, i);//回溯
+        }
+    }
+    public static void swap(char[] arr, int i, int j) {
+        char temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 
 }
