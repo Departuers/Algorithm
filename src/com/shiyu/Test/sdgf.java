@@ -1,4 +1,4 @@
-package Test;
+package com.shiyu.Test;
 
 public class sdgf {
     public static void main(String[] args) {
@@ -10,7 +10,7 @@ public class sdgf {
             x[i] = sum;//sum自增
         }
         for (int i = 0; i < 10; i++) {
-            System.out.println(x[i]);
+            System.out.print(x[i]+"  ");
         }
         sum = 1;
         int k = 0;

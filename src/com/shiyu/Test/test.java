@@ -1,4 +1,4 @@
-package Test;
+package com.shiyu.Test;
 
 public class test {
     public static void main(String[] args) {

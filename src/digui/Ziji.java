@@ -1,5 +1,6 @@
 package digui;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,8 +9,13 @@ import java.util.Set;
  */
 public class Ziji {
     public static void main(String[] args) {
+
         int[] arr = {3, 2, 1};
         System.out.println(getSubsets3(arr, arr.length));
+        Integer[] arre = {3, 2, 1};
+        System.out.println(getSubsets2(arre, arr.length));
+        Character[] da = {'A', 'B', 'C'};
+        System.out.println(getSubsets(da, 3));
     }
 
     /**
@@ -72,18 +78,65 @@ public class Ziji {
      * @param n   上数组长度
      * @return
      */
-    public static Set<Set<Integer>> getSubsets2(int[] arr, int n) {
-        Set<Set<Integer>> res = new HashSet<>();
+    public static <T> Set<Set<T>> getSubsets2(T[] arr, int n) {
+        Set<Set<T>> res = new HashSet<>();
         res.add(new HashSet<>());//初始化有个空集
         for (int i = 0; i < n; i++) {
-            Set<Set<Integer>> temp = new HashSet<>();
+            Set<Set<T>> temp = new HashSet<>();
             temp.addAll(res);//要有一个存上一次迭代的结果
-            for (Set<Integer> e : res) {
-                Set<Integer> clone = (Set<Integer>) ((HashSet) e).clone();
+            for (Set<T> e : res) {
+                Set<T> clone = (Set<T>) ((HashSet) e).clone();
                 clone.add(arr[i]);
                 temp.add(clone);
             }
             res = temp;
+        }
+        return res;
+    }
+
+    /**
+     * 子集生成之二进制，代换ABC
+     * 子集生成之二进制(2^n-1)
+     * {A,B,C}
+     * 子集有2^n个，去掉空集就是(2^n-1)
+     * 比如三个都选就是1 1 1，算上0
+     * 对于第一个值，选或者不选。
+     * 对于第二个值，选或者不选。
+     * 对于第三个值，选或者不选。
+     * 会形成一个选择树
+     * 去掉空集就是2^n-1
+     * 从1-2^n-1(去掉空集)把其中的二进制写出来
+     * 0   0   1
+     * 0   1   0
+     * 0   1   1
+     * 1   0   0
+     * 1   0   1
+     * 1   1   0
+     * 1   1   1
+     * C   B   A
+     * 0代表不选，1代表选。映射成A，B，C
+     * 所以要生成子集的源数组，需要按字典序倒序排列
+     * for(1 -> 2^n-1 )
+     * {
+     * list.add(对应元素)
+     * }
+     *
+     * @param arr 要生成子集的数组
+     * @param n   二进制代换子集(去掉空集)是2^n-1个,所以是元素个数
+     * @return
+     */
+    public static <T> ArrayList<ArrayList<T>> getSubsets(T[] arr, int n) {
+        //Arrays.sort(arr);
+        ArrayList<ArrayList<T>> res = new ArrayList<>();
+        for (int i = (int) (Math.pow(2, n) - 1); i > 0; i--) {//i为子集最大数量
+            ArrayList<T> temp = new ArrayList<>();//对于每一个二进制数据，都新建一个list记录
+            for (int j = n - 1; j >= 0; j--) {  //检查二进制每一位是否为1
+                if (((i >> j) & 1) == 1) {
+                    temp.add(arr[j]);
+                }
+            }
+            System.out.println(temp);
+            res.add(temp);
         }
         return res;
     }
