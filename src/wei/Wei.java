@@ -1,4 +1,4 @@
-package com.shiyu.wei;
+package wei;
 
 public class Wei {
     public static void main(String[] args) {

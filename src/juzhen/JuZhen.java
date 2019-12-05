@@ -1,4 +1,4 @@
-package com.shiyu.juzhen;
+package juzhen;
 
 public class JuZhen {
     public static void main(String[] args) {

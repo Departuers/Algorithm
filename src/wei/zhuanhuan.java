@@ -1,4 +1,4 @@
-package com.shiyu.wei;
+package wei;
 
 /**
  * 实现一个整数，输入这个整数，输出该二进制表示1的个数，

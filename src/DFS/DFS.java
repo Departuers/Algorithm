@@ -41,8 +41,8 @@ public class DFS {
         //这两个状态平行
         dfs(arr, k, cur + 1, intS);//不要cur这个元素
         intS.add(arr[cur]);
-
         dfs(arr, k - arr[cur], cur + 1, intS);//要k这个元素
         intS.remove(intS.size() - 1);//回溯
+
     }
 }

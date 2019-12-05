@@ -1,4 +1,4 @@
-package com.shiyu.string;
+package string;
 
 /**
  * KMP字符串匹配...未完

@@ -1,4 +1,4 @@
-package com.shiyu.string;
+package string;
 
 import java.util.ArrayList;
 

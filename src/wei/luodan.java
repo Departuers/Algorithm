@@ -1,4 +1,4 @@
-package com.shiyu.wei;
+package wei;
 
 import java.util.Random;
 

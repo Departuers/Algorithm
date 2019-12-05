@@ -1,4 +1,4 @@
-package com.shiyu.digui;
+package digui;
 
 public class di {
     public static void main(String[] args) {
