@@ -131,7 +131,7 @@ public class Ziji {
         for (int i = (int) (Math.pow(2, n) - 1); i > 0; i--) {//i为子集最大数量
             ArrayList<T> temp = new ArrayList<>();//对于每一个二进制数据，都新建一个list记录
             for (int j = n - 1; j >= 0; j--) {  //检查二进制每一位是否为1
-                if (((i >> j) & 1) == 1) {
+                if (((i >> j) & 1) == 1) {//从j位高位开始检查，添加的也是高位
                     temp.add(arr[j]);
                 }
             }
