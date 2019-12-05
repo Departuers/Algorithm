@@ -1,15 +1,22 @@
 package digui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * 全排列
  */
 public class Quanpailie {
     public static void main(String[] args) {
-
+//        System.out.println(Quanpailie("abc"));
+        System.out.println(getPermutation("abc"));
     }
 
+
+    /**
+     * @param arr 需要进行全排列的字符串
+     * @return
+     */
     public static ArrayList<String> Quanpailie(String arr) {
         int n = arr.length();
         ArrayList<String> res = new ArrayList<>();
@@ -28,10 +35,39 @@ public class Quanpailie {
                     newTemp = str.substring(0, j) + c + str.substring(j);
                     temp.add(newTemp);//加在中间
                 }
-
             }
             res = temp;
         }
         return res;
+    }
+
+    public static ArrayList<String> res = new ArrayList<>();
+
+    public static ArrayList<String> getPermutation(String A) {
+        char[] arr = A.toCharArray();
+        Arrays.sort(arr);//从小到大排序
+        getPermutationCore(arr, 0);
+        return res;
+    }
+
+    public static void getPermutationCore(char[] arr, int k) {
+        //排好了一种情况
+        if (k == arr.length) {
+            res.add(new String(arr));
+        }
+
+        for (int i = k; i < arr.length; i++) {
+            swap(arr, k, i);
+            getPermutationCore(arr, k + 1);
+            swap(arr, k, i);//回溯
+        }
+    }
+
+    public static void swap(char[] arr, int k, int p) {
+        if (k==p)
+            return;
+        char temp = arr[k];
+        arr[k] = arr[p];
+        arr[p] = temp;
     }
 }
