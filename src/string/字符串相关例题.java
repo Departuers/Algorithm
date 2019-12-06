@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("all")
-public class str {
+public class 字符串相关例题 {
     public static void main(String[] args) {
         // System.out.println(replace("12 34 "));
 //        System.out.println(tj("aadddd"));

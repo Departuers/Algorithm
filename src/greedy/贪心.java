@@ -1,6 +1,6 @@
-package Tanxin;
+package greedy;
 
-public class Tanxin {
+public class 贪心 {
     public static void main(String[] args) {
         System.out.println(yingBi(124));
 
@@ -42,7 +42,7 @@ public class Tanxin {
      * <p>
      * 尽量优先先用大面值，就能得到最优解
      *
-     * @param money    当前剩余钱
+     * @param money 当前剩余钱
      * @param cur   当前剩余最大硬币的数组下标
      * @return
      */
@@ -51,11 +51,11 @@ public class Tanxin {
             return 0;
         if (cur == 0)
             return money;
-        int coinValue=Value[cur];
-        int x=money/coinValue;  //求剩余的钱能消耗几枚最大币值
-        int cut=Count[cur];    //求该种硬币有几枚
-        int t=Math.min(x,cut);//计算谁更小
-        return t+yingBiN(money-t*Value[cur],cur-1);
+        int coinValue = Value[cur];
+        int x = money / coinValue;  //求剩余的钱能消耗几枚最大币值
+        int cut = Count[cur];    //求该种硬币有几枚
+        int t = Math.min(x, cut);//计算谁更小
+        return t + yingBiN(money - t * Value[cur], cur - 1);
     }
 
 }

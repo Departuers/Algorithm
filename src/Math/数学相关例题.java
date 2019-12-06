@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("all")
-public class mathtest {
+public class 数学相关例题 {
 
     public static void main(String[] args) {
         //ex(19);

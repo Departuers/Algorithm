@@ -2,7 +2,7 @@ package sort;
 
 import java.util.Arrays;
 
-public class lizi {
+public class 排序例题 {
     public static void main(String[] args) {
         int[] data = {1, 1, 2, 2, 2, 2, 1, 3};
 //        System.out.println(selectK(data, 0, data.length - 1, 7));

@@ -1,4 +1,4 @@
-package digui;
+package recursion;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * 子集生成。
  */
-public class Ziji {
+public class 子集 {
     public static void main(String[] args) {
 
         int[] arr = {3, 2, 1};

@@ -1,6 +1,6 @@
-package juzhen;
+package matrix;
 
-public class JuZhen {
+public class 矩阵 {
     public static void main(String[] args) {
         int[][] arr = {
                 {1, 2, 3, 4},

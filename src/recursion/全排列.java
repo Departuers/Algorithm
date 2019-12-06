@@ -1,4 +1,4 @@
-package digui;
+package recursion;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * 全排列
  */
-public class Quanpailie {
+public class 全排列 {
     public static void main(String[] args) {
 //        System.out.println(Quanpailie("abc"));
         System.out.println(getPermutation("abc"));
@@ -43,6 +43,11 @@ public class Quanpailie {
 
     public static ArrayList<String> res = new ArrayList<>();
 
+    /**
+     *
+     * @param A     需要进行全排列的字符串
+     * @return      返回一个ArrayList
+     */
     public static ArrayList<String> getPermutation(String A) {
         char[] arr = A.toCharArray();
         Arrays.sort(arr);//从小到大排序
@@ -70,4 +75,6 @@ public class Quanpailie {
         arr[k] = arr[p];
         arr[p] = temp;
     }
+
+
 }

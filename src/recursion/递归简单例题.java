@@ -1,6 +1,6 @@
-package digui;
+package recursion;
 
-public class di {
+public class 递归简单例题 {
     public static void main(String[] args) {
 //        System.out.println(g(5));
 //        f(12, 155);

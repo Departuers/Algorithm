@@ -1,11 +1,11 @@
-package digui;
+package recursion;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Shenrudigui {
+public class 深入递归 {
     private static int mod = 1000000007;
     private static int[] data = {1, 5, 10, 25};
 
