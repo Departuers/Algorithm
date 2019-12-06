@@ -25,7 +25,7 @@ public class tongjizifu {
     public static void main(String[] args) {
         char a = 'B';
         System.out.println(a + 0);
-        String[] s = {"123", "asf"};
+        String[] s = {"123", "asfa", "123"};
         for (String bb : s) {
             bb = "42";
             System.out.println(bb);

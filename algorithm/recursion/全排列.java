@@ -12,7 +12,6 @@ public class 全排列 {
         System.out.println(getPermutation("abc"));
     }
 
-
     /**
      * 全排列(N!)
      * 全排列就没有要和不要的概念，全都要，对排列顺序有要求
