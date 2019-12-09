@@ -7,10 +7,14 @@ public class DFS {
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 15, 23, 13, 12};
 //        buFenHe(arr, 46, 0, new ArrayList<>());
+
 //        int[] data = new int[6];
 //        data[0] = 1;
 //        suShuHuan(6,data,1);
-        ShuiWa(N, M);
+
+//        ShuiWa(N, M);
+        NhuangHou(0);
+        System.out.println(cnt);
     }
 
     /**
@@ -50,24 +54,26 @@ public class DFS {
     }
 
     /**
-     * @param n
-     * @param arr
-     * @param cur
+     *
+     * @param n     素数环有几个元素
+     * @param arr   存储素数环元素的辅助数组
+     * @param cur   DFS搜索过程中变化的cur,也就是数组下标,初始化为1,因为第一个固定为1,只能从第二个开始
      */
     public static void suShuHuan(int n, int[] arr, int cur) {
+        //n就是环的长度,当足够长,判断最后一个和最后一个元素之和是不是素数
         if (cur == n && isP(arr[0] + arr[n - 1])) {
             print(arr);
             return;
         }
-        for (int i = 2; i <= n; i++) {
+        //核心DFS逻辑
+        for (int i = 2; i <= n; i++) {//判断是否出现过,以及是否与之前元素之和为素数
             if (check(arr, i, cur)) {
                 arr[cur] = i;
                 suShuHuan(n, arr, cur + 1);
-                arr[cur] = 0;
+                arr[cur] = 0;//回溯
             }
         }
     }
-
     private static void print(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + (i == arr.length - 1 ? "" : " "));
@@ -76,9 +82,10 @@ public class DFS {
     }
 
     /**
-     * 判断是否
+     * 1.判断i没有在arr数组中出现过
+     * 2.判断arr[cur-1]+k是不是一个素数
      *
-     * @param arr
+     * @param arr   源数组
      * @param k
      * @param cur
      * @return
@@ -192,10 +199,43 @@ public class DFS {
         }
     }
 
-    public static int[] rec;
-    public static int cnt;
-
-    public static void NhuangHou(int row, int n) {
+    public static int n = 8;
+    public static int[] rec = new int[n];
+    public static int cnt = 0;
+    /**
+     * 4.n皇后问题
+     * 在一个n*n的棋盘上面放n个皇后,每行,每列,每条对角线上都只能有一个皇后
+     * n=3的时候是无解的,
+     * NOO
+     * OON          N代表皇后,第二行的皇后和第三行的皇后冲突
+     * ONO
+     *
+     * ONO
+     * OON          N代表皇后,第二行的皇后怎么放和第一行的皇后冲突
+     * ONO
+     *
+     * OON
+     * NOO          N代表皇后,第二行的皇后和第三行的皇后冲突
+     * ONO
+     *
+     * N=4,有4个皇后只有2种摆法
+     * 一直在变,只能用DFS枚举所有状态,但可以提前剪枝,很难把这个问题用迭代模拟,
+     * 思路:每一行只能放一个皇后,每次只放一个皇后
+     * 一行,一列一个对角线只能有一个皇后
+     * 每一次都是处理一个新行,不用判断行,判断列也比较简单,主要是判断对角线
+     * 1,1     1,2     1,3     1,4
+     * 2,1     2,2     2,3     2,4
+     * 3,1     3,2     3,3     3,4
+     * 4,1     4,2     4,3     4,4
+     *
+     * 判断对角线:比如3,2的对角线,与它处在同一条主对角线,他们之差相同
+     * 比如,3-2=1  跟它同一条对角线的,2,1也是,2-1=1
+     * 与3,2处在同一条次对角线,他们之和相同
+     * 比如,3+2=5,跟它同一条对角线的,2+3=5,1+4=5
+     * 他们处于同一条对角线,这样判断比较简便
+     * @param row   皇后的数量是n,row是辅助数组的行
+     */
+    public static void NhuangHou(int row) {
         if (row == n) {
             cnt++;
             return;
@@ -204,13 +244,13 @@ public class DFS {
             boolean ok = true;
             for (int i = 0; i < row; i++) {
                 if (rec[i] == col || i + rec[i] == row + col || rec[i] - i == col - row) {
-                    ok=false;
+                    ok = false;
                     break;
                 }
             }
-            if (ok){
-                rec[row]=col;
-                NhuangHou(row+1,n);
+            if (ok) {
+                rec[row] = col;
+                NhuangHou(row + 1);
                 //rec[row]=0  //写不写回溯都可以,
             }
         }
