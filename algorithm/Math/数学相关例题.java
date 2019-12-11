@@ -121,4 +121,18 @@ public class 数学相关例题 {
         return b == 0 ? a : zda(b, a % b);
     }
 
+    /**
+     * 判断是不是一个素数，
+     * @param x
+     * @return
+     */
+    public static boolean isPrimer(int x) {
+        if(x <= 1) return false;
+        int m = (int) Math.floor(Math.sqrt(x) + 0.5);
+        for (int i = 0; i * i <= x; i++) {
+            if (x % i == 0)
+                return false;
+        }
+        return true;
+    }
 }

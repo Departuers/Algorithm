@@ -53,63 +53,6 @@ public class DFS {
         intS.remove(intS.size() - 1);
     }
 
-    /**
-     *
-     * @param n     素数环有几个元素
-     * @param arr   存储素数环元素的辅助数组
-     * @param cur   DFS搜索过程中变化的cur,也就是数组下标,初始化为1,因为第一个固定为1,只能从第二个开始
-     */
-    public static void suShuHuan(int n, int[] arr, int cur) {
-        //n就是环的长度,当足够长,判断最后一个和最后一个元素之和是不是素数
-        if (cur == n && isP(arr[0] + arr[n - 1])) {
-            print(arr);
-            return;
-        }
-        //核心DFS逻辑
-        for (int i = 2; i <= n; i++) {//判断是否出现过,以及是否与之前元素之和为素数
-            if (check(arr, i, cur)) {
-                arr[cur] = i;
-                suShuHuan(n, arr, cur + 1);
-                arr[cur] = 0;//回溯
-            }
-        }
-    }
-    private static void print(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + (i == arr.length - 1 ? "" : " "));
-        }
-        System.out.println();
-    }
-
-    /**
-     * 1.判断i没有在arr数组中出现过
-     * 2.判断arr[cur-1]+k是不是一个素数
-     *
-     * @param arr   源数组
-     * @param k
-     * @param cur
-     * @return
-     */
-    private static boolean check(int[] arr, int k, int cur) {
-        for (int i : arr) {
-            if (i == k || !isP(arr[cur - 1] + k)) return false;
-        }
-        return true;
-    }
-
-    /**
-     * 判断是否为素数
-     *
-     * @param k 需要判断是不是为素数的数字
-     * @return b
-     */
-    private static boolean isP(int k) {
-        for (int i = 2; i * i <= k; i++) {
-            if (k % i == 0)
-                return false;
-        }
-        return true;
-    }
 
     public static int N = 10;
     public static int M = 12;
@@ -202,6 +145,7 @@ public class DFS {
     public static int n = 8;
     public static int[] rec = new int[n];
     public static int cnt = 0;
+
     /**
      * 4.n皇后问题
      * 在一个n*n的棋盘上面放n个皇后,每行,每列,每条对角线上都只能有一个皇后
@@ -209,15 +153,15 @@ public class DFS {
      * NOO
      * OON          N代表皇后,第二行的皇后和第三行的皇后冲突
      * ONO
-     *
+     * <p>
      * ONO
      * OON          N代表皇后,第二行的皇后怎么放和第一行的皇后冲突
      * ONO
-     *
+     * <p>
      * OON
      * NOO          N代表皇后,第二行的皇后和第三行的皇后冲突
      * ONO
-     *
+     * <p>
      * N=4,有4个皇后只有2种摆法
      * 一直在变,只能用DFS枚举所有状态,但可以提前剪枝,很难把这个问题用迭代模拟,
      * 思路:每一行只能放一个皇后,每次只放一个皇后
@@ -227,13 +171,14 @@ public class DFS {
      * 2,1     2,2     2,3     2,4
      * 3,1     3,2     3,3     3,4
      * 4,1     4,2     4,3     4,4
-     *
+     * <p>
      * 判断对角线:比如3,2的对角线,与它处在同一条主对角线,他们之差相同
      * 比如,3-2=1  跟它同一条对角线的,2,1也是,2-1=1
      * 与3,2处在同一条次对角线,他们之和相同
      * 比如,3+2=5,跟它同一条对角线的,2+3=5,1+4=5
      * 他们处于同一条对角线,这样判断比较简便
-     * @param row   皇后的数量是n,row是辅助数组的行
+     *
+     * @param row 皇后的数量是n,row是辅助数组的行
      */
     public static void NhuangHou(int row) {
         if (row == n) {
@@ -254,5 +199,128 @@ public class DFS {
                 //rec[row]=0  //写不写回溯都可以,
             }
         }
+    }
+
+    /**
+     * @param n   素数环有几个元素
+     * @param arr 存储素数环元素的辅助数组
+     * @param cur DFS搜索过程中变化的cur,也就是数组下标,初始化为1,因为第一个固定为1,只能从第二个开始
+     */
+    public static void suShuHuan(int n, int[] arr, int cur) {
+        //n就是环的长度,当足够长,判断最后一个和最后一个元素之和是不是素数
+        if (cur == n && isP(arr[0] + arr[n - 1])) {
+            print(arr);
+            return;
+        }
+        //核心DFS逻辑
+        for (int i = 2; i <= n; i++) {//判断是否出现过,以及是否与之前元素之和为素数
+            if (check(arr, i, cur)) {
+                arr[cur] = i;
+                suShuHuan(n, arr, cur + 1);
+                arr[cur] = 0;//回溯
+            }
+        }
+    }
+
+    private static void print(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + (i == arr.length - 1 ? "" : " "));
+        }
+        System.out.println();
+    }
+
+    /**
+     * 1.判断i没有在arr数组中出现过
+     * 2.判断arr[cur-1]+k是不是一个素数
+     *
+     * @param arr 源数组
+     * @param k
+     * @param cur
+     * @return
+     */
+    private static boolean check(int[] arr, int k, int cur) {
+        for (int i : arr) {
+            if (i == k || !isP(arr[cur - 1] + k)) return false;
+        }
+        return true;
+    }
+
+    /**
+     * 判断是否为素数
+     *
+     * @param k 需要判断是不是为素数的数字
+     * @return b
+     */
+    private static boolean isP(int k) {
+        for (int i = 2; i * i <= k; i++) {
+            if (k % i == 0)
+                return false;
+        }
+        return true;
+    }
+
+    public static int n_KunNan = 10;
+    public static int l_KunNan = 4;
+    public static int count_KunNan = 0;
+
+    /**
+     * 6.困难的串
+     * 问题描述:如果一个字符串包含两个相邻的重复子串，则称它为容易的串，其他串称为困难的串,
+     * 如:BB，ABCDACABCAB,ABCDABCD都是容易的，A,AB,ABA,D,DC,ABDAB,CBABCBA都是困难的。
+     * <p>
+     * 输入正整数n,L，输出由前L个字符(大写英文字母)组成的，求字典序第n小的困难的串。
+     * 例如，当L=3时，前7个困难的串分别为:
+     * A,AB,ABA,ABAC,ABACA,ABACAB,ABACABA
+     * n指定为4的话,输出ABAC
+     * <p>
+     * 思路:比如A  B  C    要保证字典序小,添加字典序比较小的字母
+     * 找路径产生的字符串
+     * 第一个抓A,第二个再抓A就有2个重复相邻子串了,不符合条件   {A}
+     * 第二个抓B,符合条件,这时候维持着字典序最小             {A,B}
+     * 第三个再抓A,还是符合条件                           {A,B,A}
+     * 第四个抓A还是抓B都不行,只能抓C                      {A,B,A,C}
+     * 第五个抓A,符合没有相邻重复子串                      {A,B,A,C,A}
+     * 第六个抓B                                       {A,B,A,C,A,B}
+     * 每次增加一个字符
+     * 注意,能往深走,就不能横着走,减少困难的串的不必要判断
+     *
+     * @param l
+     * @param n
+     * @param prefix
+     */
+    public static void KunNan(int l, int n, String prefix) {
+        //尝试在prefix后面加一个字符
+        for (char i = 'A'; i < 'A' + l; i++) {
+            if (isHard(prefix, i)) {
+                String x = prefix + i;
+                System.out.println(x);
+                count_KunNan++;
+                if (count_KunNan == n)
+                    System.exit(0);
+                KunNan(l, n, x);
+            }
+        }
+    }
+
+    /**
+     * 判断prefix+i是否是一个困难的串
+     * 1.遍历所有的长度为偶数的子串,看是否对称
+     * 2.然而prefix是一个困难的串,比如ABA i
+     * i与前面的若干(可以是0)个字符,看做一个后缀,后缀跟前缀比
+     *
+     * @param prefix
+     * @param i
+     * @return
+     */
+    public static boolean isHard(String prefix, char i) {
+        int count = 0;//截取的长度
+        for (int j = prefix.length(); j >= 0; j -= 2) {
+            final String s1 = prefix.substring(j, j + count + 1);
+            final String s2 = prefix.substring(j + count + 1) + i;
+            if (s1.equals(s2))
+                return false;
+            count++;
+        }
+        return true;
     }
 }
