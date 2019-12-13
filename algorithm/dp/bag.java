@@ -3,7 +3,7 @@ package dp;
 import java.util.Arrays;
 
 /**
- * 01背包问题
+ * 01背包问题和完全背包
  */
 public class bag {
     public static void main(String[] args) {
@@ -13,7 +13,7 @@ public class bag {
     }
 
     public static int n = 4;//物品数量
-    public static int W = 5;//背包容量
+    public static int W = 10;//背包容量
     public static int[] w = {2, 1, 3, 2};//重量
     public static int[] v = {3, 2, 4, 2};//价值
 
@@ -77,14 +77,14 @@ public class bag {
     /**
      * 一维数组解动态规划
      * 每次倒序更新,不然数据不能重用。
-     * 思路:定义
+     * 思路:定义一个数组作为辅助空间,初始为n+1,根据dp公式倒序更新
      *
      * @return
      */
     public static int dpByOne() {
         int[] dp = new int[W + 1];
         System.out.println(Arrays.toString(dp));
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {//控制循环次数
             for (int j = W; j >= w[i]; j--) {
                 dp[j] = Math.max(dp[j], v[i] + dp[j - w[i]]);
             }
@@ -102,35 +102,15 @@ public class bag {
         int[] dp = new int[W + 1];
         System.out.println(Arrays.toString(dp));
         for (int i = 0; i < n; i++) {
-            for (int j = w[i]; j <= n; j++) {
-                dp[j] = Math.max(dp[j], v[i] + dp[j - w[i]]);
+            for (int j = w[i + 1]; j <= n; j++) {
+                dp[j] = Math.max(dp[j], v[i + 1] + dp[j - w[i + 1]]);
             }
             System.out.println(Arrays.toString(dp));
         }
         return dp[W];
     }
 
-    public static int part(int[] arr, int l, int r) {
-        int pri = l;
-        int left = l + 1;
-        int right = r;
-        while (left <= right) {
-            while (left <= right && arr[left] <= pri) {
-                left++;
-            }
-            while (left <= right && arr[right] > pri) {
-                right--;
-            }
-            if (left<right)
-                swap(arr,left,right);
-        }
-        swap(arr,l,right);
-        return right;
-    }
+    public static void DpbyWan() {
 
-    private static void swap(int[] arr, int left, int right) {
-        int t=arr[left];
-        arr[left]=arr[right];
-        arr[right]=t;
     }
 }
