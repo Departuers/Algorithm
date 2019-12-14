@@ -5,7 +5,7 @@ import java.util.Random;
 /* 题解，一个数组除了某一个数字出现了1次，其他的数都出现了2次，
 * 要找出只出现一次的数字，主要就是A^A^B^B^C=C，直接异或就行
 */
-public class luodan {
+public class 落单的数字 {
     public static void main(String[] args) {
         int N = 11;
         int[] arr = new int[N];
