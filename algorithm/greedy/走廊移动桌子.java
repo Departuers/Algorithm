@@ -1,12 +1,15 @@
 package greedy;
 
+import java.util.Scanner;
+
 /**
+ * https://www.cnblogs.com/yxh-amysear/p/8393920.html
  * For each room, at most one table will be either moved in or moved out. Now, the manager seeks out a method to minimize the time to move all the tables. Your job is to write a program to solve the manager’s problem.
  * Input
  * The input consists of T test cases. The number of test cases ) (T is given in the first line of the input. Each test case begins with a line containing an integer N , 1<=N<=200 , that represents the number of tables to move. Each of the following N lines contains two positive integers s and t, representing that a table is to move from room number s to room number t (each room number appears at most once in the N lines). From the N+3-rd line, the remaining test cases are listed in the same manner as above.
  * Output
  * The output should contain the minimum time in minutes to complete the moving, one per line.
- * Sample Input
+ * Sample Input 第一个表示n个测试用例,我只做一个
  * 3 4 10 20 30 40 50 60 70 80 2 1 3 2 200 3 10 100 20 80 30 50
  * Sample Output
  * 10 20 30
@@ -18,9 +21,35 @@ package greedy;
  * 要经过，一次只能经过一个桌子，则需要m*10的时间移动桌子。设一个数组，下标值即为房间号。
  * 桌子经过房间时，该房间号为下标对应的数组值即加10。最后找到最大的数组值，即为移动完桌子
  * 需要的最短时间。
+ * 未完成跳过...
  */
 public class 走廊移动桌子 {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int count = sc.nextInt();
+        int ans = 0;
+        int a = 0;
+        int map[] = new int[210];
+        for (int i = 0; i < count; i++) {
 
+            int c=sc.nextInt();
+            int b = sc.nextInt();
+            if (c > b) {
+                swap(map, c, b);
+            }
+            for (int j = (a + 1) / 2; j <= (b + 1) / 2; j++) {
+                map[j]++;
+            }
+            for (int j = 0; j < 201; j++) {
+                ans = Math.max(ans, map[j]);
+            }
+        }
+        System.out.println(ans * 10);
+    }
+
+    public static void swap(int[] a, int b, int c) {
+        int temp = a[b];
+        a[b] = a[c];
+        a[c] = temp;
     }
 }

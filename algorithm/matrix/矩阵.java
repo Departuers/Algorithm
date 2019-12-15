@@ -9,6 +9,7 @@ public class 矩阵 {
                 {13, 14, 15, 16}
         };
         print(arr);
+
     }
 
     /**
@@ -32,6 +33,14 @@ public class 矩阵 {
         leftUpRow = rightDownRow;//恢复
         leftUpCol--;
         while (leftUpCol >= rightDownCol) {
+        }
+    }
+
+    public static void she(int n) {
+        int[][] arr = new int[n][n];
+        int tot = arr[0][n - 1];
+        while (tot < n * n) {
+
         }
     }
 }
