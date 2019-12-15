@@ -1,8 +1,6 @@
 package greedy;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * 问题:看电视
@@ -35,6 +33,7 @@ import java.util.Scanner;
  * 贪心之活动安排问题:
  * 求出能看到最多的完整的节目,按结束时间升序排列,
  * 当结束时间相同时再按开始时间升序排列,最后从前往后计数即可
+ * 如果后面一个的开始时间,比前面那个的结束早或者相等,就代表这两个不冲突
  */
 public class 看电视 {
     static class Node {
@@ -64,6 +63,20 @@ public class 看电视 {
         }
 
         @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Node node = (Node) o;
+            return start == node.start &&
+                    end == node.end;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(start, end);
+        }
+
+        @Override
         public String toString() {
             return "Node{" +
                     "start=" + start +
@@ -85,17 +98,22 @@ public class 看电视 {
                 return o1.getEnd() - o2.getEnd();
             }
         });
+        Set<Node> set = new HashSet<>();
         System.out.println(data);
         //核心,没懂...
         int k = 0;
         int sum = 1;
         for (int i = 1; i < count; i++) {
-            if (data.get(i).getStart() >= data.get(k).end) {
+            if (data.get(i).getStart() >= data.get(k).end) {//如果后面一个的开始时间,比前面那个的结束早,就代表这两个不冲突
+                set.add(data.get(i));
+                set.add(data.get(k));
                 sum++;
                 k = i;
             }
         }
         System.out.println(sum);
+        for (Node node : set) {
+            System.out.println(node);
+        }
     }
-
 }
