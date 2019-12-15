@@ -1,5 +1,6 @@
 package greedy;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -21,22 +22,35 @@ import java.util.Scanner;
  * <p>
  * 思路:对字符串进行查找,每次查找最大值,查找len-m次就可以,
  * 但查找时需要考虑范围,比如9222225,第1次查询只能查询9到最后一个2这个范围,
- * 查找第i次必须保证后面还剩下m-i个字符不能查找
- *
+ * 查找第i次必须保证后面还剩下m-i个字符不能查找,这样才能保证位数最大,只有这样才能保证原序列
+ * 循环len-m次,每次循环从查找到最大值的下一个字符开始查找
+ * 范围必须保证位数不能小于len-m
+ * 简单来说:
+ * 循环len-m次,(起点)每次从最大值的下一个元素开始找,第i次就是从第i个,查找到,查找范围就是m+i,查找的最大索引为m+i
+ * 非常重要,但还是不太理解
  */
 public class 寻找最大数 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int T = sc.nextInt();
         while (T != 0) {
-            String s = sc.next();
+            char[] s = sc.next().toCharArray();
+            ArrayList<Character> ch = new ArrayList<>();
             int m = sc.nextInt();
-            int n = s.length() - m;//需要保留的长度
+            int n = s.length - m;//需要保留的长度
+            int k = -1;
             for (int i = 0; i < n; i++) {
                 int max = 0;
-
+                for (int j = k + 1; j <= m + i; j++) {//m+i是寻找的终点的索引,最后肯定有m-i个没被查找,只有这样才能保证原序列
+                    int t = s[j];
+                    if (t > max) {
+                        max = t;
+                        k = j;
+                    }
+                }
+                ch.add((char) max);
             }
-
+            System.out.println(ch);
             T--;
         }
 
