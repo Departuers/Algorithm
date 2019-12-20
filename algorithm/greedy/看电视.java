@@ -100,7 +100,6 @@ public class 看电视 {
         });
         Set<Node> set = new HashSet<>();
         System.out.println(data);
-        //核心,没懂...
         int k = 0;
         int sum = 1;
         for (int i = 1; i < count; i++) {

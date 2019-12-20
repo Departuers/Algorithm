@@ -1,5 +1,6 @@
 package UnionFind;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -46,7 +47,6 @@ import java.util.Scanner;
 public class 修计算机 {
     public static int dx[];
     public static int dy[];
-    public static int par[];
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -55,25 +55,29 @@ public class 修计算机 {
         UnionFindE u = new UnionFindE(n);
         dx = new int[n];
         dy = new int[n];
-        par = new int[n];
+        ArrayList<Integer> list = new ArrayList<>();//已经修好的计算机
         for (int i = 0; i < n; i++) {
             dx[i] = sc.nextInt();
             dy[i] = sc.nextInt();
         }
-        int len = 0;
         while (sc.hasNext()) {
             String s = sc.next();
-            int p = sc.nextInt();
+            int p = 0;
             if (s.startsWith("O")) {
-                par[len++] = p;
+                p = sc.nextInt();
+                p--;
+                list.add(p);
             }
-            for (int i = 0; i < len - 1; i++) {
-                if (par[i] != p && dis(par[i], p) <= d)
-                    u.Union(par[i], p);
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i) != p && dis(list.get(i), p) <= d)
+                    u.Union(list.get(i), p);
+                continue;
             }
-            if (s.equals("S")) {
+            if (s.startsWith("S")) {
                 int tm = sc.nextInt();
                 int ts = sc.nextInt();
+                tm--;
+                ts--;
                 if (u.find(tm) == u.find(ts))
                     System.out.println("SUCCESS");
                 else System.out.println("FAIL");
@@ -87,7 +91,6 @@ public class 修计算机 {
 }
 
 class UnionFindE {
-    public int sum = 0;
     private int[] parent;
 
     UnionFindE(int n) {
@@ -101,7 +104,6 @@ class UnionFindE {
         int pRoot = find(p);
         int qRoot = find(q);
         if (pRoot != qRoot) {
-            sum++;//计算边的数量,如果两个端点的根相同,那就是非法边
             parent[pRoot] = qRoot;
         }
     }
