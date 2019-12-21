@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class 卖商品 {
     static class Node {
-        int profit;
+        int profit;//价值
         int deadline;
 
         public int getProfit() {
@@ -56,12 +56,24 @@ public class 卖商品 {
         for (int i = 0; i < count; i++) {
             list.add(new Node(sc.nextInt(), sc.nextInt()));
         }
-        list.sort((o1, o2) -> o2.profit - o1.profit);
-        boolean[] visit = new boolean[count];
-        System.out.println(list);
+        list.add(0, new Node(1, 1));
+        list.sort((o1, o2) -> o2.profit - o1.profit);//按照商品价格从大到小排列
+        boolean[] visit = new boolean[1000];
         for (int i = 1; i <= count; i++) {
-
+            if (!visit[list.get(i).deadline]) {//如果这一天没有被占用
+                maxProfit += list.get(i).profit;//要了这一天
+                visit[list.get(i).deadline] = true;//占用这一天
+            } else {
+                for (int j = list.get(i).deadline - 1; j >= 1; j--) {
+                    if (!visit[j]) {
+                        maxProfit += list.get(i).profit;
+                        visit[j] = true;
+                        break;
+                    }
+                }
+            }
         }
+        System.out.println(maxProfit);
     }
 }
 /**

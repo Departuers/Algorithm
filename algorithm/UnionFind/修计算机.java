@@ -52,7 +52,7 @@ public class 修计算机 {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();//计算机数量
         int d = sc.nextInt();//可通信距离
-        UnionFindE u = new UnionFindE(n);
+        UnionFind u = new UnionFind(n);
         dx = new int[n];
         dy = new int[n];
         ArrayList<Integer> list = new ArrayList<>();//已经修好的计算机
@@ -87,32 +87,5 @@ public class 修计算机 {
 
     public static double dis(int a, int b) {
         return Math.sqrt(Math.abs((dx[a] - dx[b])) * Math.abs((dx[a] - dx[b])) + Math.abs((dy[a] - dy[b])) * Math.abs((dy[a] - dy[b])));
-    }
-}
-
-class UnionFindE {
-    private int[] parent;
-
-    UnionFindE(int n) {
-        parent = new int[n + 1];
-        for (int i = 0; i < n + 1; i++) {
-            parent[i] = i;
-        }
-    }
-
-    public void Union(int p, int q) {
-        int pRoot = find(p);
-        int qRoot = find(q);
-        if (pRoot != qRoot) {
-            parent[pRoot] = qRoot;
-        }
-    }
-
-
-    public int find(int p) {
-        while (p != parent[p]) {
-            p = find(parent[p]);
-        }
-        return parent[p];
     }
 }
