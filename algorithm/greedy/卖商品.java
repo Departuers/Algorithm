@@ -10,7 +10,8 @@ import java.util.Scanner;
  * 测试用例7  20 1   2 1   10 3  100 2   8 2  5 20   50 10
  * 输出185
  * 思路:要在最后一天之前销售出去,并且销售该商品需要1天时间,一天只能销售1个商品,求销售的最大利润,利用贪心策略
- * 商品的价值从大到小排列,找到销售的最大期限,
+ * 商品的价值从大到小排列,找到销售的最大期限,用visit标记,如果它的期限没有被占用就占用这一天,在这天销售
+ * 如果占用了,则从前一天开始,向前查找有没有空闲的日期,如果有则占用
  */
 public class 卖商品 {
     static class Node {
@@ -56,10 +57,12 @@ public class 卖商品 {
         for (int i = 0; i < count; i++) {
             list.add(new Node(sc.nextInt(), sc.nextInt()));
         }
-        list.add(0, new Node(1, 1));
-        list.sort((o1, o2) -> o2.profit - o1.profit);//按照商品价格从大到小排列
-        boolean[] visit = new boolean[1000];
-        for (int i = 1; i <= count; i++) {
+        list.sort((o1, o2) -> o2.profit - o1.profit);
+        //按照商品价格从大到小排列,因为是按商品价格从大到小排的序,使得同一天,价格更高的商品排在更前面,
+        // 所以从头开始遍历才能,只判断visit有没有被占用,没有占用直接往里占,占用了往前找
+        boolean[] visit = new boolean[1005];//实际上是天数,不知道多少天,所以多写点
+        System.out.println(list);
+        for (int i = 0; i < count; i++) {
             if (!visit[list.get(i).deadline]) {//如果这一天没有被占用
                 maxProfit += list.get(i).profit;//要了这一天
                 visit[list.get(i).deadline] = true;//占用这一天
