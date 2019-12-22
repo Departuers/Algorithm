@@ -7,9 +7,10 @@ import java.util.Arrays;
  */
 public class bag {
     public static void main(String[] args) {
-        System.out.println(dp());
-        System.out.println();
-        System.out.println(dpByOne());
+     //   w(3);
+//        System.out.println(dp());
+//        System.out.println();
+        System.out.println(dpByWan());
     }
 
     public static int n = 4;//物品数量
@@ -111,6 +112,17 @@ public class bag {
     }
 
     public static void DpbyWan() {
-            
+
+    }
+
+    public static void w(int n) {
+        int c[] = {1, 2, 3};
+        int dp[] = new int[n + 1];
+        for (int i =1; i <= n; i++) {
+            for (int j =0; j < 3; j++) {
+                dp[j] = dp[j] + dp[j - c[i]];
+            }
+        }
+        System.out.println(dp[n]);
     }
 }

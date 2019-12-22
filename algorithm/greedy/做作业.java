@@ -166,14 +166,14 @@ public class 做作业 {
                 if (!do_work1[list.get(j).day]) {
                     do_work1[list.get(j).day] = true;
                 } else {
-                    for (k = list.get(j).day; k >= 1; k--) {
+                    for (k = list.get(j).day; k >= 1; k--) {//因为相同日期的作业中,分数高的会在前面,如果找不到,没有执行到break,k的值为0,就会把其+=ans
                         if (!do_work1[k])
                             break;
                     }//往前找,找到没有占用的那一天的索引下标,就是k
                     if (k > 0) {//对找到的k进行合法性判断,没有第0天
                         do_work1[k] = true;
                     } else {
-                        ans += list.get(j).score;
+                        ans += list.get(j).score;//题目说求被扣的最小分数,意思是,最终被放弃做的作业的分数之和
                     }
                 }
             }
