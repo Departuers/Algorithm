@@ -32,7 +32,6 @@ public class 最小乘车费用 {
                 }
             }
         }
-
         System.out.println(dp[n]);
     }
 }

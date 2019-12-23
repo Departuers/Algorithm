@@ -11,8 +11,8 @@ public class ditu {
     public static void get() {
         double[][] arr = { { 2, 1 }, { 2, 3.1 }, { 2, 3 }, { 2, 5 } };
         Double mindix = Double.MAX_VALUE;
-        int minI = 0;
-        int minJ = 0;
+        int minI = 11;
+        int minJ = 11;
         for (int i = 0; i < arr.length; i++) {
             for (int j = i + 1; j < arr.length; j++) {
                 double x1 = arr[i][0];
