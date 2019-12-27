@@ -23,8 +23,7 @@ public class Sort {
                 countSort(data);
                 if (data[i] < data[i - 1])
                     System.out.println("错误");
-            }
-        }
+            }        }
     }
 
     public static int[] random(int size, int f) {
