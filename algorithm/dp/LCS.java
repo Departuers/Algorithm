@@ -26,7 +26,7 @@ import java.util.Arrays;
  */
 public class LCS {
     public static void main(String[] args) {
-        String s1 = "BA34C23";
+        String s1 = "BA34C";
         String s2 = "A1BC23";
         System.out.println(dp(s1, s2));
         System.out.println(parseDp(dpp,s1,s2));
