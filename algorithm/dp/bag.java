@@ -7,10 +7,10 @@ import java.util.Arrays;
  */
 public class bag {
     public static void main(String[] args) {
-     //   w(3);
-//        System.out.println(dp());
-//        System.out.println();
-        System.out.println(dpByWan());
+//        w(3);
+        System.out.println(dp());
+        System.out.println(dpByOne());
+     //   System.out.println(dpByWan());
     }
 
     public static int n = 4;//物品数量
@@ -95,7 +95,7 @@ public class bag {
     }
 
     /**
-     * 完全背包，但未经测试不知对错
+     * 完全背包，但未经测试不知对错,肯定是错的
      *
      * @return
      */
