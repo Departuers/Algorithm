@@ -26,22 +26,27 @@ import java.util.Scanner;
 public class 走廊移动桌子 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int count = sc.nextInt();
+        int count = sc.nextInt();//几张桌子
         int ans = 0;
-        int a = 0;
         int map[] = new int[210];
         for (int i = 0; i < count; i++) {
 
-            int c=sc.nextInt();
-            int b = sc.nextInt();
-            if (c > b) {
-                swap(map, c, b);
+            int a = sc.nextInt();//从c起始移动
+            int b = sc.nextInt();//移动到b房间
+            if (a > b) {
+                swap(map, a, b);
             }
-            for (int j = (a + 1) / 2; j <= (b + 1) / 2; j++) {
+            for (int j = (a + 1) / 2; j <= (b + 1) / 2; j++) {//找出移动桌子占用部分的走廊,
+                // (a+1)/2如果a是奇数,需要(a+1)/2,,如果a是偶数(a+1)/2也不会影响结果
                 map[j]++;
             }
+            /**
+             * room1  room3   room5  ... root397   room399     //都是奇数
+             *                   中间是走廊
+             * room2  room4   room6  ... room398   root400     //都是偶数     b+1/2
+             */
             for (int j = 0; j < 201; j++) {
-                ans = Math.max(ans, map[j]);
+                ans = Math.max(ans, map[j]);//找出最大冲突的移动桌子
             }
         }
         System.out.println(ans * 10);

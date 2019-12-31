@@ -67,12 +67,14 @@ public class 修计算机 {
                 p = sc.nextInt();
                 p--;
                 list.add(p);
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i) != p && dis(list.get(i), p) <= d) {
+                        u.Union(list.get(i), p);
+                        continue;
+                    }
+                }
             }
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i) != p && dis(list.get(i), p) <= d)
-                    u.Union(list.get(i), p);
-                continue;
-            }
+
             if (s.startsWith("S")) {
                 int tm = sc.nextInt();
                 int ts = sc.nextInt();
