@@ -1,5 +1,6 @@
 package dp;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -33,7 +34,7 @@ public class 装箱问题 {
         for (int i = 1; i <= n; i++) {
             tiji[i] = sc.nextInt();
         }
-        int dp[][] = new int[30][20004];
+        int dp[][] = new int[n + 1][v + 1];
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= v; j++) {
                 if (tiji[i] <= j) {
@@ -43,7 +44,9 @@ public class 装箱问题 {
                 }
             }
         }
+        for (int[] ints : dp) {
+            System.out.println(Arrays.toString(ints));
+        }
         System.out.println(dp[n][v]);
-
     }
 }

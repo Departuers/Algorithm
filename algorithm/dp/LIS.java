@@ -14,7 +14,7 @@ public class LIS {
         int[] arr = {4, 2, 3, 1, 5, 6};
 
         System.out.println(Arrays.toString(arr));
-        System.out.println(Baoli(arr));
+ //       System.out.println(Baoli(arr));
         System.out.println(dp(arr, arr.length));
         System.out.println(Arrays.toString(dp));
         System.out.println();

@@ -66,11 +66,8 @@ public class bag {
                 }
             }
         }
-        for (int i = 0; i < dp.length; i++) {
-            for (int j = 0; j < dp[0].length; j++) {
-                System.out.print(dp[i][j] + "   ");
-            }
-            System.out.println();
+        for (int[] ints : dp) {
+            System.out.println(Arrays.toString(ints));
         }
         return dp[n - 1][W];
     }
