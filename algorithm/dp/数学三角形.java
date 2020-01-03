@@ -1,5 +1,7 @@
 package dp;
 
+import java.util.Arrays;
+
 public class 数学三角形 {
     public static void main(String[] args) {
         int[][] data = {
@@ -27,13 +29,36 @@ public class 数学三角形 {
         System.out.println(dp[0][0]);
     }
 
+    public static void Max() {
+        int[][] arr = {
+                {3},
+                {2, 4},
+                {6, 7, 9},
+                {4, 2, 6}};
+        int[][] dp = new int[arr.length][arr[arr.length - 1].length + 1];
+        for (int i = 0; i < arr[arr.length - 1].length; i++) {
+            dp[arr.length - 1][i] = arr[arr.length - 1][i];
+        }
+        System.out.println(Arrays.toString(dp[3]));
+        for (int i = arr.length - 2; i >= 0; i--) {
+            for (int j = 0; j <= arr[i].length - 1; j++) {
+                dp[i][j] = arr[i][j] + Math.max(dp[i + 1][j + 1], dp[i + 1][j]);
+            }
+        }
+        for (int[] ints : dp) {
+            System.out.println(Arrays.toString(ints));
+        }
+        System.out.println(dp[0][0]);
+    }
+
     /**
      * 使用一维数组的解法
+     *
      * @param tri
      * @param i
      * @param j
      */
-    public static void MaxSumByOne(int[][] tri,int i,int j){
+    public static void MaxSumByOne(int[][] tri, int i, int j) {
 
     }
 }
