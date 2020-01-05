@@ -3,7 +3,9 @@ package dp;
 import java.util.Arrays;
 
 /**
- * LCS最优实现:
+ * LeetCode 第 300 号问题
+ * 最长递增子序列(最长上升子序列)
+ * LIS最优实现:
  * 设dp为动态规划辅助数组,dp[0]不存值,也没有任何意义
  * dp[i]代表:长度为i的最长递增子序列末尾的数(源数组的数)
  * 4, 2, 3, 1, 5, 6
@@ -11,15 +13,16 @@ import java.util.Arrays;
  */
 public class LIS {
     public static void main(String[] args) {
-        int[] arr = {4, 2, 3, 1, 5, 6};
-
-        System.out.println(Arrays.toString(arr));
- //       System.out.println(Baoli(arr));
-        System.out.println(dp(arr, arr.length));
-        System.out.println(Arrays.toString(dp));
-        System.out.println();
-
+        // int[] arr = {4, 2, 3, 1, 5, 2, 6};
+        int i=1;
+        System.out.println(-i);
+//        for (int i = 0; i < 1000000; i++) {
+//            int[] arr = random(200);
+//            if (dpBest(arr) != dp(arr, arr.length))
+//                System.out.println("no");
+//        }
     }
+
 
     public static int[] random(int n) {
         int arr[] = new int[n];
@@ -33,27 +36,43 @@ public class LIS {
     public static int[] dp;
 
     /**
-     * O(N logN)最优实现
-     * @param arr
+     * O(N logN)最优实现,LeetCode官方题解非常牛逼
+     *
+     * @param nums
      * @return
      */
-    public static int dpBest(int[] arr) {
-        dp = new int[arr.length + 1];
-        dp[1] = arr[0];//结合数组语义初始化:长度为1的最长递增子序列,为源数组第一个元素
-        int p = 1;//记录dp更新的最后位置
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] > dp[p]) {
-                dp[p + 1] = arr[i];
-                p++;
-            } else {//扫描dp数组:用arr[i]的值,替换为在dp数组中扫到的第一个比arr[i]大的值
-                for (int j = 0; j <= p; j++) {//可以优化为二分搜索
-                    if (dp[j] < arr[i]) {
-                        dp[j] = arr[i];
-                    }
-                }
+    public static int dpBest(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        int[] dp = new int[nums.length];
+        int len = 0;
+        for (int num : nums) {
+            int i = Arrays.binarySearch(dp, 0, len, num);
+            if (i < 0) {
+                i = -(i + 1);
+            }
+            dp[i] = num;
+            if (i == len) {
+                len++;
             }
         }
-        return p;
+        return len;
+    }
+
+    public static int indexOfFirstBigger(int[] dp, int v, int l, int r) {
+        while (l <= r) {
+            int mid = (l + r) >> 1;
+            if (dp[mid] > v) {
+                r = mid;  //保留大于v的下标以防这是第一个
+            } else {
+                l = mid + 1;
+            }
+            if (l == r && dp[l] > v)
+                return l;
+        }
+        return -1;
     }
 
     /**
@@ -80,17 +99,20 @@ public class LIS {
      * <p>
      * dp[0]初始化为1,有一堆候选值选最大的
      *
-     * @param arr 需要求的源数组
-     * @param n   数组的长度
-     * @return 最长递增子序列
+     * @param nums 需要求的源数组
+     * @param n    数组的长度
+     * @return 最长递增子序列的长度
      */
-    public static int dp(int[] arr, int n) {
-        dp = new int[n];
+    public static int dp(int[] nums, int n) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int[] dp = new int[n];
         dp[0] = 1;
         for (int i = 1; i < dp.length; i++) {//以i为结尾
             int cnt = 1;
             for (int j = i - 1; j >= 0; j--) {//从当前索引-1往前找
-                if (arr[i] > arr[j]) {//从源数组中找到比当前元素还小的值,就把在dp数组中求出的值+1与cnt作比较,并更新cnt
+                if (nums[i] > nums[j]) {//从源数组中找到比当前元素还小的值,就把在dp数组中求出的值+1与cnt作比较,并更新cnt
                     //for结束后,最后cnt表示以arr[i]结尾,之前的最长递增子序列的长度
                     cnt = Math.max(cnt, dp[j] + 1);
                 }
@@ -102,6 +124,45 @@ public class LIS {
             ans = Math.max(dp[i], ans);//寻找dp数组中最大的元素,因为不一定最长递增子序列在最后
         }
         return ans;
+    }
+
+    /**
+     * ：最长上升子序列。与LIS相同,另一种实现,思路
+     * 给定一个无序的整数数组，找到其中最长上升子序列的长度。
+     * 示例:
+     * 输入: [10,9,2,5,3,7,101,18]
+     * 输出: 4
+     * 解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。
+     * 说明:
+     * 可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。
+     * 你算法的时间复杂度应该为 O(n2) 。
+     * 进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗?
+     * <p>
+     * 思路与上一题类似:
+     * dp数组语义,dp[i] 表示以位置 i 结尾的子序列的最大长度
+     *
+     * @param nums
+     * @return
+     */
+    public static int lengthOfLIS(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        // dp[i] -> the longest length sequence from 0 - i, and must include nums[i]
+        int[] dp = new int[nums.length];
+
+        Arrays.fill(dp, 1);//初始化dp数组为1,因为每个子序列可以只有1个元素
+        int max = 0;//记录最长的序列
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {//寻找i之前的元素
+                if (nums[i] > nums[j])//基准元素,arr[i],找在它之前的比它小的元素
+                    dp[i] = Math.max(dp[j] + 1, dp[i]);
+            }
+            max = Math.max(max, dp[i]);//寻找dp数组中最大的元素,因为不一定最长递增子序列在最后
+        }
+        return max;
     }
 
     /**
