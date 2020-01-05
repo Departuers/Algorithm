@@ -210,7 +210,7 @@ public class 深入递归 {
      * @return
      */
     public static Set<String> check(int n) {
-        Set<String> s_n = new HashSet<>();
+        Set<String> s_n = new HashSet<String>();
         if (n == 1) {
             s_n.add("()");
             return s_n;
@@ -238,10 +238,10 @@ public class 深入递归 {
      * @return
      */
     public static Set<Set<Integer>> getSubset(int[] arr, int n, int cur) {
-        Set<Set<Integer>> res = new HashSet<>();
+        Set<Set<Integer>> res = new HashSet<Set<Integer>>();
         if (cur == 0) {
-            Set<Integer> nil = new HashSet<>();//空集
-            Set<Integer> first = new HashSet<>();//包含第一个元素的集合
+            Set<Integer> nil = new HashSet<Integer>();//空集
+            Set<Integer> first = new HashSet<Integer>();//包含第一个元素的集合
             first.add(arr[0]);
             res.add(nil);
             res.add(first);
@@ -249,7 +249,7 @@ public class 深入递归 {
         }
         Set<Set<Integer>> oldSet = getSubset(arr, n, cur - 1);
         for (int i = 0; i < n; i++) {
-            Set<Set<Integer>> resNew = new HashSet<>(res);
+            Set<Set<Integer>> resNew = new HashSet<Set<Integer>>(res);
             for (Set s : oldSet) {
                 Set clone = (Set) ((HashSet) s).clone();
                 clone.add(arr[i]);
@@ -283,9 +283,9 @@ public class 深入递归 {
      */
     public static ArrayList<ArrayList<Integer>> getSubset2(int[] arr, int n) {
         //  Arrays.sort(arr);//正序排序
-        ArrayList<ArrayList<Integer>> res = new ArrayList<>();//大集合
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();//大集合
         for (int i = (int) (Math.pow(2, n) - 1); i > 0; i--) {
-            ArrayList<Integer> list = new ArrayList<>();//每一个i建立一个list
+            ArrayList<Integer> list = new ArrayList<Integer>();//每一个i建立一个list
             for (int j = n - 1; j >= 0; j--) {
                 if (((i >> j) & 1) == 1) {//检查哪个位上的二进制为1，从高位开始检查，高位对应着数组靠后的元素
                     list.add(arr[j]);
@@ -323,10 +323,10 @@ public class 深入递归 {
      */
     public static ArrayList<String> getPermutation(String A) {
         int n = A.length();
-        ArrayList<String> res = new ArrayList<>();
+        ArrayList<String> res = new ArrayList<String>();
         res.add(A.charAt(0) + "");
         for (int i = 1; i < n; i++) {
-            ArrayList<String> res_new = new ArrayList<>();
+            ArrayList<String> res_new = new ArrayList<String>();
             char c = A.charAt(i);
             for (String str : res) {
                 String newStr = c + str;
@@ -357,7 +357,7 @@ public class 深入递归 {
      * @param k
      * @return
      */
-    private static ArrayList<String> res=new ArrayList<>();
+    private static ArrayList<String> res=new ArrayList<String>();
 
     public static ArrayList<String> getPer(String A) {
         char[] arr = A.toCharArray();

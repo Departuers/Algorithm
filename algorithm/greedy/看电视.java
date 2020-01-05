@@ -71,10 +71,6 @@ public class 看电视 {
                     end == node.end;
         }
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(start, end);
-        }
 
         @Override
         public String toString() {
@@ -88,17 +84,17 @@ public class 看电视 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int count = sc.nextInt();
-        ArrayList<Node> data = new ArrayList<>();
+        ArrayList<Node> data = new ArrayList<Node>();
         for (int i = 0; i < count; i++) {
             data.add(new Node(sc.nextInt(), sc.nextInt()));
         }
-        data.sort(new Comparator<Node>() {
+        Collections.sort(data, new Comparator<Node>() {
             @Override
             public int compare(Node o1, Node o2) {
                 return o1.getEnd() - o2.getEnd();
             }
         });
-        Set<Node> set = new HashSet<>();
+        Set<Node> set = new HashSet<Node>();
         System.out.println(data);
         int k = 0;
         int sum = 1;

@@ -1,8 +1,6 @@
 package greedy;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * 小明玩了将近整个寒假，马上就要开学了，现在他有很多寒假作业要做。每一位老师给了他一个交作业的期限。如果在截止日期后交作业,老师就会减少他的期末考试成绩。而现在我们假设每科作业总是做一天。小明让你来帮他安排做作业的计划减少的得分达到最小。
@@ -136,7 +134,7 @@ public class 做作业 {
         Scanner sc = new Scanner(System.in);
         int s = sc.nextInt();
         boolean do_work1[];
-        ArrayList<Node> list = new ArrayList<>();
+        ArrayList<Node> list = new ArrayList<Node>();
         for (int i = 0; i < s; i++) {
             int k = 0, ans = 0;
             list.clear();
@@ -150,7 +148,7 @@ public class 做作业 {
                 node.setScore(sc.nextInt());
                 list.set(j, node);
             }
-            list.sort(new Comparator<Node>() {
+            Collections.sort(list,new Comparator<Node>() {
                 @Override
                 public int compare(Node o1, Node o2) {
                     if (o2.score == o1.score) {

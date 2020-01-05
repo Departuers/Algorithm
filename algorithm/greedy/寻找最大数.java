@@ -35,7 +35,7 @@ public class 寻找最大数 {
         int T = sc.nextInt();
         while (T != 0) {
             char[] s = sc.next().toCharArray();
-            ArrayList<Character> ch = new ArrayList<>();
+            ArrayList<Character> ch = new ArrayList<Character>();
             int m = sc.nextInt();
             int n = s.length - m;//需要保留的长度
             int k = -1;

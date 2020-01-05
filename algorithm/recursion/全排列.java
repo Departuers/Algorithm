@@ -38,10 +38,10 @@ public class 全排列 {
      */
     public static ArrayList<String> Quanpailie(String arr) {
         int n = arr.length();
-        ArrayList<String> res = new ArrayList<>();
+        ArrayList<String> res = new ArrayList<String>();
         res.add(arr.charAt(0) + "");//初始化，第一个字符
         for (int i = 1; i < n; i++) {
-            ArrayList<String> temp = new ArrayList<>();
+            ArrayList<String> temp = new ArrayList<String>();
             char c = arr.charAt(i);
             for (String str : res) {
                 String newTemp = c + str;//加在前面
@@ -60,7 +60,7 @@ public class 全排列 {
         return res;
     }
 
-    public static ArrayList<String> res = new ArrayList<>();
+    public static ArrayList<String> res = new ArrayList<String>();
 
     /**
      * 回溯   (交换法)    全排列

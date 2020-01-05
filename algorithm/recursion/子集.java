@@ -52,10 +52,10 @@ public class 子集 {
      * @return
      */
     public static Set<Set<Integer>> getSubsets3Core(int[] arr, int n, int cur) {
-        Set<Set<Integer>> newSet = new HashSet<>();
+        Set<Set<Integer>> newSet = new HashSet<Set<Integer>>();
         if (cur == 0) {//单独处理第一个元素
-            Set<Integer> nil = new HashSet<>();
-            Set<Integer> first = new HashSet<>();
+            Set<Integer> nil = new HashSet<Integer>();
+            Set<Integer> first = new HashSet<Integer>();
             first.add(arr[0]);
             newSet.add(nil);
             newSet.add(first);
@@ -80,10 +80,10 @@ public class 子集 {
      * @return
      */
     public static <T> Set<Set<T>> getSubsets2(T[] arr, int n) {
-        Set<Set<T>> res = new HashSet<>();
-        res.add(new HashSet<>());//初始化有个空集
+        Set<Set<T>> res = new HashSet<Set<T>>();
+        res.add(new HashSet<T>());//初始化有个空集
         for (int i = 0; i < n; i++) {
-            Set<Set<T>> temp = new HashSet<>();
+            Set<Set<T>> temp = new HashSet<Set<T>>();
             temp.addAll(res);//要有一个存上一次迭代的结果
             for (Set<T> e : res) {
                 Set<T> clone = (Set<T>) ((HashSet) e).clone();
@@ -128,9 +128,9 @@ public class 子集 {
      */
     public static <T> ArrayList<ArrayList<T>> getSubsets(T[] arr, int n) {
         //Arrays.sort(arr);
-        ArrayList<ArrayList<T>> res = new ArrayList<>();
+        ArrayList<ArrayList<T>> res = new ArrayList<ArrayList<T>>();
         for (int i = (int) (Math.pow(2, n) - 1); i > 0; i--) {//i为子集最大数量
-            ArrayList<T> temp = new ArrayList<>();//对于每一个二进制数据，都新建一个list记录
+            ArrayList<T> temp = new ArrayList<T>();//对于每一个二进制数据，都新建一个list记录
             for (int j = n - 1; j >= 0; j--) {  //检查二进制每一位是否为1
                 if (((i >> j) & 1) == 1) {//从j位高位开始检查，添加的也是高位
                     temp.add(arr[j]);

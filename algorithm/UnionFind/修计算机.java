@@ -55,7 +55,7 @@ public class 修计算机 {
         UnionFind u = new UnionFind(n);
         dx = new int[n];
         dy = new int[n];
-        ArrayList<Integer> list = new ArrayList<>();//已经修好的计算机
+        ArrayList<Integer> list = new ArrayList<Integer>();//已经修好的计算机
         for (int i = 0; i < n; i++) {
             dx[i] = sc.nextInt();
             dy[i] = sc.nextInt();

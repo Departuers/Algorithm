@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class tsdt {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Integer> jishu = new ArrayList<>();
-        ArrayList<Integer> oshu = new ArrayList<>();
+        ArrayList<Integer> jishu = new ArrayList<Integer>();
+        ArrayList<Integer> oshu = new ArrayList<Integer>();
         Iterator<Integer> iterator = jishu.iterator();
         while (iterator.hasNext()) {
             Integer next = iterator.next();

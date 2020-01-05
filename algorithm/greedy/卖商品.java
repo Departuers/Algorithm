@@ -1,6 +1,8 @@
 package greedy;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -53,11 +55,16 @@ public class 卖商品 {
         Scanner sc = new Scanner(System.in);
         int maxProfit = 0;
         int count = sc.nextInt();
-        ArrayList<Node> list = new ArrayList<>();
+        ArrayList<Node> list = new ArrayList<Node>();
         for (int i = 0; i < count; i++) {
             list.add(new Node(sc.nextInt(), sc.nextInt()));
         }
-        list.sort((o1, o2) -> o2.profit - o1.profit);
+        Collections.sort(list, new Comparator<Node>() {
+            @Override
+            public int compare(Node o1, Node o2) {
+                return o2.profit - o1.profit;
+            }
+        });
         //按照商品价格从大到小排列,因为是按商品价格从大到小排的序,使得同一天,价格更高的商品排在更前面,
         // 所以从头开始遍历才能,只判断visit有没有被占用,没有占用直接往里占,占用了往前找
         boolean[] visit = new boolean[1005];//实际上是天数,不知道多少天,所以多写点
