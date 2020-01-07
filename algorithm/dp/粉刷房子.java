@@ -26,25 +26,27 @@ public class 粉刷房子 {
         System.out.println(minCostII(arrr));////4,1,4
 
 
-        int[] ran = LIS.random(23);
-        System.out.println(Arrays.toString(ran));
-        int min1 = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE;
-        int minIndex = -1;
-        for (int l = 0; l < ran.length; ++l) {
-            if (min1 > ran[l]) {
-                min2 = min1;//如果最小的那个元素在数组末尾,会导致min2,不是次最小元素,所以这么写
-                min1 = ran[l];
-                minIndex = l;
-            } else if (min2 > ran[l]) {
-                min2 = ran[l];
+        {//测试
+            int[] ran = LIS.random(23);
+            System.out.println(Arrays.toString(ran));
+            int min1 = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE;
+            int minIndex = -1;
+            for (int l = 0; l < ran.length; ++l) {
+                if (min1 > ran[l]) {
+                    min2 = min1;//如果最小的那个元素在数组末尾,会导致min2,不是次最小元素,所以这么写
+                    min1 = ran[l];
+                    minIndex = l;
+                } else if (min2 > ran[l]) {
+                    min2 = ran[l];
+                }
             }
+            System.out.println("---");
+            System.out.println(min1);
+            System.out.println(min2);
+            System.out.println(minIndex);
+            Arrays.sort(ran);
+            System.out.println(Arrays.toString(ran));
         }
-        System.out.println("---");
-        System.out.println(min1);
-        System.out.println(min2);
-        System.out.println(minIndex);
-        Arrays.sort(ran);
-        System.out.println(Arrays.toString(ran));
 
     }
 
@@ -181,13 +183,15 @@ public class 粉刷房子 {
                     } else if (min2 > dp[i - 1][l]) {
                         min2 = dp[i - 1][l];
                     }
-                }//精髓,找出,minIndex代表颜色,是第几列,
+                }//精髓,找出,minIndex代表颜色,是第几列,把最小元素也就是min1的索引赋值给minIndex
 
                 for (int j = 0; j < k; j++) {
                     if (minIndex != j) {
-                        dp[i][j] = Math.min(dp[i][j], min1 + costs[i][j]);
+                        dp[i][j] = Math.min(dp[i][j], min1 + costs[i][j]);//把最小的花费,的颜色,算出来第i个房子是什么颜色,
                     } else {
                         dp[i][j] = Math.min(dp[i][j], min2 + costs[i][j]);
+                        //如果第i-1个房子与第i个房子颜色相冲突
+                        //就把第i-1行,那个次最小花费(min2),来跟第,消费表第i个相加;
                     }
                 }
 
