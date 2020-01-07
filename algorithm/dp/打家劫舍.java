@@ -131,7 +131,6 @@ public class 打家劫舍 {
         int[] dp = new int[n + 1];
 
         dp[1] = nums[0];
-
         for (int i = 2; i <= n; ++i) {
             dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i - 1]);
         }// dp[i] 表示抢到第 i 个房子可以获得的最大值
