@@ -50,7 +50,7 @@ public class DFS {
         buFenHe(arr, k, cur + 1, intS);
         intS.add(arr[cur]);
         buFenHe(arr, k - arr[cur], cur + 1, intS);
-        intS.remove(intS.size() - 1);
+        intS.remove(intS.size() - 1);//回溯
     }
 
 

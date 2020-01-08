@@ -25,7 +25,8 @@ package dp;
 public class 最大和连续子数组 {
     public static void main(String[] args) {
         int[] are = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
-        System.out.println(dpp(are));
+        int[] arr = {2, 4, -7, 5, 2, -1, 2, -4, 3};
+        System.out.println(dpp(arr));
     }
 
     public static int[] dp;
@@ -43,5 +44,13 @@ public class 最大和连续子数组 {
         }
         System.out.println();
         return ans;
+    }
+
+    /**
+     * 分治算法解最大和连续子数组
+     * @return
+     */
+    public static int Fenzhi() {
+        return 0;
     }
 }
