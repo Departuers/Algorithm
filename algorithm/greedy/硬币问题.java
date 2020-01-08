@@ -1,6 +1,6 @@
 package greedy;
 
-public class 贪心 {
+public class 硬币问题 {
     public static void main(String[] args) {
         System.out.println(yingBi(124));
 

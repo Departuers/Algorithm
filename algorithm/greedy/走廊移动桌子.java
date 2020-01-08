@@ -10,9 +10,17 @@ import java.util.Scanner;
  * Output
  * The output should contain the minimum time in minutes to complete the moving, one per line.
  * Sample Input 第一个表示n个测试用例,我只做一个
- * 3 4 10 20 30 40 50 60 70 80 2 1 3 2 200 3 10 100 20 80 30 50
+ * 3
+ * 4
+ * 10 20 30 40 50 60 70 80
+ * 2
+ * 1 3 2 200
+ * 3
+ * 10 100 20 80 30 50
  * Sample Output
- * 10 20 30
+ * 10
+ * 20
+ * 30
  * 题意：在一个狭窄的走廊里将桌子从一个房间移动到另一个房间，走廊的宽度只能允许一个桌子通过。给出t，
  * 表示有t组测试数据。再给出n，表示要移动n个桌子。n下面有n行，每行两个数字，表示将桌子从a房间
  * 移到b房间。走廊的分布图如一图所示，每移动一个桌子到达目的地房间需要花10分钟，问移动n个桌子
@@ -21,7 +29,6 @@ import java.util.Scanner;
  * 要经过，一次只能经过一个桌子，则需要m*10的时间移动桌子。设一个数组，下标值即为房间号。
  * 桌子经过房间时，该房间号为下标对应的数组值即加10。最后找到最大的数组值，即为移动完桌子
  * 需要的最短时间。
- * 未完成跳过...
  */
 public class 走廊移动桌子 {
     public static void main(String[] args) {

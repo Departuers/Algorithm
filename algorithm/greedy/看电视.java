@@ -71,6 +71,10 @@ public class 看电视 {
                     end == node.end;
         }
 
+        @Override
+        public int hashCode() {
+            return start * 100 + end * 10;
+        }
 
         @Override
         public String toString() {
@@ -91,6 +95,8 @@ public class 看电视 {
         Collections.sort(data, new Comparator<Node>() {
             @Override
             public int compare(Node o1, Node o2) {
+                if (o1.getEnd() == o2.getEnd())
+                    return o1.getStart() - o2.getStart();
                 return o1.getEnd() - o2.getEnd();
             }
         });
