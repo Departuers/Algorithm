@@ -31,18 +31,19 @@ package greedy;
  */
 public class 字典序最小 {
     public static void main(String[] args) {
-        Z(6, "ACDBCB");
+        String ab = "ACDBCB";
+        Z(ab.length(), ab);
     }
 
-    public static void Z(int n, String s) {
+    public static String Z(int n, String s) {
         String Cp = new StringBuilder(s).reverse().toString();
-        int p1 = 0;
-        int p2 = 0;
-        int Strlen = 0;
+        int p1 = 0;//源串的开头
+        int p2 = 0;//翻转过后的源串开头
+        int Strlen = 0;//合成的T串长度
         StringBuilder result = new StringBuilder();
         while (Strlen < n) {
-            if (s.substring(p1, s.length()).compareTo
-                    (Cp.substring(p2, Cp.length())) > 0) {
+            if (s.substring(p1).compareTo
+                    (Cp.substring(p2)) > 0) {
                 Strlen++;
                 result.append(Cp.charAt(p2));
                 p2++;
@@ -53,5 +54,6 @@ public class 字典序最小 {
             }
         }
         System.out.println(result);
+        return result.toString();
     }
 }
