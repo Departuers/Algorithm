@@ -23,7 +23,9 @@ import java.util.Comparator;
  * 还有所有 0<i<=max_v的值构成的 i到i-1的长0的边和 i-1到i的长1的边.所以这样我们就形成了一个具有点[0,max_v]的有向图.在原图处理时,为了避免ai-1==-1,我们令所有ai与bi都自增了10.所以我们形成了一个具有点[9,max_v]的有向图(其实就是差分约束系统).我们的目标是令S[max_v]-S[9]的值最小.(切记这里不是仅使S[max_v]的值最小,因为我们这里只有从9 ,10,11,…max_v 的值构成了一个差分约束系统.max_v的值和0号点的值是不在一个系统的. 0号点是超级源点,它的值与系统中其他点的值是无关的.)
  * 然后我们上面已经知道了希望让系统中S[max_v]和S[9]的值差距尽量小.(构成差分约束系统时,1.如果在所有点外添加一个超级源0号点,并使得超级源到所有其他点的距离为0,那么最终求出的0号点到其他所有原始点的最短距离就是本系统的一个可行解,且可行解之间的差距最小.      2.如果初始时不添加超级源,只是将原始点的初始距离设为INF,且令其中一个原始点的初始距离为0,然后求该点到其他所有点的最短距离,那么最短距离的集合就是一个可行解,且该可行解两两之间的差距最大.注意方案2只能在该问题一定存在解的时候即肯定不存在负权环的时候用.否则从1号点到其他点没有路,但是其他点的强连通分量中有负权环,这样根本探测不到错误) 所以我们需要采取方案1.
  * 转自大佬:
- * 贪心策略
+ * 贪心策略,尽量先选区间右边的点
+ * 还有树状数组
+ * 拆分约束
  */
 public class 区间选点 {
     static class Node {
@@ -75,6 +77,8 @@ public class 区间选点 {
     }
 
     /**
+     * 贪心策略实现
+     *
      * @param n    区间数量
      * @param list 区间对象
      */
@@ -94,24 +98,25 @@ public class 区间选点 {
         for (int i = 0; i < n; i++) {
             int start = list.get(i).start;
             int end = list.get(i).end;
-            int cnt = sum(axis, start, end);
-            list.get(i).num -= cnt;
+            int cnt = sum(axis, start, end);//查询数轴上(数组start到end)这个范围已经存在的点,
+            list.get(i).num -= cnt;//当前该区间需要多少个点(去掉已经,已经包含数量的点)
             while (list.get(i).num > 0) {
-                if (axis[end] == 0) {
-                    axis[end] = 1;
-                    list.get(i).num--;
-                    end--;
+                if (axis[end] == 0) {//如果该区间右边界如果未被标记
+                    axis[end] = 1;//标记区间右边界
+                    list.get(i).num--;//维护该区间需要的点
+                    end--;//维护end,右边界左移一位
                 } else {
-                    end--;
+                    end--;//右边界左移一位
                 }
             }
         }
         System.out.println(sum(axis, 0, max));
-        return sum(axis, 0, max);
+        return sum(axis, 0, max);//整个数轴上有几个点
     }
 
     /**
      * 统计数轴axis上s-t区间已经有多少个点被选中
+     * 贪心策略辅助统计方法
      *
      * @param axis 数轴
      * @param s    区间左边界
