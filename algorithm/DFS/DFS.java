@@ -6,15 +6,17 @@ import java.util.Scanner;
 public class DFS {
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 15, 23, 13, 12};
-//        buFenHe(arr, 46, 0, new ArrayList<>());
-
+        ShuiWa(10,12);
+        int k = 11;
+        System.out.println(ABC(arr, arr.length, k, 0, 0));
+        buFenHe(arr, k, 0, new ArrayList<Integer>());
 //        int[] data = new int[6];
 //        data[0] = 1;
 //        suShuHuan(6,data,1);
 
 //        ShuiWa(N, M);
-        NhuangHou(0);
-        System.out.println(cnt);
+//        NhuangHou(0);
+//        System.out.println(cnt);
     }
 
     /**
@@ -53,11 +55,33 @@ public class DFS {
         intS.remove(intS.size() - 1);//回溯
     }
 
+    /**
+     * 部分数之和简化版,返回存在与否
+     *
+     * @param arr 源数组
+     * @param n   数组长度
+     * @param k   需要求出的和
+     * @param i   第i个元素
+     * @param sum 当前凑到的部分和
+     * @return 返回存在与否
+     * 每个状态按顺序决定每个数,加或者不加,
+     * 在全部n个数分决定后再判断它们的和是否为k即可
+     * 状态数是2^n+1所以复杂度是O(2^n)
+     * 枚举所有的状态
+     */
+    public static boolean ABC(int[] arr, int n, int k, int i, int sum) {
+        if (i == n) return sum == k;
+        if (ABC(arr, n, k, i + 1, sum)) return true;
+        if (ABC(arr, n, k, i + 1, sum + arr[i])) return true;
+        return false;
+    }
+
 
     public static int N = 10;
     public static int M = 12;
 
     /**
+     * POJ.2386
      * 3.水洼数目
      * 有一个大小为 N*M 的园子，雨后积起了水。八连通的积水被认为是连接在一起的。请求出
      * 园子里总共有多少水洼？（八连通指的是下图中相对 W 的*的部分）
@@ -134,7 +158,7 @@ public class DFS {
             for (int l = -1; l < 2; l++) {
                 if (k == 0 && l == 0)//不判断自身,因为开头已经把当前水抽干
                     continue;
-                if (i + k >= 0 && i + k <= N - 1 && j + l >= 0 && j + l <= M - 1) {
+                if (i + k >= 0 && i + k <= N - 1 && j + l >= 0 && j + l <= M - 1) {//边界条件
                     if (data[i + k][j + l] == 'W')
                         Shuiwa(data, i + k, j + l);
                 }
