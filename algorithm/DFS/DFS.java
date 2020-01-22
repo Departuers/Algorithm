@@ -6,10 +6,12 @@ import java.util.Scanner;
 public class DFS {
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 15, 23, 13, 12};
-        ShuiWa(10,12);
-        int k = 11;
+        //    ShuiWa(10, 12);
+        int k = 1;
         System.out.println(ABC(arr, arr.length, k, 0, 0));
         buFenHe(arr, k, 0, new ArrayList<Integer>());
+
+
 //        int[] data = new int[6];
 //        data[0] = 1;
 //        suShuHuan(6,data,1);
@@ -45,7 +47,7 @@ public class DFS {
             for (Integer anInt : intS) {
                 System.out.print(anInt + " ");
             }
-            System.exit(0);
+            System.exit(0);//结束程序,不然会出现其他答案,这里只需要一个答案
         }
         if (k < 0 || cur == arr.length)//剪枝
             return;
@@ -70,6 +72,7 @@ public class DFS {
      * 枚举所有的状态
      */
     public static boolean ABC(int[] arr, int n, int k, int i, int sum) {
+        if (sum > k) return false;//剪枝
         if (i == n) return sum == k;
         if (ABC(arr, n, k, i + 1, sum)) return true;
         if (ABC(arr, n, k, i + 1, sum + arr[i])) return true;

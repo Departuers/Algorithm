@@ -1,6 +1,7 @@
 package greedy;
 
 /**
+ * POJ 3617
  * 字典序最小问题
  * https://blog.csdn.net/weixin_41676901/article/details/80615415
  * 给定长度为N的字符串为S，要构造一个长度为N的字符串T。起初，T 是一个空串，随后反复进行下列任意操作。
@@ -42,14 +43,13 @@ public class 字典序最小 {
         int Strlen = 0;//合成的T串长度
         StringBuilder result = new StringBuilder();
         while (Strlen < n) {
+            Strlen++;
             if (s.substring(p1).compareTo
-                    (Cp.substring(p2)) > 0) {
-                Strlen++;
-                result.append(Cp.charAt(p2));
+                    (Cp.substring(p2)) > 0) {//说明p1的字典序大
+                result.append(Cp.charAt(p2));//所以添加p2
                 p2++;
             } else {
-                Strlen++;
-                result.append(s.charAt(p1));
+                result.append(s.charAt(p1));//否则才添加p1
                 p1++;
             }
         }
