@@ -28,7 +28,7 @@ import java.util.Scanner;
 public class 装箱问题 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int v = sc.nextInt();//箱子容量
+        int v = sc.nextInt();//箱子容量消除
         int n = sc.nextInt();//物品数量
         int tiji[] = new int[n + 1];
         for (int i = 1; i <= n; i++) {

@@ -10,9 +10,10 @@ public class Main {
         PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
         for (int i = 0; i < n; i++) {
             int a = sc.nextInt();
-                pq.add(a);
+            pq.add(a);
         }
-        int ans = 0, c = 0;
+        long ans = 0;
+        int c = 0;
         if (pq.size() == 1)
             ans += pq.poll();
         while (pq.size() > 1) {
