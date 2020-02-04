@@ -116,7 +116,7 @@ public class bag {
                     dp[i + 1][j] = Math.min(dp[i][j],
                             dp[i][j - v[i]] == Integer.MAX_VALUE ?
                                     dp[i][j] : dp[i][j - v[i]] + w[i]);
-                    //非常重要由于初始化为Integer.MAX_VALUE,再加上重量会溢出为
+                    //非常重要由于初始化为Integer.MAX_VALUE,再加上重量会溢出为负数,导致错误
                     //dp[i][j - v[i]] + w[i]
                 }
             }

@@ -1,6 +1,7 @@
 package Greedy;
 
 import java.util.PriorityQueue;
+import java.util.Scanner;
 
 /**
  * POJ 3253
@@ -20,7 +21,7 @@ import java.util.PriorityQueue;
  * N=3, L={8, 5, 8}
  * 输出样例：
  * 34
- *  ，要使总费用最小，那么每次只选取最小长度的两块木板相加，再把这些“和”累加到总费用中即可
+ * ，要使总费用最小，那么每次只选取最小长度的两块木板相加，再把这些“和”累加到总费用中即可
  * 本题虽然利用了Huffman思想，但是直接用HuffmanTree做会超时，可以用优先队列做
  * 因为朴素的HuffmanTree思想是：
  * （1）先把输入的所有元素升序排序，再选取最小的两个元素，把他们的和值累加到总费用
@@ -28,8 +29,8 @@ import java.util.PriorityQueue;
  * 则累计的费用就是最小费用
  */
 public class 切木板 {
-    public static void main(String[] args) { 
-        int[] arr = {8, 5, 8, 4, 3};
+    public static void main(String[] args) {
+        int[] arr = {8, 5, 8};
         System.out.println(Zui(3, arr));
     }
 
@@ -39,15 +40,43 @@ public class 切木板 {
             pq.add(arr[i]);
         }
         int ans = 0;
+        Integer p1, p2, p3;
         while (pq.size() > 1) {
-            Integer p1 = pq.poll();
-            Integer p2 = pq.poll();
-            ans += p1 + p2;
-            pq.add(p1 + p2);
+            p1 = pq.poll();
+            p2 = pq.poll();
+            p3 = p1 + p2;
+            ans += p3;
+            pq.add(p3);
         }
         return ans;
     }
+
+    /**
+     * POJ 3253题解
+     */
+    public static void Tijie() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        for (int i = 0; i < n; i++) {
+            int a = sc.nextInt();
+            pq.add(a);
+        }
+        long ans = 0;
+        int c = 0;
+        if (pq.size() == 1)
+            ans += pq.poll();
+        while (pq.size() > 1) {
+            Integer p1 = pq.poll();
+            Integer p2 = pq.poll();
+            c = p1 + p2;
+            ans += c;
+            pq.add(c);
+        }
+        System.out.println(ans);
+    }
 }
+
 /**
  * #include <iostream>
  * #include <algorithm>
