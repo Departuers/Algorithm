@@ -7,6 +7,8 @@ import java.util.List;
 public class 数学相关例题 {
 
     public static void main(String[] args) {
+        AIshi(2019);
+
         //ex(19);
 //        int[] arr = {2, 3, 2};
 
@@ -31,6 +33,7 @@ public class 数学相关例题 {
 //        System.out.println(jiqire(6, 6));
 //        long ends = System.nanoTime();
 //        System.out.println(ends - starts);
+
 
     }
 
@@ -123,16 +126,55 @@ public class 数学相关例题 {
 
     /**
      * 判断是不是一个素数，
+     *
      * @param x
      * @return
      */
     public static boolean isPrimer(int x) {
-        if(x <= 1) return false;
+        if (x <= 1) return false;
         int m = (int) Math.floor(Math.sqrt(x) + 0.5);
         for (int i = 0; i * i <= x; i++) {
             if (x % i == 0)
                 return false;
         }
         return true;
+    }
+
+    /**
+     * 埃氏筛法,判断一群数是不是质数,或者求第多少个是素数
+     * 剩余定理:非常牛逼
+     */
+    public static void AIshi(int N) {
+        int n = 1000;
+        while ((n / Math.log(n)) < N) {
+            n++;
+        }//在整数X范围内有X/log(X)个素数,
+        //逆推第N个素数的范围
+        int[] arr = new int[n];
+        int x = 2;
+        while (x < n) {
+            if (arr[x] != 0) {
+                x++;
+                continue;
+            }
+            int k = 2;
+            while (x * k < n) {
+                arr[x * k] = -1;
+                k++;
+            }
+            x++;
+        }
+        int res = 0;
+        for (int i = 2; i < arr.length; i++) {
+
+            if (arr[i] != -1) {
+                res++;
+            }
+            if (res == N) {
+                System.out.println(i);
+                break;
+            }
+        }
+
     }
 }
