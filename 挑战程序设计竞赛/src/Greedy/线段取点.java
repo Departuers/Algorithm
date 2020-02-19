@@ -18,7 +18,7 @@ import java.util.Arrays;
  */
 public class 线段取点 {
     public static void main(String[] args) {
-        int arr[] = {1, 7, 15, 20, 30, 50};
+        int[] arr = {1, 7, 15, 20, 30, 50};
         System.out.println(Qu(6, 10, arr));
     }
 

@@ -164,7 +164,7 @@ public class 深入递归 {
      * @return
      */
     public static int count(int n, int[] coins) {
-        int help[][] = new int[4][n + 1];
+        int[][] help = new int[4][n + 1];
         for (int i = 0; i < help.length; i++) {
             help[i][0] = 1;//第一列初始化为1
         }

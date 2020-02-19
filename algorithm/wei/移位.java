@@ -10,7 +10,7 @@ import java.util.Random;
  * 给补成2个消除重复 把偶数个变成奇数个，1-1000的异或值算出来再异或数组，k有3个，2个自动消掉，剩下k
  */
 
-public class yiwei {
+public class 移位 {
     public static void main(String[] args) {
         int N = 11;
         int[] arr = new int[N];

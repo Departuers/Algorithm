@@ -75,8 +75,7 @@ public class DFS {
         if (sum > k) return false;//剪枝
         if (i == n) return sum == k;
         if (ABC(arr, n, k, i + 1, sum)) return true;
-        if (ABC(arr, n, k, i + 1, sum + arr[i])) return true;
-        return false;
+        return ABC(arr, n, k, i + 1, sum + arr[i]);
     }
 
 

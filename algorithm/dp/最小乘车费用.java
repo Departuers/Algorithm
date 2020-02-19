@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class 最小乘车费用 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int gongli[] = new int[11];
+        int[] gongli = new int[11];
         for (int i = 1; i <= 10; i++) {
             gongli[i] = sc.nextInt();
         }

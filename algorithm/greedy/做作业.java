@@ -76,7 +76,7 @@ public class 做作业 {
         }
     }
 
-    public static int do_work[];
+    public static int[] do_work;
 
     public static void main(String[] args) {
 //        Scanner sc = new Scanner(System.in);
@@ -133,7 +133,7 @@ public class 做作业 {
     public static void s() {
         Scanner sc = new Scanner(System.in);
         int s = sc.nextInt();
-        boolean do_work1[];
+        boolean[] do_work1;
         ArrayList<Node> list = new ArrayList<Node>();
         for (int i = 0; i < s; i++) {
             int k = 0, ans = 0;

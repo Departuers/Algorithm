@@ -25,7 +25,7 @@ public class LIS {
 
 
     public static int[] random(int n) {
-        int arr[] = new int[n];
+        int[] arr = new int[n];
         for (int i = 0; i < n; i++) {
             int d = (int) (Math.random() * 100);
             arr[i] = d;

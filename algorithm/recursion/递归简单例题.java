@@ -126,7 +126,7 @@ public class 递归简单例题 {
     /**
      * 3.插入排序递归写法...
      */
-    public static void ca(int arr[], int k) {
+    public static void ca(int[] arr, int k) {
         if (k == 0)
             return;
         ca(arr, k - 1);
@@ -225,7 +225,7 @@ public class 递归简单例题 {
      * 在数组A[0,1，...，n-1]中A[i]=i,满足数组下标，跟对应下标存的值相同，
      * 给定一个有序整数数组，元素值各不相同，编写一个方法，在数组A中找出一个魔术索引，若存在的话，不存在返回-1。
      */
-    public static int moshu(int arr[]) {
+    public static int moshu(int[] arr) {
         int begin = 0;
         int end = arr.length - 1;
         while (begin < end) {

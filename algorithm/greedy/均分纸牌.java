@@ -38,7 +38,7 @@ public class 均分纸牌 {
         Scanner sc = new Scanner(System.in);
         int sum = 0, step = 0;
         int N = sc.nextInt();
-        int tem[] = new int[N];
+        int[] tem = new int[N];
         for (int i = 0; i < N; i++) {
             tem[i] = sc.nextInt();
             sum += tem[i];

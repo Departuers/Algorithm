@@ -1,6 +1,6 @@
 package wei;
 
-public class Wei {
+public class 位运算 {
     public static void main(String[] args) {
 //        System.out.println(isj(11));
 //
@@ -79,7 +79,7 @@ public class Wei {
      * 2个2进制相同的数字， 做不进位加法结果为0
      * 10个10进制相同的数字，做不进位加法结果为0
      * K个K进制数字做不进位加法，结果为0
-     *
+     * <p>
      * 用于练习进制，实际上用map，每次添加key，value+1最后遍历Value最简单
      *
      * @param arr

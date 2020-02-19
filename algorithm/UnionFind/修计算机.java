@@ -45,8 +45,8 @@ import java.util.Scanner;
  * 每修好一台计算机,就遍历所有修好的计算机,同时满足距离小于D就把它们合并
  */
 public class 修计算机 {
-    public static int dx[];
-    public static int dy[];
+    public static int[] dx;
+    public static int[] dy;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

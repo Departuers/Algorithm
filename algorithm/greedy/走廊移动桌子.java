@@ -35,7 +35,7 @@ public class 走廊移动桌子 {
         Scanner sc = new Scanner(System.in);
         int count = sc.nextInt();//几张桌子
         int ans = 0;
-        int map[] = new int[210];
+        int[] map = new int[210];
         for (int i = 0; i < count; i++) {
 
             int a = sc.nextInt();//从c起始移动

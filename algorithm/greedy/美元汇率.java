@@ -27,7 +27,7 @@ public class 美元汇率 {
         double money = 100;
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int tem[] = new int[n + 1];
+        int[] tem = new int[n + 1];
         tem[1] = sc.nextInt();
         for (int i = 2; i <= n; i++) {
             tem[i] = sc.nextInt();
