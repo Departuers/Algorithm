@@ -94,7 +94,7 @@ public class 矩阵快速幂 {
      * 使用矩阵快速幂求,斐波拉切数列第n项
      *
      * @param n 斐波拉切数列第n项
-     * @return 使用矩阵快速幂求,斐波拉切数列第n项
+     * @return 使用矩阵快速幂求, 斐波拉切数列第n项
      */
     public static long fib(int n) {
         long[][] c = {{0, 1}, {1, 1}};//f(n)=f(n-1)+f(n-2)
@@ -102,6 +102,5 @@ public class 矩阵快速幂 {
         res = multiply(new long[][]{{2, 3}}, res);//前2个基础数字,基本条件
         return res[0][0];
     }
-
 
 }
