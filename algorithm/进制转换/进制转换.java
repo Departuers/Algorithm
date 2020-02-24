@@ -3,7 +3,7 @@ package 进制转换;
 public class 进制转换 {
     public static void main(String[] args) {
         System.out.println(Integer.toBinaryString(123));
-        System.out.println(change(123,2));
+        System.out.println(change(123, 2));
     }
 
     public static char[] arr = {'a', 'b'};
@@ -40,5 +40,44 @@ public class 进制转换 {
                 System.out.println(i);
             }
         }
+    }
+
+    /**
+     * @param n 需要转的10进制数字
+     */
+    public static void Ten转16进制(int n) {
+        char[] arr = new char[2576];
+        int cur = n;
+        int count = 0;
+        while (cur != 0) {
+            if (cur % 16 >= 10)
+                arr[count++] = (char) (cur % 16 - 10 + 'A');
+            else
+                arr[count++] = (char) (cur % 16 + '0');
+            cur /= 16;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = count - 1; i >= 0; i--) {
+            sb.append(arr[i]);
+        }
+        System.out.println(sb);
+    }
+
+    /**
+     * @param n 需要转的16进制数
+     */
+    public static void Sixto10进制(String n) {
+        long res = 0;
+        int t = 0;
+        int c = 0;
+        for (int i = n.length() - 1; i >= 0; i--) {
+            if (n.charAt(i) >= 'A') {
+                t = n.charAt(i) - 'A' + 10;
+            } else {
+                t = n.charAt(i) - '0';
+            }
+            res += t * Math.pow(16, c++);
+        }
+        System.out.println(res);
     }
 }

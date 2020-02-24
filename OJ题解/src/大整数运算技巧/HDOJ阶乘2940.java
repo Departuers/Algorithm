@@ -42,5 +42,4 @@ public class HDOJ阶乘2940 {
             }
         }
     }
-
 }
