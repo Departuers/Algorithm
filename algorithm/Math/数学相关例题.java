@@ -132,8 +132,7 @@ public class 数学相关例题 {
      */
     public static boolean isPrimer(int x) {
         if (x <= 1) return false;
-        int m = (int) Math.floor(Math.sqrt(x) + 0.5);
-        for (int i = 0; i * i <= x; i++) {
+        for (int i = 1; i * i <= x; i++) {
             if (x % i == 0)
                 return false;
         }
