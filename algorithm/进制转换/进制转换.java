@@ -6,10 +6,10 @@ public class 进制转换 {
         System.out.println(change(123, 2));
     }
 
-    public static char[] arr = {'a', 'b'};
+    public static char[] arr = {'0', '1'};
 
     /**
-     * 给定一个i,转换成j进制,适用于正数
+     * 给定一个十进制i,转换成j进制,只适用于正数!!!
      *
      * @param i
      * @param j
@@ -43,7 +43,7 @@ public class 进制转换 {
     }
 
     /**
-     * @param n 需要转的10进制数字
+     * @param n 10转16进制
      */
     public static void Ten转16进制(int n) {
         char[] arr = new char[2576];
@@ -64,7 +64,7 @@ public class 进制转换 {
     }
 
     /**
-     * @param n 需要转的16进制数
+     * @param n 16转10进制
      */
     public static void Sixto10进制(String n) {
         long res = 0;

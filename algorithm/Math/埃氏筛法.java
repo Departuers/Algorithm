@@ -7,7 +7,7 @@ public class 埃氏筛法 {
 
     /**
      * 埃氏筛法,判断一群数是不是质数,或者求第多少个是素数
-     * 剩余定理:非常牛逼
+     * 素数定理
      */
     public static int AIshi(int N) {
         int n = 1000;

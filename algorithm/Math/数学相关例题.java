@@ -7,7 +7,17 @@ import java.util.List;
 public class 数学相关例题 {
 
     public static void main(String[] args) {
-        AIshi(2019);
+        //AIshi(2019);
+        long ans = 0;
+        long s=0;
+        for (int i = 2; ans <= 2999; i++) {
+            if (isPrimer(i)){
+                ans++;
+                s=i;
+            }
+        }
+        System.out.println(s);
+
 
         //ex(19);
 //        int[] arr = {2, 3, 2};
@@ -33,8 +43,6 @@ public class 数学相关例题 {
 //        System.out.println(jiqire(6, 6));
 //        long ends = System.nanoTime();
 //        System.out.println(ends - starts);
-
-
     }
 
     /**
@@ -132,9 +140,11 @@ public class 数学相关例题 {
      */
     public static boolean isPrimer(int x) {
         if (x <= 1) return false;
-        for (int i = 1; i * i <= x; i++) {
-            if (x % i == 0)
+        int k = (int) Math.sqrt(x);
+        for (int i = 2; i <= k; i++) {
+            if (x % i == 0) {
                 return false;
+            }
         }
         return true;
     }
