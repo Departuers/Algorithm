@@ -8,12 +8,15 @@ public class 埃氏筛法 {
         long l = System.nanoTime();
         System.out.println(AIshi(1234341));
         long t = System.nanoTime();
-        System.out.println(t-l);
+        System.out.println(t - l);
         l = System.nanoTime();
         eluer(1234341);
         t = System.nanoTime();
-        System.out.println(t-l);
-
+        System.out.println(t - l);
+        l = System.nanoTime();
+        System.out.println(Bei(1234341));
+        t = System.nanoTime();
+        System.out.println(t - l);
     }
 
     /**
@@ -58,7 +61,7 @@ public class 埃氏筛法 {
     static int[] visited;
 
     /**
-     * 欧拉线性筛法求第N个质数
+     * 欧拉线性筛法求第N个质数(最快的!)
      *
      * @param N
      */
@@ -80,5 +83,27 @@ public class 埃氏筛法 {
             }
         }
         System.out.println(prime[N]);
+    }
+
+    static int Bei(int n) {
+        int c = 1000;
+        while ((c / Math.log(c)) < n) {
+            c++;
+        }//判断第n个数的范围
+        boolean[] visited = new boolean[c];
+        visited[1] = true;
+        for (int i = 2; i < c; i++) {
+            if (!visited[2]) {
+                for (int j = 2 * i; j < c; j += i) {
+                    visited[j] = true;
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 2; i < c; i++) {
+            if (!visited[i]) ans++;
+            if (ans == n) return i;
+        }
+        return -1;
     }
 }
