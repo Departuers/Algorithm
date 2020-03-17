@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class DFS {
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 15, 23, 13, 12};
-        //    ShuiWa(10, 12);
-        int k = 1;
-        System.out.println(ABC(arr, arr.length, k, 0, 0));
-        buFenHe(arr, k, 0, new ArrayList<Integer>());
+//        int[] arr = {1, 2, 3, 15, 23, 13, 12};
+//        //    ShuiWa(10, 12);
+//        int k = 1;
+//        System.out.println(ABC(arr, arr.length, k, 0, 0));
+//        buFenHe(arr, k, 0, new ArrayList<Integer>());
 
 
 //        int[] data = new int[6];
@@ -17,8 +17,8 @@ public class DFS {
 //        suShuHuan(6,data,1);
 
 //        ShuiWa(N, M);
-//        NhuangHou(0);
-//        System.out.println(cnt);
+        NhuangHou(0);
+        System.out.println(cnt);
     }
 
     /**
@@ -51,10 +51,11 @@ public class DFS {
         }
         if (k < 0 || cur == arr.length)//剪枝
             return;
-        buFenHe(arr, k, cur + 1, intS);
-        intS.add(arr[cur]);
+        buFenHe(arr, k, cur + 1, intS);//不要第cur个
+
+        intS.add(arr[cur]);//拿上第cur个交给第cur+1次递归
         buFenHe(arr, k - arr[cur], cur + 1, intS);
-        intS.remove(intS.size() - 1);//回溯
+        intS.remove(intS.size() - 1);//回溯,到上一个状态
     }
 
     /**
@@ -215,6 +216,8 @@ public class DFS {
             boolean ok = true;
             for (int i = 0; i < row; i++) {
                 if (rec[i] == col || i + rec[i] == row + col || rec[i] - i == col - row) {
+                    //由于是一行一行放的,一行行不可能有2个皇后
+                    //判断第一个是放皇后的列是否与上一个冲突,第二三个是判断对角线是否冲突
                     ok = false;
                     break;
                 }
@@ -222,7 +225,7 @@ public class DFS {
             if (ok) {
                 rec[row] = col;
                 NhuangHou(row + 1);
-                //rec[row]=0  //写不写回溯都可以,
+                //rec[row]=0  //写不写回溯都可以,因为会覆盖
             }
         }
     }
@@ -278,7 +281,8 @@ public class DFS {
      * @return b
      */
     private static boolean isP(int k) {
-        for (int i = 2; i * i <= k; i++) {
+        int t = (int) Math.sqrt(k);
+        for (int i = 2; i <= t; i++) {
             if (k % i == 0)
                 return false;
         }

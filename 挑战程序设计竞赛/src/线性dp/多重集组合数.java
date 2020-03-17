@@ -1,4 +1,4 @@
-package dp;
+package 线性dp;
 
 /**
  * 有n种物品,第i种物品有ai个,不同种类的物品可以互相区分,

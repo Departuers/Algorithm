@@ -1,4 +1,4 @@
-package dp;
+package 线性dp;
 
 /**
  * 有n个无区别的物品,将它们划分成不超过m组,
