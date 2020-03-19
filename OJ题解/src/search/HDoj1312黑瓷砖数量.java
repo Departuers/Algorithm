@@ -3,7 +3,7 @@ package search;
 import java.util.Scanner;
 
 import static java.lang.System.in;
-
+//求一个联通分量有多少元素
 public class HDoj1312黑瓷砖数量 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(in);

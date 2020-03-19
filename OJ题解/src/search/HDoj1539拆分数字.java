@@ -12,6 +12,7 @@ import static java.lang.System.in;
  * 就输出这种拆法。如果对于同一个最接近的和，
  * 有多种拆法，就输出rejected。
  * 如果所有拆法得到的和都比n大，那么就输出error。
+ * https://blog.csdn.net/weixin_40163242/article/details/86760142
  * <p>
  * Sample Input
  * 50 12346
@@ -39,16 +40,21 @@ import static java.lang.System.in;
 public class HDoj1539拆分数字 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(in);
-        n = sc.nextInt();
-        m = sc.nextInt();
-        arr = c(m);
-        len = arr.size();
-        mark = new boolean[arr.size()];
-        space = new boolean[arr.size()];
-        dfs(1, 0, arr.get(0));
-        for (int i = 0; i < len; i++) {
-            if (space[i]) System.out.print(" ");
-            System.out.print(arr.get(i));
+        while (true){
+            n = sc.nextInt();
+            m = sc.nextInt();
+            if (n==m&&m==0)break;
+            arr = len(m);
+            len = arr.size();
+            mark = new boolean[arr.size()];
+            space = new boolean[arr.size()];
+            dfs(1, 0, arr.get(0));
+            System.out.print(ans+" ");
+            for (int i = 0; i < len; i++) {
+                if (space[i]) System.out.print(" ");
+                System.out.print(arr.get(i));
+            }
+            System.out.println();
         }
     }
 
@@ -85,7 +91,7 @@ public class HDoj1539拆分数字 {
         mark[pos] = false;
     }
 
-    static ArrayList<Integer> c(int t) {
+    static ArrayList<Integer> len(int t) {
         ArrayList<Integer> list = new ArrayList<Integer>();
         while (t != 0) {
             list.add(t % 10);

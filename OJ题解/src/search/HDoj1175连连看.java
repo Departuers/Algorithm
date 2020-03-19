@@ -51,7 +51,6 @@ import static java.lang.System.in;
  * <p>
  * n/m最多1000,用邻接矩阵DFS是5000毫秒我吐了白写这么久
  * 用BFS是170ms书上说,但Java是1700ms
- *
  */
 public class HDoj1175连连看 {
 
@@ -62,39 +61,39 @@ public class HDoj1175连连看 {
 
     public static void main(String[] args) throws CloneNotSupportedException {
         Scanner sc = new Scanner(in);
-       while (true){
-           n = sc.nextInt();
-           m = sc.nextInt();
-           if (n == 0 && m == 0) break;
-           for (int i = 1; i <= n; i++) {
-               for (int j = 1; j <= m; j++) {
-                   g[i][j] = sc.nextInt();
-               }
-           }
-           int q = sc.nextInt();//q个查询;
-           for (int z = 0; z < q; z++) {
-               for (int i = 0; i < vis.length; i++) {
-                   Arrays.fill(vis[i], false);
-               }
-               int x1, x2, y1, y2;
-               x1 = sc.nextInt();
-               y1 = sc.nextInt();
-               x2 = sc.nextInt();
-               y2 = sc.nextInt();
-               if (g[x1][y1] != 0 && g[x1][y1] == g[x2][y2] && (x1 != x2 || y1 != y2)) {
-                   //起点和终点有棋子,颜色相同,位置不同
-                   if (bfs(x1, y1, x2, y2)) {
-                       System.out.println("YES");
-                   } else {
-                       System.out.println("NO");
-                   }
-               } else System.out.println("NO");
-           }
-       }
+        while (true) {
+            n = sc.nextInt();
+            m = sc.nextInt();
+            if (n == 0 && m == 0) break;
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= m; j++) {
+                    g[i][j] = sc.nextInt();
+                }
+            }
+            int q = sc.nextInt();//q个查询;
+            for (int z = 0; z < q; z++) {
+                for (int i = 0; i < vis.length; i++) {
+                    Arrays.fill(vis[i], false);
+                }
+                int x1, x2, y1, y2;
+                x1 = sc.nextInt();
+                y1 = sc.nextInt();
+                x2 = sc.nextInt();
+                y2 = sc.nextInt();
+                if (g[x1][y1] != 0 && g[x1][y1] == g[x2][y2] && (x1 != x2 || y1 != y2)) {
+                    //起点和终点有棋子,颜色相同,位置不同
+                    if (bfs(x1, y1, x2, y2)) {
+                        System.out.println("YES");
+                    } else {
+                        System.out.println("NO");
+                    }
+                } else System.out.println("NO");
+            }
+        }
     }
 
     //判断节点合法
-    static boolean Juege(int x, int y) {
+    static boolean inArea(int x, int y) {
         if (x < 1 || x > n || y < 1 || y > m || vis[x][y]) return false;
         return true;
     }
@@ -105,8 +104,8 @@ public class HDoj1175连连看 {
         for (int d = 0; d < 4; d++) {
             int x = x1 + dirs[d][0], y = y1 + dirs[d][1];
             int tem = ((dir == d) ? num : num + 1);
-            if (tem <= 2 && Juege(x, y)) {
-                if (x == x2 && y == y2) return true;
+            if (tem <= 2 && inArea(x, y)) {//判断转折次数小于2,节点合法
+                if (x == x2 && y == y2) return true;//判断终点
                 else if (!vis[x][y] && g[x][y] == 0 && dfs(x, y, x2, y2, d, tem)) return true;
             }//是0才能走
         }

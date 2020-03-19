@@ -20,6 +20,9 @@ import static java.lang.System.in;
  * ........
  * out:
  * 13
+ * 思路:其实就是贪心+bfs
+ * pq里面放的状态,步数少的会在前面
+ * 最终的结果,就一定是步数最少的
  */
 public class HDoj1242拯救天使 {
     static int n, m;
