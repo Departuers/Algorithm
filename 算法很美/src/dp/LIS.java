@@ -1,5 +1,6 @@
-package graph;
+package dp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -13,14 +14,11 @@ import java.util.Arrays;
  */
 public class LIS {
     public static void main(String[] args) {
-        // int[] arr = {4, 2, 3, 1, 5, 2, 6};
-        int i=1;
-        System.out.println(-i);
-//        for (int i = 0; i < 1000000; i++) {
-//            int[] arr = random(200);
-//            if (dpBest(arr) != dp(arr, arr.length))
-//                System.out.println("no");
-//        }
+        for (int i = 0; i < 1000000; i++) {
+            int[] arr = random(200);
+            if (dpBest(arr) != dp(arr, arr.length))
+                System.out.println("no");
+        }
     }
 
 
@@ -37,6 +35,7 @@ public class LIS {
 
     /**
      * O(N logN)最优实现,LeetCode官方题解非常牛逼
+     * dp[i] 代表长度为i的最长上升子序列末尾的那个元素(数字)
      *
      * @param nums
      * @return

@@ -1,4 +1,4 @@
-package graph;
+package dp;
 
 /**
  * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
