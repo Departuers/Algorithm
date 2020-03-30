@@ -43,7 +43,7 @@ public class l1除法 {
             int t = arr[i];
             arr[i] = arr[k];
             arr[k] = t;
-            dfs(arr, k + 1, 62);
+            dfs(arr, k + 1, N);
             t = arr[i];
             arr[i] = arr[k];
             arr[k] = t;

@@ -51,6 +51,5 @@ public class 快速幂 {
             b >>= 1;//去掉最低位
         }
         return res;
-
     }
 }
