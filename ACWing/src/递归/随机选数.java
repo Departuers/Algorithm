@@ -1,9 +1,5 @@
 package 递归;
 
-import java.util.Scanner;
-
-import static java.lang.System.in;
-
 /**
  * 92. 递归实现指数型枚举
  * 从 1~n 这 n 个整数中随机选取任意多个，输出所有可能的选择方案。
@@ -29,23 +25,31 @@ import static java.lang.System.in;
  */
 public class 随机选数 {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(in);
-        n = sc.nextInt();
-        dfs(0,0);
+//        Scanner sc = new Scanner(in);
+//        n = sc.nextInt();
+        dfs(0);
     }
 
-    static int n;
+    static int n = 3;
+    static int[] arr = {1, 2, 3};
+    static int[] vis = new int[10];
 
-    static void dfs(int u, int state) {
+    //dfs求子集,选和不选
+    static void dfs(int u) {
         if (u == n) {//经过所有的数
             for (int i = 0; i < n; i++) {
-                if (((state >> i) & 1) == 1)//为1说明用这个数
-                    System.out.print(i + 1+" ");//枚举的0~(n-1)所以i+1
+                if (vis[i] == 1)
+                    System.out.print(arr[i] + " ");
             }
             System.out.println();
             return;
         }
-        dfs(u + 1, state);//不用第u个数字
-        dfs(u + 1, state | (1 << u));//用第u个数字,把state的第u位变成为1
+        vis[u] = 2;
+        dfs(u + 1);//不用第u个数字
+        vis[u] = 0;
+
+        vis[u] = 1;
+        dfs(u + 1);//用第u个数字,把state的第u位变成为1
+        vis[u] = 0;
     }
 }

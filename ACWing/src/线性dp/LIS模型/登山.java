@@ -37,7 +37,7 @@ public class 登山 {
             }
         }
         int res = 0;
-        for (int i = 0; i <= N; i++) {
+        for (int i = 1; i <= N; i++) {
             res=Math.max(res, g[i] + f[i] - 1);
         }
         System.out.println(res);

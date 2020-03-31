@@ -1,6 +1,7 @@
 package 递归;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static java.lang.System.in;
@@ -54,5 +55,24 @@ public class 排列枚举 {
                 path.remove(path.size() - 1);//恢复状态
             }
         }
+    }
+
+    static int[] arr = {4, 3, 5, 2};
+    static void d(int u, int k) {
+        if (u == n) {
+            System.out.println(Arrays.toString(arr));
+            return;
+        }
+        for (int i = k; i < n; i++) {
+            swap(i, k);
+            d(u + 1, k + 1);
+            swap(i, k);
+        }
+    }
+
+    static void swap(int i, int j) {
+        int t = arr[i];
+        arr[i] = arr[j];
+        arr[j] = t;
     }
 }

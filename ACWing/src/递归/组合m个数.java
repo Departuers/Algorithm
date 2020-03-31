@@ -33,13 +33,15 @@ public class 组合m个数 {
 //        n = sc.nextInt();
 //        m = sc.nextInt();
         long l = System.nanoTime();
-        dfs(0, 0, 0);
+
         long e = System.nanoTime();
         System.out.println(e - l);
 
     }
 
-    static int m = 15, n = 10;
+    static int m = 2, n = 6;
+    static int[] arr = {23, 1, 2, 4, 7, 3};
+    static int[] vis = new int[6];
 
     //枚举到第u位 ,sum是当前选了几个,state是vis数组
     static void dfs(int u, int sum, int state) {
@@ -47,8 +49,9 @@ public class 组合m个数 {
         // sum+(n-u)<m就是剩余的数字都选上,也不够m个数字,所以剪枝
         if (sum == m) {//选了m个就输出
             for (int i = 0; i < n; i++) {
-                if (((state >> i) & 1) == 1)
+                if ((state >> i & 1) == 1) {
                     System.out.print(i + 1 + " ");
+                }
             }
             System.out.println();
             return;
@@ -56,5 +59,24 @@ public class 组合m个数 {
         if (u == n) return;//所有数字都选完了
         dfs(u + 1, sum + 1, state | (1 << u));//能选就先选,保持字典序!!!
         dfs(u + 1, sum, state);//选不选第u个数
+    }
+
+    //一共有n个数据,选m个
+    //u是第几个,k是当前一共选了多少个
+    static void dfs(int u, int k) {
+        if (k + n - u < m) return;
+        if (k == m) {
+            for (int i = 0; i < n; i++) {
+                if (vis[i] == 1)
+                    System.out.print(arr[i] + " ");
+            }
+            System.out.println();
+            return;
+        }
+        if (u == n) return;//n个数据都用完了
+        vis[u] = 1;//带上第u个数,前往下一层
+        dfs(u + 1, k + 1);//选第u个
+        vis[u] = 0;
+        dfs(u + 1, k);
     }
 }
