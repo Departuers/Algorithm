@@ -6,49 +6,46 @@ import java.util.StringTokenizer;
 import static java.lang.System.in;
 
 /**
- * 差分
- * a[] 3 5  2  1  9
- * b[] 3 2 -3 -1  8
- * a[i]=b[i]+b[i-1]+...+b[1]
- * a是b是前缀和数组,b是a的差分
- * 对a[l]+=c相当于对a[l]直到结尾都加上c
- * 对a[r+1]-=c相当于对a[r+1]直到结尾都减去c
- * 这样就可以O(1)实现对数组进行区间加减
- * 构造也是上述构造!!!
- * 不考虑前置构造,直接更新!!!
+ *
  */
-public class 差分 {
+public class 二维差分矩阵 {
     public static void main(String[] args) throws IOException {
         n = nextInt();
         m = nextInt();
-        ca = new int[n + 2];
-        int d = 0;
+        q = nextInt();
+        ca = new int[n + 2][m + 2];
         for (int i = 1; i <= n; i++) {
-            d = nextInt();
-            insert(i, i, d);
+            for (int j = 1; j <= m; j++) {
+                insert(i, j, i, j, nextInt());
+            }
         }
-        int a, b, c;
-        while (m-- != 0) {
-            a = nextInt();
-            b = nextInt();
-            c = nextInt();
-            insert(a, b, c);
+        while (q-- != 0) {
+            insert(nextInt(), nextInt(), nextInt(), nextInt(), nextInt());
+        }
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                ca[i][j] += ca[i - 1][j] + ca[i][j - 1] - ca[i - 1][j - 1];
+            }
         }
         for (int i = 1; i <= n; i++) {
-            ca[i] += ca[i - 1];
+            for (int j = 1; j <= m; j++) {
+                bw.write(ca[i][j]+" ");
+            }
+            bw.write("\n");
         }
-        for (int i = 1; i <= n; i++) {
-            System.out.println(ca[i]);
-        }
+        bw.flush();
     }
 
-    static void insert(int l, int r, int c) {
-        ca[l] += c;
-        ca[r + 1] -= c;
+    static void insert(int x1, int y1, int x2, int y2, int c) {
+        ca[x1][y1] += c;
+        ca[x1][y2 + 1] -= c;
+        ca[x2 + 1][y1] -= c;
+        ca[x2+1][y2+1] += c;
     }
 
-    static int n, m;
-    static int[] ca;
+    static int[][] ca;
+    static int n, m, q;
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
     static StringTokenizer tokenizer = new StringTokenizer("");
