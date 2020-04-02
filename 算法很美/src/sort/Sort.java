@@ -16,14 +16,14 @@ public class Sort {
 //                        count++;
 //        System.out.println(count);
 
-
-        for (int j = 0; j < 100; j++) {
-            for (int i = 1; i < 20; i++) {
-                int[] data = random(20, 200);
-                countSort(data);
-                if (data[i] < data[i - 1])
-                    System.out.println("错误");
-            }        }
+//
+//        for (int j = 0; j < 100; j++) {
+//            for (int i = 1; i < 20; i++) {
+//                int[] data = random(20, 200);
+//                countSort(data);
+//                if (data[i] < data[i - 1])
+//                    System.out.println("错误");
+//            }        }
     }
 
     public static int[] random(int size, int f) {

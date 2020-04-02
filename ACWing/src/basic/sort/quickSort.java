@@ -12,25 +12,25 @@ public class quickSort {
     public static void main(String[] args) {
         q[0] = 5;
         q[1] = 4;
-        quick(0, 5);
+        quick(2, 5);
         System.out.println(q[0]);
         System.out.println(q[1]);
 
     }
 
     static int[] q = new int[1000005];
-    static int t = 0;
+    static int t;
 
     static void quick(int l, int r) {
-        if (l == r) return;
-        int x = q[(l + r) / 2], i = l - 1, j = r + 1;
+        if (l >= r) return;
+        int x = q[r], i = l - 1, j = r + 1;
         while (i < j) {
             do {
                 i++;
-            } while (q[i] < x&&i<j);
+            } while (q[i] < x);
             do {
                 j++;
-            } while (q[j] > x&&i<j);
+            } while (q[j] > x);
             if (i < j) {
                 t = q[i];
                 q[i] = q[j];
@@ -38,6 +38,6 @@ public class quickSort {
             }
         }
         quick(l, j);
-        quick(j + 1, r);
+        quick(j+1, r);
     }
 }

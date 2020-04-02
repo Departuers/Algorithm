@@ -69,19 +69,6 @@ public class LIS {
             dp[t] = w;
             if (t == len) len++;
         }
-
-        for (int i = 0; i < nums.length; i++) {
-            dp[i] = 0;
-            for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                }
-            }
-            len = Math.max(dp[i], len);
-        }
         return len;
-
-
     }
-
 }

@@ -10,7 +10,7 @@ public class 排序例题 {
 //        System.out.println(Arrays.toString(data));
         //       System.out.println(shu(data));
         int[] c = {1, 2, 5};
-        System.out.println(zuiii(c,0,c.length-1));
+        System.out.println(zuiii(c, 0, c.length - 1));
 
 
     }
@@ -255,6 +255,13 @@ public class 排序例题 {
      * 思路:归并的思维，两个指针指向数值的最后一个。对比这两个指针，往数组末端放
      */
     public static void hebing() {
+
+    }
+
+    /**
+     * 逆序对
+     */
+    public static void ni() {
 
     }
 
