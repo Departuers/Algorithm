@@ -16,6 +16,15 @@ import static java.lang.System.in;
  * 这样就可以O(1)实现对数组进行区间加减
  * 构造也是上述构造!!!
  * 不考虑前置构造,直接更新!!!
+ * 第二种构造方法:如上找到规律
+ * b[4]=a[4]-a[3]
+ * b[3]=a[3]-a[2]
+ * b[2]=a[2]-a[1]
+ * b[1]=a[1]-a[0]
+ * 所以可以倒序从n~1
+ * b[i]=a[i]-a[i-1]
+ * 这样构造,也可以
+ * 给出证明:a[i]=b[i]+b[i-1]+...+b[1]=a[i]-a[i-1]+a[i-1]-a[i-2]+...+a[1]=a[i]
  */
 public class 差分 {
     public static void main(String[] args) throws IOException {
