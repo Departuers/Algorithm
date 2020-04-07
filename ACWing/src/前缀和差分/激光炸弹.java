@@ -10,30 +10,36 @@ public class 激光炸弹 {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         r = sc.nextInt();
-        int x, y, w;
+        N = r;
+        M = r;
+        int x, y, v;
         while (n-- != 0) {
             x = sc.nextInt();
             y = sc.nextInt();
-            w = sc.nextInt();
-            a[++x][++y] += w;
+            v = sc.nextInt();
+            x++;
+            y++;
+            N = Math.max(N, x);//求出矩形最大长宽
+            M = Math.max(M, y);
+            qzh[x][y] += v;
         }
-        for (int i = 1; i <= 5000; i++) {
-            for (int j = 1; j <= 5000; j++) {
-                qzh[i][j] += qzh[i - 1][j] + qzh[i][j - 1] - qzh[i - 1][j - 1] + a[i][j];
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j <= M; j++) {
+                qzh[i][j] += qzh[i - 1][j] + qzh[i][j - 1] - qzh[i - 1][j - 1];
             }
-        }
+        }//前缀和
         long res = 0;
-        for (int i = 1; i <= 5000 - r + 1; i++) {
-            for (int j = 1; j <= 5000 - r + 1; j++) {
-                res = Math.max(get(i, j, i + r - 1, j + r - 1), res);
+        for (int i = r; i <= N; i++) {
+            for (int j = r; j <= M; j++) {
+                res = Math.max(get(i - r + 1, j - r + 1, i, j), res);
             }
         }
+        //求出最大r-1的矩形
         System.out.println(res);
     }
 
-    static int n, r;
-    static int[][] qzh = new int[5005][5005];
-    static int[][] a = new int[5005][5005];
+    static int[][] qzh = new int[5010][5010];
+    static int n, r, N, M;
 
     static int get(int x1, int y1, int x2, int y2) {
         return qzh[x2][y2] - qzh[x1 - 1][y2] - qzh[x2][y1 - 1] + qzh[x1 - 1][y1 - 1];

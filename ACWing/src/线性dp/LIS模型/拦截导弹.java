@@ -21,8 +21,7 @@ public class 拦截导弹 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            arr[N] = sc.nextInt();
-            N++;
+            arr[N++] = sc.nextInt();
         }
         int ans = 0;
         for (int i = 0; i < N; i++) {

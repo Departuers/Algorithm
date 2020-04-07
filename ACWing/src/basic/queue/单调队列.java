@@ -1,5 +1,11 @@
 package basic.queue;
 
+import java.io.*;
+import java.util.LinkedList;
+import java.util.StringTokenizer;
+
+import static java.lang.System.in;
+
 /**
  * https://www.acwing.com/problem/content/156/
  * 给定一个大小为n≤106
@@ -42,8 +48,73 @@ package basic.queue;
  * 也就是下标小,存的值大,不选,因为起码都有2个
  */
 public class 单调队列 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        n = nextInt();
+        k = nextInt();
+        for (int i = 0; i < n; i++) {
+            a[i] = nextInt();
+        }
+        List();
+//        int head = 0, end = -1;
+//        for (int i = 0; i < n; i++) {
+//            if (head <= end && q[head] < i - k + 1) head++;
+//            //队列里面的元素不在窗口内,就删除该元素
+//            //i-k+1是当前窗口的第一个值的下标
+//            while (head <= end && a[q[end]] >= a[i]) end--;
+//            //如果队列尾部的值大于新加进来的值,就删除队尾元素,
+//            //对应的是队尾指针前移
+//            q[++end] = i;
+//            //把新元素插入到队尾
+//            if (i >= k - 1) System.out.println(a[q[head]]);
+//        }
+
 
     }
 
+    //链表实现队列
+    static void List() throws IOException {
+        for (int i = 0; i < n; i++) {
+            if (!queue.isEmpty() && a[queue.peekFirst()] < i - k + 1) queue.removeFirst();
+            while (!queue.isEmpty() && a[queue.peekLast()] > a[i]) queue.removeLast();
+            queue.add(i);
+            if (!queue.isEmpty() && i >= k - 1) bw.write(a[queue.peekFirst()] + " ");
+        }
+        bw.write("\n");
+        queue.clear();
+        for (int i = 0; i < n; i++) {
+            if (!queue.isEmpty() && queue.peekFirst() < i - k + 1) queue.removeFirst();
+            while (!queue.isEmpty() && a[queue.peekLast()] <= a[i]) queue.removeLast();
+            queue.add(i);
+            if (i >= k - 1 && !queue.isEmpty()) bw.write(a[queue.peekFirst()] + " ");
+        }
+        bw.flush();
+    }
+
+    static int[] a = new int[(int) (1e6 + 10)];
+    static int[] q = new int[(int) (1e6 + 10)];
+    static int n, k;
+
+    static LinkedList<Integer> queue = new LinkedList<Integer>();
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+    static StringTokenizer tokenizer = new StringTokenizer("");
+
+    static String nextLine() throws IOException {// 读取下一行字符串
+        return reader.readLine();
+    }
+
+    static String next() throws IOException {// 读取下一个字符串
+        while (!tokenizer.hasMoreTokens()) {
+            tokenizer = new StringTokenizer(reader.readLine());
+        }
+        return tokenizer.nextToken();
+    }
+
+    static int nextInt() throws IOException {// 读取下一个int型数值
+        return Integer.parseInt(next());
+    }
+
+    static double nextDouble() throws IOException {// 读取下一个double型数值
+        return Double.parseDouble(next());
+    }
 }
