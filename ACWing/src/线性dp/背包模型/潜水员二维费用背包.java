@@ -1,5 +1,6 @@
 package 线性dp.背包模型;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -41,8 +42,10 @@ import java.util.Scanner;
  * >=m    >=n
  * 价值要求最低
  * 费用1恰好是j,费用2恰好是k
- * 状态定义改变:f[i,j,k]表示为:所有从前i种物品选,总氧气恰好是j,总氮气恰好是k的选法
+ * 状态定义改变:f[i,j,k]表示为:所有从前i种物品选,总氧气至少是j,总氮气至少是k的选法
  * 属性:Min 最小重量
+ * 不选第i种物品:f[i-1,j,k]
+ * <p>
  * 背包恰好和不超过,在初始化的时候有区别
  * f[0,j,k]=在状态定义小于等于j,小于等于k的时候是合法的
  * 在状态定义恰好是j,恰好是k的时候
@@ -60,26 +63,26 @@ public class 潜水员二维费用背包 {
             d[i] = sc.nextInt();
             w[i] = sc.nextInt();
         }
-        for (int i = 0; i <= n; i++) {
-            for (int j = 0; j <= m; j++) {
-                f[0][i][j] = Integer.MAX_VALUE - 1000;
-            }
-        }
-        f[0][0][0] = 0;
-        for (int i = 1; i <= shu; i++) {
-            for (int j = 0; j <= n; j++) {
-                for (int k = 0; k <= m; k++) {
-                    f[i][j][k] = f[i - 1][j][k];
-                    if (j >= o[i] && k >= d[i]) {
-                        f[i][j][k]=Math.min(f[i-1][j-o[i]][k-d[i]]+w[i],f[i][j][k]);
-                    }
-                }
-            }
-        }
-        System.out.println(f[shu][n][m]);
+        two();
     }
 
     static int n, m, shu;
     static int[] o = new int[1010], d = new int[1010], w = new int[1010];
     static int[][][] f = new int[23][88][1010];
+    static int[][] dp = new int[5000][1600];
+
+    static void two() {
+        for (int i = 0; i < dp.length; i++) {
+            Arrays.fill(dp[i], Integer.MAX_VALUE - 10000);
+        }
+        dp[0][0] = 0;
+        for (int i = 1; i <= shu; i++) {
+            for (int j = n; j >= 0; j--) {
+                for (int k = m; k >= 0; k--) {
+                    dp[j][k] = Math.min(dp[j][k], dp[Math.max(j - o[i], 0)][Math.max(k - d[i], 0)] + w[i]);
+                }
+            }
+        }
+        System.out.println(dp[n][m]);
+    }
 }
