@@ -15,9 +15,9 @@ public class ST表最优写法 {
     static int[] arr = {22, 23, 8, 67, 7, 7, 2};
 
     static void init() {
-        log = new int[n + 2];
+        log = new int[n + 1];
         log[1] = 0;
-        for (int i = 2; i <= n + 1; i++) {
+        for (int i = 2; i <= n ; i++) {
             log[i] = log[i / 2] + 1;
         }
         st = new int[n + 2][log[n] + 1];

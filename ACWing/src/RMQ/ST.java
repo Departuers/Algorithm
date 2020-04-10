@@ -24,17 +24,17 @@ import java.util.Random;
  */
 public class ST {
     public static void main(String[] args) {
-//        for (int z = 20; z < 200; z++) {
-//            N = z;
-//            arr = ran(N);
-//            init();
-//            for (int i = 1; i <= N; i++) {
-//                for (int j = i + 1; j <= N; j++) {
-//                    if (rmq(i, j) != rmqq(i, j))
-//                        System.out.println("No");
-//                }
-//            }
-//        }
+        for (int z = 20; z < 20000; z++) {
+            N = z;
+            arr = ran(N);
+            init();
+            for (int i = 1; i <= N; i++) {
+                for (int j = i + 1; j <= N; j++) {
+                    if (rmq(i, j) != rmqq(i, j))
+                        System.out.println("No");
+                }
+            }
+        }
 
 
     }
@@ -54,7 +54,7 @@ public class ST {
     static int[] arr = {22, 23, 8, 67, 7, 7, 2};
 
     static void init() {
-        log = new int[N + 2];
+        log = new int[N + 1];
         log[1] = 0;
         for (int i = 2; i <= N; i++) {
             log[i] = log[i / 2] + 1;
