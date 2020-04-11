@@ -40,7 +40,7 @@ public class 混合背包 {
             } else {
                 if (t[i] == -1) t[i] = 1;
                 for (int k = 1; k <= t[i]; k *= 2) {
-                    for (int j = V; j >= k * v[i]; j--) {
+                    for (int j = V; j >= k * v[i]; j--) {//把k个物品看成可选可不选的一个物品,01背包
                         f[j] = Math.max(f[j], f[j - k * v[i]] + w[i] * k);
                     }
                     t[i] -= k;

@@ -8,6 +8,7 @@ import static java.lang.System.in;
 
 /**
  * https://www.acwing.com/problem/content/156/
+ * 滑动窗口
  * 给定一个大小为n≤106
  * 的数组。
  * 有一个大小为k的滑动窗口，它从数组的最左边移动到最右边。
