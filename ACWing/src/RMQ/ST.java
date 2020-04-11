@@ -3,7 +3,7 @@ package RMQ;
 import java.util.Random;
 
 /**
- * https://blog.csdn.net/qq_41311604/article/details/79900893
+ * https://blog.csdn.net/qq_41311604/article/de tails/79900893
  * 只给出模板
  * dp[i][j] = min(dp [i][j - 1], dp [i + (1 << j - 1)][j - 1])
  * 由此给出下列代码：
