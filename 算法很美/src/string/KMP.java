@@ -1,23 +1,26 @@
 package string;
 
-import java.util.Arrays;
 import java.util.Random;
 
 /**
- * KMP字符串匹配...未完
+ * KMP字符串匹配...
+ * https://blog.csdn.net/dark_cy/article/details/88698736
  */
 public class KMP {
     public static void main(String[] args) {
-        for (int i = 3; i < 1000; i++) {
-            String st = randomStr(i);
-            if (!Arrays.equals(next(st), nextt(st))) {
-                System.out.println(st);
-                System.out.println(Arrays.toString(next(st)));
-                System.out.println(Arrays.toString(nextt(st)));
+        String s = "214131242";
+        String t = "124";
+        int[] next = nextt(t);
+        int i = 0, j = 0;
+        while (i < s.length() && j < t.length()) {
+            if (j == -1 || s.charAt(i) == t.charAt(j)) {
+                i++;
+                j++;
+            } else j = next[j];
+            if (j >= t.length()) {
+                System.out.println(i-t.length());
             }
         }
-        System.out.println(Arrays.toString(next("abaabcac")));
-        System.out.println(Arrays.toString(nextt("abaabcac")));
 
     }
 

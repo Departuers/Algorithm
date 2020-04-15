@@ -2,8 +2,6 @@ package 数学;
 
 import java.util.Scanner;
 
-import static java.lang.System.in;
-
 /**
  * 90. 64位整数乘法
  * 求 a 乘 b 对 p 取模的值。
@@ -30,12 +28,21 @@ import static java.lang.System.in;
  */
 public class 快速乘 {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(in);
+        Scanner sc = new Scanner(System.in);
         long a = sc.nextLong();
         long b = sc.nextLong();
         long p = sc.nextLong();
         System.out.println(ks(a, b, p));
-
+        System.out.println(ca(2, 20));
+    }
+    //递归快速乘
+    static int ca(int a, int b) {
+        int res = 0;
+        if (b == 0) return res;
+        if ((b & 1) == 1) {
+            res += a;
+        }
+        return res + ca(a << 1, b >> 1);
     }
 
     //转换为快速加法,a*b
@@ -52,4 +59,6 @@ public class 快速乘 {
         }
         return res;
     }
+
+
 }

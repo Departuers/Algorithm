@@ -13,8 +13,10 @@ import java.util.Scanner;
  * 集合划分:子树1,子树3,子树3
  * 再根据体积划分子树:体积是0-m
  * 把每一颗子树看做物品组,分组背包问题
+ * 链式前向星建图
  */
 public class 有依赖的背包问题 {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
@@ -22,5 +24,14 @@ public class 有依赖的背包问题 {
 
     }
 
-    static int n, v;
+    static int N = 110;
+    static int[] head = new int[N], e = new int[N], ne = new int[N];
+
+    static int n, v, cnt = 1;
+
+    static void add(int a, int b) {
+        e[cnt] = b;
+        ne[cnt] = head[a];
+        head[a] = cnt++;
+    }
 }
