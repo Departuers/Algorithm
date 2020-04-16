@@ -7,7 +7,7 @@ public class 没有上司的舞会 {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         for (int i = 1; i <= n; i++) {
-            happy[i] = sc.nextInt();
+            f[i][1] = sc.nextInt();
         }
         int a, b;
         for (int i = 0; i < n - 1; i++) {
@@ -23,11 +23,11 @@ public class 没有上司的舞会 {
     }
 
     private static void dfs(int u) {
-        f[u][1] = happy[u];//选择了u就加上u的幸福指数
+       // f[u][1] = happy[u];//选择了u就加上u的幸福指数
         for (int i = he[u]; i != 0; i = ne[i]) {
             int j = e[i];
             dfs(j);
-            f[u][1] += f[j][0];//不选子节点
+            f[u][1] += f[j][0];//选当前节点,但不选子节点
             f[u][0] += Math.max(f[j][0], f[j][1]);
             //不选当前节点,是选还是不选子节点
         }

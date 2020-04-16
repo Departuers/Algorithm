@@ -50,7 +50,6 @@ import java.util.Scanner;
  * 可以算出价值和体积
  * 状态划分:不选第i种组件,f[i-1,j]
  * 选第i种主件:f[i-1,j-v]+w  和第一个附件f[i-1,j-v]+w .... 或者不选第一个附件,选第二个附件...
- *
  */
 public class 金明的预算方案 {
     static class node {

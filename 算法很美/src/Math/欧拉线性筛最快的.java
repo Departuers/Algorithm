@@ -2,7 +2,7 @@ package Math;
 
 public class 欧拉线性筛最快的 {
     public static void main(String[] args) {
-        eluer(12345);
+        eluer(12345798);
     }
 
     static int[] prime;
