@@ -82,14 +82,14 @@ public class dijkstra {
         he[a] = cnt++;
     }
 
+
     static int n, m, cnt = 1;
-    static PriorityQueue<node> q = new PriorityQueue<node>();
+    static int[] e = new int[100005];
     static int[] he = new int[100005];
-    static int[] dis = new int[100005];
     static int[] ne = new int[100005];
     static int[] w = new int[100005];
-
-    static int[] e = new int[100005];
     static boolean[] vis = new boolean[100005];
-
+    static PriorityQueue<node> q = new PriorityQueue<node>();
+    static int[] dis = new int[100005];
 }
+

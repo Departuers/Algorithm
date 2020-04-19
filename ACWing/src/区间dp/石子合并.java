@@ -1,5 +1,6 @@
 package 区间dp;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -39,6 +40,13 @@ public class 石子合并 {
             s[i] = sc.nextInt();
             s[i] += s[i - 1];
         }//前缀和
+        for (int i = 0; i < dp.length; i++) {
+            Arrays.fill(dp[i], -1);
+        }
+        System.out.println(dfs(1, n));
+        System.out.println(dp[1][n]);
+
+        //要先更新小区间的答案,按照拓扑序
         for (int len = 2; len <= n; len++) {
             for (int i = 1; i + len - 1 <= n; i++) {
                 int j = i + len - 1;
@@ -52,6 +60,17 @@ public class 石子合并 {
 
     }
 
+    static int dfs(int i, int j) {
+        if (i == j) return 0;
+        if (dp[i][j] != -1) return dp[i][j];
+        int ans = (int) 1e9;
+        for (int k = i; k < j; k++) {
+            ans = Math.min(ans, dfs(i, k) + dfs(k + 1, j) + s[j] - s[i - 1]);
+        }
+        return dp[i][j] = ans;
+    }
+
+    static int[][] dp = new int[310][310];
     static int[] s = new int[310];
     static int[][] f = new int[310][310];
     static int n = 0;
