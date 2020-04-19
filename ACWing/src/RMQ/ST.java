@@ -36,7 +36,6 @@ public class ST {
             }
         }
 
-
     }
 
     static int[] ran(int a) {

@@ -21,11 +21,10 @@ public class m任取n满足 {
         f(u + 1, sum + 1, s - arr[u]);
     }
 
-    static boolean x[] = new boolean[6];
+    static boolean[] x = new boolean[6];
 
     //搜索策略
     static void dfs(int u, int cnt) {
-
 
         for (int i = 0; i < n; i++) {
             if (!x[u]) {

@@ -72,6 +72,8 @@ public class 有依赖的背包问题 {
         for (int i = head[u]; i != 0; i = ne[i]) {
             int son = e[i];
             dfs(e[i]);
+            //以u为根的子树,每一棵子树都是一个分组背包问题
+            //抽象成2层
             for (int j = m - v[u]; j >= 0; j--) {//枚举体积
                 for (int k = 0; k <= j; k++) {//枚举决策,分为以0~m的一些决策
                     f[u][j] = Math.max(f[u][j], f[u][j - k] + f[son][k]);

@@ -1,9 +1,6 @@
 package dp;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * FatMouse's Speed
@@ -141,6 +138,5 @@ public class 胖老鼠 {
         });
         int[] dp = new int[list.size() + 1];
         ArrayList<Integer> mem = new ArrayList<Integer>();
-
     }
 }
