@@ -26,7 +26,6 @@ public class 树重心找节点 {
         dfs(1);
         System.out.println(Arrays.toString(size));
         System.out.println(Arrays.toString(maxpart));
-
     }
 
     private static void dfs(int u) {
@@ -44,6 +43,7 @@ public class 树重心找节点 {
         //算出以u为根,u的父节点所在联通分量的节点数目
         ans = Math.min(ans, maxpart[u]);
     }
+    //4, 5, 8, 7, 8, 5, 6, 8, 8,
 
     static int ans = Integer.MAX_VALUE;
 

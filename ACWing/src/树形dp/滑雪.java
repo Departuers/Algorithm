@@ -79,7 +79,7 @@ public class 滑雪 {
             int x = i + dir[d][0], y = j + dir[d][1];
             if (inarea(x, y)) {
                 if (g[i][j] > g[x][y]) {
-                    f[i][j] = Math.max(f[i][j], dfs(x, y) + 1);
+                    f[i][j] = Math.max(f[i][j], dfs(x, y) + 1);//所以要+1
                 }
             }
         }

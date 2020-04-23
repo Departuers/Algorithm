@@ -1,6 +1,7 @@
 package graph;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -45,23 +46,24 @@ public class spfa判断负环 {
         }
         if (spfa()) System.out.println("YES");
         else System.out.println("NO");
+        System.out.println(Arrays.toString(dis));
     }
 
     static boolean spfa() {
         // 不需要初始化dist数组
         // 原理：如果某条最短路径上有n个点（除了自己），那么加上自己之后一共有n+1个点，由抽屉原理一定有两个点相同，所以存在环。
-        ArrayDeque<Integer> q = new ArrayDeque<Integer>(100000);
+        ArrayDeque<Integer> q = new ArrayDeque<Integer>();
         for (int i = 1; i <= n; i++) {
             q.add(i);
             vis[i] = true;
         }
-        int t = 0,x;
+        int t = 0, x;
         while (!q.isEmpty()) {
             x = q.poll();
             vis[x] = false;
             for (int i = he[x]; i != 0; i = ne[i]) {
                 t = e[i];
-                if (dis[x] != Integer.MAX_VALUE && dis[t] > dis[x] + w[i]) {
+                if (dis[t] > dis[x] + w[i]) {
                     dis[t] = dis[x] + w[i];
                     count[t] = count[x] + 1;
                     if (count[t] >= n) return true;

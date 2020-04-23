@@ -95,12 +95,22 @@ public class 主席树 {
         return now;
     }
 
+    //区间第k小
     static int query(int l, int r, int L, int R, int k) {
         if (l == r) return l;
         int mid = l + r >> 1;
         int m = tree[lson[R]] - tree[lson[L]];
         if (k <= m) return query(l, mid, lson[L], lson[R], k);
         else return query(mid + 1, r, rson[L], rson[R], k - m);
+    }
+
+    //区间第k大
+    static int queryD(int l, int r, int L, int R, int k) {
+        if (l == r) return l;
+        int mid = l + r >> 1;
+        int m = tree[lson[R]] - tree[lson[L]];
+        if (k <= m) return queryD(mid + 1, r, rson[L], rson[R], k);
+        else return queryD(l, mid, lson[L], lson[R], k - m);
     }
 
     static int get(int x) {

@@ -23,11 +23,11 @@ public class 线性筛 {
     }
 
     static void oldN(int N) {
-        int n = N;
+        int n = 3000000;
         int r = 0;
         while ((n / Math.log(n)) < N) {
             r++;
-            n += 599;
+            n += 3000;
         }
         System.out.println(r);
         int cnt = 0;
