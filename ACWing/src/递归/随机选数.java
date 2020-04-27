@@ -31,7 +31,7 @@ public class 随机选数 {
     }
 
     static int n = 3;
-    static int[] arr = {1, 2, 3};
+    static int[] arr = {2, 4, 3};
     static int[] vis = new int[10];
 
     //dfs求子集,选和不选
@@ -44,9 +44,9 @@ public class 随机选数 {
             System.out.println();
             return;
         }
-        vis[u] = 2;
+//        vis[u] = 2;
         dfs(u + 1);//不用第u个数字
-        vis[u] = 0;
+//        vis[u] = 0;
 
         vis[u] = 1;
         dfs(u + 1);//用第u个数字,把state的第u位变成为1

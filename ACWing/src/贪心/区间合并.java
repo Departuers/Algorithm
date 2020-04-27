@@ -59,6 +59,10 @@ public class 区间合并 {
     }
 
     static void megers() {
+        if (segs.isEmpty()) {
+            System.out.println(0);
+            return;
+        }//特判为0
         int st = segs.get(0).x;
         int ed = segs.get(0).y;
         int res = 1;

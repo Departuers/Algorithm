@@ -22,7 +22,6 @@ public class 树的重心 {
         for (int i = 1; i < n; i++) {
             a = sc.nextInt();
             b = sc.nextInt();
-
             add(a, b);
             add(b, a);
         }

@@ -34,12 +34,12 @@ public class 拦截导弹 {
             ans = Math.max(dp[i], ans);
         }
         System.out.println(ans);
-        //非常牛逼了
+        //非常牛逼了,贪心
         int cnt = 0;
         for (int i = 0; i < N; i++) {
             int k = 0;
             while (k < cnt && arr[i] > g[k]) {//只要g[k]的元素大于arr[i],就一直往后找
-                k++;//找到能放的位置
+                k++;//找到能放的位置,因为是下降子序列
             }
             //把arr[i]接在 g[k]后面
             //g[k]存储的是每一个元素存储的是,每一个最长下降子序列的结尾元素

@@ -19,6 +19,7 @@ import java.util.Scanner;
  * 1 1 2 2
  * 输出样例：
  * 3
+ * 01背包
  * M看做背包容量,每一个数看作物品,把Ai看做体积
  * 求出总体积为M的所有方案数量
  * 状态定义:f[i,j],集合:所有只从前i个物品选,且恰好总体积是j的方案总和
@@ -37,7 +38,7 @@ public class 数字组合 {
         for (int i = 1; i <= n; i++) {
             A[i] = sc.nextInt();
         }
-       // one();
+        // one();
         f[0][0] = 1;
         for (int i = 1; i <= n; i++) {
             for (int j = 0; j <= m; j++) {

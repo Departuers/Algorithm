@@ -12,7 +12,7 @@ package 尺取法;
  * 尺取法,通常用于区间有一定规律,或者说有一定变化趋势
  * 对所选取区间进行判断之后,可以推出满足条件的区间,
  * 如果判断目前所选区间,但无法确定所求解的区间,如何进一步推出,无法使用尺取法
- *
+ * <p>
  * 尺取法的模型便是这样：
  * 根据区间的特征交替推进左右端点求解问题，
  * 其高效的原因在于避免了大量的无效枚举，
@@ -24,7 +24,7 @@ package 尺取法;
 public class ruler {
     public static void main(String[] args) {
 
-        int[] arr = {5, 1, 3, 5, 10, 7, 4, 9, 2, 13};
+        int[] arr = {5, 1, 3, 5, 7, 7, 4, 9, 2, 13};
         System.out.println(chiqu(arr, 15));
         int[] a = {1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0};
         System.out.println(two(a, 2));
@@ -40,15 +40,16 @@ public class ruler {
      * @return
      */
     static int chiqu(int[] arr, int n) {
-        int i = 0, j = 0, ans = Integer.MIN_VALUE;
+        int i = 0, j = 0, ans = Integer.MAX_VALUE;
         int sum = arr[0];
         while (i <= j && j < arr.length) {
             if (sum >= n) {//枚举所有区间!!!,会打印所有区间
                 System.out.printf("%d,%d", i + 1, j + 1);
                 System.out.println();
-                ans = Math.max(j - i + 1, ans);
+                ans = Math.min(j - i + 1, ans);
                 sum -= arr[i];
                 i++;
+                //显然如果该区间的值(sum)超过了n,我们就舍弃左指针指向的元素,也就是收缩左区间
             } else {
                 j++;
                 if (j == arr.length) break;
@@ -81,6 +82,7 @@ public class ruler {
         int left = 0;
         int ans = 0;
         //显然使得left和right达到最长,怎么使用k
+        //该循环right从0~arr.length走一遍,是因为超过边界,左边减一就一定可以达成符合条件的区间
         for (int right = 0; right < arr.length; right++) {
             if (arr[right] == 0) {
                 k--;//遇见一次0就使用一次k,维护k值

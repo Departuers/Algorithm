@@ -38,11 +38,28 @@ public class 树的直径 {
             add(b, a, c);
             add(a, b, c);
         }
+        dfs(1, -1);
+        System.out.println(ans);
     }
 
-    static void dfs(int u, int fa) {
-
+    static int dfs(int u, int fa) {
+        int d1 = 0, d2 = 0;
+        for (int i = he[u]; i != 0; i = ne[i]) {
+            int j = e[i];
+            if (j == fa) continue;
+            int d = dfs(j, u) + w[i];
+            if (d > d1) {
+                d2 = d1;
+                d1 = d;
+            } else if (d > d2) {
+                d2 = d;
+            }
+        }
+        ans = Math.max(ans, d1 + d2);
+        return d1;
     }
+
+    static int ans = 0;
 
     static void add(int a, int b, int c) {
         e[cnt] = b;

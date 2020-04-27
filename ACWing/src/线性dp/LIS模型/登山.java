@@ -9,7 +9,7 @@ import java.util.Scanner;
  * 每次求以第k个元素结尾的最长上升子序列 f[i]
  * 再求以k开头的最长下降子序列 g[i]从后面往前找上升子序列就是下降子序列
  * 对应位置相加-1  f[i]+g[i]-1因为第k个被算了2次
- *
+ * O(n^2*2)
  */
 public class 登山 {
     public static void main(String[] args) {
@@ -38,7 +38,7 @@ public class 登山 {
         }
         int res = 0;
         for (int i = 1; i <= N; i++) {
-            res=Math.max(res, g[i] + f[i] - 1);
+            res = Math.max(res, g[i] + f[i] - 1);
         }
         System.out.println(res);
     }
