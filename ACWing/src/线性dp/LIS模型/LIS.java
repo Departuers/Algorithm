@@ -27,7 +27,7 @@ import java.util.Scanner;
  */
 public class LIS {
     public static void main(String[] args) {
-        int[] arr = {2, 4, 2, 2, 4};
+        int[] arr = {2, 4, 2, 3, 4};
         System.out.println(LIS(arr));
         Scanner sc = new Scanner(System.in);
         N = sc.nextInt();

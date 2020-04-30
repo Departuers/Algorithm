@@ -40,7 +40,7 @@ public class 树重心找节点 {
 
         }
         maxpart[u] = Math.max(maxpart[u], n - size[u]);
-        //算出以u为根,u的父节点所在联通分量的节点数目
+        //算出以u为根的子树,u的父节点所在联通分量的节点数目
         ans = Math.min(ans, maxpart[u]);
     }
     //4, 5, 8, 7, 8, 5, 6, 8, 8,

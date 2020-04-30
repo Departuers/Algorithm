@@ -1,7 +1,7 @@
 package basic.queue;
 
 import java.io.*;
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
 import static java.lang.System.in;
@@ -95,7 +95,7 @@ public class 单调队列 {
     static int[] q = new int[(int) (1e6 + 10)];
     static int n, k;
 
-    static LinkedList<Integer> queue = new LinkedList<Integer>();
+    static ArrayDeque<Integer> queue = new ArrayDeque<Integer>();
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
     static StringTokenizer tokenizer = new StringTokenizer("");

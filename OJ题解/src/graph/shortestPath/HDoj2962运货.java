@@ -7,8 +7,6 @@ import java.util.Scanner;
 import static java.lang.System.in;
 
 /**
- *
- *
  * 5 6
  * 1 2 7 5
  * 1 3 4 2
@@ -17,7 +15,7 @@ import static java.lang.System.in;
  * 3 4 10 1
  * 4 5 8 5
  * 1 5 10
- *
+ * <p>
  * 5 6
  * 1 2 7 5
  * 1 3 4 2
@@ -26,12 +24,12 @@ import static java.lang.System.in;
  * 3 4 10 1
  * 4 5 8 5
  * 1 5 4
- *
+ * <p>
  * Sample Output
  * Case 1:
  * maximum height = 7
  * length of shortest route = 20
- *
+ * <p>
  * Case 2:
  * maximum height = 4
  * length of shortest route = 8

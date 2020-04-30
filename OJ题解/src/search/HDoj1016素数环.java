@@ -35,9 +35,20 @@ public class HDoj1016素数环 {
     static int[] circle;
     static boolean[] vis;
 
+    /**
+     * 显然能被2的倍数整除,就一定能被2整除
+     * 就少枚举一半的约数
+     * 直接快一半!!!
+     *
+     * @param x
+     * @return
+     */
     static boolean isPrimer(int x) {
+        if (x < 2) return false;
+        if (x == 2) return true;
+        if ((x & 1) == 0) return false;
         int t = (int) Math.sqrt(x);
-        for (int i = 2; i <= t; i++) {
+        for (int i = 3; i <= t; i += 2) {
             if (x % i == 0) return false;
         }
         return true;

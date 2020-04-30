@@ -58,8 +58,8 @@ public class 树状数组区间修改 {
     }
 
     static int maxn = 500001, n, m;
-    static long tree[] = new long[maxn];
-    static long cha[] = new long[maxn];
+    static long[] tree = new long[maxn];
+    static long[] cha = new long[maxn];
     //差分数组
 
     static void add(int s, int value) {

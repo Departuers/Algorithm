@@ -3,7 +3,11 @@ package 数学;
 //线性筛质数
 public class 线性筛 {
     public static void main(String[] args) {
-        oldN(1234567);
+        long s = System.nanoTime();
+
+        oldN(4234567);
+        long t = System.nanoTime();
+        System.out.println((t - s) / 1e9);
     }
 
     static int cnt = 0;
@@ -23,11 +27,11 @@ public class 线性筛 {
     }
 
     static void oldN(int N) {
-        int n = 3000000;
+        int n = 6000000;
         int r = 0;
         while ((n / Math.log(n)) < N) {
             r++;
-            n += 3000;
+            n += 5000;
         }
         System.out.println(r);
         int cnt = 0;
