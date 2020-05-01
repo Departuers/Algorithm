@@ -17,6 +17,7 @@ import java.util.Scanner;
  * 2 3 4 5 6 1
  * 输出样例：
  * 5
+ * 会变成两两对比
  */
 public class 逆序对 {
     public static void main(String[] args) {
@@ -37,7 +38,7 @@ public class 逆序对 {
             if (a[i] <= a[j]) temp[k++] = a[i++];
             else {
                 temp[k++] = a[j++];
-                res += mid - i + 1;
+                res += mid - i + 1;//统计逆序对!!!
             }
         }
         while (i <= mid) temp[k++] = a[i++];
@@ -48,6 +49,5 @@ public class 逆序对 {
 
     static int[] a = new int[100010];
     static int[] temp = new int[100010];
-
     static int n;
 }

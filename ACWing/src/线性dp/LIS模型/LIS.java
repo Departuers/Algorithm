@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
+ * https://blog.csdn.net/weixin_43501684/article/details/89303085?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2
  * 最长上升子序列 O(n^2)写法
  * 状态表示:f[i] 集合:所有以a[i]结尾的严格单调子序列
  * 属性肯定是max 最长的那个
