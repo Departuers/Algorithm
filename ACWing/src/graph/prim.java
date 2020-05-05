@@ -75,12 +75,12 @@ public class prim {
             c = sc.nextInt();
             g[a][b] = g[b][a] = Math.min(g[a][n], c);//处理自环边
         }
-        int res = prime();
+        int res = prim();
         if (res == -1) System.out.println("NO");
         else System.out.println(res);
     }
 
-    private static int prime() {
+    private static int prim() {
         vis[1] = true;
         int res = 0;
         for (int i = 1; i <= n; i++) {
