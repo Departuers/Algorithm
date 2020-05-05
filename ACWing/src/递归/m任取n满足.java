@@ -1,5 +1,8 @@
 package 递归;
 
+/**
+ * 给定n个数,取出m个数使得和为s,求方案数
+ */
 public class m任取n满足 {
     public static void main(String[] args) {
         f(0, 0, 7);

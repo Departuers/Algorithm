@@ -1,4 +1,4 @@
-package 线性dp.背包模型;
+package 背包模型;
 
 import java.util.Arrays;
 import java.util.Scanner;

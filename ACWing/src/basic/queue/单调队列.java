@@ -55,20 +55,19 @@ public class 单调队列 {
         for (int i = 0; i < n; i++) {
             a[i] = nextInt();
         }
-        List();
-//        int head = 0, end = -1;
-//        for (int i = 0; i < n; i++) {
-//            if (head <= end && q[head] < i - k + 1) head++;
-//            //队列里面的元素不在窗口内,就删除该元素
-//            //i-k+1是当前窗口的第一个值的下标
-//            while (head <= end && a[q[end]] >= a[i]) end--;
-//            //如果队列尾部的值大于新加进来的值,就删除队尾元素,
-//            //对应的是队尾指针前移
-//            q[++end] = i;
-//            //把新元素插入到队尾
-//            if (i >= k - 1) System.out.println(a[q[head]]);
-//        }
-
+//        List();
+        int head = 0, end = -1;
+        for (int i = 0; i < n; i++) {
+            if (head <= end && q[head] < i - k + 1) head++;
+            //队列里面的元素不在窗口内,就删除该元素
+            //i-k+1是当前窗口的第一个值的下标
+            while (head <= end && a[q[end]] >= a[i]) end--;
+            //如果队列尾部的值大于新加进来的值,就删除队尾元素,
+            //对应的是队尾指针前移
+            q[++end] = i;
+            //把新元素插入到队尾
+            if (i >= k - 1) System.out.println(a[q[head]]);
+        }
 
     }
 

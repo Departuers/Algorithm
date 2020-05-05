@@ -5,12 +5,19 @@ import static java.lang.System.in;
 
 public class IO加速 {
     public static void main(String[] args) throws IOException {
-        //标准输入流
-        int i = nextInt();
-        System.out.println(i);
+
+        tokenizer=new StringTokenizer("123123   15412  4312412");
+        System.out.println(tokenizer.nextToken());
+        System.out.println(tokenizer.nextToken());
+        System.out.println(tokenizer.hasMoreTokens());
+
+        System.out.println(tokenizer.nextToken());
+
+        System.out.println(tokenizer.hasMoreTokens());
+
 
         //标准输出流,只能输出字符串,不能输出数字!!!
-        bw.write(i + " ");
+        bw.write(1 + " ");
         bw.flush();
     }
 
@@ -24,6 +31,7 @@ public class IO加速 {
 
     static String next() throws IOException {// 读取下一个字符串
         while (!tokenizer.hasMoreTokens()) {
+            //如果没有字符了,就是下一个,使用空格拆分,
             tokenizer = new StringTokenizer(reader.readLine());
         }
         return tokenizer.nextToken();

@@ -1,8 +1,9 @@
-package 线性dp.背包模型;
+package 背包模型;
 
 import java.util.Scanner;
 
 /**
+ * https://blog.csdn.net/xiji333/article/details/104226993
  * 2. 01背包问题
  * 状态定义:集合所有只从前i个物品选,且总体积不超过j的所有选法的集合
  * f[i,j]存的是最大价值

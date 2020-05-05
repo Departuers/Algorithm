@@ -1,6 +1,5 @@
 package 树形dp;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -37,19 +36,36 @@ import java.util.Scanner;
  * 输出样例：
  * 1
  * 2
+ * 显然改个样例
+ * 4 3  四个点3条边无向图
+ * 0 1
+ * 1 3
+ * 1 2
+ * <p>
+ * 5 4
+ * 3 1
+ * 3 4
+ * 3 2
+ * 1 0
  */
 public class 战略游戏 {
     public static void main(String[] args) {
         System.out.println();
         Scanner sc = new Scanner(System.in);
-        int t, w;
-        while (sc.hasNext()) {
-            n = sc.nextInt();
-            Arrays.fill(vis, false);
-            cnt = 1;
-            for (int i = 0; i < n; i++) {
-                t = sc.nextInt();
-
+        int t, w, e;
+        n = sc.nextInt();
+        e = sc.nextInt();
+        for (int i = 0; i < e; i++) {
+            t = sc.nextInt();
+            w = sc.nextInt();
+            add(t, w);
+            vis[w] = true;
+        }
+        for (int i = 0; i < n; i++) {
+            if (!vis[i]) {
+                dfs(i);
+                System.out.println(Math.min(f[i][1], f[i][0]));
+                break;
             }
         }
     }
