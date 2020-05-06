@@ -63,7 +63,7 @@ public class 种玉米 {
                 if (judge(j) && (j & a[i]) == 0) {
                     for (int k = 0; k < 1 << n; k++) {
                         if (judge(k) && (k & a[i - 1]) == 0 && (j & k) == 0)
-                            f[i][j] = f[i][j] + f[i - 1][k] % (int) 1e8;
+                            f[i][j] =( f[i][j] + f[i - 1][k] )% (int) 1e8;
 
                     }
                 }

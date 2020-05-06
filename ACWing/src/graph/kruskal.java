@@ -1,7 +1,10 @@
 package graph;
 
+import java.io.*;
 import java.util.PriorityQueue;
-import java.util.Scanner;
+import java.util.StringTokenizer;
+
+import static java.lang.System.in;
 
 /**
  * 给定一个n个点m条边的无向图，图中可能存在重边和自环，边权可能为负数。
@@ -38,16 +41,16 @@ import java.util.Scanner;
  * 在则说明边的两个顶点均已加入并查集中，不可再添加边了。
  */
 public class kruskal {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         PriorityQueue<node> q = new PriorityQueue<node>();
-        Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        m = sc.nextInt();
+        //Scanner sc = new Scanner(System.in);
+        n = nextInt();
+        m = nextInt();
         int a, b, c;
         for (int i = 0; i < m; i++) {
-            a = sc.nextInt();
-            b = sc.nextInt();
-            c = sc.nextInt();
+            a = nextInt();
+            b = nextInt();
+            c = nextInt();
             q.add(new node(a, b, c));
         }
         int res = 0;
@@ -62,7 +65,7 @@ public class kruskal {
         }
         if (cnt==n-1)
         System.out.println(res);
-        else System.out.println("No");
+        else System.out.println("orz");
     }
 
     static boolean is(int p, int q) {
@@ -107,5 +110,28 @@ public class kruskal {
             x = par[x];
         }
         return x;
+    }
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+    static StringTokenizer tokenizer = new StringTokenizer("");
+
+    static String nextLine() throws IOException {// 读取下一行字符串
+        return reader.readLine();
+    }
+
+    static String next() throws IOException {// 读取下一个字符串
+        while (!tokenizer.hasMoreTokens()) {
+            //如果没有字符了,就是下一个,使用空格拆分,
+            tokenizer = new StringTokenizer(reader.readLine());
+        }
+        return tokenizer.nextToken();
+    }
+
+    static int nextInt() throws IOException {// 读取下一个int型数值
+        return Integer.parseInt(next());
+    }
+
+    static double nextDouble() throws IOException {// 读取下一个double型数值
+        return Double.parseDouble(next());
     }
 }

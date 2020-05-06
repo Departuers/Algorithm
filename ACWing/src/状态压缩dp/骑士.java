@@ -38,6 +38,11 @@ import java.util.Scanner;
  * 将所有不存在相邻1的合法状态都存进向量a中，并统计出每个状态包含1的数量。
  * 另外，a中的合法状态可以转移到哪些合法的状态，也可以预处理出来存进向量b中。
  * 本题方案数可能很大，需要用long long存储。
+ * <p>
+ * f[i,j,k]
+ * 状态定义:所有只从前i行摆放,已经摆了j个国王,并且第i行的摆放状态是k的所有方案的集合
+ * 属性count
+ *
  */
 public class 骑士 {
     public static void main(String[] args) {

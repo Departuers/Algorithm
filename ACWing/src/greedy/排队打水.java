@@ -37,18 +37,11 @@ public class 排队打水 {
         for (int i = 0; i < n; i++) {
             a[i] = sc.nextInt();
         }
+        qzh();
         Arrays.sort(a, 0, n);
         int s = 0;
         long sum = 0;
-        /**
-         * 显然a[]是升序的
-         * 第1个需要等待0
-         * 第2个需要等待a[0]
-         * 第3个需要等待a[0]+a[1]
-         * 第4个需要等待a[0]+a[1]+a[2]
-         * ...
-         * 第i个需要∑ a[i] i=0->i-2   i从0开始到i-2
-         */
+
         for (int i = 0; i < n; i++) {
             sum += s;
             s += a[i];
@@ -56,6 +49,30 @@ public class 排队打水 {
         System.out.println(sum);
     }
 
+    /**
+     * 推导前缀和实现,上面代码实现是等价的
+     * 显然a[]是升序的,因为先执行工作时长短的,会使总等待时长更小
+     * 第1个需要等待0
+     * 第2个需要等待a[0]  也就是第一个的工作时长
+     * 第3个需要等待a[0]+a[1]
+     * 第4个需要等待a[0]+a[1]+a[2]
+     * ...
+     * 第i个需要∑ a[i] i=0->i-2   i从0开始到i-2
+     */
+    static void qzh() {
+        Arrays.sort(a, 0, n);
+        int s = 0;
+        //前缀和从1开始没有边界问题
+        for (int i = 1; i <= n; i++) {
+            b[i] += (b[i - 1] + a[i - 1]);
+            if (i <= n - 1)
+                s += b[i];
+        }//再变形-->
+        System.out.println(Arrays.toString(b));
+        System.out.println(s);
+    }
+
+    static int[] b = new int[100005];
     static int[] a = new int[100005];
     static int n;
 }

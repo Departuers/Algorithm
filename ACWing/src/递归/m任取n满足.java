@@ -12,6 +12,7 @@ public class m任取n满足 {
     static int ans, n = 6, m = 2;
     static int[] arr = {2, 3, 5, 6, 1, 7};
 
+    //u是当前第几位,sum是当前选了几个,s是当前和
     static void f(int u, int sum, int s) {
         if (sum + n - u < m) return;//n-u是剩余可选的数,
         if (u == 6) {

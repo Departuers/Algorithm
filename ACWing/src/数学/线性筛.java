@@ -1,6 +1,7 @@
 package 数学;
 
 //线性筛质数
+//https://blog.csdn.net/qq_30277239/article/details/103687477
 public class 线性筛 {
     public static void main(String[] args) {
         long s = System.nanoTime();
@@ -15,7 +16,6 @@ public class 线性筛 {
     static boolean[] vis = new boolean[10000];
 
     //让每个合数只被它的最小质因子筛选一次，以达到不重复的目的。
-    //太过牛逼只能背下来
     static void ol(int n) {
         for (int i = 2; i <= n; i++) {
             if (!vis[i]) prime[cnt++] = i;
@@ -26,6 +26,7 @@ public class 线性筛 {
         }
     }
 
+    //求第N个质数是多少
     static void oldN(int N) {
         int n = 6000000;
         int r = 0;

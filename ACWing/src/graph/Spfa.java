@@ -22,7 +22,6 @@ import java.util.Scanner;
  * 1 2 5
  * 2 3 -3
  * 1 3 4
- * <p>
  * 输出样例：
  * 2
  * Bellman-Ford算法的时间复杂度为O（mn），处理本题显然会超时，

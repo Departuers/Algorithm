@@ -1,8 +1,11 @@
 package graph;
 
-import java.util.Arrays;
+import java.io.*;
 import java.util.PriorityQueue;
 import java.util.Scanner;
+import java.util.StringTokenizer;
+
+import static java.lang.System.in;
 
 /**
  * 给定一个n个点m条边的无向图，图中可能存在重边和自环，边权可能为负数。
@@ -38,17 +41,17 @@ import java.util.Scanner;
  */
 public class prim {
     static class node implements Comparable<node> {
-        int x, y, z;
+        int x, y, w;
 
         public node(int x, int y, int w) {
             this.x = x;
             this.y = y;
-            this.z = w;
+            this.w = w;
         }
 
         @Override
         public int compareTo(node node) {
-            return z - node.z;
+            return w - node.w;
         }
 
         @Override
@@ -56,48 +59,44 @@ public class prim {
             return "node{" +
                     "x=" + x +
                     ", y=" + y +
-                    ", z=" + z +
+                    ", z=" + w +
                     '}';
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        m = sc.nextInt();
+        n = nextInt();
+        m = nextInt();
         int a, b, c;
-        for (int i = 0; i < g.length; i++) {
-            Arrays.fill(g[i], Integer.MAX_VALUE);
-        }
         for (int i = 0; i < m; i++) {
-            a = sc.nextInt();
-            b = sc.nextInt();
-            c = sc.nextInt();
-            g[a][b] = g[b][a] = Math.min(g[a][n], c);//处理自环边
+            a = nextInt();
+            b = nextInt();
+            c = nextInt();
+            add(a, b, c);
+            add(b, a, c);
         }
         int res = prim();
-        if (res == -1) System.out.println("NO");
+        if (res == -1) System.out.println("orz");
         else System.out.println(res);
     }
 
     private static int prim() {
         vis[1] = true;
         int res = 0;
-        for (int i = 1; i <= n; i++) {
-            if (g[1][i] != Integer.MAX_VALUE) q.add(new node(1, i, g[1][i]));
+        for (int i = he[1]; i != 0; i = ne[i]) {
+            q.add(new node(1, e[i], w[i]));
         }
         int cnt = 0;
         while (!q.isEmpty()) {
             node min = q.poll();
             if (vis[min.x] && vis[min.y]) continue;
-            res += min.z;
+            res += min.w;
             cnt++;
             int newV = vis[min.x] ? min.y : min.x;
             vis[newV] = true;
-            for (int i = 1; i <= n; i++) {
-                if (g[newV][i] != Integer.MAX_VALUE && !vis[i]) {
-                    q.add(new node(newV, i, g[newV][i]));
-                }
+            for (int i = he[newV]; i != 0; i = ne[i]) {
+                q.add(new node(newV, e[i], w[i]));
             }
         }
         if (cnt != n - 1) return -1;
@@ -106,8 +105,42 @@ public class prim {
 
     static PriorityQueue<node> q = new PriorityQueue<node>();
 
-    static boolean[] vis = new boolean[510];
-    static int n, m;
-    static int[][] g = new int[510][510];
+    static boolean[] vis = new boolean[5100];
+    static int n, m, cnt = 1;
+    static int[] he = new int[5010];
+    static int[] ne = new int[400100];
+    static int[] e = new int[400100];
+    static int[] w = new int[400100];
 
+    static void add(int a, int b, int c) {
+        w[cnt] = c;
+        e[cnt] = b;
+        ne[cnt] = he[a];
+        he[a] = cnt++;
+    }
+
+
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+    static StringTokenizer tokenizer = new StringTokenizer("");
+
+    static String nextLine() throws IOException {// 读取下一行字符串
+        return reader.readLine();
+    }
+
+    static String next() throws IOException {// 读取下一个字符串
+        while (!tokenizer.hasMoreTokens()) {
+            //如果没有字符了,就是下一个,使用空格拆分,
+            tokenizer = new StringTokenizer(reader.readLine());
+        }
+        return tokenizer.nextToken();
+    }
+
+    static int nextInt() throws IOException {// 读取下一个int型数值
+        return Integer.parseInt(next());
+    }
+
+    static double nextDouble() throws IOException {// 读取下一个double型数值
+        return Double.parseDouble(next());
+    }
 }

@@ -1,8 +1,11 @@
 package graph;
 
+import java.io.*;
 import java.util.Arrays;
 import java.util.PriorityQueue;
-import java.util.Scanner;
+import java.util.StringTokenizer;
+
+import static java.lang.System.in;
 
 /**
  * 给定一个n个点m条边的有向图，图中可能存在重边和自环，所有边权均为正值。
@@ -40,26 +43,28 @@ public class dijkstra {
     }
 
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        m = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+     //   Scanner sc = new Scanner(System.in);
+        n = nextInt();
+        m = nextInt();
+        int s = nextInt();
         int a, b, c;
         for (int i = 0; i < m; i++) {
-            a = sc.nextInt();
-            b = sc.nextInt();
-            c = sc.nextInt();
+            a = nextInt();
+            b = nextInt();
+            c = nextInt();
             add(a, b, c);
         }
-        Arrays.fill(dis, Integer.MAX_VALUE);
-        dij();
+        Arrays.fill(dis, (1 << 31) - 1);
+        dij(s);
     }
 
-    private static void dij() {
-        q.add(new node(1, 0));
-        dis[1] = 0;
+    private static void dij(int s) throws IOException {
+        q.add(new node(s, 0));
+        dis[s] = 0;
         while (!q.isEmpty()) {
             node p = q.poll();
+            //pq每次取出的边,就是算出最短路径的边
             if (vis[p.to]) continue;
             vis[p.to] = true;
             for (int i = he[p.to]; i != 0; i = ne[i]) {
@@ -70,9 +75,10 @@ public class dijkstra {
                 }
             }
         }
-        if (dis[n] != Integer.MAX_VALUE)
-            System.out.println(dis[n]);
-        else System.out.println("No");
+        for (int i = 1; i <= n; i++) {
+            bw.write(dis[i] + " ");
+        }
+        bw.flush();
     }
 
     static void add(int a, int b, int c) {
@@ -84,12 +90,35 @@ public class dijkstra {
 
 
     static int n, m, cnt = 1;
-    static int[] e = new int[100005];
-    static int[] he = new int[100005];
-    static int[] ne = new int[100005];
-    static int[] w = new int[100005];
+    static int[] e = new int[500005];
+    static int[] he = new int[500005];
+    static int[] ne = new int[500005];
+    static int[] w = new int[500005];
     static boolean[] vis = new boolean[100005];
     static PriorityQueue<node> q = new PriorityQueue<node>();
     static int[] dis = new int[100005];
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+    static StringTokenizer tokenizer = new StringTokenizer("");
+
+    static String nextLine() throws IOException {// 读取下一行字符串
+        return reader.readLine();
+    }
+
+    static String next() throws IOException {// 读取下一个字符串
+        while (!tokenizer.hasMoreTokens()) {
+            //如果没有字符了,就是下一个,使用空格拆分,
+            tokenizer = new StringTokenizer(reader.readLine());
+        }
+        return tokenizer.nextToken();
+    }
+
+    static int nextInt() throws IOException {// 读取下一个int型数值
+        return Integer.parseInt(next());
+    }
+
+    static double nextDouble() throws IOException {// 读取下一个double型数值
+        return Double.parseDouble(next());
+    }
 }
 
