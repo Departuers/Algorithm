@@ -55,7 +55,11 @@ public class 单调队列 {
         for (int i = 0; i < n; i++) {
             a[i] = nextInt();
         }
-//        List();
+        long s = System.nanoTime();
+        List();
+        long t = System.nanoTime();
+        System.out.println((t - s));
+        s = System.nanoTime();
         int head = 0, end = -1;
         for (int i = 0; i < n; i++) {
             if (head <= end && q[head] < i - k + 1) head++;
@@ -68,10 +72,12 @@ public class 单调队列 {
             //把新元素插入到队尾
             if (i >= k - 1) System.out.println(a[q[head]]);
         }
+        t = System.nanoTime();
+        System.out.println((t - s));
 
     }
 
-    //链表实现队列
+    //链表实现队列,慢一些相较于数组模拟队列
     static void List() throws IOException {
         for (int i = 0; i < n; i++) {
             if (!queue.isEmpty() && a[queue.peekFirst()] < i - k + 1) queue.removeFirst();
@@ -88,6 +94,7 @@ public class 单调队列 {
             if (i >= k - 1 && !queue.isEmpty()) bw.write(a[queue.peekFirst()] + " ");
         }
         bw.flush();
+        System.out.println();
     }
 
     static int[] a = new int[(int) (1e6 + 10)];

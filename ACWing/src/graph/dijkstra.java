@@ -44,7 +44,7 @@ public class dijkstra {
 
 
     public static void main(String[] args) throws IOException {
-     //   Scanner sc = new Scanner(System.in);
+        //   Scanner sc = new Scanner(System.in);
         n = nextInt();
         m = nextInt();
         int s = nextInt();
@@ -63,14 +63,14 @@ public class dijkstra {
         q.add(new node(s, 0));
         dis[s] = 0;
         while (!q.isEmpty()) {
-            node p = q.poll();
+            int p = q.poll().to;
             //pq每次取出的边,就是算出最短路径的边
-            if (vis[p.to]) continue;
-            vis[p.to] = true;
-            for (int i = he[p.to]; i != 0; i = ne[i]) {
+            if (vis[p]) continue;
+            vis[p] = true;
+            for (int i = he[p]; i != 0; i = ne[i]) {
                 int ed = e[i];
-                if (dis[p.to] != Integer.MAX_VALUE && dis[ed] > p.dis + w[i]) {
-                    dis[ed] = p.dis + w[i];
+                if (dis[p] != Integer.MAX_VALUE && dis[ed] > dis[p] + w[i]) {
+                    dis[ed] = dis[p] + w[i];
                     q.add(new node(ed, dis[ed]));
                 }
             }
