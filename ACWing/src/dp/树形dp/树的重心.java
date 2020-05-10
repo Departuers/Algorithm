@@ -33,7 +33,7 @@ public class 树的重心 {
     private static int dfs(int u) {
         vis[u] = true;
         int size = 0, sum = 1;
-        //sum为以sum节点为根的子树,节点数量
+        //sum为以u节点为根的子树,节点数量
         for (int i = he[u]; i != 0; i = ne[i]) {
             int j = e[i];
             if (vis[j]) continue;//不用遍历父节点
