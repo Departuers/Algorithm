@@ -31,7 +31,7 @@ public class 线段树 {
     }
 
     static final int maxn = 104;
-    static int[] tree = new int[maxn << 2];
+    static int[] sum = new int[maxn << 2];
     static int[] tag = new int[maxn << 2];
     static int[] a = new int[maxn];
     static int[] min = new int[maxn << 2];
@@ -50,14 +50,14 @@ public class 线段树 {
      */
     static void build(int k, int l, int r) {
         if (l == r) {
-            tree[k] = a[l];
+            sum[k] = a[l];
             min[k] = a[l];
             return;
         }
         int mid = (l + r) >> 1;
         build(k << 1, l, mid);
         build(k << 1 | 1, mid + 1, r);
-        tree[k] = tree[k << 1] + tree[k << 1 | 1];
+        sum[k] = sum[k << 1] + sum[k << 1 | 1];
         min[k] = Math.min(min[k << 1], min[k << 1 | 1]);
     }
 
@@ -73,13 +73,13 @@ public class 线段树 {
      */
     static void update(int k, int l, int r, int index, int value) {
         if (l == r) {
-            tree[k] = value;
+            sum[k] = value;
             return;
         }
         int mid = l + r >> 1;
         if (index <= mid) update(k << 1, l, mid, index, value);
         else update(k << 1 | 1, mid + 1, r, index, value);
-        tree[k] = tree[k << 1] + tree[k << 1 | 1];
+        sum[k] = sum[k << 1] + sum[k << 1 | 1];
         min[k] = Math.min(min[k << 1], min[k << 1 | 1]);
 
     }
@@ -105,7 +105,7 @@ public class 线段树 {
      */
     static long query(int k, int LL, int RR, int l, int r) {
         if (LL <= l && r <= RR) {
-            return tree[k];
+            return sum[k];
         }
         if (tag[k] > 0) lazy(k, l, r);
         int mid = (l + r) >> 1, ans = 0;
@@ -126,7 +126,7 @@ public class 线段树 {
      */
     static long ask(int k, int l, int r, int i) {
         if (l == r) {
-            return tree[k];
+            return sum[k];
         }
         lazy(k, l, r);
         int mid = (l + r) >> 1;
@@ -150,8 +150,8 @@ public class 线段树 {
         int mid = l + r >> 1;
         if (tag[k] > 0) {
             tag[k << 1] = tag[k << 1 | 1] = tag[k];
-            tree[k << 1] = (mid - l + 1) * tag[k];
-            tree[k << 1 | 1] = (r - mid) * tag[k];
+            sum[k << 1] = (mid - l + 1) * tag[k];
+            sum[k << 1 | 1] = (r - mid) * tag[k];
             tag[k] = 0;
         }
     }
@@ -161,7 +161,7 @@ public class 线段树 {
         if (A <= l && r <= B) {
             //当前区间[l,r]完全落在需修改区间[A,B]里面
             tag[k] = v;
-            tree[k] = v * (r - l + 1);
+            sum[k] = v * (r - l + 1);
             return;
         }
         lazy(k, l, r);
@@ -172,7 +172,7 @@ public class 线段树 {
     }
 
     static void update(int k) {
-        tree[k] = tree[k << 1] + tree[k << 1 | 1];
+        sum[k] = sum[k << 1] + sum[k << 1 | 1];
         min[k] = Math.min(min[k << 1], min[k << 1 | 1]);
     }
 
@@ -189,7 +189,7 @@ public class 线段树 {
     static void add(int k, int A, int B, int l, int r, int v) {
         if (A <= l && r <= B) {
             tag[k] += v;
-            tree[k] += v * (r - l + 1);
+            sum[k] += v * (r - l + 1);
             min[k] += v;
             return;
         }
@@ -213,8 +213,8 @@ public class 线段树 {
         if (tag[k] > 0) {
             tag[k << 1] += tag[k];
             tag[k << 1 | 1] += tag[k];
-            tree[k << 1] += (mid - l + 1) * tag[k];
-            tree[k << 1 | 1] += (r - mid) * tag[k];
+            sum[k << 1] += (mid - l + 1) * tag[k];
+            sum[k << 1 | 1] += (r - mid) * tag[k];
             tag[k] = 0;
         }
     }

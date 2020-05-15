@@ -1,4 +1,4 @@
-package BFS;
+package DFS.多源bfs;
 
 import java.io.*;
 import java.util.ArrayDeque;
@@ -31,6 +31,10 @@ import static java.lang.System.in;
  * 3 2 1 0
  * 2 1 0 0
  * 1 0 0 1
+ * 显然:多源最短路,求每个点到一堆起点的距离,终点不唯一找出最近,可以转化成单源最短路
+ * 有一个虚拟头结点,与所有起点有一条边权为0的边,
+ * 体现在bfs中就是队列中添加所有起点!!!
+ * 体现在dijkstra就是要真的把那个源点建立出来
  */
 public class 矩阵距离 {
     static class node {

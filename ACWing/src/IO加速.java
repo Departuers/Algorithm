@@ -1,24 +1,50 @@
 import java.io.*;
+import java.util.ArrayDeque;
+import java.util.LinkedList;
 import java.util.StringTokenizer;
 
 import static java.lang.System.in;
 
 public class IO加速 {
+    static void f() {
+        long s = System.nanoTime();
+        LinkedList<Integer> l = new LinkedList<Integer>();
+        for (int i = 0; i < 3000000; i++) {
+            l.add(i);
+        }
+        for (int i = 0; i < 3000000; i++) {
+            l.poll();
+        }
+        long t = System.nanoTime();
+        System.out.println((t - s) / 1e8);
+        s = System.nanoTime();
+        ArrayDeque<Integer> r = new ArrayDeque<Integer>();
+        for (int i = 0; i < 3000000; i++) {
+            r.addFirst(i);
+        }
+        for (int i = 0; i < 3000000; i++) {
+            if ((i & 1) == 1) r.pollLast();
+            else r.pollFirst();
+        }
+        t = System.nanoTime();
+        System.out.println((t - s) / 1e8);
+    }
+
     public static void main(String[] args) throws IOException {
-
-        tokenizer=new StringTokenizer("123123   15412  4312412");
-        System.out.println(tokenizer.nextToken());
-        System.out.println(tokenizer.nextToken());
-        System.out.println(tokenizer.hasMoreTokens());
-
-        System.out.println(tokenizer.nextToken());
-
-        System.out.println(tokenizer.hasMoreTokens());
-
-
-        //标准输出流,只能输出字符串,不能输出数字!!!
-        bw.write(1 + " ");
-        bw.flush();
+        f();
+//        tokenizer = new StringTokenizer("123123   15412  4312412");
+//        System.out.println(tokenizer.nextToken());
+//        System.out.println(tokenizer.nextToken());
+//        System.out.println(tokenizer.hasMoreTokens());
+//
+//        System.out.println(tokenizer.nextToken());
+//
+//        System.out.println(tokenizer.hasMoreTokens());
+//
+//
+//        //标准输出流,只能输出字符串,不能输出数字!!!
+//        bw.write(1 + " ");
+//        bw.flush();
     }
 
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

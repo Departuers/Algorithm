@@ -108,9 +108,10 @@ public class 卡车加油 {
         for (int i = 0; i <= N; i++) {//把终点看做加油站,看能不能到这个加油站
             int d = node[i].Juli - pos;//卡车的位置从0开始,到达第i个加油站需要多少油
             while (tank - d < 0) {//如果无法到达第i个加油站
-                if (pq.size() == 0)//从优先队列里面没有加油站,没有刻
+                if (pq.isEmpty()) {//从优先队列里面没有加油站,没有刻
                     System.out.println("-1");
-                tank += pq.poll();
+                } else
+                    tank += pq.poll();
                 res++;
             }
             tank -= d;//减去走到第i个加油站需要的油,区间是什么呢,

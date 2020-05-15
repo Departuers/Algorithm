@@ -2,6 +2,9 @@ package dp;
 
 import java.util.Arrays;
 
+/**
+ * 完全背包问题
+ */
 public class 钢条切割 {
     public static void main(String[] args) {
         Arrays.fill(vs, -1);

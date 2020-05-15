@@ -4,8 +4,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
+ * https://blog.csdn.net/qq_30277239/article/details/104780078
  * 1
  * 5 4 0 0
+ * 有多少种方式走满整个棋盘
  */
 public class 马走日 {
     public static void main(String[] args) {
@@ -31,7 +33,6 @@ public class 马走日 {
             ans++;
             return;
         }
-
         for (int i = 0; i < 8; i++) {
             int a = x + dir[i][0], b = y + dir[i][1];
             if (a < 0 || a >= n || b < 0 || b >= m || vis[a][b]) continue;

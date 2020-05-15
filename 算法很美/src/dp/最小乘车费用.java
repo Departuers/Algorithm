@@ -14,6 +14,7 @@ import java.util.Scanner;
  * 15
  * Sample Output
  * 147
+ * 完全背包问题
  */
 public class 最小乘车费用 {
     public static void main(String[] args) {

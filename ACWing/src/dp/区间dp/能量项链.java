@@ -18,6 +18,14 @@ public class 能量项链 {
                 }
             }
         }
+        for (int len = 1; len <= n + 1; len++) {
+            for (int l = 1; l + len - 1 <= n * 2; l++) {
+                int r = l + len - 1;
+                for (int k = l; k < r; k++) {
+
+                }
+            }
+        }
         int res = 0;
         for (int i = 1; i <= n; i++) {
             res = Math.max(res, f[i][i + n]);

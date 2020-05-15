@@ -29,7 +29,8 @@ import static java.lang.Math.min;
  * 18
  * 状压dp
  * 该图是完全图
- *
+ * 2的整数次幂-1的二进制位全是1111111
+ * f[i,j]状态表示为从0走到顶点j状态为i的所有走法
  */
 public class 哈密尔顿回路 {
     public static void main(String[] args) {
@@ -44,12 +45,14 @@ public class 哈密尔顿回路 {
             Arrays.fill(f[i], 0x3f3f3f3f);
         }
         f[1][0] = 0;
-        for (int i = 1; i < 1 << n; i++) {
-            if ((i & 1) == 0) continue;
-            for (int j = 0; j < n; j++) {
-                if (((i >> j) & 1) == 1) {
+        for (int i = 1; i < 1 << n; i++) {//二进制枚举
+            if ((i & 1) == 0) continue;//路径必然包含起点,最后一位必须为1,快一倍
+            for (int j = 0; j < n; j++) {//取出每一位
+                if (((i >> j) & 1) == 1) {//取出每一位
                     int t = i - (1 << j);
+                    //把第j位置为0
                     int s = t - 1 != 0 ? 1 : 0;
+                    //如果只剩下了起点和终点，才需要枚举以k = 0的情况
                     for (int k = s; k < n; k++) {
                         if ((t >> k & 1) == 1) {
                             f[i][j] = min(f[i][j], f[t][k] + g[k][j]);
@@ -59,6 +62,8 @@ public class 哈密尔顿回路 {
             }
         }
         System.out.println(f[(1 << n) - 1][n - 1]);
+        //从0走到j路径为1111111的最短路径,也就是经过所有点到达n-1这个点
+
     }
 
     static int N = 20, M = 1 << 20, n;
