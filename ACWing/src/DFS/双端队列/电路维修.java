@@ -62,11 +62,11 @@ public class 电路维修 {
     private static int bfs(int x, int y) {
         q.clear();
         int t = Integer.MAX_VALUE / 2;
-        for (int i = 0; i < dist.length; i++) {
-            Arrays.fill(dist[i], t);
+        for (int[] ints : dist) {
+            Arrays.fill(ints, t);
         }
-        for (int i = 0; i < vis.length; i++) {
-            Arrays.fill(vis[i], false);
+        for (boolean[] vi : vis) {
+            Arrays.fill(vi, false);
         }
         q.add(new node(x, y));
         dist[x][y] = 0;

@@ -1,39 +1,76 @@
 package 递归;
 
+import java.util.Arrays;
+
 /**
- * 给定n个数,取出m个数使得和为s,求方案数
+ * 给定n个数,取出k个数使得和为sum,求方案数
  */
 public class m任取n满足 {
     public static void main(String[] args) {
-        f(0, 0, 7);
+        for (int i = 0; i < 30; i++) {
+            arr[i] = i;
+        }
+        System.out.println(Arrays.toString(arr));
+        //  dfs(0, 0, 7);
+        long a = System.nanoTime();
+        f(0, 0, 0);
         System.out.println(ans);
+        long e = System.nanoTime();
+        System.out.println((e - a) / 1e8);
+        ans = 0;
+        a = System.nanoTime();
+
+        dfs(0, 0, 0);
+        System.out.println(ans);
+        e = System.nanoTime();
+
+        System.out.println((e - a) / 1e8);
+
     }
 
-    static int ans, n = 6, m = 2;
-    static int[] arr = {2, 3, 5, 6, 1, 7};
+    static int ans, n = 30, k = 8, suma = 200;
+    static int[] arr = new int[30];
 
-    //u是当前第几位,sum是当前选了几个,s是当前和
+    /**
+     * 枚举每一位选或者不选
+     *
+     * @param u   是当前第几位
+     * @param sum 是当前选了几个
+     * @param s   当前和
+     */
     static void f(int u, int sum, int s) {
-        if (sum + n - u < m) return;//n-u是剩余可选的数,
-        if (u == 6) {
-            if (sum == 2 && s == 0)
+        if (sum + n - u < k) return;//n-u是剩余可选的数,
+        if (sum > k) return;
+        if (u == n) {
+            if (sum == k && s == suma)
                 ans++;
             return;
         }
         if (u > n) return;
         f(u + 1, sum, s);
-        f(u + 1, sum + 1, s - arr[u]);
+        f(u + 1, sum + 1, s + arr[u]);
     }
 
-    static boolean[] x = new boolean[6];
+    static boolean[] x = new boolean[30];
 
-    //搜索策略
-    static void dfs(int u, int cnt) {
-
-        for (int i = 0; i < n; i++) {
+    /**
+     * 枚举
+     *
+     * @param u   当前选了多少个
+     * @param sum 当前和
+     * @param pos 下一次从哪一个索引开始
+     */
+    static void dfs(int u, int sum, int pos) {
+        if (sum > suma || u > k) return;
+        if (sum == suma && u == k) {
+            ans++;
+            return;
+        }
+        for (int i = pos; i < n; i++) {
             if (!x[u]) {
                 x[u] = true;
-                dfs(u + 1, cnt);
+                dfs(u + 1, sum + arr[i], i + 1);
+                x[u] = false;
             }
         }
     }

@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayDeque;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 import static java.lang.System.in;
@@ -31,7 +32,8 @@ public class IO加速 {
     }
 
     public static void main(String[] args) throws IOException {
-        f();
+        ff();
+//        f();
 //        tokenizer = new StringTokenizer("123123   15412  4312412");
 //        System.out.println(tokenizer.nextToken());
 //        System.out.println(tokenizer.nextToken());
@@ -45,6 +47,29 @@ public class IO加速 {
 //        //标准输出流,只能输出字符串,不能输出数字!!!
 //        bw.write(1 + " ");
 //        bw.flush();
+    }
+
+    static void ff() {
+        int a = 5, b = 5;
+        Random r = new Random();
+        int[] t = new int[3];
+        while (a > 0 && b > 0) {
+            for (int i = 0; i < 3; i++) {
+                int e=r.nextInt(13923);
+                System.out.println(e);
+                t[i] =e & 1;
+            }
+            if (t[0] == t[1] && t[1] == t[2]) {
+                a++;
+                b--;
+            } else {
+                b++;
+                a--;
+            }
+            System.out.println(a + "  " + b);
+        }
+        System.out.println(a);
+        System.out.println(b);
     }
 
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

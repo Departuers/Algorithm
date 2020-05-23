@@ -15,7 +15,7 @@ public class 新年好 {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         m = sc.nextInt();
-        source[0] = 1;
+        source[0] = 1;//起点
         for (int i = 1; i <= 5; i++) {
             source[i] = sc.nextInt();//起点
         }
@@ -33,6 +33,12 @@ public class 新年好 {
         System.out.println(dfs(1, 0, 0));
     }
 
+    /**
+     * @param u     当前枚举到第几个
+     * @param start 当前起点
+     * @param dist  当前距离
+     * @return
+     */
     static int dfs(int u, int start, int dist) {
         if (u == 6) return dist;
         int res = Integer.MAX_VALUE / 2;
@@ -51,7 +57,7 @@ public class 新年好 {
     private static void spfa(int s, int[] dis) {
         q.add(s);
         Arrays.fill(dis, Integer.MAX_VALUE / 2);
-        Arrays.fill(vis,false);
+        Arrays.fill(vis, false);
         dis[s] = 0;
         while (!q.isEmpty()) {
             int t = q.poll();
