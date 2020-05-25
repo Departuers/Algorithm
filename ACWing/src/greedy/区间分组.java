@@ -6,6 +6,7 @@ import java.util.PriorityQueue;
 import java.util.Scanner;
 
 /**
+ * https://blog.csdn.net/qq_30277239/article/details/104001511
  * 给定N个闭区间[ai,bi]，请你将这些区间分成若干组，
  * 使得每组内部的区间两两之间（包括端点）没有交集，并使得组数尽可能小。
  * 输出最小组数。

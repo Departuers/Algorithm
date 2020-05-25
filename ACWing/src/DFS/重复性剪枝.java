@@ -24,7 +24,7 @@ public class 重复性剪枝 {
 
     //当前位置,当前和 w选了多少个
     static void dfs(int cnt, int s, int w) {
-//        if (k - w > n - cnt + 1) return;
+        if (k - w > n - cnt + 1) return;
         if (s > sum || w > k) return;
         if (cnt == n) {
             if (s == sum && w == k) {

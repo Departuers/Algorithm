@@ -24,7 +24,6 @@ public class 树重心找节点 {
             add(sc.nextInt(), sc.nextInt());
         }
         dfs(1);
-        System.out.println(Arrays.toString(size));
         System.out.println(Arrays.toString(maxpart));
     }
 
@@ -36,8 +35,9 @@ public class 树重心找节点 {
             if (vis[j]) continue;
             dfs(j);
             size[u] += size[j];
+            //u节点加上所有子节点
             maxpart[u] = Math.max(maxpart[u], size[j]);
-
+            //取u的最大部分
         }
         maxpart[u] = Math.max(maxpart[u], n - size[u]);
         //算出以u为根的子树,u的父节点所在联通分量的节点数目

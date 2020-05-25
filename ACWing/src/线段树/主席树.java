@@ -33,6 +33,10 @@ public class 主席树 {
         return Double.parseDouble(next());
     }
 
+    static int get(int x) {
+        return Arrays.binarySearch(c, 1, count, x);
+    }
+
     static int unique(int[] a) {
         int j = 1;
         for (int i = 1; i < a.length; i++) {
@@ -113,7 +117,5 @@ public class 主席树 {
         else return queryD(l, mid, lson[L], lson[R], k - m);
     }
 
-    static int get(int x) {
-        return Arrays.binarySearch(c, 1, count, x);
-    }
+
 }

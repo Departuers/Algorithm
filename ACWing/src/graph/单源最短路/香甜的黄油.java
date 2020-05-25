@@ -65,9 +65,11 @@ public class 香甜的黄油 {
                 }
             }
         }
+        //计算从0~n的距离和
         for (int i = 0; i < n; i++) {
             int j = id[i];
             if (dis[j] == Integer.MAX_VALUE / 2) return Integer.MAX_VALUE / 2;
+            //无法到达
             res += dis[j];
         }
         return res;
