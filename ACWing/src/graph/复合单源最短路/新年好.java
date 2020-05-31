@@ -8,6 +8,7 @@ import java.util.Scanner;
  * https://blog.csdn.net/qq_43256272/article/details/103392889
  * 使用spfa+dfs
  * 复杂度 6*O(m)+5!
+ * 预处理出单源最短路
  * 5!只有120不需要剪枝
  */
 public class 新年好 {
@@ -37,7 +38,7 @@ public class 新年好 {
      * @param u     当前枚举到第几个
      * @param start 当前起点
      * @param dist  当前距离
-     * @return
+     * @return 花费
      */
     static int dfs(int u, int start, int dist) {
         if (u == 6) return dist;

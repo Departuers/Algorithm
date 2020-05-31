@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayDeque;
-import java.util.LinkedList;
-import java.util.Random;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import static java.lang.System.in;
 
@@ -32,7 +29,8 @@ public class IO加速 {
     }
 
     public static void main(String[] args) throws IOException {
-        ff();
+        //       fff();
+        sw();
 //        f();
 //        tokenizer = new StringTokenizer("123123   15412  4312412");
 //        System.out.println(tokenizer.nextToken());
@@ -49,15 +47,82 @@ public class IO加速 {
 //        bw.flush();
     }
 
+    static void fff() {
+        ArrayList<Integer> e = new ArrayList<Integer>();
+        Random r = new Random();
+        int te;
+        long s = System.nanoTime();
+        for (int i = 0; i < 1000000; i++) {
+            te = r.nextInt(100000);
+            e.add(te);
+        }
+        Collections.sort(e);
+        long t = System.nanoTime();
+        System.out.println((t - s) / 1e8);
+        s = System.nanoTime();
+        PriorityQueue<Integer> q = new PriorityQueue<Integer>(e);
+        while (!q.isEmpty()) q.poll();
+        t = System.nanoTime();
+        System.out.println((t - s) / 1e8);
+    }
+
+    static void sw() {
+
+        long s = System.nanoTime(); for (int i = 0; i < par.length; i++) {
+            par[i] = i;
+        }
+        for (int i = 0; i < par.length; i++) {
+            union(1, i);
+        }
+        long t = System.nanoTime();
+        System.out.println((t - s) / 1e8);
+
+        s = System.nanoTime(); for (int i = 0; i < par.length; i++) {
+            par[i] = i;
+        }
+        for (int i = 0; i < par.length; i++) {
+            unio(i, 0);
+        }
+        t = System.nanoTime();
+        System.out.println((t - s) / 1e8);
+    }
+
+    static void union(int x, int y) {
+        x = find(x);
+        y = find(y);
+        if (x != y) par[x] = y;
+    }
+
+    static void unio(int x, int y) {
+        x = fin(x);
+        y = fin(y);
+        if (x != y) par[x] = y;
+    }
+
+    static int find(int x) {
+        while (x != par[x]) {
+            par[x] = par[par[x]];
+            x = par[x];
+        }
+        return x;
+    }
+
+    static int fin(int x) {
+        if (x == par[x]) return x;
+        return par[x] = fin(par[x]);
+    }
+
+    static int[] par = new int[11000000];
+
     static void ff() {
         int a = 5, b = 5;
         Random r = new Random();
         int[] t = new int[3];
         while (a > 0 && b > 0) {
             for (int i = 0; i < 3; i++) {
-                int e=r.nextInt(13923);
+                int e = r.nextInt(13923);
                 System.out.println(e);
-                t[i] =e & 1;
+                t[i] = e & 1;
             }
             if (t[0] == t[1] && t[1] == t[2]) {
                 a++;
