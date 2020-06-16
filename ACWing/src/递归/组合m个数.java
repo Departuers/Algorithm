@@ -33,27 +33,32 @@ public class 组合m个数 {
 //        n = sc.nextInt();
 //        m = sc.nextInt();
         long l = System.nanoTime();
-
+        dfs(0, 0, 0);
         long e = System.nanoTime();
-        System.out.println(e - l);
+        System.out.println((e - l) / 1e9);
+        l = System.nanoTime();
+        dfs(0, 0);
+        e = System.nanoTime();
+        System.out.println((e - l) / 1e9);
+
 
     }
 
-    static int m = 2, n = 6;
-    static int[] arr = {23, 1, 2, 4, 7, 3};
-    static int[] vis = new int[6];
+    static int m = 3, n = 12;
+    static int[] arr = {23, 1, 2, 4, 7, 3, 6, 8, 1, 5, 12,13};
+    static int[] vis = new int[12];
 
     //枚举到第u位 ,sum是当前选了几个,state是vis数组
     static void dfs(int u, int sum, int state) {
         if (sum + (n - u) < m) return;//就是n-u就是剩余还没有选的数字的数量,
         // sum+(n-u)<m就是剩余的数字都选上,也不够m个数字,所以剪枝
         if (sum == m) {//选了m个就输出
-            for (int i = 0; i < n; i++) {
-                if ((state >> i & 1) == 1) {
-                    System.out.print(i + 1 + " ");
-                }
-            }
-            System.out.println();
+//            for (int i = 0; i < n; i++) {
+//                if ((state >> i & 1) == 1) {
+//                    System.out.print(arr[i] + " ");
+//                }
+//            }
+//            System.out.println();
             return;
         }
         if (u == n) return;//所有数字都选完了
@@ -66,11 +71,11 @@ public class 组合m个数 {
     static void dfs(int u, int k) {
         if (k + n - u < m) return;
         if (k == m) {
-            for (int i = 0; i < n; i++) {
-                if (vis[i] == 1)
-                    System.out.print(arr[i] + " ");
-            }
-            System.out.println();
+//            for (int i = 0; i < n; i++) {
+//                if (vis[i] == 1)
+//                    System.out.print(arr[i] + " ");
+//            }
+//            System.out.println();
             return;
         }
         if (u == n) return;//n个数据都用完了

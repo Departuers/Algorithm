@@ -27,11 +27,12 @@ public class 随机选数 {
     public static void main(String[] args) {
 //        Scanner sc = new Scanner(in);
 //        n = sc.nextInt();
-        dfs(0);
+        dfs(0, 0);
+        //dfs(0, 0);
     }
 
     static int n = 3;
-    static int[] arr = {2, 4, 3};
+    static int[] arr = {1, 2, 3};
     static int[] vis = new int[10];
 
     //dfs求子集,选和不选
@@ -51,5 +52,19 @@ public class 随机选数 {
         vis[u] = 1;
         dfs(u + 1);//用第u个数字,把state的第u位变成为1
         vis[u] = 0;
+    }
+
+    static void dfs(int u, int state) {
+        if (u == n) {
+            if (state==0)return;
+            for (int i = 0; i < n; i++) {
+                if (((state >> i) & 1) == 1)
+                    System.out.print(arr[i] + " ");
+            }
+            System.out.println();
+            return;
+        }
+        dfs(u + 1, state);
+        dfs(u + 1, state | (1 << u));
     }
 }

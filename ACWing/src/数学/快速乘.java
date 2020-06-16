@@ -17,7 +17,6 @@ import java.util.Scanner;
  * 5
  * 输出样例：
  * 2
- * <p>
  * 类似快速幂:
  * a*b转换成加法
  * a+a+a 加法操作b次

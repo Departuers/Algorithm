@@ -1,6 +1,5 @@
 package dp.线性dp.数字三角形模型;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -27,9 +26,6 @@ public class 摘花生 {
         while (t-- != 0) {
             R = sc.nextInt();
             C = sc.nextInt();
-            for (int i = 0; i < arr.length; i++) {
-                Arrays.fill(arr[i], 0);
-            }
             for (int i = 1; i <= R; i++) {
                 for (int j = 1; j <= C; j++) {
                     arr[i][j] = sc.nextInt();

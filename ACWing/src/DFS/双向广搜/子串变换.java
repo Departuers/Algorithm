@@ -2,36 +2,39 @@ package DFS.双向广搜;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 /**
  * https://blog.csdn.net/qq_30277239/article/details/104723891
+ * 双向广搜,显然直接bfs会超时
  */
+//@SuppressWarnings("all")
 public class 子串变换 {
     public static void main(String[] args) {
         String A, B;
         Scanner sc = new Scanner(System.in);
         A = sc.next();
         B = sc.next();
-        int n = 0;
+        n = 0;
         while (sc.hasNext()) {
-            a[n] = sc.next();
-            b[n] = sc.next();
+            aaa[n] = sc.next();
+            bbb[n] = sc.next();
             n++;
         }
         int step = bfs(A, B);
         if (step > 10) System.out.println("No");
         else {
-
+            System.out.println(step);
         }
     }
 
+    static int n;
     static ArrayDeque<String> qa = new ArrayDeque<String>(), qb = new ArrayDeque<String>();
 
+
     private static int bfs(String a, String b) {
-        Map<String, Integer> da = new HashMap<String, Integer>();
-        Map<String, Integer> db = new HashMap<String, Integer>();
+        HashMap<String, Integer> da = new HashMap<String, Integer>();
+        HashMap<String, Integer> db = new HashMap<String, Integer>();
         qa.add(a);
         qb.add(b);
         da.put(a, 0);
@@ -46,14 +49,22 @@ public class 子串变换 {
         return 11;
     }
 
-    private static int extend(ArrayDeque<String> q, Map<String, Integer> da, Map<String, Integer> db, String a, String b) {
+    private static int extend(ArrayDeque<String> q, HashMap<String, Integer> da, HashMap<String, Integer> db, String a, String b) {
         String t = q.poll();
-        for (int i = 0; i < t.length(); i++) {
-
+        for (int i = 0; i < (t != null ? t.length() : 0); i++) {
+            for (int j = 0; j < n; j++) {
+                if (!t.substring(i, aaa[j].length()).equals(aaa[j])) continue;
+                String u = t.substring(0, i) + bbb[j] + t.substring(i + bbb[j].length());
+                if (db.containsKey(u)) return da.get(t) + 1 + db.get(u);
+                if (da.containsKey(u)) continue;
+                da.put(u, da.get(t) + 1);
+//                if ()
+            }
         }
-        return 0;
+        return -1;
     }
 
+    static int e;
     static int N = 6;
-    static String[] a = new String[N], b = new String[N];
+    static String[] aaa = new String[N], bbb = new String[N];
 }

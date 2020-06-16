@@ -31,6 +31,7 @@ import static java.lang.System.in;
  * 3 2 1 0
  * 2 1 0 0
  * 1 0 0 1
+ * 找每个点到指定最近的点
  * 显然:多源最短路,求每个点到一堆起点的距离,终点不唯一找出最近,可以转化成单源最短路
  * 有一个虚拟头结点,与所有起点有一条边权为0的边,
  * 体现在bfs中就是队列中添加所有起点!!!
@@ -52,7 +53,7 @@ public class 矩阵距离 {
         m = nextInt();
 
         for (int i = 0; i < n; i++) {
-                g[i] = next().toCharArray();
+            g[i] = next().toCharArray();
         }
 
         ArrayDeque<node> q = new ArrayDeque<node>();
@@ -69,21 +70,20 @@ public class 矩阵距离 {
         while (!q.isEmpty()) {
             node p = q.poll();
             for (int i = 0; i < 4; i++) {
-                int x = p.x + dir[i][0], y = dir[i][1]+p.y;
-                if (x < 0 || x >= n || y < 0 || y >= m||dis[x][y]!=-1) continue;
-             dis[x][y] = dis[p.x][p.y] + 1;
+                int x = p.x + dir[i][0], y = dir[i][1] + p.y;
+                if (x < 0 || x >= n || y < 0 || y >= m || dis[x][y] != -1) continue;
+                dis[x][y] = dis[p.x][p.y] + 1;
                 q.add(new node(x, y));
             }
         }
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                bw.write(dis[i][j]+"");
+                bw.write(dis[i][j] + "");
             }
             bw.write("\n");
         }
         bw.flush();
-
     }
 
     static int[][] dir = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};

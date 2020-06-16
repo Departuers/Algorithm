@@ -2,6 +2,9 @@ package dp.区间dp;
 
 import java.util.Scanner;
 
+/**
+ *
+ */
 public class 能量项链 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

@@ -30,7 +30,7 @@ import java.util.Scanner;
  * 证明思路:只需要证明任取一点,找到离该点最远距离的点u,点u是直径的一个端点
  * 显然,u-v就是树的直径
  * 推导过程
- * https://blog.csdn.net/qq_30277239/article/details/104396460?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522158864856319725247611541%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=158864856319725247611541&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_v25-1
+ * https://blog.csdn.net/qq_30277239/article/details/104396460
  *
  */
 public class 树的直径 {

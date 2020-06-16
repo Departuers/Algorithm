@@ -1,7 +1,6 @@
 package 递归;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import static java.lang.System.in;
@@ -28,12 +27,21 @@ import static java.lang.System.in;
  * 3 2 1
  * 排列型枚举,n个数,有n个坑,第一个坑有n种选择,第二个坑有n-1中选择,第n个坑只有一种选择
  * 第一个坑的n种选择,是平行的,
+ * 交换性枚举每一位,是效率最高的
  */
 public class 排列枚举 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(in);
         n = sc.nextInt();
+        long s = System.nanoTime();
+        d(0, 0);
+        long t = System.nanoTime();
+        System.out.println((t - s) / 1e8);
+        s = System.nanoTime();
         dfs(0, 0);
+        t = System.nanoTime();
+        System.out.println((t - s) / 1e8);
+
     }
 
     static int n = 3;
@@ -42,25 +50,26 @@ public class 排列枚举 {
     //u代表结果path有多少个
     static void dfs(int u, int state) {//state通过位运算作为vis数字,
         if (u == n) {
-            for (Integer w : path) {
-                System.out.print(w + " ");
-            }
-            System.out.println();
+//            for (Integer w : path) {
+//                System.out.print(w + " ");
+//            }
+//            System.out.println();
             return;
         }
-        for (int i = 0; i < n; i++) {//枚举n种平行选择
-            if (!(((state >> i) & 1) == 1)) {//如果这个数字没被选,就选
-                path.add(i + 1);
+        for (int i = 0; i < n; i++) {//每一位枚举n种平行选择
+            if (((state >> i) & 1) != 1) {//如果这个数字没被选,就选
+                path.add(arr[i]);
                 dfs(u + 1, state | (1 << i));//选上
                 path.remove(path.size() - 1);//恢复状态
             }
         }
     }
 
-    static int[] arr = {4, 3, 5, 2};
+    static int[] arr = {4, 3, 5, 2, 3, 4, 1, 4, 5, 1, 2};
+
     static void d(int u, int k) {
         if (u == n) {
-            System.out.println(Arrays.toString(arr));
+//            System.out.println(Arrays.toString(arr));
             return;
         }
         for (int i = k; i < n; i++) {

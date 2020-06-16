@@ -3,6 +3,7 @@ package graph.复合单源最短路;
 import java.util.Scanner;
 
 /**
+ * https://www.acwing.com/file_system/file/content/whole/index/content/533831/
  * 从a到b,路径的长度定义为第k+1大值
  * 二分:
  *

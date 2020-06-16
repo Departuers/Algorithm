@@ -14,16 +14,16 @@ public class 没有上司的舞会 {
             a = sc.nextInt();
             b = sc.nextInt();
             add(b, a);
-            hasf[a] = true;
+            hasFather[a] = true;
         }
         int root = 1;
-        while (hasf[root]) root++;
+        while (hasFather[root]) root++;
         dfs(root);
         System.out.println(Math.max(f[root][1], f[root][0]));
     }
 
     private static void dfs(int u) {
-       // f[u][1] = happy[u];//选择了u就加上u的幸福指数
+        // f[u][1] = happy[u];//选择了u就加上u的幸福指数
         for (int i = he[u]; i != 0; i = ne[i]) {
             int j = e[i];
             dfs(j);
@@ -46,6 +46,6 @@ public class 没有上司的舞会 {
     static int[] ne = new int[6010];
     static int[] e = new int[6010];
     static int[] happy = new int[6010];
-    static boolean[] hasf = new boolean[6010];
+    static boolean[] hasFather = new boolean[6010];
 
 }

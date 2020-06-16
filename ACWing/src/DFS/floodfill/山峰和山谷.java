@@ -9,6 +9,7 @@ import java.util.Scanner;
  * 如果该联通块没有比当前位置数更小的就是山谷
  * 如果该联通块没有比当前位置数更大的就是山峰
  * 打上标记,如果都有,则是山坡不计算...
+ * 遍历的是什么东西,考虑进入队列的是什么东西
  */
 public class 山峰和山谷 {
     public static void main(String[] args) {
@@ -53,6 +54,8 @@ public class 山峰和山谷 {
                         if (g[a][b] > g[x][y]) High = true;
                         else if (g[a][b] < g[x][y]) low = true;
                     } else if (!vis[a][b]) {
+                        //显然这一步最重要,进入队列的都是满足未访问过该节点且与拓展之前的节点值相同
+                        //则显然,一遍bfs会把一个连通块权值相同的连通块都遍历到
                         q.add(a * n + b);
                     }
                 }
