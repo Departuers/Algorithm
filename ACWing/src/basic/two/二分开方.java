@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class 二分开方 {
     public static void main(String[] args) {
+        dk(new BigDecimal(1233L));
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         double l = 0, r = n;

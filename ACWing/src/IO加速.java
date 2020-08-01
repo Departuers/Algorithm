@@ -30,7 +30,8 @@ public class IO加速 {
 
     public static void main(String[] args) throws IOException {
         //       fff();
-        sw();
+        //   sw();
+        dfs(4, 1, new ArrayList<Integer>());
 //        f();
 //        tokenizer = new StringTokenizer("123123   15412  4312412");
 //        System.out.println(tokenizer.nextToken());
@@ -66,9 +67,25 @@ public class IO加速 {
         System.out.println((t - s) / 1e8);
     }
 
+    static void dfs(int sum, int n, ArrayList<Integer> q) {
+        if (sum == 0) {
+            System.out.println(q);
+            return;
+        }
+        System.out.println(q + " " + n);
+        for (int i = n; i < sum; i++) {
+            if (sum - i >= 0) {
+                q.add(i);
+                dfs(sum - i, i, q);
+                q.remove(q.size() - 1);
+            }
+        }
+    }
+
     static void sw() {
 
-        long s = System.nanoTime(); for (int i = 0; i < par.length; i++) {
+        long s = System.nanoTime();
+        for (int i = 0; i < par.length; i++) {
             par[i] = i;
         }
         for (int i = 0; i < par.length; i++) {
@@ -77,7 +94,8 @@ public class IO加速 {
         long t = System.nanoTime();
         System.out.println((t - s) / 1e8);
 
-        s = System.nanoTime(); for (int i = 0; i < par.length; i++) {
+        s = System.nanoTime();
+        for (int i = 0; i < par.length; i++) {
             par[i] = i;
         }
         for (int i = 0; i < par.length; i++) {

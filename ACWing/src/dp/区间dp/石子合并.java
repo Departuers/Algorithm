@@ -55,11 +55,11 @@ public class 石子合并 {
 
         //要先更新小区间的答案,按照拓扑序
         for (int len = 2; len <= n; len++) {
-            for (int i = 1; i + len - 1 <= n; i++) {
-                int j = i + len - 1;
-                f[i][j] = (int) 1e9;
-                for (int k = i; k < j; k++) {
-                    f[i][j] = Math.min(f[i][j], f[i][k] + f[k + 1][j] + s[j] - s[i - 1]);
+            for (int l = 1; l + len - 1 <= n; l++) {
+                int r = l + len - 1;
+                f[l][r] = (int) 1e9;
+                for (int k = l; k < r; k++) {
+                    f[l][r] = Math.min(f[l][r], f[l][k] + f[k + 1][r] + s[r] - s[l - 1]);
                 }
             }
         }
@@ -70,7 +70,7 @@ public class 石子合并 {
     static int dfs(int i, int j) {
         if (i == j) return 0;
         if (dp[i][j] != -1) return dp[i][j];
-        int ans = (int) 1e9;
+        int ans = Integer.MAX_VALUE / 2;
         for (int k = i; k < j; k++) {
             ans = Math.min(ans, dfs(i, k) + dfs(k + 1, j) + s[j] - s[i - 1]);
         }

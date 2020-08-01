@@ -25,7 +25,6 @@ public class m任取n满足 {
         e = System.nanoTime();
 
         System.out.println((e - a) / 1e8);
-
     }
 
     static int ans, n = 30, k = 8, suma = 200;
