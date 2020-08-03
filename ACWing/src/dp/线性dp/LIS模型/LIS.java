@@ -25,6 +25,7 @@ import java.util.Scanner;
  * 如何描述左半部分呢,所有以a[k]结尾的最长上升子序列的最大值
  * a[k]和a[i]有可能不是单调上升
  * 只有a[k]<a[i]才构成上升子序列
+ * f[i]=max{ f[j]+1 |(i<=j a[j]<=a[i]) }决策允许集合
  */
 public class LIS {
     public static void main(String[] args) {

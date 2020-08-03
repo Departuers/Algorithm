@@ -37,6 +37,13 @@ import java.util.Scanner;
  * i~k合并的最小代价结合状态定义恰好是f[i,k]
  * k+1,j合并的最小代价结合状态定义恰好是f[k+1,j]
  * 最后加上他们的和 即可:s[j]-s[i-1]
+ *
+ * 顾名思义,区间dp就是区间上的dp,
+ * 通过先算出小区间的dp的到最优解,再去得到大区间的最优解
+ * 一般设f[i,j]为区间[i,j]的最优解,一般f[i,j]都可以由[i,j]的子区间更新得到
+ * 该题合并之前是两堆,合并之后是一堆,可以枚举分界线
+ * f[i,j]=min{ f[i,k]+f[k+1,j]+a[j]-a[i-1] | i<=k<j }可以使用前缀和,
+ * k为什么不能等于j?因为k是分界线,不能是j
  */
 public class 石子合并 {
     public static void main(String[] args) {

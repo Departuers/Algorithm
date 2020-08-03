@@ -27,8 +27,8 @@ public class 单调栈 {
             x = sc.nextInt();
             while (tt != 0 && stk[tt] >= x) tt--;
             //tt==0代表找不到比它小的数
-            if (tt == 0) System.out.print(-1);
-            else System.out.println(stk[tt]);
+            if (tt == 0) System.out.print(-1+" ");
+            else System.out.print(stk[tt]+" ");
             stk[++tt] = x;
             //stk[0]这个位置什么都不存,到了这个位置代表找不到!!!
         }
