@@ -47,7 +47,7 @@ public class 最小花费 {
 
         @Override
         public int compareTo(node node) {
-            return (int) (x * 1000 - node.x * 10000);
+            return (int) (x * 10000 - node.x * 10000);
         }
     }
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
+ * 这道题一定有解
  * 拓扑排序
  * https://www.hzxueyan.com/archives/103/
  * 入度为0的点加入队列,取出入度为0的点,并减去该点相邻的入度,
@@ -28,7 +29,7 @@ public class 家谱树 {
     }
 
     private static void topo() {
-        ArrayList<Integer> g = new ArrayList<Integer>();
+        ArrayList<Integer> g = new ArrayList<Integer>();//拓扑排序的结果
         ArrayDeque<Integer> q = new ArrayDeque<Integer>();
         for (int i = 1; i <= n; i++) {
             if (in[i] == 0) {
@@ -48,7 +49,7 @@ public class 家谱树 {
             }
         }
         for (Integer w : g) {
-            System.out.println(w);
+            System.out.print(w + " ");
         }
     }
 

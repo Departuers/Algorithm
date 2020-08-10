@@ -2,6 +2,7 @@ package graph.单源最短路;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 /**
@@ -15,6 +16,8 @@ import java.util.Scanner;
  * 2 3 7
  * 2 4 3
  * 3 4 5
+ * out:
+ * 8
  * 选一个节点作为起点使得其他节点到该节点的所有步数最少,显然
  * 多源汇最短路,n为500  Floyd O(n^3)超时
  * 使用spfa
@@ -73,6 +76,49 @@ public class 香甜的黄油 {
             res += dis[j];
         }
         return res;
+    }
+
+    static int Dijkstra(int s) {
+        int res = 0;
+        PriorityQueue<node> q = new PriorityQueue<node>();
+        Arrays.fill(dis, Integer.MAX_VALUE / 2);
+        Arrays.fill(vis, false);
+        dis[s] = 0;
+        q.add(new node(0, s));
+        while (!q.isEmpty()) {
+            int p = q.poll().to;
+            //pq每次取出的边,就是算出最短路径的边
+            if (vis[p]) continue;
+            vis[p] = true;
+            for (int i = he[p]; i != 0; i = ne[i]) {
+                int ed = e[i];
+                if (dis[p] != Integer.MAX_VALUE && dis[ed] > dis[p] + w[i]) {
+                    dis[ed] = dis[p] + w[i];
+                    q.add(new node(ed, dis[ed]));
+                }
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            int j = id[i];
+            if (dis[j] == Integer.MAX_VALUE / 2) return Integer.MAX_VALUE / 2;
+            //无法到达
+            res += dis[j];
+        }
+        return res;
+    }
+
+    static class node implements Comparable<node> {
+        int dis, to;
+
+        public node(int dis, int to) {
+            this.dis = dis;
+            this.to = to;
+        }
+
+        @Override
+        public int compareTo(node node) {
+            return dis - node.dis;
+        }
     }
 
     static int ans = Integer.MAX_VALUE;

@@ -55,46 +55,60 @@ public class 单调队列 {
         for (int i = 0; i < n; i++) {
             a[i] = nextInt();
         }
-        long s = System.nanoTime();
-        List();
-        long t = System.nanoTime();
-        System.out.println((t - s));
-        s = System.nanoTime();
-        int head = 0, end = -1;
-        for (int i = 0; i < n; i++) {
-            if (head <= end && q[head] < i - k + 1) head++;
-            //队列里面的元素不在窗口内,就删除该元素
-            //i-k+1是当前窗口的第一个值的下标
-            while (head <= end && a[q[end]] >= a[i]) end--;
-            //如果队列尾部的值大于新加进来的值,就删除队尾元素,
-            //对应的是队尾指针前移
-            q[++end] = i;
-            //把新元素插入到队尾
-            if (i >= k - 1) System.out.println(a[q[head]]);
-        }
-        t = System.nanoTime();
-        System.out.println((t - s));
+        //   List();
 
+//        int head = 0, end = -1;
+//        for (int i = 0; i < n; i++) {
+//            if (head <= end && q[head] < i - k + 1) head++;
+//            //队列里面的元素不在窗口内,就删除该元素
+//            //i-k+1是当前窗口的第一个值的下标
+//            while (head <= end && a[q[end]] >= a[i]) end--;
+//            //如果队列尾部的值大于新加进来的值,就删除队尾元素,
+//            //对应的是队尾指针前移
+//            q[++end] = i;
+//            //把新元素插入到队尾
+//            if (i >= k - 1) System.out.println(a[q[head]]);
+//        }
+//        t = System.nanoTime();
+//        System.out.println((t - s));
+        int hh = 0, tt = -1;
+        for (int i = 0; i < n; i++) {
+            if (hh <= tt && q[hh] < i - k + 1) hh++;
+            while (hh <= tt && a[q[tt]] >= a[i]) tt--;
+            q[++tt] = i;
+            if (i >= k - 1) bw.write(a[q[hh]] + " ");
+        }
+        hh = 0;
+        bw.write("\n");
+        tt = -1;
+        for (int i = 0; i < n; i++) {
+            if (hh <= tt && q[hh] < i + k + 1) hh++;
+            while (hh <= tt && a[q[tt]] <= a[i]) tt--;
+            q[++tt] = i;
+            if (i >= k - 1) bw.write(a[q[hh]] + " ");
+        }
+        bw.flush();
     }
 
     //链表实现队列,慢一些相较于数组模拟队列
     static void List() throws IOException {
+        queue.clear();
         for (int i = 0; i < n; i++) {
-            if (!queue.isEmpty() && a[queue.peekFirst()] < i - k + 1) queue.removeFirst();
-            while (!queue.isEmpty() && a[queue.peekLast()] > a[i]) queue.removeLast();
-            queue.add(i);
-            if (!queue.isEmpty() && i >= k - 1) bw.write(a[queue.peekFirst()] + " ");
+            if (!queue.isEmpty() && queue.peekFirst() < i - k + 1) queue.removeFirst();
+            while (!queue.isEmpty() && a[queue.peekLast()] >= a[i]) queue.removeLast();
+            queue.addLast(i);
+            if (i >= k - 1 && !queue.isEmpty()) bw.write(a[queue.peekFirst()] + " ");
         }
+
         bw.write("\n");
         queue.clear();
         for (int i = 0; i < n; i++) {
             if (!queue.isEmpty() && queue.peekFirst() < i - k + 1) queue.removeFirst();
             while (!queue.isEmpty() && a[queue.peekLast()] <= a[i]) queue.removeLast();
-            queue.add(i);
+            queue.addLast(i);
             if (i >= k - 1 && !queue.isEmpty()) bw.write(a[queue.peekFirst()] + " ");
         }
         bw.flush();
-        System.out.println();
     }
 
     static int[] a = new int[(int) (1e6 + 10)];

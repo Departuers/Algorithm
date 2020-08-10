@@ -49,6 +49,9 @@ public class 股票买卖5 {
     /**
      * dp.状态机模型
      * https://blog.csdn.net/qq_30277239/article/details/104161014
+     * f[i,0] 第i天手中有货
+     * f[i,1] 手中无货的第1天,无法购买
+     * f[i,2] 手中无货的第>=2天,可以购买
      */
     static void time() {
         dp[0][0] = dp[0][1] = (int) -1e9;//非法方案
@@ -57,7 +60,7 @@ public class 股票买卖5 {
             dp[i][1] = dp[i - 1][0] + a[i];
             dp[i][2] = Math.max(dp[i - 1][2], dp[i - 1][1]);
         }
-        System.out.println(Math.max(dp[n][1], dp[n][2]));
+        System.out.println(Math.max(dp[n][1], dp[n][2]));//两个出口
     }
 
     static int[][] dp = new int[(int) (1e5 + 10)][3];

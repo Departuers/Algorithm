@@ -60,6 +60,10 @@ public class 股票买卖4 {
         O3();
     }
 
+    /**
+     * f[i,j,0]表示第i天已经进行了j次交易且此时未持仓，
+     * f[i][j][1]表示到第i天已经进行了j次交易且此时持有仓位。
+     */
     static void O3() {
         for (int i = 0; i <= n; i++) {
             for (int j = 0; j <= k; j++) {
@@ -67,7 +71,7 @@ public class 股票买卖4 {
                     f[i][j][l] = Integer.MIN_VALUE / 2;
                 }
             }
-        }
+        }//初始化负无穷
         f[0][0][0] = 0;
         for (int i = 1; i <= n; i++) {
             f[i][0][0] = 0;
@@ -75,6 +79,7 @@ public class 股票买卖4 {
                 f[i][j][0] = Math.max(f[i - 1][j][0], f[i - 1][j][1] + a[i]);
                 //卖出不消耗次数
                 f[i][j][1] = Math.max(f[i - 1][j][1], f[i - 1][j - 1][0] - a[i]);
+                //昨天买的,今天不卖,                   昨天交易次数为j-1没买,今天买上
                 //买入消耗次数
             }
         }

@@ -12,7 +12,19 @@ public class KMP {
         a = sc.next().toCharArray();
         m = sc.nextInt();
         p = sc.next().toCharArray();
-
+        int i = 0, j = 0;
+        init();
+        //j是匹配串
+        while (i < m && j < n) {
+            if (j == -1 || a[j] == p[i]) {
+                i++;
+                j++;
+            } else j = ne[j];
+            if (j == n) {
+                j = ne[j];
+                System.out.println(i - n);
+            }
+        }
     }
 
     static char[] a, p;

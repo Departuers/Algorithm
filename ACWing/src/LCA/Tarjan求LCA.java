@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 import static java.lang.System.in;
 
 /**
- * https://nekrozcoder.github.io/2019/07/28/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91LCA%20%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/#more
+ * https://www.cnblogs.com/hulean/p/11144059.html
  * 离线
  * 预处理O(n)
  * 单次查询O(1)

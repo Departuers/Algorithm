@@ -83,23 +83,23 @@ public class 二维费用背包收服小精灵 {
             }
         }
         System.out.println(dp[n][N][M - 1]);
-        int k = M-1;
-        while (k > 0 && dp[n][N][k - 1] == dp[n][N][M-1]) k--;
+        int k = M - 1;
+        while (k > 0 && dp[n][N][k - 1] == dp[n][N][M - 1]) k--;
         System.out.println(M - k);
     }
 
     static void two() {
         for (int i = 1; i <= n; i++) {
             for (int j = N; j >= v1[i]; j--) {
-                for (int k = M-1; k >= v2[i]; k--) {
+                for (int k = M - 1; k >= v2[i]; k--) {
                     f[j][k] = Math.max(f[j - v1[i]][k - v2[i]] + 1, f[j][k]);
                 }
             }
         }
-        System.out.println(f[N][M-1]);
+        System.out.println(f[N][M - 1]);
         //因为
-        int k = M-1;
-        while (k > 0 && f[N][k-1] == f[N][M-1]) k--;
+        int k = M - 1;
+        while (k > 0 && f[N][k - 1] == f[N][M - 1]) k--;
         System.out.println(M - k);
     }
 

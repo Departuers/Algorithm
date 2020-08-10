@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * https://www.acwing.com/activity/content/code/content/308366/
  * 求出无向图最小生成树中,最长边权的最小值
- * 最小生成树必然是n-1条边,
+ * 最小生成树的权值最大的边,对应Kruskal就是最后取到的那条边
  */
 public class 繁忙的都市 {
     public static void main(String[] args) {
@@ -29,7 +29,7 @@ public class 繁忙的都市 {
                 ans = p.w;
             }
         }
-        System.out.println(n-1+" "+ans);
+        System.out.println(n - 1 + " " + ans);
     }
 
     static void union(int x, int y) {

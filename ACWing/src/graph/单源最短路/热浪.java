@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 /**
  * http://blog.sina.com.cn/s/blog_83ac6af80102v0zj.html
+ * https://blog.csdn.net/qq_30277239/article/details/106104598
  * 裸最短路
  */
 public class 热浪 {
