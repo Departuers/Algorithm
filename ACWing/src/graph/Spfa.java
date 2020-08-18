@@ -60,10 +60,10 @@ public class Spfa {
                 if (dis[x] != Integer.MAX_VALUE && dis[t] > dis[x] + w[i]) {
                     dis[t] = dis[x] + w[i];
                     if (!vis[t]) {
-                        if (!q.isEmpty()&&dis[t]<dis[q.peekFirst()]){
+                        if (!q.isEmpty() && dis[t] < dis[q.peekFirst()]) {
                             q.addFirst(t);
-                        }else q.add(t);
-                        vis[t]=true;
+                        } else q.add(t);
+                        vis[t] = true;
                     }
                 }
             }

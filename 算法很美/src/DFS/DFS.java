@@ -49,7 +49,7 @@ public class DFS {
             }
             System.exit(0);//结束程序,不然会出现其他答案,这里只需要一个答案
         }
-        if (k < 0 || cur == arr.length)//剪枝
+        if (k < 0 || cur == arr.length)//没有候选数,或者到达最后一个位置
             return;
         buFenHe(arr, k, cur + 1, intS);//不要第cur个
 

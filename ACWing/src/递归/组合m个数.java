@@ -45,7 +45,7 @@ public class 组合m个数 {
     }
 
     static int m = 3, n = 12;
-    static int[] arr = {23, 1, 2, 4, 7, 3, 6, 8, 1, 5, 12,13};
+    static int[] arr = {23, 1, 2, 4, 7, 3, 6, 8, 1, 5, 12, 13};
     static int[] vis = new int[12];
 
     //枚举到第u位 ,sum是当前选了几个,state是vis数组

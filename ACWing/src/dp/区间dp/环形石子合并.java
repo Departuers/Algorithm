@@ -3,6 +3,9 @@ package dp.区间dp;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * 破环为链
+ */
 public class 环形石子合并 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -18,7 +21,7 @@ public class 环形石子合并 {
         for (int i = 1; i <= n * 2; i++) {
             s[i] += s[i - 1] + a[i];
         }
-        for (int len = 1; len <= n; len++) {
+        for (int len = 1; len <= n; len++) {//可以len为1
             for (int l = 1; l + len - 1 <= n * 2; l++) {
                 int r = l + len - 1;
                 if (len == 1) f[l][r] = g[l][r] = 0;
@@ -32,8 +35,8 @@ public class 环形石子合并 {
         }
         int minv = Integer.MAX_VALUE / 2, maxv = Integer.MIN_VALUE / 2;
         for (int i = 1; i <= n; i++) {
-            minv=Math.min(f[i][i+n-1],minv);
-            maxv=Math.max(g[i][i+n-1],maxv);
+            minv = Math.min(f[i][i + n - 1], minv);
+            maxv = Math.max(g[i][i + n - 1], maxv);
         }
         System.out.println(minv);
         System.out.println(maxv);

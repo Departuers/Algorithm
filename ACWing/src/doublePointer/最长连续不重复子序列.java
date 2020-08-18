@@ -78,7 +78,7 @@ public class 最长连续不重复子序列 {
                 j++;
             }
             ans = Math.max(ans, i - j + 1);
-            //实际上是枚举i,j区间,双指针,特备牛逼
+            //实际上是枚举i,j区间,双指针
         }
         System.out.println(ans);
     }

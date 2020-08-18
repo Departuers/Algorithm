@@ -33,7 +33,6 @@ public class 连接格点 {
         int res = 0;
         int[] dx = {-1, 0, 1, 0};
         int[] dy = {0, 1, 0, -1};
-        int[] dw = {1, 2, 1, 2};
         //枚举横向边,边权为1
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= m; j++) {
