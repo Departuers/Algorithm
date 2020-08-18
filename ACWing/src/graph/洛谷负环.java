@@ -77,11 +77,7 @@ public class 洛谷负环 {
                     if (count[t] >= n) return true;
                     if (!vis[t]) {
                         vis[t] = true;
-                        if (!q.isEmpty() && dis[t] < dis[q.peekFirst()]) {
-                            q.addFirst(t);
-                        } else {
-                            q.add(t);
-                        }
+                        q.add(t);
                     }
                 }
             }
@@ -89,15 +85,15 @@ public class 洛谷负环 {
         return false;
     }
 
-    static boolean[] vis = new boolean[10005];
+    static boolean[] vis = new boolean[2005];
     static ArrayDeque<Integer> q = new ArrayDeque<Integer>();
-    static int[] count = new int[10005];
-    static int[] dis = new int[10005];
+    static int[] count = new int[2005];
+    static int[] dis = new int[2005];
     static int t, n, m, cnt = 1;
-    static int[] he = new int[10005];
-    static int[] ne = new int[10005];
-    static int[] e = new int[10005];
-    static int[] w = new int[10005];
+    static int[] he = new int[2005];
+    static int[] ne = new int[6005];
+    static int[] e = new int[6005];
+    static int[] w = new int[6005];
 
     static void add(int a, int b, int c) {
         e[cnt] = b;

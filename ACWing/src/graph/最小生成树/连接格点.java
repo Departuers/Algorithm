@@ -3,7 +3,7 @@ package graph.最小生成树;
 import java.util.Scanner;
 
 /**
- * https://blog.csdn.net/qq_42279796/article/details/103091446
+ * https://blog.csdn.net/qq_30277239/article/details/107900698
  * 依然Kruskal
  * 先选一些,再用Kruskal
  * 把二维坐标转化为一维坐标

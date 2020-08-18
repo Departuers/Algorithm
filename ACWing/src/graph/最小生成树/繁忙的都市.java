@@ -4,7 +4,7 @@ import java.util.PriorityQueue;
 import java.util.Scanner;
 
 /**
- * https://www.acwing.com/activity/content/code/content/308366/
+ * https://blog.csdn.net/qq_30277239/article/details/107899568
  * 求出无向图最小生成树中,最长边权的最小值
  * 最小生成树的权值最大的边,对应Kruskal就是最后取到的那条边
  */

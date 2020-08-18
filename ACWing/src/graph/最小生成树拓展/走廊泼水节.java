@@ -1,6 +1,7 @@
 package graph.最小生成树拓展;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -9,6 +10,8 @@ import java.util.Scanner;
  * 给定一个N个节点的树,
  * 把这棵树扩充为完全图,并满足图的唯一最小生成树仍然是这棵树
  * 连接两个集合的新边,
+ * 把最小生成树,扩充,则新加的边必须严格大于最小生成树的边,
+ * 都取边权w+1最小的那个满足要求
  */
 public class 走廊泼水节 {
     public static void main(String[] args) {
@@ -32,8 +35,9 @@ public class 走廊泼水节 {
                 node c = q.get(i);
                 int a = find(c.x), b = find(c.y);
                 if (a != b) {
-                    res += (size[a] * size[b] - 1) * (c.w + 1);
-                    size[b] += size[a];
+                    res += (size[a] * size[b] - 1) * (c.w + 1);//新边都取w+1
+                    System.out.println(Arrays.toString(size));
+                    size[b] += size[a];//合并两个集合
                     par[a] = b;
                 }
             }

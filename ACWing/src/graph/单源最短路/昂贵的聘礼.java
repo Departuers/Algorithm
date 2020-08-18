@@ -11,6 +11,7 @@ import java.util.Scanner;
  * 寻找最短路
  * 等级问题的话,枚举等级区间
  */
+@SuppressWarnings("all")
 public class 昂贵的聘礼 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -33,13 +34,24 @@ public class 昂贵的聘礼 {
                 w[id][i] = Math.min(w[id][i], cost);
             }
         }
+        /**
+         * 因为最终要娶到公主,所以等级只能只能在level[1]也就是酋长的等级
+         * level[1]-m ~ level[1]+m 这个区间内
+         */
         int res = Integer.MAX_VALUE / 2;
-        for (int i = level[1] - m; i <=  level[1]; i++) {
+        for (int i = level[1] - m; i <= level[1]; i++) {
             res = Math.min(res, dijkstra(i, i + m));
         }
         System.out.println(res);
     }
 
+    /**
+     * 枚举等级区间!来实现等级差距过大无法交易
+     *
+     * @param down
+     * @param up
+     * @return
+     */
     static int dijkstra(int down, int up) {
         Arrays.fill(dist, 0x3f3f3f3f);
         Arrays.fill(vis, false);

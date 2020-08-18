@@ -54,24 +54,22 @@ public class spfa判断负环 {
         // 原理：如果某条最短路径上有n个点（除了自己），那么加上自己之后一共有n+1个点，由抽屉原理一定有两个点相同，所以存在环。
         ArrayDeque<Integer> q = new ArrayDeque<Integer>();
         for (int i = 1; i <= n; i++) {
-            q.add(i);
-            vis[i] = true;
+            q.add(i);//假设超级源点连接每个点权值都为0
+            st[i] = true;
         }
         int t = 0, x;
         while (!q.isEmpty()) {
             x = q.poll();
-            vis[x] = false;
+            st[x] = false;
             for (int i = he[x]; i != 0; i = ne[i]) {
                 t = e[i];
                 if (dis[t] > dis[x] + w[i]) {
-                    dis[t] = dis[x] + w[i];
                     count[t] = count[x] + 1;
+                    dis[t] = dis[x] + w[i];
                     if (count[t] >= n) return true;
-                    if (!vis[t]) {
-                        if (!q.isEmpty() && dis[t] < dis[q.peekFirst()]) {
-                            q.addFirst(t);
-                        } else q.add(t);
-                        vis[t] = true;
+                    if (!st[t]) {
+                        q.add(t);
+                        st[t] = true;
                     }
                 }
             }
@@ -81,7 +79,7 @@ public class spfa判断负环 {
 
     static int[] count = new int[100005];
     static int[] dis = new int[100005];
-    static boolean[] vis = new boolean[100005];
+    static boolean[] st = new boolean[100005];
     static int[] he = new int[100005];
     static int[] w = new int[200005];
     static int[] ne = new int[200005];

@@ -21,6 +21,7 @@ import java.util.Scanner;
  * 2
  * 建图,问题,
  * 2 3 4 5可以看做2-3  2-4  2-5  3-4  3-5 4-5
+ * 抽象建图!想法很重要!
  * 显然:2可以直接到3,2也可以直接到4,2也可以直接到5
  * 边权都为1可以使用bfs做
  * 则显然求最小换乘次数,转换成求最短路径问题
@@ -49,7 +50,6 @@ public class 最优乘车 {
 
     static int[][] g = new int[510][510];
     static int[] dist = new int[510];
-
     static int n, m;
 
     static void bfs() {

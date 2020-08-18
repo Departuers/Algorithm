@@ -11,6 +11,13 @@ import java.util.Scanner;
  * 具有单调性,随着d的增加,k单调减少
  * 最终Kruskal本质上在求连通性
  * 当前循环完第i条边,求出由前i条边所构成的所有连通块
+ * 输入样例：
+ * 3 2
+ * 10 10
+ * 10 0
+ * 30 0
+ * 输出样例：
+ * 10.00
  */
 public class 北极通讯网络 {
     public static void main(String[] args) {
@@ -28,11 +35,12 @@ public class 北极通讯网络 {
             for (int j = 0; j < i; j++) {
                 q.add(new node(i, j, getdist(list.get(i), list.get(j))));
             }
-        }
+        }//预处理出所有的连接边,
         int cnt = n;
         double res = 0;
+        //枚举所有的,
         while (!q.isEmpty()) {
-            if (cnt <= k) break;
+            if (cnt <= k) break;//剩下的村庄可以通过卫星连接,不需要权值边,蛮优秀的想法
             node p = q.poll();
             int a = fin(p.x), b = fin(p.y);
             double w = p.w;

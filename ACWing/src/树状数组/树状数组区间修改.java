@@ -1,4 +1,4 @@
-package 线段树;
+package 树状数组;
 
 import java.io.*;
 import java.util.StringTokenizer;
@@ -6,12 +6,11 @@ import java.util.StringTokenizer;
 import static java.lang.System.in;
 
 /**
- * 单点修改,区间查询
  * https://www.luogu.com.cn/problemnew/solution/P3368
- * tle2个
+ * 区间修改,单点查询
+ * tle1个
  */
-
-public class 树状数组 {
+public class 树状数组区间修改 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
     static StringTokenizer tokenizer = new StringTokenizer("");
@@ -39,48 +38,46 @@ public class 树状数组 {
         n = nextInt();
         m = nextInt();
         for (int i = 1; i <= n; i++) {
-            add(i, nextInt());
+            a[i] = nextInt();
         }
-        int x, y, z;
+        int x, y, z, t;
         while (m-- != 0) {
-            x = nextInt();
-            if (x == 1) {
+            t = nextInt();
+            if (t == 1) {
+                x = nextInt();
                 y = nextInt();
                 z = nextInt();
-                add(y, z);
-            } else {
-                y = nextInt();
-                z = nextInt();
-                bw.write(query(y, z ) + "\n");
+                add(x, z);
+                add(y + 1, -z);
+            } else if (t == 2) {
+                x = nextInt();
+                bw.write((ask(x) + a[x]) + "\n");
             }
         }
         bw.flush();
     }
 
-    static int[] par = new int[500005];
-    static int n, m;
+    static int maxn = 500001, n, m;
+    static long[] tree = new long[maxn];
+    static long[] a = new long[maxn];
+    //差分数组
 
-    static void add(int i, int x) {
-        while (i <= n) {
-            par[i] += x;
-            i += lowbit(i);
+    static void add(int s, int value) {
+        for (int i = s; i <= n; i += lowbit(i)) {
+            tree[i] += value;
         }
     }
 
-    private static int lowbit(int i) {
-        return i & -i;
+    static int lowbit(int x) {
+        return x & -x;
     }
 
-    static int query(int l, int r) {
-        return get(r) - get(l - 1);
-    }
-
-    static int get(int x) {
-        int res = 0;
-        while (x != 0) {
-            res += par[x];
-            x -= lowbit(x);
+    static long ask(int s) {
+        long ans = 0;
+        for (int i = s; i >= 1; i -= lowbit(i)) {
+            ans += tree[i];
         }
-        return res;
+        return ans;
     }
+
 }

@@ -55,7 +55,7 @@ public class dijkstra {
             c = nextInt();
             add(a, b, c);
         }
-        Arrays.fill(dis, (1 << 31) - 1);
+        Arrays.fill(dis, (1 << 31));
         dij(s);
     }
 

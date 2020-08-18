@@ -4,7 +4,7 @@ import java.util.PriorityQueue;
 import java.util.Scanner;
 
 /**
- * https://blog.csdn.net/weixin_43872728/article/details/105852223
+ * https://blog.csdn.net/qq_30277239/article/details/107898613
  * 求最小生成森林
  * 求每一个联通块的,最小生成树
  * 使用Kruskal算法最好写,即使算法没有进行完,那么算法也是正确的

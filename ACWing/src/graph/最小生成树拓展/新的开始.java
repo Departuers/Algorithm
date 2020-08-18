@@ -8,7 +8,7 @@ import java.util.Scanner;
  * 本来不是最小生成树问题
  * 把在该节点新建一条边,看做向虚拟源点(0号点)连一条边
  * 虚拟源点,是个非常重要的技巧,这样就变成了最小生成树问题
- *
+ * 图论问题,一定要先想到虚拟源点技巧
  */
 public class 新的开始 {
     public static void main(String[] args) {

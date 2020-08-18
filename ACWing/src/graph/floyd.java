@@ -36,6 +36,7 @@ import java.util.Scanner;
  * 初始化为int/2即可
  * 即使全是负权边,int/2-2*10^8,无穷-常数还是无穷
  * 如何判别无穷呢,显然 int/4>2*10^8
+ *
  */
 public class floyd {
     public static void main(String[] args) {
