@@ -28,6 +28,7 @@ import java.util.StringTokenizer;
  * 假设以A[k]结尾,往前枚举,长度1的,长度2的,长度3...
  * 结合区间和数组为S[],那么以A[k]结尾,长度为j的子序列和为,
  * S[k]-S[k-j](1<=j<=m)
+ * 可以使用单调队列优化
  */
 public class 最大序列和 {
     public static void main(String[] args) throws IOException {
@@ -58,7 +59,6 @@ public class 最大序列和 {
             q[++tt] = i;//当前元素加到队列当中
         }
         System.out.println(res);
-
     }
 
     static int[] q = new int[300010];

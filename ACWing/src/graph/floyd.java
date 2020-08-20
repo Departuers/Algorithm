@@ -36,54 +36,33 @@ import java.util.Scanner;
  * 初始化为int/2即可
  * 即使全是负权边,int/2-2*10^8,无穷-常数还是无穷
  * 如何判别无穷呢,显然 int/4>2*10^8
- *
  */
 public class floyd {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-//        n = sc.nextInt();
-//        m = sc.nextInt();
-//        k = sc.nextInt();
-//        int x, y, z, t = Integer.MAX_VALUE / 2;
-//        for (int i = 1; i <= n; i++) {
-//            for (int j = 1; j <= n; j++) {
-//                if (i == j) g[i][j] = 0;
-//                else g[i][j] = t;
-//            }
-//        }
-//        for (int i = 0; i < m; i++) {
-//            x = sc.nextInt();
-//            y = sc.nextInt();
-//            z = sc.nextInt();
-//            g[x][y] = Math.min(g[x][y], z);
-//        }
-        int[][] g = {
-                {8, 20, 32, 56, 54, 40},
-                {20, 10, 48, 64, 34, 20},
-                {32, 48, 8, 24, 54, 42},
-                {56, 64, 24, 10, 30, 50},
-                {54, 34, 54, 30, 6, 28},
-                {40, 20, 42, 50, 28, 12}};
-//        floyd(g);
-        for (int k = 0; k < 6; k++) {
-            for (int i = 0; i < 6; i++) {
-                for (int j = 0; j < 6; j++) {
-                    g[i][j] = Math.min(g[i][k] + g[k][j], g[i][j]);
-                }
+        n = sc.nextInt();
+        m = sc.nextInt();
+        k = sc.nextInt();
+        int x, y, z, t = Integer.MAX_VALUE / 2;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (i == j) g[i][j] = 0;
+                else g[i][j] = t;
             }
         }
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 6; j++) {
-                System.out.print(g[i][j] + " ");
-            }
-            System.out.println();
+        for (int i = 0; i < m; i++) {
+            x = sc.nextInt();
+            y = sc.nextInt();
+            z = sc.nextInt();
+            g[x][y] = Math.min(g[x][y], z);
         }
-//        while (k-- != 0) {
-//            x = sc.nextInt();
-//            y = sc.nextInt();
-//            if (g[x][y] > t / 2) System.out.println("Imposs");
-//            else System.out.println(g[x][y]);
-//        }
+
+        while (k-- != 0) {
+            x = sc.nextInt();
+            y = sc.nextInt();
+            if (g[x][y] > t / 2) System.out.println("impossible");
+            else System.out.println(g[x][y]);
+        }
     }
 
     static void floyd(int[][] g) {
@@ -98,5 +77,5 @@ public class floyd {
 
     static int n = 5, m, k;
 
-    //   static int[][] g = new int[210][210];
+    static int[][] g = new int[210][210];
 }

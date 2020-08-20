@@ -13,19 +13,45 @@ public class 奶牛排队 {
     public static void main(String[] args) throws IOException {
         N = nextInt();
         Q = nextInt();
-        for (int i = 1; i <= N; i++) {
-            h[i] = nextInt();
+        init();
+        int a, b;
+        for (int i = 0; i < Q; i++) {
+            a = nextInt();
+            b = nextInt();
+                bw.write(query(a, b) + "\n");
         }
-
+        bw.flush();
     }
 
-    static void init() {
-
+    static void init() throws IOException {
+        log[1] = 0;
+        for (int i = 2; i < 50000; i++) {
+            log[i] = log[i / 2] + 1;
+        }
+        for (int i = 1; i <= N; i++) {
+            max[i][0] = nextInt();
+            min[i][0] = max[i][0];
+        }
+        for (int j = 1; 1 << j <= N; j++) {
+            for (int i = 1; i + (1 << j) - 1 <= N; i++) {
+                max[i][j] = Math.max(max[i][j - 1], max[i + (1 << j - 1)][j - 1]);
+                min[i][j] = Math.min(min[i][j - 1], min[i + (1 << j - 1)][j - 1]);
+            }
+        }
     }
 
-    static int[] log = new int[23];
+    static int query(int l, int r) {
+        int k = log[r - l + 1];
+        int t1 = Math.max(max[l][k], max[r - (1 << k) + 1][k]);
+        int t2 = Math.min(min[l][k], min[r - (1 << k) + 1][k]);
+        return t1 - t2;
+    }
 
-    static int h[] = new int[50010];
+    static int[] log = new int[50010];
+    static int[][] max = new int[50010][19];
+    static int[][] min = new int[50010][19];
+
+    static int[] h = new int[50010];
 
     static int N, Q;
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

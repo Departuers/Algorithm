@@ -55,7 +55,7 @@ public class Tarjan求LCA {
         for (int i = 0; i < m; i++) {
             addq(nextInt(), nextInt(), i);
         }
-        targan(root, 0);
+        tarjan(root, 0);
         for (int i = 0; i < m; i++) {
             bw.write(result[i] + "\n");
         }
@@ -104,11 +104,11 @@ public class Tarjan求LCA {
     }
 
 
-    static void targan(int u, int fa) {
+    static void tarjan(int u, int fa) {
         //vis[u] = true;
         for (int i = he[u]; i != 0; i = ne[i]) {
             if (e[i] != fa) {
-                targan(e[i], u);
+                tarjan(e[i], u);
                 union(e[i], u);
                 vis[e[i]] = true;
             }

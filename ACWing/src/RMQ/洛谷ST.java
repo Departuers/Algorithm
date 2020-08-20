@@ -3,13 +3,32 @@ package RMQ;
 import java.io.*;
 import java.util.StringTokenizer;
 
+/**
+ * input
+ * 8 8
+ * 9 3 1 7 5 6 0 8
+ * 1 6
+ * 1 5
+ * 2 7
+ * 2 6
+ * 1 8
+ * 4 8
+ * 3 7
+ * 1 8
+ * out
+ * 9
+ * 9
+ * 7
+ * 7
+ * 9
+ * 8
+ * 7
+ * 9
+ */
 public class 洛谷ST {
     public static void main(String[] args) throws IOException {
         n = nextInt();
         m = nextInt();
-        for (int i = 1; i <= n; i++) {
-            a[i] = nextInt();
-        }
         init();
         int a, b;
         /**
@@ -23,13 +42,13 @@ public class 洛谷ST {
         bw.flush();
     }
 
-    static void init() {
+    private static void init() throws IOException {
         log[1] = 0;
-        for (int i = 2; i <= n; i++) {
+        for (int i = 2; i < 1e5; i++) {
             log[i] = log[i / 2] + 1;
         }
         for (int i = 1; i <= n; i++) {
-            st[i][0] = a[i];
+            st[i][0] = nextInt();
         }
         for (int j = 1; 1 << j <= n; j++) {
             for (int i = 1; i + (1 << j) - 1 <= n; i++) {
@@ -43,7 +62,6 @@ public class 洛谷ST {
         return Math.max(st[l][k], st[r - (1 << k) + 1][k]);
     }
 
-    static int[] a = new int[100010];
     static int n, m;
     static int[] log = new int[(int) 1e5];
     static int[][] st = new int[100100][20];

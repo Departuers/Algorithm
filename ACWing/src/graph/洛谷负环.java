@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 import static java.lang.System.in;
 
 /**
- * 不知道为啥有一个过不了
+ * 不知道为啥有一个过不了,洛谷数据错了...
  */
 public class 洛谷负环 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -91,9 +91,9 @@ public class 洛谷负环 {
     static int[] dis = new int[2005];
     static int t, n, m, cnt = 1;
     static int[] he = new int[2005];
-    static int[] ne = new int[6005];
-    static int[] e = new int[6005];
-    static int[] w = new int[6005];
+    static int[] ne = new int[10005];
+    static int[] e = new int[10005];
+    static int[] w = new int[10005];
 
     static void add(int a, int b, int c) {
         e[cnt] = b;

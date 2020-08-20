@@ -67,6 +67,7 @@ public class 排列枚举 {
 
     static int[] arr = {4, 3, 5, 2, 3, 4, 1, 4, 5, 1, 2};
 
+    //最快
     static void d(int u, int k) {
         if (u == n) {
 //            System.out.println(Arrays.toString(arr));
