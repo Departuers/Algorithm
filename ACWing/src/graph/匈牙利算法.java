@@ -46,6 +46,7 @@ import java.util.Scanner;
  * 先看她有木有对象，没有就在一起，有了就去和她男友商量，让他换个对象，
  * 把女友让给自己；如果对方男友换了对象，这时就可以和该妹纸在一起了，
  * 要是对方男友不肯让，就只好尝试再去考虑其他喜欢的女生了。
+ * 洛谷ac
  */
 public class 匈牙利算法 {
     public static void main(String[] args) {
@@ -56,7 +57,6 @@ public class 匈牙利算法 {
         for (int i = 0; i < m; i++) {
             add(sc.nextInt(), sc.nextInt());
         }
-        Arrays.fill(match, -1);
         for (int i = 1; i <= n1; i++) {
             Arrays.fill(vis, false);
             if (find(i)) res++;
@@ -73,12 +73,11 @@ public class 匈牙利算法 {
     static int res = 0;
 
     static boolean find(int v) {
-        vis[v] = true;
         for (int i = he[v]; i != 0; i = ne[i]) {
             int u = e[i];
             if (!vis[u]) {
                 vis[u] = true;
-                if (match[u] == -1 || find(match[u])) {
+                if (match[u] == 0 || find(match[u])) {
                     match[u] = v;
                     return true;
                 }
@@ -87,10 +86,10 @@ public class 匈牙利算法 {
         return false;
     }
 
-    static int[] match = new int[100006];
-    static boolean[] vis = new boolean[100006];
+    static int[] match = new int[10006];
+    static boolean[] vis = new boolean[10006];
     static int n, m, cnt = 1;
-    static int[] e = new int[200005];
-    static int[] he = new int[100005];
-    static int[] ne = new int[200005];
+    static int[] e = new int[20005];
+    static int[] he = new int[10005];
+    static int[] ne = new int[20005];
 }
