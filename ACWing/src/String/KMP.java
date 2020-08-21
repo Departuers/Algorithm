@@ -5,6 +5,13 @@ import java.util.Scanner;
 
 /**
  * https://blog.csdn.net/qq_30277239/article/details/100881221
+ * 3
+ * aba
+ * 5
+ * ababa
+ * out:
+ * 0
+ * 2
  */
 public class KMP {
     public static void main(String[] args) {
@@ -46,13 +53,4 @@ public class KMP {
         }
     }
 
-    static void it() {
-        ne[0] = -1;
-        int t = 0;
-        for (int i = 1; i <= n; i++) {
-            t = ne[i - 1];
-            while (t != -1 && p[i - 1] != p[t]) t = ne[t];
-            ne[i] = t + 1;
-        }
-    }
 }
