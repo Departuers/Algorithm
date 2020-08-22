@@ -1,7 +1,6 @@
 package BFS;
 
 import java.util.ArrayDeque;
-import java.util.Queue;
 import java.util.Scanner;
 
 /**
@@ -44,7 +43,7 @@ public class 图中点的层次 {
     static int[] dis = new int[(int) (1e5 + 10)];
     static boolean[] vis = new boolean[(int) (1e5 + 10)];
     static int cnt = 1, n, m;
-    static Queue<Integer> q = new ArrayDeque<Integer>();
+    static ArrayDeque<Integer> q = new ArrayDeque<Integer>();
 
     static void add(int u, int v) {
         e[cnt] = v;

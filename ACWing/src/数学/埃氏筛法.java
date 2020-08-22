@@ -8,11 +8,12 @@ public class 埃氏筛法 {
         long s = System.nanoTime();
         f(12345678);
         long t = System.nanoTime();
-        System.out.println((t - s )/ 1e8);
-        s=System.nanoTime();
+        System.out.println((t - s) / 1e8);
+        s = System.nanoTime();
         euler(12345678);
-        t=System.nanoTime();
-        System.out.println((t-s)/1e8);
+//        e(12345678);
+        t = System.nanoTime();
+        System.out.println((t - s) / 1e8);
         System.out.println();
     }
 
@@ -36,7 +37,22 @@ public class 埃氏筛法 {
                 vis[j] = true;
             }
         }
-        System.out.println(primer[cnt-1]);
+        System.out.println(primer[cnt - 1]);
+    }
+
+    static void e(int n) {
+        int cnt = 0;
+        boolean[] st = new boolean[n + 1];
+        for (int i = 2; i <= n; i++) {
+            if (!st[i]) {
+                primer[cnt++] = i;
+                for (int j = 2 * i; j <= n; j += i) {
+                    st[j] = true;
+                }
+            }
+        }
+        System.out.println(primer[cnt - 1]);
+
     }
 
     /**
@@ -54,7 +70,7 @@ public class 埃氏筛法 {
                 if (i % primer[j] == 0) break;
             }
         }
-        System.out.println(primer[cnt-1]);
+        System.out.println(primer[cnt - 1]);
 
     }
 }

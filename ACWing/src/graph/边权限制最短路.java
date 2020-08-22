@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
+ *
  * 给定一个n个点m条边的有向图，图中可能存在重边和自环， 边权可能为负数。
  * 请你求出从1号点到n号点的最多经过k条边的最短距离，如果无法从1号点走到n号点，输出impossible。
  * 注意：图中可能 存在负权回路 。
@@ -65,7 +66,6 @@ public class 边权限制最短路 {
 
     static int[] dis = new int[502];
     static int[] tem;
-
     static int n, m, k;
 
 }

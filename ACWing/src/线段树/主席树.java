@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
 import static java.lang.System.in;
 
 /**
+ * https://www.acwing.com/blog/content/487/
  * 需要背下来.tle2个
  */
 public class 主席树 {
