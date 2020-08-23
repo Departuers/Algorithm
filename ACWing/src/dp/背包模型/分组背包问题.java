@@ -34,9 +34,9 @@ public class 分组背包问题 {
                 w[i][j] = sc.nextInt();
             }
         }
-        for (int i = 1; i <= n; i++) {
-            for (int j = V; j >= 0; j--) {
-                for (int k = 0; k < s[i]; k++) {
+        for (int i = 1; i <= n; i++) {//枚举每一组
+            for (int j = V; j >= 0; j--) {//枚举体积
+                for (int k = 0; k < s[i]; k++) {//枚举第i组
                     if (v[i][k] <= j) {
                         //可以选第i组,第k个值
                         dp[j] = Math.max(dp[j - v[i][k]] + w[i][k], dp[j]);

@@ -26,6 +26,7 @@ package 递归;
  * 2 3 5
  * 2 4 5
  * 3 4 5
+ * 随机选m个不考虑顺序
  */
 public class 组合m个数 {
     public static void main(String[] args) {

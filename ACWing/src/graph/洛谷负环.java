@@ -8,7 +8,8 @@ import java.util.StringTokenizer;
 import static java.lang.System.in;
 
 /**
- * 不知道为啥有一个过不了,洛谷数据错了...
+ * 从1开始到达,不能用那个模板!!!
+ * 我错了,洛谷都不会错
  */
 public class 洛谷负环 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -41,7 +42,6 @@ public class 洛谷负环 {
             cnt = 1;
             n = nextInt();
             m = nextInt();
-            Arrays.fill(dis, 0);
             Arrays.fill(he, 0);
             Arrays.fill(ne, 0);
             Arrays.fill(count, 0);
@@ -61,10 +61,12 @@ public class 洛谷负环 {
     }
 
     private static boolean spfa() {
-        for (int i = 1; i <= n; i++) {
-            q.add(i);
-            vis[i] = true;
-        }
+        Arrays.fill(vis, false);
+        q.clear();
+        Arrays.fill(dis, Integer.MAX_VALUE / 2);
+        q.add(1);
+        dis[1] = 0;
+        vis[1] = true;
         int t = 0;
         while (!q.isEmpty()) {
             int v = q.poll();
@@ -85,15 +87,15 @@ public class 洛谷负环 {
         return false;
     }
 
-    static boolean[] vis = new boolean[2005];
     static ArrayDeque<Integer> q = new ArrayDeque<Integer>();
-    static int[] count = new int[2005];
-    static int[] dis = new int[2005];
+    static boolean[] vis = new boolean[6005];
+    static int[] count = new int[6005];
+    static int[] dis = new int[6005];
     static int t, n, m, cnt = 1;
-    static int[] he = new int[2005];
-    static int[] ne = new int[10005];
-    static int[] e = new int[10005];
-    static int[] w = new int[10005];
+    static int[] he = new int[6005];
+    static int[] ne = new int[6005];
+    static int[] e = new int[6005];
+    static int[] w = new int[6005];
 
     static void add(int a, int b, int c) {
         e[cnt] = b;

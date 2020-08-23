@@ -23,7 +23,7 @@ public class 完全背包 {
     static void O3() {
         for (int i = 1; i <= N; i++) {
             for (int j = 0; j <= V; j++) {
-                dp[i][j] = dp[i - 1][j];
+                dp[i][j] = dp[i - 1][j];//至少有前i-1种物品可选,容量为v的价值
                 if (j >= w[i])
                     dp[i][j] = Math.max(dp[i][j - w[i]] + v[i], dp[i][j]);
             }
@@ -33,10 +33,10 @@ public class 完全背包 {
 
     static void O2() {
         for (int i = 1; i <= N; i++) {
-            for (int j = w[i]; j <= V; j++) {
-                f[j] = Math.max(f[i], f[i - w[i]] + v[i]);
+            for (int j = v[i]; j <= V; j++) {
+                f[j] = Math.max(f[j], f[j - v[i]] + w[i]);
             }
         }
-        System.out.println(f[N]);
+        System.out.println(f[V]);
     }
 }

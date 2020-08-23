@@ -28,6 +28,7 @@ import static java.lang.System.in;
  * 排列型枚举,n个数,有n个坑,第一个坑有n种选择,第二个坑有n-1中选择,第n个坑只有一种选择
  * 第一个坑的n种选择,是平行的,
  * 交换性枚举每一位,是效率最高的
+ * 全排列
  */
 public class 排列枚举 {
     public static void main(String[] args) {
