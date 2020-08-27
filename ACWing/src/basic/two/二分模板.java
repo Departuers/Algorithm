@@ -17,4 +17,13 @@ public class 二分模板 {
         return false;
     }
 
+    static int bin(int l, int r) {
+        while (l < r) {
+            int mid = l + r + 1 >> 1;
+            if (check(mid)) l = mid;
+            else r = mid;
+        }
+        return r;
+    }
+
 }

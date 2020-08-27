@@ -5,8 +5,10 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-import static java.lang.System.in;
-
+/**
+ *
+ */
+@SuppressWarnings("all")
 public class AcWingEK {
 
     public static void main(String[] args) throws IOException {
@@ -51,19 +53,19 @@ public class AcWingEK {
     static boolean bfs() {
         Arrays.fill(st, false);
         q.clear();
-        q.push(s);
+        q.add(s);
         st[s] = true;
         dis[s] = inf;
         while (!q.isEmpty()) {
-            int x = q.pollFirst();
-            for (int i = h[x]; i != 0; i = ne[i]) {
-                int v = e[i];
-                if (!st[v] && w[i] != 0) {
-                    dis[v] = Math.min(dis[x], w[i]);
-                    pre[v] = i;
-                    q.push(v);
-                    st[v] = true;
-                    if (v == t) return true;
+            int v = q.poll();
+            for (int i = h[v]; i != 0; i = ne[i]) {
+                int u = e[i];
+                if (!st[u] && w[i] != 0) {
+                    dis[u] = Math.min(w[i], dis[v]);
+                    pre[u] = i;
+                    st[u] = true;
+                    q.add(u);
+                    if (u == t) return true;
                 }
             }
         }
@@ -83,7 +85,7 @@ public class AcWingEK {
     }
 
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer tokenizer = new StringTokenizer("");
 
     static String nextLine() throws IOException {// 读取下一行字符串

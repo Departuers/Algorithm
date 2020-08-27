@@ -27,7 +27,7 @@ public class 滑动谜题 {
 
     public static void main(String[] args) {
         int[][] board = {{1, 2, 3}, {4, 0, 5}};
-        System.out.println(new cn.shiyu.bobo.LeetCode.滑动谜题().slidingPuzzle(board));
+        System.out.println();
     }
 
     public int[][] dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};

@@ -29,50 +29,50 @@ public class LCS {
         String s1 = "BA34C";
         String s2 = "A1BC23";
         System.out.println(dp(s1, s2));
-        System.out.println(parseDp(dpp,s1,s2));
+        System.out.println(parseDp(f,s1,s2));
     }
-    public static int[][] dpp;
+    public static int[][] f;
     public static int dp(String s1, String s2) {
         int len1 = s1.length();
         int len2 = s2.length();
-        dpp = new int[len1 + 1][len2 + 1];
+        f = new int[len1 + 1][len2 + 1];
         int flag = 0;//标志
         for (int i = 1; i <= len1; i++) {//初始化第一列,如果之前的值有算出来1,后面的都是1,符合标志,就不用算了,
             if (flag == 1) {
-                dpp[i][1] = 1;
+                f[i][1] = 1;
             } else if (s1.charAt(i - 1) == s2.charAt(0)) {
-                dpp[i][1] = 1;
+                f[i][1] = 1;
                 flag = 1;
             } else {
-                dpp[i][1] = 0;
+                f[i][1] = 0;
             }
         }
         flag = 0;
         for (int i = 1; i <= len2; i++) {//初始化第一行
             if (flag == 1) {
-                dpp[1][i] = 1;
+                f[1][i] = 1;
             } else if (s2.charAt(i - 1) == s1.charAt(0)) {
-                dpp[1][i] = 1;
+                f[1][i] = 1;
                 flag = 1;
             } else {
-                dpp[1][i] = 0;
+                f[1][i] = 0;
             }
         }
 
         for (int i = 2; i <= len1; i++) {
             for (int j = 2; j <= len2; j++) {
-                int temp = Math.max(dpp[i - 1][j], dpp[i][j - 1]);
+                int temp = Math.max(f[i - 1][j], f[i][j - 1]);
                 if (s1.charAt(i-1) == s2.charAt(j-1)) {//要把dp数组索引语义和源串索引语义联系起来,只能是-1
-                    dpp[i][j] = Math.max(temp, dpp[i - 1][j - 1] + 1);
+                    f[i][j] = Math.max(temp, f[i - 1][j - 1] + 1);
                 } else {
-                    dpp[i][j] = temp;
+                    f[i][j] = temp;
                 }
             }
         }
-        for (int[] ints : dpp) {
+        for (int[] ints : f) {
             System.out.println(Arrays.toString(ints));
         }
-        return dpp[len1][len2];
+        return f[len1][len2];
     }
 
     /**

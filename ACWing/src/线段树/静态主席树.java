@@ -8,9 +8,10 @@ import static java.lang.System.in;
 
 /**
  * https://www.acwing.com/blog/content/487/
- * 需要背下来.tle2个
+ * https://www.cnblogs.com/TaylorSwift13/p/11228276.html
+ * 开28倍就过了,不过1.15秒
  */
-public class 主席树 {
+public class 静态主席树 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
     static StringTokenizer tokenizer = new StringTokenizer("");
@@ -38,9 +39,9 @@ public class 主席树 {
         return Arrays.binarySearch(c, 1, count, x);
     }
 
-    static int unique(int[] a) {
+    static int unique(int[] a, int n) {
         int j = 1;
-        for (int i = 1; i < a.length; i++) {
+        for (int i = 1; i <= n; i++) {
             if (i == 1 || a[i] != a[i - 1]) {
                 a[j++] = a[i];
             }
@@ -58,7 +59,7 @@ public class 主席树 {
         }
 
         Arrays.sort(c, 1, n + 1);
-        count = unique(c);
+        count = unique(c, n + 1);
 
         for (int i = 1; i <= n; i++) {
             root[i] = update(1, n, root[i - 1], root[i], get(a[i]));
@@ -117,6 +118,5 @@ public class 主席树 {
         if (k <= m) return queryD(mid + 1, r, rson[L], rson[R], k);
         else return queryD(l, mid, lson[L], lson[R], k - m);
     }
-
 
 }

@@ -18,6 +18,7 @@ import java.util.Scanner;
  * 30 0
  * 输出样例：
  * 10.00
+ * Kruskal进行到一半也是正确的
  */
 public class 北极通讯网络 {
     public static void main(String[] args) {

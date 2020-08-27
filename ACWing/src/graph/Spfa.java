@@ -48,7 +48,6 @@ public class Spfa {
         }
         Arrays.fill(dis, Integer.MAX_VALUE);
         dis[1] = 0;
-        vis[1] = true;
         ArrayDeque<Integer> q = new ArrayDeque<Integer>();
         q.add(1);
         int t = 0;

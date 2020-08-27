@@ -48,7 +48,7 @@ public class 多重背包二进制优化 {
         System.out.println(dp[V]);
     }
 
-    static int cnt;
+    static int cnt=0;
     static int dp[] = new int[2010];
     static int[] v = new int[1000 * 13], w = new int[1000 * 13];
     static int N, V;

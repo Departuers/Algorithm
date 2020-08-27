@@ -45,7 +45,6 @@ public class 两点最长路 {
         }
         ArrayDeque<Integer> q = new ArrayDeque<Integer>();
         q.add(1);
-        st[1] = true;
         while (!q.isEmpty()) {
             a = q.poll();
             st[a] = false;

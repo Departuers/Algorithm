@@ -32,11 +32,10 @@ public class 逆序数 {
             de[i] = new node(sc.nextInt(), i);
 //            max_value = Math.max(a[i], max_value);//记录数组最大值
         }
-        Arrays.sort(de, 1, n+1);
+        Arrays.sort(de, 1, n + 1);
         /**
          * 正序循环,巧妙想法,也可以求逆序数
-         * 这里great记录左边有多少个比它大的,
-         * lower记录左边有多少比它小的
+         * res记录每个数左边有多少个比它大的,
          */
         int res = 0;
         for (int i = 1; i <= n; i++) {

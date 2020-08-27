@@ -81,7 +81,6 @@ public class 线段树 {
         else update(k << 1 | 1, mid + 1, r, index, value);
         sum[k] = sum[k << 1] + sum[k << 1 | 1];
         min[k] = Math.min(min[k << 1], min[k << 1 | 1]);
-
     }
 
     /**

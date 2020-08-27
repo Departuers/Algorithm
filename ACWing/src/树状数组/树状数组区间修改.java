@@ -47,7 +47,8 @@ public class 树状数组区间修改 {
                 x = nextInt();
                 y = nextInt();
                 z = nextInt();
-                add(x, z);
+                add(x, z);//树状数组维护差分数组
+                // 巧妙的思想
                 add(y + 1, -z);
             } else if (t == 2) {
                 x = nextInt();

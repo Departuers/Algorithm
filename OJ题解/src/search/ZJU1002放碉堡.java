@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 import static java.lang.System.in;
 
+/**
+ * 在一张最大为4X4的地图中，放置碉堡，所有的碉堡不能同行和同列，除非中间有墙阻隔！
+ * 求最多能放置多少个碉堡！
+ * '.'表示能放置碉堡的位置，‘X’表示墙！
+ */
 public class ZJU1002放碉堡 {
 
     private static int n;
@@ -15,7 +20,7 @@ public class ZJU1002放碉堡 {
         while (true) {
             n = sc.nextInt();
             if (n == 0) break;
-            ibest=0;
+            ibest = 0;
             for (int i = 0; i < n; i++) {
                 String z = sc.next();
                 for (int j = 0; j < n; j++) {
@@ -50,6 +55,11 @@ public class ZJU1002放碉堡 {
 
     }
 
+    /**
+     * @param row 行
+     * @param col 列
+     * @return
+     */
     static boolean canPut(int row, int col) {
         int i = 0;
         //判断列合法性

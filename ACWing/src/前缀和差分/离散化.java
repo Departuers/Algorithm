@@ -1,5 +1,6 @@
 package 前缀和差分;
 
+import java.util.Arrays;
 import java.util.TreeSet;
 
 /**
@@ -14,15 +15,17 @@ public class 离散化 {
             t.add(i);
         }
         int c = 0;
+        int[] f=new int[20];
         for (Integer w : t) {
-            arr[c++] = w;
+            f[c++] = w;
         }
-        System.out.println(find(8));
+        System.out.println(Arrays.toString(f));
+        System.out.println(find(9));
     }
 
     static TreeSet<Integer> t = new TreeSet<Integer>();
 
-    static int[] arr = {2, 5, 1, 7, 9, 2};
+    static int[] arr = {9, 2, 5, 1, 7, 2};
 
     static int find(int x) {
         int l = 0, r = t.size() - 1;

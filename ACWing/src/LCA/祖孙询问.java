@@ -6,15 +6,14 @@ import java.util.Scanner;
 
 /**
  * https://blog.csdn.net/qq_44828887/article/details/107291771
- * 已知一棵 nn
- * 个节点的有根树。有 mm 个询问，每个询问给出了一对节点的编号 xx 和 yy，询问 xx 与 yy 的祖孙关系。
+ * 已知一棵 n个节点的有根树。有 m 个询问，每个询问给出了一对节点的编号 x 和 y，询问 x 与 y 的祖孙关系。
  * 【输入】
- * 输入第一行包括一个整数 nn 表示节点个数；
- * 接下来 nn 行每行一对整数对 aa 和 bb 表示 aa 和 bb 之间有连边。如果 bb 是 −1−1，那么 aa 就是树的根；
- * 第 n+2n+2 行是一个整数 mm 表示询问个数；
- * 接下来 mm 行，每行两个正整数 xx 和 yy，表示一个询问。
+ * 输入第一行包括一个整数 n 表示节点个数；
+ * 接下来 n 行每行一对整数对 a和 b表示 a 和 b 之间有连边。如果 b 是 −1，那么a 就是树的根；
+ * 第 n+2 行是一个整数 m 表示询问个数；
+ * 接下来 m 行，每行两个正整数 x 和 y，表示一个询问。
  * 【输出】
- * 对于每一个询问，若 xx 是 yy 的祖先则输出 11，若 yy 是 xx 的祖先则输出 22，否则输出 00。
+ * 对于每一个询问，若 x 是 y 的祖先则输出1，若 y 是 x 的祖先则输出 2，否则输出 0。
  * 【输入样例】
  * 10
  * 234 -1
@@ -44,7 +43,7 @@ public class 祖孙询问 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
-        int a, b, root=0;
+        int a, b, root = 0;
         for (int i = 0; i < n; i++) {
             a = sc.nextInt();
             b = sc.nextInt();

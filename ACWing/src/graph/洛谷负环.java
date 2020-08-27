@@ -66,10 +66,9 @@ public class 洛谷负环 {
         Arrays.fill(dis, Integer.MAX_VALUE / 2);
         q.add(1);
         dis[1] = 0;
-        vis[1] = true;
         int t = 0;
         while (!q.isEmpty()) {
-            int v = q.poll();
+            int v = q.pollLast();
             vis[v] = false;
             for (int i = he[v]; i != 0; i = ne[i]) {
                 t = e[i];

@@ -18,7 +18,7 @@ import static java.lang.System.in;
  * 4
  * 7
  * 3
- * 洛谷3379 tel2个
+ * 洛谷3379 ac了居然1.23秒也算ac
  * 最好的版本!!!
  */
 public class Tarjan求LCA {
@@ -46,6 +46,9 @@ public class Tarjan求LCA {
     }
 
     public static void main(String[] args) throws IOException {
+        for (int i = 0; i < parent.length; i++) {
+            parent[i] = i;
+        }
         n = nextInt();
         m = nextInt();
         root = nextInt();
@@ -97,15 +100,7 @@ public class Tarjan求LCA {
         qheadedge[a] = qidx++;
     }
 
-    static {
-        for (int i = 0; i < parent.length; i++) {
-            parent[i] = i;
-        }
-    }
-
-
     static void tarjan(int u, int fa) {
-        //vis[u] = true;
         for (int i = he[u]; i != 0; i = ne[i]) {
             if (e[i] != fa) {
                 tarjan(e[i], u);
@@ -113,7 +108,6 @@ public class Tarjan求LCA {
                 vis[e[i]] = true;
             }
         }
-        //  vis[u] = true;
         for (int i = qheadedge[u]; i != 0; i = qnext[i]) {
             int j = qto[i];
             if (vis[j]) {
