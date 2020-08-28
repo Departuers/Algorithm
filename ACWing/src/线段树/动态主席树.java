@@ -8,6 +8,7 @@ import static java.lang.System.in;
 /**
  * https://www.acwing.com/blog/content/487/
  * https://www.cnblogs.com/TaylorSwift13/p/11228276.html
+ * https://www.cnblogs.com/CzYoL/p/7246842.html
  */
 public class 动态主席树 {
     public static void main(String[] args) {

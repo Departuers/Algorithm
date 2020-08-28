@@ -16,13 +16,13 @@ public class 被围绕的区域 {
         visited = new boolean[R][C];
         if (C == 0) return;
         res = board;
-        for (int i = 0; i < R; i++) {
+        for (int i = 0; i < R; i++) {//遍历第一列,最后一列
             if (board[i][0] == 'O')
                 dfs(i, 0);
             if (board[i][C - 1] == 'O')
                 dfs(i, C - 1);
         }
-        for (int j = 0; j < C; j++) {
+        for (int j = 0; j < C; j++) {//遍历第一行,最后一行
             if (board[R - 1][j] == 'O')
                 dfs(R - 1, j);
             if (board[0][j] == 'O')

@@ -39,7 +39,7 @@ public class 图像渲染 {
 
     public static void main(String[] args) {
         int[][] arr = {{1, 1, 1}, {1, 1, 0}, {1, 0, 1}};
-        cn.shiyu.bobo.LeetCode.图像渲染 a = new cn.shiyu.bobo.LeetCode.图像渲染();
+        图像渲染 a = new 图像渲染();
         int[][] ints = a.floodFill(arr, 1, 1, 2);
         for (int i = 0; i < ints.length; i++) {
             System.out.println(Arrays.toString(ints[i]));

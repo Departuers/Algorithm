@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * LeetCode 773 滑动谜题
@@ -33,7 +30,7 @@ public class 滑动谜题 {
     public int[][] dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 
     public int slidingPuzzle(int[][] board) {
-        Queue<String> queue = new LinkedList<String>();
+        Queue<String> queue = new ArrayDeque<String>();
         HashMap<String, Integer> visited = new HashMap<String, Integer>();
         String init = boardToString(board);//初始值
         if (init.equals("123450")) return 0;

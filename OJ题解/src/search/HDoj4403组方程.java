@@ -7,6 +7,21 @@ import static java.lang.System.in;
 
 /**
  * 这道题太难 AC代码,抄了很久
+ * 给出一个数字串，插入加号和等号使之成立。求成立的算式数。
+ * you can get 2 equations, they are "12=12" and "1+2=1+2".
+ * Please note that the digits only include 1 to 9,
+ * and every '+' must have a digit on its left side and right side.
+ * For example, "+12=12", and "1++1=2" are illegal.非法!
+ * Please note that "1+11=12" and "11+1=12" are different equations.
+ * Sample Input
+ * 1212
+ * 12345666
+ * 1235
+ * END
+ * Sample Output
+ * 2
+ * 2
+ * 0
  */
 public class HDoj4403组方程 {
 

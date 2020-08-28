@@ -51,7 +51,7 @@ public class 打开转盘锁 {
         if (target.equals("0000")) return 0;
 
         //BFS
-        Queue<String> queue = new LinkedList<String>();
+        Queue<String> queue = new ArrayDeque<String>();
         HashMap<String, Integer> visited = new HashMap<String, Integer>();
         queue.add("0000");
         visited.put("0000", 0);

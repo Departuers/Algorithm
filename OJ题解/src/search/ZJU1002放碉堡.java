@@ -30,7 +30,6 @@ public class ZJU1002放碉堡 {
             dfs(0, 0);
             System.out.println(ibest);
         }
-
     }
 
     static int ibest = 0;
@@ -52,7 +51,6 @@ public class ZJU1002放碉堡 {
             }
             dfs(k + 1, cur);
         }
-
     }
 
     /**

@@ -33,6 +33,10 @@ public class HDoj2266数字之间加减号 {
     static long ans, n;
     static char[] arr;
 
+    /**
+     * @param pos 数组下标
+     * @param sum 当前和
+     */
     static void dfs(int pos, int sum) {
         if (pos == arr.length) {
             if (sum == n) ans++;

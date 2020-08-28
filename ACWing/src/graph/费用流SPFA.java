@@ -8,33 +8,31 @@ import java.util.StringTokenizer;
 import static java.lang.System.in;
 
 /**
+ * https://www.luogu.com.cn/problem/P3381
  * https://www.acwing.com/activity/content/code/content/447948/
  * https://blog.csdn.net/lym940928/article/details/90209172
+ * tle1个很快了
  */
 public class 费用流SPFA {
-    static int N = 5005, M = 100005, mincost, maxflow, n, m, idx = 1, inf = 0x3f3f3f3f, S, T;
+    static int N = 5003, M = 100003, mincost, maxflow, n, m, idx = 1, inf = 0x3fffffff, S, T;
 
     public static void main(String[] args) throws IOException {
         n = nextInt();
         m = nextInt();
         S = nextInt();
         T = nextInt();
-        int a, b, c, d;
         for (int i = 0; i < m; i++) {
-            a = nextInt();
-            b = nextInt();
-            c = nextInt();
-            d = nextInt();
-            add(a, b, c, d);
+            add(nextInt(), nextInt(), nextInt(), nextInt());
         }
         min_cost_flow();
-        System.out.println(mincost + " " + maxflow);
+        bw.write(maxflow + " " + mincost);
+        bw.flush();
     }
 
     private static void min_cost_flow() {
-        mincost = maxflow = 0;
+        mincost = 0;
+        maxflow = 0;
         while (spfa()) {
-
             for (int i = T; i != S; i = e[pre[i] ^ 1]) {
                 w[pre[i]] -= f[T];
                 w[pre[i] ^ 1] += f[T];
@@ -42,7 +40,6 @@ public class 费用流SPFA {
             maxflow += f[T];
             mincost += f[T] * d[T];
         }
-        System.out.println(2);
     }
 
     static int[] h = new int[N];
@@ -57,11 +54,11 @@ public class 费用流SPFA {
     static int[] pre = new int[N];
 
     static void addEdge(int a, int b, int c, int d) {
-        e[idx] = b;
+        e[++idx] = b;
         w[idx] = c;
         cost[idx] = d;
         ne[idx] = h[a];
-        h[a] = idx++;
+        h[a] = idx;
     }
 
     static void add(int a, int b, int c, int d) {

@@ -21,7 +21,7 @@ public class 二进制矩阵中的最短路径 {
         dis[0][0] = 1;
 
         while (!queue.isEmpty()) {
-            int cur = queue.remove();
+            int cur = queue.poll();
             int curx = cur / C, cury = cur % C;
             for (int i = -1; i <= 1; i++) {//八联通
                 for (int j = -1; j <= 1; j++) {
