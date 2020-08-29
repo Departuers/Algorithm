@@ -121,4 +121,3 @@ public class dijkstra {
         return Double.parseDouble(next());
     }
 }
-

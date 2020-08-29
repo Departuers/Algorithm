@@ -6,7 +6,38 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
- *
+ * 给定一个包含 n 个点 m 条边的有向图，并给定每条边的容量，边的容量非负。
+ * 图中可能存在重边和自环。求从点 S 到点 T 的最大流。
+ * 输入格式
+ * 第一行包含四个整数 n,m,S,T。
+ * 接下来 m 行，每行三个整数 u,v,c，表示从点 u 到点 v 存在一条有向边，容量为 c。
+ * 点的编号从 1 到 n。
+ * 输出格式
+ * 输出点 S 到点 T 的最大流。
+ * 如果从点 S 无法到达点 T 则输出 0。
+ * 数据范围
+ * 2≤n≤1000,
+ * 1≤m≤10000,
+ * 0≤c≤10000,
+ * S≠T
+ * 输入样例：
+ * 7 14 1 7
+ * 1 2 5
+ * 1 3 6
+ * 1 4 5
+ * 2 3 2
+ * 2 5 3
+ * 3 2 2
+ * 3 4 3
+ * 3 5 3
+ * 3 6 7
+ * 4 6 5
+ * 5 6 1
+ * 6 5 1
+ * 5 7 8
+ * 6 7 7
+ * 输出样例：
+ * 14
  */
 @SuppressWarnings("all")
 public class AcWingEK {
@@ -49,7 +80,6 @@ public class AcWingEK {
 
     static ArrayDeque<Integer> q = new ArrayDeque<Integer>();
 
-    //使用bfs寻找增广路
     static boolean bfs() {
         Arrays.fill(st, false);
         q.clear();
@@ -83,6 +113,7 @@ public class AcWingEK {
         }
         return r;
     }
+
 
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
