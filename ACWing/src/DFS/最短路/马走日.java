@@ -23,7 +23,7 @@ public class 马走日 {
                 Arrays.fill(vis[i], false);
             }
             vis[x][y] = true;
-            dfs(x, y, 1);
+            dfs(x, y, 1);//起点本身可以到达
             System.out.println(ans);
         }
     }

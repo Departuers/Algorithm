@@ -29,7 +29,7 @@ public class 迷宫问题 {
         }
         ArrayDeque<node> q = new ArrayDeque<node>();
         int[][] dir = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-        q.add(new node(n - 1, n - 1));
+        q.add(new node(n - 1, n - 1));//终点开始搜
         int x = 0, y = 0, a, b;
         while (!q.isEmpty()) {
             node p = q.poll();
@@ -43,11 +43,11 @@ public class 迷宫问题 {
                 if (a == 0 && b == 0) break;
             }
         }
-        node p = pre[0][0];
+        node p = pre[0][0];//搜到起点
         while (true) {
             System.out.println(p.x + " " + p.y);
             if (p.x == n - 1 && p.y == n - 1) break;
-            p = pre[p.x][p.y];
+            p = pre[p.x][p.y];//等于它上一个节点
         }
     }
 

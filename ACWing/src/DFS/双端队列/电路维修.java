@@ -31,6 +31,13 @@ import java.util.Scanner;
  * 则要求终点是偶点
  * 起点和终点奇偶性相同才可以到达
  * 起点(0,0)自然是偶点
+ * <p>
+ * 1
+ * 3 5
+ * \\/\\
+ * \\///
+ * /\\\\
+ * out:1
  */
 public class 电路维修 {
     static class node {
@@ -51,7 +58,8 @@ public class 电路维修 {
             for (int i = 0; i < n; i++) {
                 g[i] = sc.next().toCharArray();
             }
-            if (((n + m) & 1) == 1) System.out.println("NO SOLUTION");
+            if (((n + m) & 1) == 1) System.out.println("NO SOLUTION");//首先，由于只能斜着走，所以横纵坐标要么同时加1，要么同时减1，
+                // 要么一个加1一个减1。不论是那种，从起点（0,0）出发，能够到达的点的横纵坐标之和一定是偶数，所以当R + C是奇数时，就无解
             else {
                 bfs(0, 0);
                 System.out.println(dist[n][m]);
@@ -61,12 +69,12 @@ public class 电路维修 {
 
     private static int bfs(int x, int y) {
         q.clear();
+        for (boolean[] vi : vis) {
+            Arrays.fill(vi, false);
+        }
         int t = Integer.MAX_VALUE / 2;
         for (int[] ints : dist) {
             Arrays.fill(ints, t);
-        }
-        for (boolean[] vi : vis) {
-            Arrays.fill(vi, false);
         }
         q.add(new node(x, y));
         dist[x][y] = 0;
@@ -77,19 +85,20 @@ public class 电路维修 {
             for (int i = 0; i < 4; i++) {
                 int nx = e.x + dir[i][0], ny = e.y + dir[i][1];
                 if (nx < 0 || nx > n || ny < 0 || ny > m) continue;
-                int ex = e.x + idx[i][0], ey = e.y + idx[i][1];
-                int d = dist[e.x][e.y] + (g[ex][ey] != op.charAt(i) ? 1 : 0);
-                if (d < dist[nx][ny]) {
+                int ex = e.x + idx[i][0], ey = e.y + idx[i][1];//在格子里的下标
+                int w = (g[nx][ny] != op.charAt(i) ? 1 : 0);
+                int d = dist[e.x][e.y] + w;//4个方向,判断这条边有没有,没有就是边权为1的边
+                if (d < dist[nx][ny]) {//类似于Dijkstra的松弛,能够松弛才入队
                     dist[nx][ny] = d;
-                    if (g[ex][ey] == op.charAt(i)) q.addFirst(new node(nx, ny));
+                    if (w == 0) q.addFirst(new node(nx, ny));
                     else q.addLast(new node(nx, ny));
                 }
             }
         }
-        return 0;
+        return -1;//一定不会被执行到,无解情况已经被奇偶性判掉
     }
 
-    static String op = "\\/\\/";
+    static String op = "\\/\\/";//4个方向
     static int[][] dir = {{-1, -1}, {-1, 1}, {1, 1}, {1, -1}};
     static int[][] idx = {{-1, -1}, {-1, 0}, {0, 0}, {0, -1}};
 

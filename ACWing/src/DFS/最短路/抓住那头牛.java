@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * https://blog.csdn.net/qq_30277239/article/details/104680308
  * bfs
- * 显然边界问题
+ * 考虑边界问题
  * n*2不会超过20w+10
  * n-1不会低于0
  * 如果越界则无需记录
@@ -21,6 +21,7 @@ public class 抓住那头牛 {
         Arrays.fill(d, -1);
         d[n] = 0;
         q.add(n);
+        //bfs
         while (!q.isEmpty()) {
             int t = q.poll();
             if (t == k) {

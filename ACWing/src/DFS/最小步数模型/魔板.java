@@ -42,9 +42,10 @@ public class 魔板 {
         }
         String st = start.toString();
         String ed = end.toString();
-        bfs(st, ed);
         if (st.equals(ed)) System.out.println(0);
         else {
+            bfs(st, ed);
+
             System.out.println(dist.get(ed));
             StringBuilder res = new StringBuilder();
             while (!ed.equals(st)) {
@@ -57,6 +58,10 @@ public class 魔板 {
             }
         }
     }
+
+    static Map<String, Integer> dist = new HashMap<String, Integer>();//记录步数
+    static Map<String, node> pre = new HashMap<String, node>();//记录路径
+    static ArrayDeque<String> q = new ArrayDeque<String>();
 
     private static void bfs(String start, String end) {
         if (start.equals(end)) return;
@@ -136,7 +141,4 @@ public class 魔板 {
         return get();
     }
 
-    static Map<String, Integer> dist = new HashMap<String, Integer>();
-    static Map<String, node> pre = new HashMap<String, node>();
-    static ArrayDeque<String> q = new ArrayDeque<String>();
 }
