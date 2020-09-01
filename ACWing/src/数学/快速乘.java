@@ -34,7 +34,8 @@ public class 快速乘 {
         System.out.println(ks(a, b, p));
         System.out.println(ca(2, 20));
     }
-    //递归快速乘
+
+    //递归快速乘转化为加法
     static int ca(int a, int b) {
         int res = 0;
         if (b == 0) return res;

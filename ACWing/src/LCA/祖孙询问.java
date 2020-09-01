@@ -73,7 +73,7 @@ public class 祖孙询问 {
             if (depth[up[a][k]] >= depth[b]) {
                 a = up[a][k];
             }
-        }
+        }//从高往低跳
         if (a == b) return a;
         for (int k = 17; k >= 0; k--) {
             if (up[a][k] != up[b][k]) {
@@ -112,10 +112,10 @@ public class 祖孙询问 {
             for (int i = h[t]; i != 0; i = ne[i]) {
                 int j = e[i];
                 if (depth[j] > depth[t] + 1) {
-                    depth[j] = depth[t] + 1;
+                    depth[j] = depth[t] + 1;//bfs拓展
                     q.add(j);
-                    up[j][0] = t;
-                    for (int k = 1; k <= 17; k++) {
+                    up[j][0] = t;//记录第一个
+                    for (int k = 1; k <= 17; k++) {//记录后面的up
                         up[j][k] = up[up[j][k - 1]][k - 1];
                     }
                 }

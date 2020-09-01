@@ -73,7 +73,7 @@ public class 倍增LCA {
     /**
      * 求取每个节点深度
      * 和dist[a]存的是a往上直到根节点的权值和
-     *
+     * 也可以用bfs
      * @param u  当前节点
      * @param fa 父节点
      * @param d  该节点的深度

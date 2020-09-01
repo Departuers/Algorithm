@@ -119,7 +119,7 @@ public class 第k短路 {
         he[a] = idx++;
     }
 
-    //处理估价函数
+    //处理估价函数,从终点往前搜
     static void dijkstra() {
         PriorityQueue<node> q = new PriorityQueue<node>();
         q.add(new node(0, T));
@@ -147,7 +147,7 @@ public class 第k短路 {
         while (!q.isEmpty()) {
             tem p = q.poll();
             int v = p.t.to, dis = p.t.dis;
-            if (v == T) {
+            if (v == T) {//记录出队次数
                 cnt++;
             }
             if (cnt == K) return dis;//第k短路

@@ -44,6 +44,12 @@ import java.util.Scanner;
  */
 public class 距离Tarjan {
     public static void main(String[] args) {
+        for (int i = 1; i < p.length; i++) {
+            p[i] = i;
+        }
+        for (int i = 0; i < query.length; i++) {
+            query[i] = new ArrayList<node>();
+        }
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         m = sc.nextInt();
@@ -67,7 +73,7 @@ public class 距离Tarjan {
         dfs(1, -1);
         tarjan(1);
         for (int i = 0; i < m; i++) {
-            System.out.println(res[i]);
+            System.out.println(result[i]);
         }
 
     }
@@ -78,11 +84,11 @@ public class 距离Tarjan {
     static int[] w = new int[M];
     static int[] ne = new int[N];
     static int[] st = new int[N];
-    static int[] res = new int[N];
+    static int[] result = new int[N];//预处理查询
     static int[] p = new int[N];
     static int[] dist = new int[N];//记录每个点到根节点的距离
 
-    //求每个点到根节点的距离
+    //求每个点到根节点的距离,前序遍历
     static void dfs(int u, int fa) {
         for (int i = h[u]; i != 0; i = ne[i]) {
             int j = e[i];
@@ -101,11 +107,12 @@ public class 距离Tarjan {
                 p[j] = u;
             }
         }
-        for (node it : query[u]) {
+        for (node it : query[u]) {//u->y这条查询,查询编号为2
             int y = it.a, id = it.b;
             if (st[y] == 2) {
-                int anc = find(y);
-                res[id] = dist[u] + dist[y] - dist[anc] * 2;
+                int anc = find(y);//最近公共祖先
+                result[id] = dist[u] + dist[y] - dist[anc] * 2;
+                //u到根节点的距离加上y到根节点的距离减去两个最近共祖先到根节点的距离,就是两点之间的距离
             }
         }
         st[u] = 2;
@@ -133,13 +140,4 @@ public class 距离Tarjan {
     }
 
     static ArrayList<node>[] query = new ArrayList[N];
-
-    static {
-        for (int i = 1; i < p.length; i++) {
-            p[i] = i;
-        }
-        for (int i = 0; i < query.length; i++) {
-            query[i] = new ArrayList<node>();
-        }
-    }
 }

@@ -10,14 +10,22 @@ import static java.lang.System.in;
  * 离线
  * 预处理O(n)
  * 单次查询O(1)
- * 1
- * 1
- * 2
- * 2
+ * 5 5 4
+ * 3 1
+ * 2 4
+ * 5 1
+ * 1 4
+ * 2 4
+ * 3 2
+ * 3 5
+ * 1 2
+ * 4 5
+ * out
+ * 4
+ * 4
  * 1
  * 4
- * 7
- * 3
+ * 4
  * 洛谷3379 ac了居然1.23秒也算ac
  * 最好的版本!!!
  */
@@ -46,7 +54,7 @@ public class Tarjan求LCA {
     }
 
     public static void main(String[] args) throws IOException {
-        for (int i = 0; i < parent.length; i++) {
+        for (int i = 1; i < parent.length; i++) {
             parent[i] = i;
         }
         n = nextInt();
@@ -102,10 +110,11 @@ public class Tarjan求LCA {
 
     static void tarjan(int u, int fa) {
         for (int i = he[u]; i != 0; i = ne[i]) {
-            if (e[i] != fa) {
-                tarjan(e[i], u);
-                union(e[i], u);
-                vis[e[i]] = true;
+            int j = e[i];
+            if (j != fa) {
+                tarjan(j, u);
+                union(j, u);
+                vis[j] = true;
             }
         }
         for (int i = qheadedge[u]; i != 0; i = qnext[i]) {

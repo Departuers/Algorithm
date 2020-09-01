@@ -17,7 +17,6 @@ public class 楼兰图腾 {
         n = sc.nextInt();
         for (int i = 1; i <= n; i++) {
             a[i] = sc.nextInt();
-//            max_value = Math.max(a[i], max_value);//记录数组最大值
         }
         /**
          * 正序循环,巧妙想法,也可以求逆序数

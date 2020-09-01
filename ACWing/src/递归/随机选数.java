@@ -25,14 +25,30 @@ package 递归;
  */
 public class 随机选数 {
     public static void main(String[] args) {
+
 //        Scanner sc = new Scanner(in);
 //        n = sc.nextInt();
-        dfs(0, 0);
+//        long l = System.nanoTime();
+//        f(0);
+//        long r = System.nanoTime();
+//        System.out.println((r - l) / 1e8);
+//        l = System.nanoTime();
+
         //dfs(0, 0);
+        for (int i = 0; i < 1 << n; i++) {
+            for (int j = 0; j < n; j++) {
+                if ((i >> j & 1) == 1)
+                    System.out.print(j + 1 + " ");
+            }
+            System.out.println();
+        }
+        //位运算求子集
+//        r = System.nanoTime();
+//        System.out.println((r - l) / 1e8);
     }
 
-    static int n = 3;
-    static int[] arr = {1, 2, 3};
+    static int n = 4;
+    static int[] arr = {1, 2, 3, 4, 5, 6};
     static int[] vis = new int[10];
 
     //dfs求子集,选和不选
@@ -54,9 +70,25 @@ public class 随机选数 {
         vis[u] = 0;
     }
 
+    static boolean[] st = new boolean[23];
+
+    static void f(int u) {
+        if (u == n) {
+            for (int i = 0; i < n; i++) {
+                if (st[i]) System.out.print(arr[i] + " ");
+            }
+            System.out.println();
+            return;
+        }
+        f(u + 1);
+        st[u] = true;
+        f(u + 1);
+        st[u] = false;
+    }
+
     static void dfs(int u, int state) {
         if (u == n) {
-            if (state==0)return;
+            if (state == 0) return;
             for (int i = 0; i < n; i++) {
                 if (((state >> i) & 1) == 1)
                     System.out.print(arr[i] + " ");

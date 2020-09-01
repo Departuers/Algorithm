@@ -23,17 +23,17 @@ public class 重复性剪枝 {
     static boolean[] vis = new boolean[30];
 
     //当前位置,当前和 w选了多少个
-    static void dfs(int cnt, int s, int w) {
-        if (k - w > n - cnt + 1) return;
+    static void dfs(int u, int s, int w) {
+        if (k - w > n - u + 1) return;
         if (s > sum || w > k) return;
-        if (cnt == n) {
+        if (u == n) {
             if (s == sum && w == k) {
                 ans++;
             }
             return;
         }
-        dfs(cnt + 1, s + a[cnt], w + 1);
-        dfs(cnt + 1, s, w);
+        dfs(u + 1, s + a[u], w + 1);
+        dfs(u + 1, s, w);
     }
 
     static void ddf(int s, int cnt, int pos) {

@@ -17,14 +17,14 @@ public class LIS题解 {
 
     static int n;
     static int[] arr = new int[100005];
-    static int[] dp = new int[100005];
 
     static int lis() {
+        int[] f = new int[100005];
         int i = 0, len = 0;
         for (int j = 0; j < n; j++) {
-            i = Arrays.binarySearch(dp, 0, len, arr[j]);
+            i = Arrays.binarySearch(f, 0, len, arr[j]);
             if (i < 0) i = -(i + 1);
-            dp[i] = arr[j];
+            f[i] = arr[j];
             if (i == len) len++;
         }
         return len;

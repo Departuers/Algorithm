@@ -19,7 +19,7 @@ import static java.lang.System.in;
  * 注意欧拉序要开2倍!
  * 预处理O(n log n) 在线
  * 查询O(1)
- * 洛谷3379 re4个..tle3个..
+ * 洛谷3379   tle3个..超时
  */
 public class 欧拉序ST求LCA {
     public static void main(String[] args) throws IOException {
@@ -59,9 +59,9 @@ public class 欧拉序ST求LCA {
         return Double.parseDouble(next());
     }
 
-    static int[] log = new int[25];
     static int n, m, len = 0, cnt = 1, root;
     static final int maxn = 500005;
+    static int[] log = new int[maxn];
     static int[][] st = new int[maxn << 1][20];
     static int[] depth = new int[maxn << 1];//深度
     static int[] euler = new int[maxn << 1];//欧拉序
@@ -82,7 +82,7 @@ public class 欧拉序ST求LCA {
     static void init(int root) {
         dfs(root, root, 1);
         log[1] = 0;
-        for (int i = 2; i < 25; i++) {
+        for (int i = 2; i < maxn; i++) {
             log[i] = log[i / 2] + 1;
         }
         for (int i = 1; i <= len; i++) {

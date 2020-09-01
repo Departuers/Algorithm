@@ -38,7 +38,7 @@ public class 走廊泼水节 {
                     res += (size[a] * size[b] - 1) * (c.w + 1);//新边都取w+1
                     System.out.println(Arrays.toString(size));
                     size[b] += size[a];//合并两个集合
-                    par[a] = b;
+                    par[a] = b;//a指向b
                 }
             }
             System.out.println(res);

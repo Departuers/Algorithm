@@ -40,7 +40,7 @@ public class m任取n满足 {
     static void f(int u, int sum, int s) {
         if (sum + n - u < k) return;//n-u是剩余可选的数,
         if (sum > k) return;
-        if (u == n) {
+        if (u == n) {//枚举到最后一个元素
             if (sum == k && s == suma)
                 ans++;
             return;
@@ -49,6 +49,7 @@ public class m任取n满足 {
         f(u + 1, sum, s);
         f(u + 1, sum + 1, s + arr[u]);
     }
+
 
     static boolean[] x = new boolean[30];
 

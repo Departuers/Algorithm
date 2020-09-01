@@ -59,7 +59,7 @@ public class 八数码 {
 //            System.out.println(bfs());
         }
     }
-
+//
 //    static int bfs(String start) {
 //        HashMap<String, Integer> dist = new HashMap<String, Integer>();
 //        HashMap<String, p> prev = new HashMap<String, p>();
