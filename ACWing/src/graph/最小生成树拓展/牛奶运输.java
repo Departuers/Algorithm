@@ -67,6 +67,8 @@ public class 牛奶运输 {
         for (int i = 1; i <= n; i++) {
             dfs(i, -1, 0, dis[i]);
         }
+
+
         long res = (long) 1e18;
         for (int i = 0; i < m; i++) {
             if (!edge.get(i).isShu) {//遍历非树边
@@ -79,6 +81,32 @@ public class 牛奶运输 {
             }
         }
         System.out.println(res);
+        //
+
+
+        {
+            for (int i = 1; i <= n; i++) {
+                dubbo(i, -1, -1, -1, m1[i], m2[i]);
+            }//求任意两点路径中的单条边权最大值,和次大值
+            for (int i = 0; i < m; i++) {
+                if (!edge.get(i).isShu) {//遍历非树边
+                    a = edge.get(i).a;
+                    b = edge.get(i).b;
+                    w = edge.get(i).w;
+                    if (w > m1[a][b]) {
+                        res = Math.min(res, sum + w - m1[a][b]);
+                    } else if (w > m2[a][b]) {
+                        res = Math.min(res, sum + w - m2[a][b]);
+                    }
+                }
+            }
+            System.out.println(res);
+        }
+    }
+
+    //求任意两点路径中的单条边权最大值,和次大值
+    static void work() {
+
     }
 
     /**
