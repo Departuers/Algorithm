@@ -3,7 +3,9 @@ package graph.有向图的强联通分量;
 import java.util.Scanner;
 
 /**
+ * tarjan求强联通分量
  * https://www.luogu.com.cn/blog/zyb2624936151/tarjan
+ *
  */
 @SuppressWarnings("all")
 public class 受欢迎的牛 {

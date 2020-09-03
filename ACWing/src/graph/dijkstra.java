@@ -55,11 +55,11 @@ public class dijkstra {
             c = nextInt();
             add(a, b, c);
         }
-        Arrays.fill(dis, Integer.MAX_VALUE);
         dij(s);
     }
 
     private static void dij(int s) throws IOException {
+        Arrays.fill(dis, Integer.MAX_VALUE);
         q.add(new node(s, 0));
         dis[s] = 0;
         while (!q.isEmpty()) {

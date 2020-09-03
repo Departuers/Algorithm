@@ -102,11 +102,16 @@ public class 祖孙询问 {
         h[b] = cnt++;
     }
 
+    /**
+     * bfs求深度和lca
+     *
+     * @param root
+     */
     static void bfs(int root) {
         Arrays.fill(depth, inf);
         depth[0] = 0;
-        depth[root] = 1;
-        q.add(root);
+        depth[root] = 1;//规定根节点深度为1
+        q.add(root);//加入根节点
         while (!q.isEmpty()) {
             int t = q.poll();
             for (int i = h[t]; i != 0; i = ne[i]) {
@@ -115,7 +120,7 @@ public class 祖孙询问 {
                     depth[j] = depth[t] + 1;//bfs拓展
                     q.add(j);
                     up[j][0] = t;//记录第一个
-                    for (int k = 1; k <= 17; k++) {//记录后面的up
+                    for (int k = 1; k <= 17; k++) {//记录后面的up,虽然有无效计算,但胜在好写
                         up[j][k] = up[up[j][k - 1]][k - 1];
                     }
                 }

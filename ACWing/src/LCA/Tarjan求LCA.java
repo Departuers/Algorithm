@@ -66,7 +66,7 @@ public class Tarjan求LCA {
         for (int i = 0; i < m; i++) {
             addq(nextInt(), nextInt(), i);
         }//存储询问
-        tarjan(root, 0);
+        tarjan(root, -1);
         for (int i = 0; i < m; i++) {
             bw.write(result[i] + "\n");
         }
