@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 import static java.lang.System.in;
 
 /**
- *  * https://blog.csdn.net/qq_41661919/article/details/86565228
+ * https://blog.csdn.net/qq_41661919/article/details/86565228
  * https://blog.csdn.net/qq_44828887/article/details/107305636
  * 给定一张 N 个点 M 条边的无向图，求无向图的严格次小生成树。
  * 设最小生成树的边权之和为sum，

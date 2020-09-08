@@ -33,7 +33,7 @@ import java.util.StringTokenizer;
  * 1
  * 设A1 A2...An
  * 倒着往前推,
- * 那么低An位置,就是第An+1小的数
+ * 那么第An位置,就是第An+1小的数
  * 第A(i)位置,有A(i)头比它少,就是剩下的第A(i)小的数
  * (1)从剩余的数中找到第k小的数
  * (2)删除某个数
@@ -63,7 +63,7 @@ public class 谜一样的牛 {
             add(r, -1);
         }
         for (int i = 1; i <= n; i++) {
-            bw.write(ans[i]+"\n");
+            bw.write(ans[i] + "\n");
         }
         bw.flush();
 

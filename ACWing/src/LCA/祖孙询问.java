@@ -63,18 +63,20 @@ public class 祖孙询问 {
             else if (p == b) System.out.println(2);
             else System.out.println(0);
         }
-
     }
 
     private static int lca(int a, int b) {
         if (depth[a] < depth[b]) return lca(b, a);
-        //a要在b的上面
+        //depth[a]>depth[b]也就是a的深度更深,a在下面
+        //a往上跳,先跳到根b相同高度
         for (int k = 17; k >= 0; k--) {
             if (depth[up[a][k]] >= depth[b]) {
                 a = up[a][k];
             }
-        }//从高往低跳
+        }//跳到一个特别高的位置,会使得up[a][k]=0,而0是不存在的节点,depth[0]=0,不会出错
+        //从高往下跳,最终a与b处于同一高度
         if (a == b) return a;
+        //a与b处于同一高度,从高往低枚举,同时跳
         for (int k = 17; k >= 0; k--) {
             if (up[a][k] != up[b][k]) {
                 a = up[a][k];
@@ -127,4 +129,6 @@ public class 祖孙询问 {
             }
         }
     }
+
+
 }

@@ -70,7 +70,7 @@ public class 运输小猫 {
                 sum[i] -= w[u];
             }
         }
-        //k的取值是0~k-1,所以k就是下一辆车
+        //k的取值是0~k-1,所以下一次递归k就是下一辆车
         sum[k] = w[u];
         dfs(u + 1, k + 1);
         sum[k] = 0;
@@ -82,7 +82,7 @@ public class 运输小猫 {
      * @param u
      */
     static void f(int u) {
-        if (len >= ans) return;
+        if (len >= ans) return;//最优性剪枝
         if (u == n) {
             ans = len;
             System.out.println(Arrays.toString(car));//每辆车放多少个

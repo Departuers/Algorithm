@@ -27,15 +27,13 @@ public class seg {
     }
 
     static class node {
-        int l, r;
-        long sum;//区间和
-        int lazy;//懒标记,给当前节点为根的子树中的每一个节点加上lazy(设计不包含根节点)
-        //只要递归到子区间就pushdown
+        int l, r, lazy;
+        long v;
 
-        public node(int l, int r, int sum) {
+        public node(int l, int r, long v) {
             this.l = l;
             this.r = r;
-            this.sum = sum;
+            this.v = v;
         }
     }
 
@@ -52,12 +50,34 @@ public class seg {
     }
 
     private static void pushup(int k) {
-        tr[k].sum = tr[k << 1].sum + tr[k << 1 | 1].sum;
+        tr[k].v = tr[k << 1].v + tr[k << 1 | 1].v;
+    }
+
+    static long query(int k, int l, int r) {
+        if (tr[k].l >= l && tr[k].r <= r) {
+            return tr[k].v;
+        }
+        down(k);
+        int mid = tr[k].l + tr[k].r >> 1;
+        long res = 0;
+        if (l <= mid) res += query(k << 1, l, r);
+        if (r > mid) res += query(k << 1 | 1, l, r);
+        return res;
+    }
+
+    private static void down(int k) {
+        if (tr[k].lazy != 0) {
+            tr[k << 1].v += (tr[k << 1].r - tr[k << 1].l + 1) * tr[k].lazy;
+            tr[k << 1 | 1].v += (tr[k << 1 | 1].r - tr[k << 1 | 1].l + 1) * tr[k].lazy;
+            tr[k << 1].lazy = tr[k].lazy;
+            tr[k << 1 | 1].lazy = tr[k].lazy;
+            tr[k].lazy = 0;
+        }
     }
 
     static void update(int k, int l, int r, int d) {
         if (tr[k].l >= l && tr[k].r <= r) {
-            tr[k].sum += (tr[k].r - tr[k].l + 1) * d;
+            tr[k].v += (tr[k].r - tr[k].l + 1) * d;
             tr[k].lazy += d;
             return;
         }
@@ -66,28 +86,6 @@ public class seg {
         if (l <= mid) update(k << 1, l, r, d);
         if (r > mid) update(k << 1 | 1, l, r, d);
         pushup(k);
-    }
-
-    static long query(int k, int l, int r) {
-        if (tr[k].l >= l && tr[k].r <= r) {
-            return tr[k].sum;
-        }
-        down(k);
-        int mid = tr[k].l + tr[k].r >> 1;
-        long ans = 0;
-        if (l <= mid) ans += query(k << 1, l, r);
-        if (r > mid) ans += query(k << 1 | 1, l, r);
-        return ans;
-    }
-
-    private static void down(int k) {
-        if (tr[k].lazy != 0) {
-            tr[k << 1].sum += (tr[k << 1].r - tr[k << 1].l + 1) * tr[k].lazy;
-            tr[k << 1 | 1].sum += (tr[k << 1 | 1].r - tr[k << 1 | 1].l + 1) * tr[k].lazy;
-            tr[k << 1].lazy += tr[k].lazy;
-            tr[k << 1 | 1].lazy += tr[k].lazy;
-            tr[k].lazy = 0;
-        }
     }
 
     static int N = (int) (1e5 + 2), n, m;

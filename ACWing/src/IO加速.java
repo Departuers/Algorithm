@@ -31,8 +31,8 @@ public class IO加速 {
     public static void main(String[] args) throws IOException {
         //       fff();
         //   sw();
-        dfs(4, 1, new ArrayList<Integer>());
-//        f();
+        ///dfs(4, 1, new ArrayList<Integer>());
+        f();
 //        tokenizer = new StringTokenizer("123123   15412  4312412");
 //        System.out.println(tokenizer.nextToken());
 //        System.out.println(tokenizer.nextToken());
@@ -82,53 +82,6 @@ public class IO加速 {
         }
     }
 
-    static void sw() {
-
-        long s = System.nanoTime();
-        for (int i = 0; i < par.length; i++) {
-            par[i] = i;
-        }
-        for (int i = 0; i < par.length; i++) {
-            union(1, i);
-        }
-        long t = System.nanoTime();
-        System.out.println((t - s) / 1e8);
-
-        s = System.nanoTime();
-        for (int i = 0; i < par.length; i++) {
-            par[i] = i;
-        }
-        for (int i = 0; i < par.length; i++) {
-            unio(i, 0);
-        }
-        t = System.nanoTime();
-        System.out.println((t - s) / 1e8);
-    }
-
-    static void union(int x, int y) {
-        x = find(x);
-        y = find(y);
-        if (x != y) par[x] = y;
-    }
-
-    static void unio(int x, int y) {
-        x = fin(x);
-        y = fin(y);
-        if (x != y) par[x] = y;
-    }
-
-    static int find(int x) {
-        while (x != par[x]) {
-            par[x] = par[par[x]];
-            x = par[x];
-        }
-        return x;
-    }
-
-    static int fin(int x) {
-        if (x == par[x]) return x;
-        return par[x] = fin(par[x]);
-    }
 
     static int[] par = new int[11000000];
 
