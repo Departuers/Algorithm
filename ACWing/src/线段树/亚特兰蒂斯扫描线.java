@@ -3,7 +3,8 @@ package 线段树;
 import java.util.ArrayList;
 
 /**
- *
+ * 积分思想
+ * 分成几个小块扫描
  */
 public class 亚特兰蒂斯扫描线 {
     public static void main(String[] args) {
@@ -22,7 +23,7 @@ public class 亚特兰蒂斯扫描线 {
 
         @Override
         public int compareTo(seg seg) {
-            return (int) (x*1000000-seg.x*1000000);
+            return (int) (x * 1000000 - seg.x * 1000000);
         }
     }
 
@@ -33,6 +34,7 @@ public class 亚特兰蒂斯扫描线 {
         int l, r;
         int cnt = 0;
         double len;
+
     }
 
     static node[] nodes = new node[N * 8];

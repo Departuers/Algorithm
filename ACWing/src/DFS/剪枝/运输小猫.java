@@ -68,7 +68,7 @@ public class 运输小猫 {
                 sum[i] += w[u];
                 dfs(u + 1, k);
                 sum[i] -= w[u];
-            }
+             }
         }
         //k的取值是0~k-1,所以下一次递归k就是下一辆车
         sum[k] = w[u];

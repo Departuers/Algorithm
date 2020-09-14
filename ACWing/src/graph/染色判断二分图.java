@@ -41,7 +41,6 @@ public class 染色判断二分图 {
                 if (dfs(1, 0)) System.out.println("YES");
                 else System.out.println("NO");
         }
-        System.out.println(Arrays.toString(vis));
     }
 
     static boolean dfs(int u, int id) {
@@ -49,7 +48,7 @@ public class 染色判断二分图 {
         for (int i = he[u]; i != 0; i = ne[i]) {
             int ed = e[i];
             if (vis[ed] == -1) {
-                if (!dfs(ed, 1 - id)) return true;
+                if (!dfs(ed, 1 - id)) return false;
             } else if (vis[ed] == vis[u]) return false;
         }
         return true;
