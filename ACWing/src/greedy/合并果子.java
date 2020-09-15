@@ -39,22 +39,22 @@ import java.util.Scanner;
  * 可以推导出贪心选择性质:先合并小的,花费最小
  */
 public class 合并果子 {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
+        int n = sc.nextInt();
         for (int i = 0; i < n; i++) {
             q.add(sc.nextInt());
         }
-        int x, y, res = 0;
-        while (q.size() > 1) {
-            x = q.poll();
-            y = q.poll();
-            q.add(x + y);
-            res += x + y;
+        int a, b, res = 0;
+        while (q.size() != 1) {
+            a = q.poll();
+            b = q.poll();
+            res += a + b;
+            q.add(a + b);
         }
         System.out.println(res);
     }
 
     static PriorityQueue<Integer> q = new PriorityQueue<Integer>();
-    static int n;
 }

@@ -80,7 +80,7 @@ public class 城堡问题 {
         for (int i = 0; i < 4; i++) {
             int a = x + dir[i][0], b = y + dir[i][1];
             if (a < 0 || a >= n || b < 0 || b >= m || vis[a][b]) continue;
-            if ((g[x][y] >> i & 1) == 1) continue;
+            if ((g[x][y] >> i & 1) == 1) continue;//有墙
             dfs(a, b);
         }
     }

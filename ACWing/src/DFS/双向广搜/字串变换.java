@@ -104,7 +104,7 @@ public class 字串变换 {
                 if (db.containsKey(u)) return da.get(t) + 1 + db.get(u);
                 if (da.containsKey(u)) continue;
                 da.put(u, da.get(t) + 1);
-//                if ()
+
             }
         }
         return -1;

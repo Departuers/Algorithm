@@ -80,7 +80,7 @@ public class dijkstra {
         }
         bw.flush();
     }
-
+    static int inf = 0x3f3f3f3f;
     static void add(int a, int b, int c) {
         e[cnt] = b;
         w[cnt] = c;

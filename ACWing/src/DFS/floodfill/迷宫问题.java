@@ -34,13 +34,14 @@ public class 迷宫问题 {
         while (!q.isEmpty()) {
             node p = q.poll();
             vis[p.x][p.y] = true;
+            if (p.x == 0 && p.y == 0) break;//出队的时候判断,搜到终点
             for (int i = 0; i < 4; i++) {
                 a = dir[i][0] + p.x;
                 b = dir[i][1] + p.y;
                 if (a < 0 || a >= n || b < 0 || b >= n || vis[a][b] || g[a][b] == 1) continue;
+                //可以使用pre充当vis,但是没必要
                 q.add(new node(a, b));
                 pre[a][b] = p;
-                if (a == 0 && b == 0) break;
             }
         }
         node p = pre[0][0];//搜到起点

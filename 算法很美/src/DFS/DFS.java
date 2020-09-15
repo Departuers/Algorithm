@@ -12,13 +12,13 @@ public class DFS {
 //        buFenHe(arr, k, 0, new ArrayList<Integer>());
 
 
-//        int[] data = new int[6];
-//        data[0] = 1;
-//        suShuHuan(6,data,1);
+        int[] data = new int[6];
+        data[0] = 1;
+        suShuHuan(6, data, 1);
 
 //        ShuiWa(N, M);
-        NhuangHou(0);
-        System.out.println(cnt);
+//        NhuangHou(0);
+//        System.out.println(cnt);
     }
 
     /**
@@ -37,24 +37,25 @@ public class DFS {
      * 10,cur=2
      * 6,cur=3  10,cur=3
      * 一条路走到完，发现没有找到解，回退，一步继续找
+     * 枚举每个位置要不要
      *
      * @param arr 源数组
-     * @param k   剩余多少交给下次递归,
-     * @param cur 数组索引走到哪了
+     * @param sum 剩余多少交给下次递归,
+     * @param u   数组索引走到哪了
      */
-    public static void buFenHe(int[] arr, int k, int cur, ArrayList<Integer> intS) {
-        if (k == 0) {//出口
+    public static void buFenHe(int[] arr, int u, int sum, ArrayList<Integer> intS) {
+        if (sum == 0) {//出口
             for (Integer anInt : intS) {
                 System.out.print(anInt + " ");
             }
             System.exit(0);//结束程序,不然会出现其他答案,这里只需要一个答案
         }
-        if (k < 0 || cur == arr.length)//没有候选数,或者到达最后一个位置
+        if (sum < 0 || u == arr.length)//选上这个数字超过了,没有候选数,u是下标,下标越界了,就return
             return;
-        buFenHe(arr, k, cur + 1, intS);//不要第cur个
+        buFenHe(arr, u, sum, intS);//不要第cur个
 
-        intS.add(arr[cur]);//拿上第cur个交给第cur+1次递归
-        buFenHe(arr, k - arr[cur], cur + 1, intS);
+        intS.add(arr[u]);//拿上第cur个交给第cur+1次递归
+        buFenHe(arr, u + 1, sum - arr[u], intS);
         intS.remove(intS.size() - 1);//回溯,到上一个状态
     }
 
@@ -231,22 +232,25 @@ public class DFS {
     }
 
     /**
+     * 指的是将从1到n这n个整数围成一个圆环，若其中任意2个相邻的数字相加，
+     * 结果均为素数，那么这个环就成为素数环。
+     *
      * @param n   素数环有几个元素
      * @param arr 存储素数环元素的辅助数组
-     * @param cur DFS搜索过程中变化的cur,也就是数组下标,初始化为1,因为第一个固定为1,只能从第二个开始
+     * @param u   DFS搜索过程中变化的cur,也就是数组下标,初始化为1,因为第一个固定为1,只能从第二个开始
      */
-    public static void suShuHuan(int n, int[] arr, int cur) {
+    public static void suShuHuan(int n, int[] arr, int u) {
         //n就是环的长度,当足够长,判断最后一个和最后一个元素之和是不是素数
-        if (cur == n && isP(arr[0] + arr[n - 1])) {
+        if (u == n && isP(arr[0] + arr[n - 1])) {
             print(arr);
             return;
         }
         //核心DFS逻辑
         for (int i = 2; i <= n; i++) {//判断是否出现过,以及是否与之前元素之和为素数
-            if (check(arr, i, cur)) {
-                arr[cur] = i;
-                suShuHuan(n, arr, cur + 1);
-                arr[cur] = 0;//回溯
+            if (check(arr, i, u)) {
+                arr[u] = i;
+                suShuHuan(n, arr, u + 1);
+                arr[u] = 0;//回溯
             }
         }
     }
@@ -261,15 +265,16 @@ public class DFS {
     /**
      * 1.判断i没有在arr数组中出现过
      * 2.判断arr[cur-1]+k是不是一个素数
+     * 3.判断第u个数字是否能填k
      *
      * @param arr 源数组
      * @param k
-     * @param cur
+     * @param u
      * @return
      */
-    private static boolean check(int[] arr, int k, int cur) {
+    private static boolean check(int[] arr, int k, int u) {
         for (int i : arr) {
-            if (i == k || !isP(arr[cur - 1] + k)) return false;
+            if (i == k || !isP(arr[u - 1] + k)) return false;
         }
         return true;
     }

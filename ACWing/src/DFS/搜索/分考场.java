@@ -1,4 +1,4 @@
-package DFS.搜索顺序;
+package DFS.搜索;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -43,7 +43,7 @@ public class 分考场 {
 
     static void dfs(int u) {
         if (list.size() >= ans) return;//最优性剪枝
-        if (u > n) {
+        if (u == n) {
             ans = Math.min(ans, list.size());
             return;
         }

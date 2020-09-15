@@ -1,5 +1,7 @@
 package DFS.启发式搜索;
 
+import java.util.HashMap;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 /**
@@ -35,18 +37,26 @@ import java.util.Scanner;
  * 2  3  4  1  5  x  7  6  8
  * 输出样例
  * ullddrurdllurdruldr
+ * 有解的充要条件是,逆序对的数量是偶数,
+ * 因为行内移动没有改变序列本身,没有改变逆序对数量
+ * 如果上下移动,相当于往后,或者往前移动了两个格子,
+ * 不太好证明
+ * 估价函数:当前状态中的每个数与它的目标位置的曼哈顿距离之和
  */
 public class 八数码 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String start, seq = "";
+        String start;
+        StringBuilder seq = new StringBuilder();
         StringBuilder s = new StringBuilder();
         s.append(sc.nextLine());
         start = s.toString().replace(" ", "");
+
         for (int i = 0; i < start.length(); i++) {
-            if (start.charAt(i) != 'x') seq += start.charAt(i);
+            if (start.charAt(i) != 'x') seq.append(start.charAt(i));
         }
         int cnt = 0;
+        //求逆序对数量
         for (int i = 0; i < 8; i++) {
             for (int j = i; j < 8; j++) {
                 if (seq.charAt(i) > seq.charAt(j)) {
@@ -54,38 +64,57 @@ public class 八数码 {
                 }
             }
         }
-        if ((cnt & 1) == 1) System.out.println("无解");
+        if ((cnt & 1) == 1) System.out.println("无解");//奇数则无解
         else {
-//            System.out.println(bfs());
+            System.out.println(bfs(""));
         }
     }
-//
-//    static int bfs(String start) {
-//        HashMap<String, Integer> dist = new HashMap<String, Integer>();
-//        HashMap<String, p> prev = new HashMap<String, p>();
-//        PriorityQueue<node> heap = new PriorityQueue<node>();
-//        dist.put(start, 0);
-//        heap.add(new node(f(state), state));
-//        int[][] dir = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-//        while (!heap.isEmpty()) {
-//            node t = heap.poll();
-//            String state = t.y;
-//            if (state == end) break;
-//            int x, y;
-//            for (int i = 0; i < 9; i++) {
-//                if (state.charAt(i) == 'x') {
-//                    x = i / 3;
-//                    y = i % 3;
-//                    break;
-//                }
-//            }
-//            String source = state;
-//        }
-//    }
-//
-//    static int f(String state) {
-//
-//    }
+
+    //
+    static int bfs(String start) {
+        HashMap<String, Integer> dist = new HashMap<String, Integer>();
+        HashMap<String, p> prev = new HashMap<String, p>();
+        PriorityQueue<node> heap = new PriorityQueue<node>();
+        dist.put(start, 0);
+        String end = "12345678x";
+        char[] op = {'u', 'r', 'd', 'l'};
+        heap.add(new node(f(start), start));
+        int[][] dir = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+        while (!heap.isEmpty()) {
+            node t = heap.poll();
+            String state = t.y;
+            if (state.equals(end)) break;
+            int x = 0, y = 0;
+            //找到数码中x的坐标
+            for (int i = 0; i < 9; i++) {
+                if (state.charAt(i) == 'x') {
+                    x = i / 3;
+                    y = i % 3;
+                    break;
+                }
+            }
+            //源状态
+            String source = state;
+            StringBuilder sb = new StringBuilder(state);
+            for (int i = 0; i < 4; i++) {
+                int a = dir[i][0] + x, b = y + dir[i][1];
+                if (a < 0 || a >= 3 || b < 0 || b >= 3) continue;
+                sb = new StringBuilder(state);
+                char temp = sb.charAt(x * 3 + y);
+                sb.setCharAt(x * 3 + y, sb.charAt(a * 3 + b));
+                sb.setCharAt(a * 3 + b, temp);
+                if (dist.containsKey(sb.toString()) || dist.get(sb.toString()) > dist.get(source) + 1) {
+                    dist.put(sb.toString(), dist.get(source) + 1);
+                    //     prev.put(op[i], source);
+                }
+            }
+        }
+        return 0;
+    }
+
+    static int f(String state) {
+        return 1;
+    }
 
     static class p {
         int x, y;

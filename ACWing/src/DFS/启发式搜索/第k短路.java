@@ -1,5 +1,6 @@
 package DFS.启发式搜索;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Scanner;
@@ -29,9 +30,10 @@ import java.util.Scanner;
  * 1 2 2
  * 输出样例：
  * 14
- * 当终点从pq中第一次取出,那就是最小的,第二次就是,第二小距离,...第n次就是第n小距离
+ * 当终点从pq中第一次取出,那就是最小的,第二次就是,第二小距离,...第n次就是第n小距离,第n短路
  * 证明难证...
- * 在上一题八数码问题中，我们详细分析了A*算法的原理和实现。本题同样是A*算法的应用，题目中求的第K短路，要求每条路径至少要包含一条边，所以当起点与终点重合时，要去掉本身这条长度为0的自环边，
+ * 在上一题八数码问题中，我们详细分析了A*算法的原理和实现。本题同样是A*算法的应用，题目中求的第K短路，
+ * 要求每条路径至少要包含一条边，所以当起点与终点重合时，要去掉本身这条长度为0的自环边，
  * 执行k++操作即可。另外第k短路这里的k可以是重复的排名，
  * 比如k = 3时，那么第二短的路径有4条时，求的就是第2短的路径长度了。
  * <p>
@@ -51,6 +53,10 @@ import java.util.Scanner;
  * 后面A*算法不论求的是第几短距离到终点的实际距离都不会小于最短距离。题目中的图是有向图，
  * 所以不仅需要建立邻接表，还要建立逆邻接表方便倒着来一遍dijkstra。实现细节并不复杂，
  * https://www.cnblogs.com/buhuiflydepig/p/11383538.html
+ * 3 2
+ * 1 2 1
+ * 2 1 1
+ * 1 3 1000
  */
 public class 第k短路 {
 
@@ -64,13 +70,15 @@ public class 第k短路 {
             b = sc.nextInt();
             c = sc.nextInt();
             add(h, a, b, c);
-            add(rh, b, a, c);//添加反向边
+            add(rh, b, a, c);//添加反向边,用来做估价函数
+            //由于是有向图,估价值的计算=起点到当前点的真实距离+当前点到终点的估价距离
+            //当前点到终点的估价距离需要用Dijkstra来算,所以要添加反向边
         }
         S = sc.nextInt();
         T = sc.nextInt();
         K = sc.nextInt();
-        if (S == T) K++;
-        dijkstra();
+        if (S == T) K++;//起点跟终点相同
+        spfa();
         System.out.println(Astar());
     }
 
@@ -119,7 +127,7 @@ public class 第k短路 {
         he[a] = idx++;
     }
 
-    //处理估价函数,从终点往前搜
+    //Dijkstra处理估价函数,从终点往前搜
     static void dijkstra() {
         PriorityQueue<node> q = new PriorityQueue<node>();
         q.add(new node(0, T));
@@ -130,7 +138,7 @@ public class 第k短路 {
             int v = p.to;
             if (st[v]) continue;//dij
             st[v] = true;
-            for (int i = rh[v]; i != 0; i = ne[i]) {//反边
+            for (int i = rh[v]; i != 0; i = ne[i]) {//遍历反边
                 int j = e[i];
                 if (dist[j] > dist[v] + w[i]) {
                     dist[j] = dist[v] + w[i];
@@ -140,17 +148,42 @@ public class 第k短路 {
         }
     }
 
+    //spfa处理估价函数,从终点往前搜
+    static void spfa() {
+        boolean[] st = new boolean[N];
+        ArrayDeque<Integer> q = new ArrayDeque<Integer>();
+        q.add(T);
+        Arrays.fill(dist, 1 << 30);
+        dist[T] = 0;
+        while (!q.isEmpty()) {
+            int p = q.poll();
+            st[p] = false;
+            for (int i = rh[p]; i != 0; i = ne[i]) {
+                int j = e[i];
+                if (dist[j] > dist[p] + w[i]) {
+                    dist[j] = dist[p] + w[i];
+                    if (!st[j]) {
+                        q.add(j);
+                        st[j] = true;
+                    }
+                }
+            }
+        }
+    }
+
+    static int[] cnt = new int[N];
+
     static int Astar() {
         PriorityQueue<tem> q = new PriorityQueue<tem>();
+        //第一个参数是估价值=起点到当前点真实距离+起点到终点的估计距离  第二个node是当前点到起点的真实距离,当前点
+        //起点到终点的真实距离是
         q.add(new tem(dist[S], new node(0, S)));
-        int cnt = 0;
         while (!q.isEmpty()) {
             tem p = q.poll();
             int v = p.t.to, dis = p.t.dis;
-            if (v == T) {//记录出队次数
-                cnt++;
-            }
-            if (cnt == K) return dis;//第k短路
+            cnt[v]++;//出队次数+1
+            if (cnt[v] > 100010) break;
+            if (cnt[T] == K) return dis;//第k短路,出队k次
             for (int i = h[v]; i != 0; i = ne[i]) {
                 int j = e[i];
                 q.add(new tem(dis + w[i] + dist[j], new node(dis + w[i], j)));
@@ -158,5 +191,4 @@ public class 第k短路 {
         }
         return -1;
     }
-
 }

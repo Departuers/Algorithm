@@ -40,6 +40,7 @@ public class 山峰和山谷 {
     static void bfs(int x, int y) {
         q.add(x * n + y);
         int t = g[x][y];
+        System.out.print(g[x][y] + " ");
         while (!q.isEmpty()) {
             int p = q.poll();
             x = p / n;
@@ -51,16 +52,18 @@ public class 山峰和山谷 {
                     int a = x + i, b = y + j;
                     if (a < 0 || a >= n || b < 0 || b >= n) continue;
                     if (g[x][y] != g[a][b]) {
-                        if (g[a][b] > g[x][y]) High = true;
-                        else if (g[a][b] < g[x][y]) low = true;
+                        if (g[a][b] > g[x][y]) High = true;//有比它高的
+                        else if (g[a][b] < g[x][y]) low = true;//有比它矮的
                     } else if (!vis[a][b]) {
                         //这一步最重要,进入队列的都是满足未访问过该节点且与拓展之前的节点值相同
                         //一遍bfs会把一个连通块权值相同的连通块都遍历到
+                        System.out.print(g[a][b] + " ");
                         q.add(a * n + b);
                     }
                 }
             }
         }
+        System.out.println();
     }
 
     static ArrayDeque<Integer> q = new ArrayDeque<Integer>();
