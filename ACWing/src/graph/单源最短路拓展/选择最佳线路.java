@@ -103,7 +103,7 @@ public class 选择最佳线路 {
         else return dis[T];
     }
 
-    static int inf = Integer.MAX_VALUE / 2;
+    static int inf = Integer.MAX_VALUE / 2-19999;
 
     static void add(int a, int b, int c) {
         e[cnt] = b;

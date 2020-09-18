@@ -1,7 +1,6 @@
 package 递归;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import static java.lang.System.in;
@@ -36,7 +35,7 @@ public class 排列枚举 {
         Scanner sc = new Scanner(in);
         n = sc.nextInt();
         long s = System.nanoTime();
-        d( 0);
+        d(0,0);
         long t = System.nanoTime();
         System.out.println((t - s) / 1e8);
         s = System.nanoTime();
@@ -70,14 +69,13 @@ public class 排列枚举 {
     static int[] arr = {1, 2, 3, 4, 5, 4, 1, 4, 5, 1, 2};
 
     //最快
-    static void d( int k) {
-        if (k== n) {
-           System.out.println(Arrays.toString(arr));
+    static void d(int u, int k) {
+        if (u == n) {
             return;
         }
         for (int i = k; i < n; i++) {
             swap(i, k);
-            d( k + 1);
+            d(u + 1, k + 1);
             swap(i, k);
         }
     }

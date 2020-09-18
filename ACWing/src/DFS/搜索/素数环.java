@@ -29,6 +29,7 @@ public class 素数环 {
             return;
         }
         for (int i = 2; i <= n; i++) {
+            //查看判断第u为能否放i,并且未被使用过
             if (check(u, i) && !vis[i]) {
                 a[u] = i;
                 vis[i] = true;

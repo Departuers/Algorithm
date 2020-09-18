@@ -73,7 +73,7 @@ public class 八数码 {
     //
     static int bfs(String start) {
         HashMap<String, Integer> dist = new HashMap<String, Integer>();
-        HashMap<String, p> prev = new HashMap<String, p>();
+        HashMap<String, em> prev = new HashMap<String, em>();
         PriorityQueue<node> heap = new PriorityQueue<node>();
         dist.put(start, 0);
         String end = "12345678x";
@@ -95,7 +95,7 @@ public class 八数码 {
             }
             //源状态
             String source = state;
-            StringBuilder sb = new StringBuilder(state);
+            StringBuilder sb;
             for (int i = 0; i < 4; i++) {
                 int a = dir[i][0] + x, b = y + dir[i][1];
                 if (a < 0 || a >= 3 || b < 0 || b >= 3) continue;
@@ -105,7 +105,8 @@ public class 八数码 {
                 sb.setCharAt(a * 3 + b, temp);
                 if (dist.containsKey(sb.toString()) || dist.get(sb.toString()) > dist.get(source) + 1) {
                     dist.put(sb.toString(), dist.get(source) + 1);
-                    //     prev.put(op[i], source);
+                    prev.put(state, new em(op[i], source));
+//                    heap.add(new node(state))
                 }
             }
         }
@@ -113,7 +114,14 @@ public class 八数码 {
     }
 
     static int f(String state) {
-        return 1;
+        int res = 0;
+        for (int i = 0; i < state.length(); i++) {
+            if (state.charAt(i) != 'x') {
+                int t = state.charAt(i) - '1';
+                res += Math.abs(i / 3 - t / 3) + Math.abs(i / 3 - t % 3);
+            }
+        }
+        return res;
     }
 
     static class p {
@@ -122,6 +130,16 @@ public class 八数码 {
         public p(int x, int y) {
             this.x = x;
             this.y = y;
+        }
+    }
+
+    static class em {
+        char s;
+        String p;
+
+        public em(char s, String p) {
+            this.s = s;
+            this.p = p;
         }
     }
 

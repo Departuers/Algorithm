@@ -3,6 +3,9 @@ package DFS.搜索顺序;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * 分组搜索
+ */
 public class 分成互质组另一种写法 {
     public static void main(String[] args) {
         for (int i = 0; i <= 10; i++) {

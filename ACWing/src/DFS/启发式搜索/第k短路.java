@@ -169,6 +169,7 @@ public class 第k短路 {
                 }
             }
         }
+        System.out.println(dist[S]);//最短路
     }
 
     static int[] cnt = new int[N];

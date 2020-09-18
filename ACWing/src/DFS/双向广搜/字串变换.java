@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 /**
+ * * https://blog.csdn.net/qq_30277239/article/details/104723891
  * 已知有两个字串 A, B 及一组字串变换的规则（至多6个规则）:
  * A1 -> B1
  * A2 -> B2
@@ -32,7 +33,6 @@ import java.util.Scanner;
  * y yz
  * 输出样例：
  * 3
- * https://blog.csdn.net/qq_30277239/article/details/104723891
  * 双向广搜,显然直接bfs会超时
  * 每个字符串及其拓展的字符串都可以应用6个规则
  * 最坏 20*6=120种扩展
@@ -48,7 +48,7 @@ import java.util.Scanner;
  * 则在两种情况下涉及的状态分别是2 * 20^5=640w以及2 * 6^5 约等于1.54w个状态，
  * 显然，这两个状态数都要远小于之前的状态数，或者说只有之前状态数开根号后这么多状态。
  * 因此，本题分别从起点和终点同时进行BFS的这种双向BFS的方法能够很好的解决问题。
- *
+ * <p>
  * 需要解决的就是如何同时进行BFS搜索，可以先将开始状态和终点状态分别加入两个不同的队列，
  * 如何当两个队列都非空的时候，先对较小的那个队列出队做BFS，以减小状态的增加数量，
  * 并且如果两个队头元素的步数之和超过了10，就可以剪枝直接返回了。
@@ -56,8 +56,9 @@ import java.util.Scanner;
  */
 //@SuppressWarnings("all")
 public class 字串变换 {
+    static String A, B;
+
     public static void main(String[] args) {
-        String A, B;
         Scanner sc = new Scanner(System.in);
         A = sc.next();
         B = sc.next();
@@ -68,7 +69,7 @@ public class 字串变换 {
             n++;
         }
         int step = bfs(A, B);
-        if (step > 10) System.out.println("No");
+        if (step > 10) System.out.println("NO ANSWER!");
         else {
             System.out.println(step);
         }
@@ -84,33 +85,41 @@ public class 字串变换 {
         qb.add(b);
         da.put(a, 0);
         db.put(b, 0);
-        //两个数组不能为空
+        //两个数组不能为空,从A点拓展出来的所有的都拓展完了,但B点还可以拓展,说明A和B不连通
         while (!qa.isEmpty() && !qb.isEmpty()) {
             int t = 0;
             if (qa.size() <= qb.size()) {
-                t = extend(qa, da, db, a, b);
-            } else t = extend(qb, da, db, b, a);
+                t = extend(qa, da, db);//把a变成b
+            } else t = extend(qb, db, da);//把b变成a
             if (t <= 10) return t;
         }
         return 11;
     }
 
-    private static int extend(ArrayDeque<String> q, HashMap<String, Integer> da, HashMap<String, Integer> db, String a, String b) {
-        String t = q.poll();
-        for (int i = 0; i < (t != null ? t.length() : 0); i++) {
-            for (int j = 0; j < n; j++) {
-                if (!t.substring(i, aaa[j].length()).equals(aaa[j])) continue;
-                String u = t.substring(0, i) + bbb[j] + t.substring(i + bbb[j].length());
-                if (db.containsKey(u)) return da.get(t) + 1 + db.get(u);
-                if (da.containsKey(u)) continue;
-                da.put(u, da.get(t) + 1);
-
+    private static int extend(ArrayDeque<String> q, HashMap<String, Integer> da, HashMap<String, Integer> db) {
+        for (int k = 0, sk = q.size(); k < sk; k++) {
+            String t = q.poll();
+            if (t != null) {
+                int star = 0;
+                int j = 0;
+                for (int i = 0; i < n; i++) {
+                    star = 0;
+                    j = 0;
+                    while ((j = t.indexOf(aaa[i], star)) != -1) {
+                        star = j + 1;
+                        String state = t.substring(0, j) + bbb[i] + t.substring(j + aaa[i].length());
+                        if (db.containsKey(state)) return da.get(t) + 1 + db.get(state);
+                        if (da.containsKey(state)) continue;
+                        da.put(state, da.get(t) + 1);
+                        q.push(state);
+                    }
+                }
             }
         }
-        return -1;
+        return 11;
     }
 
     static int e;
-    static int N = 6;
+    static int N = 7;
     static String[] aaa = new String[N], bbb = new String[N];
 }
