@@ -1,7 +1,6 @@
 package graph.最小生成树拓展;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -36,7 +35,6 @@ public class 走廊泼水节 {
                 int a = find(c.x), b = find(c.y);
                 if (a != b) {
                     res += (size[a] * size[b] - 1) * (c.w + 1);//新边都取w+1
-                    System.out.println(Arrays.toString(size));
                     size[b] += size[a];//合并两个集合
                     par[a] = b;//a指向b
                 }
