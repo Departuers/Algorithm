@@ -38,6 +38,7 @@ import java.util.Scanner;
  * 输出样例：
  * 11
  * 思路：
+ * 最小值->最长路
  * 因为我们要求的是最小值且约束条件可转换为若干不等式，所以我们可以用差分约束来做，求最长路，不等式为大于号。
  * 将题目转换成一堆不等式
  * x=1=》A>=B&&B>=A
@@ -63,17 +64,23 @@ public class 糖果 {
             if (x == 1) {
                 add(b, a, 0);
                 add(a, b, 0);
+                //A>=B,B>=A
             } else if (x == 2) {
                 add(a, b, 1);
+                //B>=A+1
             } else if (x == 3) {
                 add(b, a, 0);
+                //A>=B
             } else if (x == 4) {
                 add(b, a, 1);
+                //A>=B+1
             } else add(a, b, 0);
+            //B>=A
         }
         for (int i = 1; i <= n; i++) {
             add(0, i, 1);
-        }
+        }//所有的小朋友至少分到1个糖
+
         if (!spfa()) System.out.println("-1");
         else {
             long res = 0;
@@ -111,12 +118,12 @@ public class 糖果 {
 
     static int finf = Integer.MIN_VALUE / 2;
 
-    static int n, m, N = 100010, M = 300010, count = 1;
+    static int n, m, N = 100010, M = 300010, count = 1;//最坏建3倍边,因为第一种双向边,每个点和超级源点的边
     static int[] h = new int[N];
     static int[] e = new int[M];
     static int[] ne = new int[M];
     static int[] w = new int[M];
-    static int[] dis = new int[N];
+    static long[] dis = new long[N];
     static int[] cnt = new int[N];
     static boolean[] st = new boolean[N];
     static ArrayDeque<Integer> q = new ArrayDeque<Integer>();

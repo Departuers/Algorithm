@@ -23,6 +23,17 @@ import java.util.Scanner;
  * 输出样例：
  * 6
  * 该题必定有解,显然全放进去,一定满足要求
+ * 显然0~50000 下标不好用,同时+1, 得到1~50001
+ * 往右平移一格,不影响答案,空出0,
+ * 利用前缀和,
+ * S0=0
+ * Si表示从1~i中被选出的数的个数
+ * 则S50001的最小值,表示1~50001被选出数的个数,则是答案
+ * 找不等关系,显然:
+ * 1. Si>=S(i-1) 1<=i<=50001   i-1向i连一条长度为0的边,这个条件存在意味着,存在源点能遍历到所有点,所有边
+ * 2. Si-Si-1<=1 => S(i-1)>=Si-1 表示第i个数选没选,显然每个数只能选一次
+ * 3. [a,b]中必须选c个, =>Sb-S(a-1)>=c => Sb>=S(a-1)+C
+ * 令S50001最小,最长路
  * 思路:
  * 先将不等式写出来
  * 将所有区间向右移一位，这样如果1-2有一条边 3-4有一条边，
@@ -45,7 +56,9 @@ public class 区间 {
         n = sc.nextInt();
         for (int i = 1; i <= 50001; i++) {
             add(i - 1, i, 0);
+            //Si>=S(i-1)
             add(i, i - 1, -1);
+            //S(i-1)>=Si-1
         }
         int a, b, c;
         while (n-- != 0) {
@@ -55,14 +68,17 @@ public class 区间 {
             a++;
             b++;
             add(a - 1, b, c);
+            //Sb>=S(a-1)+C
         }
         spfa();
         System.out.println(dis[50001]);
     }
 
     private static void spfa() {
+        int inf = Integer.MIN_VALUE / 2 - 10000;
         q.add(0);
-        Arrays.fill(dis, -Integer.MAX_VALUE / 2);
+        Arrays.fill(dis, inf);
+        //求最小值,所以初始化为负无穷,看三角不等式,更新规则,得出
         st[0] = true;
         dis[0] = 0;
         while (!q.isEmpty()) {
@@ -82,7 +98,7 @@ public class 区间 {
     }
 
 
-    static int n, m, N = 50010, M = 150010, count = 1;
+    static int n, m, N = 50010, M = 150010, idx = 1;
     static int[] h = new int[N];
     static int[] e = new int[M];
     static int[] ne = new int[M];
@@ -92,9 +108,9 @@ public class 区间 {
     static ArrayDeque<Integer> q = new ArrayDeque<Integer>();
 
     static void add(int a, int b, int c) {
-        e[count] = b;
-        w[count] = c;
-        ne[count] = h[a];
-        h[a] = count++;
+        e[idx] = b;
+        w[idx] = c;
+        ne[idx] = h[a];
+        h[a] = idx++;
     }
 }

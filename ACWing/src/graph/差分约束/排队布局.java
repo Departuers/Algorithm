@@ -25,9 +25,31 @@ import java.util.Scanner;
  * 2≤N≤1000,
  * 1≤ML,MD≤104,
  * 1≤L,D≤106
+ * 输入样例：
+ * 4 2 1
+ * 1 3 10
+ * 2 4 20
+ * 2 3 3
+ * 输出样例：
+ * 27
  * 思路
- * 不等式，并且使所有点联通，i<=i+1+0
- * 加入i+1向i的边
+ * 题中求最大值，则用最短路，求出所有上界的最小值
+ * 首先关系先找全列出来：
+ * <p>
+ * 找出所有不等式
+ * 第一种关系：Xb-Xa<=L  转换后：Xb<=Xa+L ; 也就是 Xa—>Xb  (权值为L)
+ * 第二种关系：Xb-Xa>=D  转换后：Xa<=Xb-D ; 也就是 Xb—>Xa  (权值为D)
+ * 第三种关系：Xi<=X(i+1) 1<=i<n  Xi<=X(i+1)+0
+ * 不存在超级源点,所以建立超级源点X0,假定所有的Xi都处于数轴右边
+ * 假定Xi<=X0   X0->Xi  (权值为0)  X0向所有边连长度为0的边
+ * 实现不用建立超级源点到所有点的边,因为第一步把超级源点放进队列,
+ * spfa就会把所有邻边都加进队列,所以直接加入队列并标记访问
+ * 把X1固定成0,然后看Xn是不是无限大,等价
+ * 有一个链式关系,但X1和Xn没有关系,所以没有任何限制,就是正无穷
+ * <p>
+ * 1.第一个问题,首先做一遍spfa判断一下有没有负环，此时可以假设虚拟源点为0；
+ * 2.然后再做一次spfa判断1到n的距离是否为正无穷；注意此时源点为1；
+ * 3.第三个问题,如果不满足以上两个条件则输出dis[n]即可；
  */
 public class 排队布局 {
     public static void main(String[] args) {
@@ -37,6 +59,7 @@ public class 排队布局 {
         int m2 = sc.nextInt();
         for (int i = 1; i < n; i++) {
             add(i + 1, i, 0);
+            //Xi<=X(i+1)
         }
         int a, b, c, t;
         while (m1-- != 0) {
@@ -49,6 +72,7 @@ public class 排队布局 {
                 a = t;
             }
             add(a, b, c);
+            //Xb<=Xa+L
         }
         while (m2-- != 0) {
             a = sc.nextInt();
@@ -60,10 +84,11 @@ public class 排队布局 {
                 a = t;
             }
             add(b, a, -c);
+            //Xb<=Xa-D
         }
         if (!spfa(n)) System.out.println(-1);
         else {
-            spfa(1);
+            spfa(1);//从1开始往下找,看能不能找到n,看X1能否限制Xn,无法限制,则Xn最大正无穷
             if (dis[n] == Integer.MAX_VALUE / 2) System.out.println(-2);
             else System.out.println(dis[n]);
         }
@@ -74,6 +99,7 @@ public class 排队布局 {
         Arrays.fill(st, false);
         Arrays.fill(cnt, 0);
         q.clear();
+
         for (int i = 1; i <= size; i++) {
             dis[i] = 0;
             q.add(i);
@@ -87,7 +113,7 @@ public class 排队布局 {
                 if (dis[j] > dis[t] + w[i]) {
                     dis[j] = dis[t] + w[i];
                     cnt[j] = cnt[t] + 1;
-                    if (cnt[j] >= n) return false;
+                    if (cnt[j] >= n) return false;//判断是否存在负环!!!
                     if (!st[j]) {
                         q.add(j);
                         st[j] = true;
