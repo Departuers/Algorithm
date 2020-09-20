@@ -42,8 +42,10 @@ import static java.lang.System.in;
  */
 public class kruskal {
     public static void main(String[] args) throws IOException {
+        for (int i = 0; i < par.length; i++) {
+            par[i] = i;
+        }
         PriorityQueue<node> q = new PriorityQueue<node>();
-        //Scanner sc = new Scanner(System.in);
         n = nextInt();
         m = nextInt();
         int a, b, c;
@@ -90,12 +92,6 @@ public class kruskal {
     static int n, m;
 
     static int[] par = new int[200005];
-
-    static {
-        for (int i = 0; i < par.length; i++) {
-            par[i] = i;
-        }
-    }
 
     static void union(int a, int b) {
         int aroot = find(a);

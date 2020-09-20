@@ -83,7 +83,7 @@ public class 可达性统计 {
             d[b]++;
         }
         toposort();
-        for (int i = n - 1; i >= 0; i--) {
+        for (int i = n - 1; i >= 0; i--) {//从后往前,
             int j = q[i];
             f[j].set(j);
             for (int k = h[j]; k != 0; k = ne[k]) {
@@ -125,13 +125,14 @@ public class 可达性统计 {
             if (d[i] == 0) {
                 q[++tt] = i;
             }
-        }
+        }//入度为0的点加入队列
+
         while (hh <= tt) {
             int t = q[hh++];//出队
             for (int i = h[t]; i != 0; i = ne[i]) {
                 int j = e[i];
                 --d[j];
-                if (d[j] == 0) {
+                if (d[j] == 0) {//入度为0加入队列
                     q[++tt] = j;
                 }
             }

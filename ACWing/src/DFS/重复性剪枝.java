@@ -36,9 +36,9 @@ public class 重复性剪枝 {
         dfs(u + 1, s, w);
     }
 
-    static void ddf(int s, int cnt, int pos) {
-        if (s > sum || cnt > k) return;
-        if (s == sum && cnt == k) {
+    static void ddf(int u, int cnt, int pos) {
+        if (u > sum || cnt > k) return;
+        if (u == sum && cnt == k) {
             te++;
             return;
         }
@@ -46,7 +46,7 @@ public class 重复性剪枝 {
         for (int i = pos; i < n; i++) {
             if (!vis[i]) {
                 vis[i] = true;
-                ddf(s + a[i], cnt + 1, i + 1);
+                ddf(u + a[i], cnt + 1, i + 1);
                 vis[i] = false;
             }
         }

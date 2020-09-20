@@ -53,6 +53,7 @@ import java.util.Scanner;
  * 如何当两个队列都非空的时候，先对较小的那个队列出队做BFS，以减小状态的增加数量，
  * 并且如果两个队头元素的步数之和超过了10，就可以剪枝直接返回了。
  * 状态的转换需要考虑从状态x能够转换到哪些状态，因为字符串较短这里直接暴力搜索就可以解决了，
+ * 过5个数据
  */
 //@SuppressWarnings("all")
 public class 字串变换 {
@@ -97,11 +98,12 @@ public class 字串变换 {
     }
 
     private static int extend(ArrayDeque<String> q, HashMap<String, Integer> da, HashMap<String, Integer> db) {
+        int star = 0;
+        int j = 0;
         for (int k = 0, sk = q.size(); k < sk; k++) {
-            String t = q.poll();
+            String t = q.pollFirst();
             if (t != null) {
-                int star = 0;
-                int j = 0;
+
                 for (int i = 0; i < n; i++) {
                     star = 0;
                     j = 0;

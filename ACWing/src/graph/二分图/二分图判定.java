@@ -14,7 +14,6 @@ import java.util.StringTokenizer;
  * 2 4
  * 输出样例：
  * Yes
- *
  */
 public class 二分图判定 {
     public static void main(String[] args) throws IOException {
@@ -72,7 +71,7 @@ public class 二分图判定 {
         color[u] = c;
         for (int i = h[u]; i != 0; i = ne[i]) {
             int j = e[i];
-            if (color[j] == 0) {//该点未被访问过
+            if (color[j] == 0) {//该点未被访问过,3-1=2 3-2=1 2和1为不同颜色
                 if (!dfs(j, 3 - c)) return true;
             } else if (color[j] == c) return false;
             //u点和j点,也就是一条边的两边的颜色相同,我们就说他不是二分图

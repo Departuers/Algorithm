@@ -107,7 +107,9 @@ public class 木棒 {
             });
             len = 1;
             while (true) {
+                //只枚举约数
                 if (sum % len == 0 && dfs(0, 0, 0)) {
+                    //
                     System.out.println(len);
                     break;
                 }
@@ -128,7 +130,7 @@ public class 木棒 {
         }
         if (s == len) return dfs(u + 1, 0, 0);
 
-        //按照组合数枚举
+        //按照组合数枚举,不考虑顺序
         for (int i = start; i < n; i++) {
             if (st[i]) continue;
             if (s + w[i] > len) continue;//可行性剪枝,超长了

@@ -7,8 +7,8 @@ import static java.lang.System.in;
 
 /**
  * 单点修改,区间查询
- * https://www.luogu.com.cn/problemnew/solution/P3368
- * tle2个
+ * https://www.luogu.com.cn/problemnew/solution/P3374
+ * 已经ac
  */
 
 public class 树状数组 {
@@ -37,6 +37,7 @@ public class 树状数组 {
 
     public static void main(String[] args) throws IOException {
         n = nextInt();
+        par = new int[n + 1];
         m = nextInt();
         for (int i = 1; i <= n; i++) {
             add(i, nextInt());
@@ -51,24 +52,20 @@ public class 树状数组 {
             } else {
                 y = nextInt();
                 z = nextInt();
-                bw.write(query(y, z ) + "\n");
+                bw.write(query(y, z) + "\n");
             }
         }
         bw.flush();
     }
 
-    static int[] par = new int[500005];
+    static int[] par;
     static int n, m;
 
     static void add(int i, int x) {
         while (i <= n) {
             par[i] += x;
-            i += lowbit(i);
+            i += (i & -i);
         }
-    }
-
-    private static int lowbit(int i) {
-        return i & -i;
     }
 
     static int query(int l, int r) {
@@ -79,7 +76,7 @@ public class 树状数组 {
         int res = 0;
         while (x != 0) {
             res += par[x];
-            x -= lowbit(x);
+            x -= (x & -x);
         }
         return res;
     }

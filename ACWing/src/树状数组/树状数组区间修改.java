@@ -8,7 +8,7 @@ import static java.lang.System.in;
 /**
  * https://www.luogu.com.cn/problemnew/solution/P3368
  * 区间修改,单点查询
- * tle1个
+ * 已经AC
  */
 public class 树状数组区间修改 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -59,23 +59,19 @@ public class 树状数组区间修改 {
     }
 
     static int maxn = 500001, n, m;
-    static long[] tree = new long[maxn];
-    static long[] a = new long[maxn];
+    static int[] tree = new int[maxn];
+    static int[] a = new int[maxn];
     //差分数组
 
     static void add(int s, int value) {
-        for (int i = s; i <= n; i += lowbit(i)) {
+        for (int i = s; i <= n; i += (i & -i)) {
             tree[i] += value;
         }
     }
 
-    static int lowbit(int x) {
-        return x & -x;
-    }
-
     static long ask(int s) {
         long ans = 0;
-        for (int i = s; i >= 1; i -= lowbit(i)) {
+        for (int i = s; i >= 1; i -= (i & -i)) {
             ans += tree[i];
         }
         return ans;

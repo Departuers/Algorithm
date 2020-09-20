@@ -1,5 +1,8 @@
 package graph.单源最短路拓展;
 
+import java.util.Arrays;
+import java.util.PriorityQueue;
+
 /**
  * https://blog.csdn.net/qq_30277239/article/details/107073569
  * “您的个人假期”旅行社组织了一次比荷卢经济联盟的巴士之旅。
@@ -65,5 +68,46 @@ public class 观光 {
 
     }
 
-    static int N = 1010, n, m, M;
+    static int N = 1010, n, m, M = 10005, idx = 1, S, T;
+    static int[] h = new int[N];
+    static int[] e = new int[M];
+    static int[] ne = new int[M];
+    static int[] w = new int[M];
+    static int[][] dis = new int[N][2];
+    static int[][] cnt = new int[N][2];
+    static boolean[][] st = new boolean[N][2];
+    static int inf = 0x3f3f3f3f;
+    static PriorityQueue<node> q = new PriorityQueue<node>();
+
+    static int dijkstra() {
+        Arrays.fill(dis[0], inf);
+        Arrays.fill(dis[1], inf);
+        Arrays.fill(cnt[0], 0);
+        Arrays.fill(cnt[1], 0);
+        Arrays.fill(st[0], false);
+        Arrays.fill(st[1], false);
+
+        dis[S][0] = 0;
+        cnt[S][0] = 1;
+        q.add(new node());
+        return 1;
+    }
+
+    static void add(int a, int b, int c) {
+        e[idx] = b;
+        w[idx] = c;
+        ne[idx] = h[a];
+        h[a] = idx++;
+    }
+
+
+    static class node implements Comparable<node> {
+        int dis, type, idx;
+
+        @Override
+        public int compareTo(node node) {
+            return dis - node.dis;
+        }
+    }
+
 }

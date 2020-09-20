@@ -9,7 +9,7 @@ import java.util.Scanner;
  * https://www.acwing.com/solution/acwing/content/1008/
  * 巧妙想法,也可以求逆序数!!!
  * 建树状数组O(nlogn)
- * 天才想法太巧妙啊
+ * 想法太巧妙啊
  */
 public class 楼兰图腾 {
     public static void main(String[] args) {

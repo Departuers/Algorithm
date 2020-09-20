@@ -35,6 +35,8 @@ public class 新年好 {
     }
 
     /**
+     * 枚举每个坑里填什么
+     *
      * @param u     当前枚举到第几个
      * @param start 当前起点
      * @param dist  当前距离
