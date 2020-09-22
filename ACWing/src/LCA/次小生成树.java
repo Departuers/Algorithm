@@ -24,6 +24,7 @@ import static java.lang.System.in;
  * 4 5 6
  * 输出样例：
  * 11
+ * 已经ac,泪目
  */
 public class 次小生成树 {
     public static void main(String[] args) throws IOException {
@@ -36,8 +37,21 @@ public class 次小生成树 {
             c = nextInt();
             edge[i] = new node(a, b, c);
         }
+
         long sum = kruskal();
         build();
+        bfs();
+
+        long res = (long) 1e19;
+        for (int i = 0; i < m; i++) {
+            if (!edge[i].used) {
+                a = edge[i].a;
+                b = edge[i].b;
+                c = edge[i].w;
+                res = Math.min(res, sum + lca(a, b, c));
+            }
+        }
+        System.out.println(res);
     }
 
     static void bfs() {
@@ -46,22 +60,27 @@ public class 次小生成树 {
         depth[1] = 1;
         q.add(1);
         while (!q.isEmpty()) {
-            int t = q.poll();
-            for (int i = h[t]; i != 0; i = ne[i]) {
+            int p = q.poll();
+            for (int i = h[p]; i != 0; i = ne[i]) {
                 int j = e[i];
-                if (depth[j] > depth[t] + 1) {
-                    depth[j] = depth[t] + 1;
+                if (depth[j] > depth[p] + 1) {
+                    depth[j] = depth[p] + 1;
                     q.add(j);
-                    fa[j][0] = t;
+
+                    fa[j][0] = p;
                     d1[j][0] = w[i];
                     d2[j][0] = -inf;
                     for (int k = 1; k <= 16; k++) {
                         int anc = fa[j][k - 1];
                         fa[j][k] = fa[anc][k - 1];
-                        int[] dis = {d1[j][k - 1], d2[j][k - 1], d1[anc][k - 1], d2[anc][k - 1]};
+
+                        dis[0] = d1[j][k - 1];
+                        dis[1] = d2[j][k - 1];
+                        dis[2] = d1[anc][k - 1];
+                        dis[3] = d2[anc][k - 1];
                         d1[j][k] = d2[j][k] = -inf;
-                        for (int u = 0; u < 4; u++) {
-                            int d = dis[u];
+                        for (int l = 0; l < 4; l++) {
+                            int d = dis[l];
                             if (d > d1[j][k]) {
                                 d2[j][k] = d1[j][k];
                                 d1[j][k] = d;
@@ -74,11 +93,50 @@ public class 次小生成树 {
     }
 
     static int lca(int a, int b, int w) {
-        return -1;
+        if (depth[a] < depth[b]) {
+            return lca(b, a, w);
+        }
+        int cnt = 0;
+        for (int k = 16; k >= 0; k--) {
+            if (depth[fa[a][k]] >= depth[b]) {
+                dis[cnt++] = d1[a][k];
+                dis[cnt++] = d2[a][k];
+                a = fa[a][k];
+            }
+        }
+
+        if (a != b) {
+            for (int k = 16; k >= 0; k--) {
+                if (fa[a][k] != fa[b][k]) {
+                    dis[cnt++] = d1[a][k];
+                    dis[cnt++] = d2[a][k];
+                    dis[cnt++] = d1[b][k];
+                    dis[cnt++] = d2[b][k];
+                    a = fa[a][k];
+                    b = fa[b][k];
+                }
+            }
+            dis[cnt++] = d1[a][0];
+            dis[cnt++] = d1[b][0];
+        }
+
+        int dis1 = -inf, dis2 = -inf;
+        for (int i = 0; i < cnt; i++) {
+            int d = dis[i];
+            if (d > dis1) {
+                dis2 = dis1;
+                dis1 = d;
+            } else if (d != dis1 && d > dis2) {
+                dis2 = d;
+            }
+        }
+        if (w > dis1) return w - dis1;
+        if (w > dis2) return w - dis2;
+        return inf;
     }
 
     static ArrayDeque<Integer> q = new ArrayDeque<Integer>();
-    static int n, m, cnt = 1, N = (int) (1e5 + 10), M = (int) (3e5 + 10), inf = Integer.MAX_VALUE / 2;
+    static int n, m, idx = 1, N = (int) (1e5 + 10), M = (int) (3e5 + 10), inf = 0x3f3f3f3f;
     static int[] h = new int[N];
     static node[] edge = new node[N];
     static int[] w = new int[M];
@@ -89,6 +147,7 @@ public class 次小生成树 {
     static int[][] fa = new int[N][17];
     static int[][] d1 = new int[N][17];
     static int[][] d2 = new int[N][17];
+    static int[] dis = new int[N * 2];
 
     static class node implements Comparable<node> {
         int a, b, w;
@@ -107,10 +166,10 @@ public class 次小生成树 {
     }
 
     static void add(int a, int b, int c) {
-        e[cnt] = b;
-        w[cnt] = c;
-        ne[cnt] = h[a];
-        h[a] = cnt++;
+        e[idx] = b;
+        w[idx] = c;
+        ne[idx] = h[a];
+        h[a] = idx++;
     }
 
     static long kruskal() {

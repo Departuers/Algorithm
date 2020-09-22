@@ -28,6 +28,8 @@ import static java.lang.System.in;
  * 4
  * 洛谷3379 ac了居然1.23秒也算ac
  * 最好的版本!!!
+ * 离线算法
+ * https://www.luogu.com.cn/blog/qzh/lca-yang-xie
  */
 public class Tarjan求LCA {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -65,7 +67,8 @@ public class Tarjan求LCA {
         }
         for (int i = 0; i < m; i++) {
             addq(nextInt(), nextInt(), i);
-        }//存储询问
+        }//存储询问,离线算法
+
         tarjan(root, -1);
         for (int i = 0; i < m; i++) {
             bw.write(result[i] + "\n");
@@ -117,6 +120,7 @@ public class Tarjan求LCA {
                 vis[j] = true;
             }
         }
+
         for (int i = qheadedge[u]; i != 0; i = qnext[i]) {
             int j = qto[i];
             if (vis[j]) {

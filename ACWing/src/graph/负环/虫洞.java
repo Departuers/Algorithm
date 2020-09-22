@@ -48,7 +48,11 @@ import java.util.Scanner;
  * 由于虫洞是回到之前 所以可以看做是田地为点的负权值边。
  * 田地之间是双向边。
  * 只要检测到图中存在负环，那么就可以无限穿越到之前的时间，
- * 而由于田地点之间是双向边，所以肯定能到达任意一个田地(也包括起点)。所以本题目就是判断图中是否存在负环。
+ * 而由于田地点之间是双向边，所以肯定能到达任意一个田地(也包括起点)。
+ * 所以本题目就是判断图中是否存在负环。
+ * 5200*500=250w
+ * 250w*5约为10^7
+ * 2*5200+10=5210条单向边最多
  */
 public class 虫洞 {
     public static void main(String[] args) {
@@ -85,6 +89,7 @@ public class 虫洞 {
         Arrays.fill(dis, 0);
         Arrays.fill(vis, false);
         Arrays.fill(cnt, 0);
+
         for (int i = 1; i <= n; i++) {
             q.add(i);
             vis[i] = true;

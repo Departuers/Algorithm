@@ -39,9 +39,24 @@ import java.util.Scanner;
  * 5 2 2
  * 输出样例：
  * 6.00
+ * 01分数规划问题
  * 每个点都有权值,每条边都有权值,求一个环,
  * 使得每个点的权值和除以每条边的权值和最大
- * 01分数规划,∑fi/∑ti最大,可以二分找正环
+ * 01分数规划,求得一个环,使得∑fi/∑ti最大,可以二分找正环
+ * 推导:
+ * 二分范围:该题所有边权重最大为1000,使得最大,分子取1000分母取1
+ * 二分范围则是(0,1000]
+ * 取中点mid,每次判断是否∑fi/∑ti>mid
+ * =>   ∑fi>mid*∑ti   =>   ∑fi-mid*∑ti>0
+ * 如果存在那么最优解,在[mid,r]之间
+ * 保留二位小数,二分到区间足够小即可
+ * 有点权重,放在有向边的出边和入边等价
+ * ∑fi-mid*∑ti>0等价于图中是否存在正环
+ * 正环和负环相对,把所有的边取相反数,找到负环就相当于找到负环,但不这么实现
+ * 直接把最短路改成最长路,统计最短路径包含的边数即可
+ * 为什么求正环要用最长路呢,
+ * 因为最长路,是经过尽可能多的边,使得dis[i]=正无穷
+ * 如果最长路中存在正环,那么最长路就会达到正无穷
  */
 public class 观光奶牛 {
     public static void main(String[] args) {
@@ -81,8 +96,8 @@ public class 观光奶牛 {
             st[t] = false;
             for (int i = h[t]; i != 0; i = ne[i]) {
                 int j = e[i];
-                if (dis[j] < dis[t] + wf[t] - mid * wt[i]) {
-                    dis[j] = dis[t] + wf[t] - mid * wt[i];
+                if (dis[j] < dis[t] + wf[t] - mid * w[i]) {
+                    dis[j] = dis[t] + wf[t] - mid * w[i];
                     count[j] = count[t] + 1;
                     if (count[j] >= n) return true;
                     if (!st[j]) {
@@ -97,7 +112,7 @@ public class 观光奶牛 {
 
     private static void add(int a, int b, int c) {
         e[cnt] = b;
-        wt[cnt] = c;
+        w[cnt] = c;
         ne[cnt] = h[a];
         h[a] = cnt++;
     }
@@ -107,7 +122,7 @@ public class 观光奶牛 {
     static int[] e = new int[M];
     static int[] wf = new int[N];
     static int[] ne = new int[M];
-    static int[] wt = new int[M];
+    static int[] w = new int[M];
     static double[] dis = new double[N];
     static int[] count = new int[N];
     static boolean[] st = new boolean[N];

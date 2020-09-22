@@ -6,6 +6,7 @@ import java.util.Scanner;
 /**
  * https://blog.csdn.net/qq_44828887/article/details/107305481
  * 给出 n 个点的一棵树，多次询问两点之间的最短距离。
+ * <p>
  * 注意：
  * 边是无向的。
  * 所有节点的编号是 1,2,…,n。
@@ -94,12 +95,13 @@ public class 距离Tarjan {
             int j = e[i];
             if (j == fa) continue;
             dist[j] = dist[u] + w[i];
+            //字节点的距离,等于当前点的距离加上权值
             dfs(j, u);
         }
     }
 
     static void tarjan(int u) {
-        st[u] = 1;
+        st[u] = 1;//第一类点
         for (int i = h[u]; i != 0; i = ne[i]) {
             int j = e[i];
             if (st[j] == 0) {
@@ -107,15 +109,15 @@ public class 距离Tarjan {
                 p[j] = u;
             }
         }
-        for (node it : query[u]) {//u->y这条查询,查询编号为2
+        for (node it : query[u]) {//u->y这条查询,查询编号为2,所有和u相关的查询
             int y = it.a, id = it.b;
-            if (st[y] == 2) {
-                int anc = find(y);//最近公共祖先
+            if (st[y] == 2) {//这个时候两个点的lca都有了
+                int anc = find(y);//u点和y点的最近公共祖先LCA
                 result[id] = dist[u] + dist[y] - dist[anc] * 2;
                 //u到根节点的距离加上y到根节点的距离减去两个最近共祖先到根节点的距离,就是两点之间的距离
             }
         }
-        st[u] = 2;
+        st[u] = 2;//第二类点
     }
 
     static void add(int a, int b, int c) {

@@ -22,7 +22,7 @@ public class 重复性剪枝 {
     static int[] a = new int[30];
     static boolean[] vis = new boolean[30];
 
-    //当前位置,当前和 w选了多少个
+    //u当前位置,s当前和 w选了多少个
     static void dfs(int u, int s, int w) {
         if (k - w > n - u + 1) return;
         if (s > sum || w > k) return;
