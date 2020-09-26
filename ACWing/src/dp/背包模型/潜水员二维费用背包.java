@@ -35,6 +35,7 @@ import java.util.Scanner;
  * 4 20 119
  * 【输出样例】
  * 249
+ * 最低状态定义稍有区别,状态定义恰好和至少的区别做法就不一样
  * 显然三个东西,看如何划分:
  * 物品: 氧气   氮气    重量
  * a      b      c
@@ -51,6 +52,7 @@ import java.util.Scanner;
  * 在状态定义恰好是j,恰好是k的时候
  * f[0,0,0]=0 是合法的
  * f[0,j,k]=是非法的,因为只选0个不可能达到恰好是j,或者k
+ * 应该f[0,j,k]=正无穷
  */
 public class 潜水员二维费用背包 {
     public static void main(String[] args) {
@@ -59,27 +61,27 @@ public class 潜水员二维费用背包 {
         m = sc.nextInt();//需要的氮气
         shu = sc.nextInt();//有多少个气缸
         for (int i = 1; i <= shu; i++) {
-            o[i] = sc.nextInt();
-            d[i] = sc.nextInt();
+            v1[i] = sc.nextInt();
+            v2[i] = sc.nextInt();
             w[i] = sc.nextInt();
         }
         two();
     }
 
     static int n, m, shu;
-    static int[] o = new int[1010], d = new int[1010], w = new int[1010];
+    static int[] v1 = new int[1010], v2 = new int[1010], w = new int[1010];
     static int[][][] f = new int[23][88][1010];
     static int[][] dp = new int[5000][1600];
 
     static void two() {
-        for (int i = 0; i < dp.length; i++) {
-            Arrays.fill(dp[i], Integer.MAX_VALUE - 10000);
+        for (int[] ints : dp) {
+            Arrays.fill(ints, 0x3f3f3f3f);
         }
         dp[0][0] = 0;
         for (int i = 1; i <= shu; i++) {
             for (int j = n; j >= 0; j--) {
                 for (int k = m; k >= 0; k--) {
-                    dp[j][k] = Math.min(dp[j][k], dp[Math.max(j - o[i], 0)][Math.max(k - d[i], 0)] + w[i]);
+                    dp[j][k] = Math.min(dp[j][k], dp[Math.max(j - v1[i], 0)][Math.max(k - v2[i], 0)] + w[i]);
                 }
             }
         }

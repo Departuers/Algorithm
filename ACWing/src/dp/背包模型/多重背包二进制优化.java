@@ -22,6 +22,32 @@ public class 多重背包二进制优化 {
         V = sc.nextInt();
         int a, b, c;
         for (int i = 1; i <= N; i++) {
+            v[i] = sc.nextInt();
+            w[i] = sc.nextInt();
+            s[i] = sc.nextInt();
+        }
+        for (int i = 1; i <= N; i++) {
+            for (int k = 1; k <= s[i]; k *= 2) {//直接变成01背包
+                for (int j = V; j >= v[i]; j--) {
+                    dp[j] = Math.max(dp[j - v[i]] + w[i], dp[j]);
+                }
+                s[i] -= k;
+            }
+            if (s[i] > 0) {
+                for (int j = V; j >= v[i]; j--) {
+                    dp[j] = Math.max(dp[j - v[i]] + w[i], dp[j]);
+                }
+            }
+        }
+        System.out.println(dp[V]);
+    }
+
+    static void yuchuli() {
+        Scanner sc = new Scanner(System.in);
+        N = sc.nextInt();
+        V = sc.nextInt();
+        int a, b, c;
+        for (int i = 1; i <= N; i++) {
             a = sc.nextInt();
             b = sc.nextInt();
             c = sc.nextInt();
@@ -38,7 +64,7 @@ public class 多重背包二进制优化 {
                 v[cnt] = a * c;
                 w[cnt] = b * c;
             }
-        }
+        }//二进制预处理
         N = cnt;//二进制优化后,一共有n个物品,01背包
         for (int i = 1; i <= N; i++) {
             for (int j = V; j >= v[i]; j--) {
@@ -48,8 +74,9 @@ public class 多重背包二进制优化 {
         System.out.println(dp[V]);
     }
 
-    static int cnt=0;
-    static int dp[] = new int[2010];
+    static int cnt = 0;
+    static int[] dp = new int[2010];
     static int[] v = new int[1000 * 13], w = new int[1000 * 13];
+    static int[] s = new int[13000];
     static int N, V;
 }

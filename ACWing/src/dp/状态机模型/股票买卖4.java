@@ -47,6 +47,8 @@ import java.util.Scanner;
  * f[i][j][1] = f[i-1][j][1]，故f[i][j][1] = max(f[i-1][j][1],f[i-1][j-1][0]-w[i])。
  * 从而状态转移方程就求出来了，下面考虑边界状态，f[i][0][0]表示第i天都未进行交易，
  * 收益是0，除此之外，f[i][[j][0]与f[i][0][1]的初始状态都应该是不合法的，设置为-INF。
+ * <p>
+ * 引入一层状态用来存交易次数
  */
 public class 股票买卖4 {
     public static void main(String[] args) {
@@ -68,7 +70,7 @@ public class 股票买卖4 {
         for (int i = 0; i <= n; i++) {
             for (int j = 0; j <= k; j++) {
                 for (int l = 0; l < 2; l++) {
-                    f[i][j][l] = Integer.MIN_VALUE / 2;
+                    f[i][j][l] = -0x3f3f3f3f;
                 }
             }
         }//初始化负无穷
@@ -79,10 +81,12 @@ public class 股票买卖4 {
                 f[i][j][0] = Math.max(f[i - 1][j][0], f[i - 1][j][1] + a[i]);
                 //卖出不消耗次数
                 f[i][j][1] = Math.max(f[i - 1][j][1], f[i - 1][j - 1][0] - a[i]);
-                //昨天买的,今天不卖,                   昨天交易次数为j-1没买,今天买上
+                //昨天买的,今天不动,                   昨天交易次数为j-1没买,今天买上
                 //买入消耗次数
             }
         }
+
+        //查看进行i次交易能得到利润最大值
         int res = 0;
         for (int i = 0; i <= k; i++) {
             res = Math.max(res, f[n][i][0]);

@@ -46,7 +46,7 @@ public class 买书 {
     }
 
     static int n = 400;
-    static int v[] = {0, 10, 20, 50, 100};
+    static int[] v = {0, 10, 20, 50, 100};
     static int[] dp = new int[1010];
     static int[][] f = new int[5][1010];
 }

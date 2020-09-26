@@ -33,12 +33,13 @@ public class 混合背包 {
             t[i] = sc.nextInt();
         }
         for (int i = 1; i <= N; i++) {
-            if (t[i] == 0) {
+            if (t[i] == 0) {//完全背包
                 for (int j = v[i]; j <= V; j++) {
                     f[j] = Math.max(f[j], f[j - v[i]] + w[i]);
                 }
             } else {
-                if (t[i] == -1) t[i] = 1;
+                if (t[i] == -1) t[i] = 1;//01背包
+                //多重背包转01背包
                 for (int k = 1; k <= t[i]; k *= 2) {
                     for (int j = V; j >= k * v[i]; j--) {//把k个物品看成可选可不选的一个物品,01背包
                         f[j] = Math.max(f[j], f[j - k * v[i]] + w[i] * k);

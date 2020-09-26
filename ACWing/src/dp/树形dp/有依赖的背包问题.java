@@ -3,20 +3,7 @@ package dp.树形dp;
 import java.util.Scanner;
 
 /**
- * 有n个物品和容量为V的背包
- * 物品之间有依赖关系,关系组成一颗树的形状,
- * 如果要选一个物品,则必选他的父节点
- * 求最大价值
- * dfs+dp dp.树形dp
- * 状态定义:集合f[u,j]:所有从以u为根的子树中选,且总体积不超过j的选法
- * 属性:max最大价值
- * 集合划分:子树1,子树3,子树3
- * 再根据体积划分子树:体积是0-m 有m+1总可能
- * 用一个数字表示一类方案
- * 把每一颗子树看做物品组,分组背包问题
- * 链式前向星建图
- * 有 N 个物品和一个容量是 V
- * 的背包。
+ * 有 N 个物品和一个容量是 V的背包。
  * 物品之间具有依赖关系，且依赖关系组成一棵树的形状。如果选择一个物品，则必须选择它的父节点。
  * 如下图所示：
  * 如果选择物品5，则必须选择物品1和2。这是因为2是5的父节点，1是2的父节点。
@@ -49,6 +36,20 @@ import java.util.Scanner;
  * 3 6 2
  * 输出样例：
  * 11
+ * <p>
+ * 有n个物品和容量为V的背包
+ * 物品之间有依赖关系,关系组成一颗树的形状,
+ * 如果要选一个物品,则必选他的父节点
+ * 求最大价值
+ * dfs+dp dp.树形dp
+ * 状态定义:集合f[u,j]:所有从以u为根的子树中选,且总体积不超过j的选法
+ * 属性:max最大价值
+ * 集合划分:子树1,子树3,子树3
+ * 划分依据:体积为0~m的子树,把每一棵子树看做一个物品做
+ * 再根据体积划分子树:体积是0-m 有m+1总可能
+ * 用一个数字表示一类方案
+ * 把每一颗子树看做物品组,分组背包问题
+ * 链式前向星建树
  */
 public class 有依赖的背包问题 {
 
@@ -62,7 +63,7 @@ public class 有依赖的背包问题 {
             w[i] = sc.nextInt();
             p = sc.nextInt();
             if (p == -1) root = i;
-            else add(p, i);
+            else add(p, i);//p向i连一条边,父节点向子节点连边
         }
         dfs(root);
         System.out.println(f[root][m]);
@@ -74,7 +75,7 @@ public class 有依赖的背包问题 {
             dfs(e[i]);
             //以u为根的子树,每一棵子树都是一个分组背包问题
             //抽象成2层
-            for (int j = m - v[u]; j >= 0; j--) {//枚举体积
+            for (int j = m - v[u]; j >= 0; j--) {//枚举体积,因为根节点必须要选,预留m-v[u
                 for (int k = 0; k <= j; k++) {//枚举决策,分为以0~m的一些决策
                     f[u][j] = Math.max(f[u][j], f[u][j - k] + f[son][k]);
                     //以u为根节点,在剩余体积为0~m-v[u]的情况下,选子树
@@ -95,11 +96,11 @@ public class 有依赖的背包问题 {
     static int N = 110;
     static int[] head = new int[N], e = new int[N], ne = new int[N];
 
-    static int n, m, cnt = 1;
+    static int n, m, idx = 1;
 
     static void add(int a, int b) {
-        e[cnt] = b;
-        ne[cnt] = head[a];
-        head[a] = cnt++;
+        e[idx] = b;
+        ne[idx] = head[a];
+        head[a] = idx++;
     }
 }

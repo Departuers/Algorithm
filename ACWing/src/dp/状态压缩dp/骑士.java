@@ -39,10 +39,9 @@ import java.util.Scanner;
  * 另外，a中的合法状态可以转移到哪些合法的状态，也可以预处理出来存进向量b中。
  * 本题方案数可能很大，需要用long long存储。
  * <p>
- * f[i,j,k]
+ * f[i,j,k]  k为二进制数,表示在哪里放了国王
  * 状态定义:所有只从前i行摆放,已经摆了j个国王,并且第i行的摆放状态是k的所有方案的集合
  * 属性count
- *
  */
 public class 骑士 {
     public static void main(String[] args) {
@@ -52,7 +51,7 @@ public class 骑士 {
         for (int i = 0; i < 1 << n; i++) {
             if (check(i)) {
                 a.add(i);//去除相邻的放置方法
-                cnt.add(count(i));
+                cnt.add(count(i));//预处理i作为
             }
         }
         int s = 0, t = 0, u = 0;

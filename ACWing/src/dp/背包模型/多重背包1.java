@@ -5,8 +5,10 @@ import java.util.Scanner;
 /**
  * 完全背包变形多重背包:每样物品最多选s[i]个
  * 同理状态定义:f[i,j]代表体积为j前i个物品可选的最大价值
+ * 划分依据:选第i个物品多少个
  * 状态划分:选0个第i个物品,选1个第i个物品,选2个第i个物品,选3个第i个物品....选s[i]个第i个物品
  * 状态计算,不失一般性,选k个:f[i-1,j-k*v[i]]+w[i] 只有在j>=k*v[i]并且k<=s[i]的时候才合法
+ * O(n^3)
  */
 public class 多重背包1 {
     public static void main(String[] args) {
