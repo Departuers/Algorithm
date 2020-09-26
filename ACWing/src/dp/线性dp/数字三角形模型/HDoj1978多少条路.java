@@ -24,6 +24,13 @@ public class HDoj1978多少条路 {
         }
     }
 
+    /**
+     * 记忆化搜索
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     static int dfs(int x, int y) {
         int t = 0;
         if (dp[x][y] >= 0) return dp[x][y];
@@ -31,6 +38,7 @@ public class HDoj1978多少条路 {
 
         for (int i = 0; i <= a[x][y]; i++) {
             for (int j = 0; j <= a[x][y] - i; j++) {
+                //如何体现能量呢,通过坐标的取值范围总和来体现
                 if (inarea(x + i, y + j) && i + j != 0) {
                     t += dfs(x + i, y + j);
                     t %= mod;

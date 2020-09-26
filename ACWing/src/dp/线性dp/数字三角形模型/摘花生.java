@@ -14,6 +14,8 @@ import java.util.Scanner;
  * 根据最后一步划分
  * 把f[i][j] 分成两个部分,一种是从f[i][j-1]也就是从左边走过来的
  * 另一种f[i-1][j]也就是从上面走过来的
+ * 显然最终就是:
+ * f[i,j]=max( f[i-1,j]+w[i,j]  f[i,j-1]+w[i,j] )
  * 集合划分依据,一般有2个,不重不漏,
  * 在求取count数量的时候,一定不能重复,
  * 在求取min和max的话,重复没有关系
@@ -24,22 +26,23 @@ public class 摘花生 {
         Scanner sc = new Scanner(System.in);
         t = sc.nextInt();
         while (t-- != 0) {
-            R = sc.nextInt();
-            C = sc.nextInt();
-            for (int i = 1; i <= R; i++) {
-                for (int j = 1; j <= C; j++) {
+            n = sc.nextInt();
+            m = sc.nextInt();
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= m; j++) {
                     arr[i][j] = sc.nextInt();
                 }
-            }
-            for (int i = 1; i <= R; i++) {
-                for (int j = 1; j <= C; j++) {
+            }//每个点的权值
+
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= m; j++) {
                     arr[i][j] = arr[i][j] + Math.max(arr[i - 1][j], arr[i][j - 1]);
                 }
             }
-            System.out.println(arr[R][C]);
+            System.out.println(arr[n][m]);
         }
     }
 
-    static int t, R, C;
+    static int t, n, m;
     static int[][] arr = new int[105][105];
 }

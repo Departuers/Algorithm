@@ -1,4 +1,4 @@
-package graph;
+package 最大流;
 
 import java.io.*;
 import java.util.ArrayDeque;
@@ -14,7 +14,7 @@ import static java.lang.System.in;
  * tle1个很快了
  */
 public class 费用流SPFA {
-    static int N = 5003, M = 100003, mincost, maxflow, n, m, idx = 1, inf = 0x3fffffff, S, T;
+    static int N = 5003, M = 100003, mincost, maxflow, n, m, idx = 2, inf = 0x3fffffff, S, T;
 
     public static void main(String[] args) throws IOException {
         n = nextInt();
@@ -54,11 +54,11 @@ public class 费用流SPFA {
     static int[] pre = new int[N];
 
     static void addEdge(int a, int b, int c, int d) {
-        e[++idx] = b;
+        e[idx] = b;
         w[idx] = c;
         cost[idx] = d;
         ne[idx] = h[a];
-        h[a] = idx;
+        h[a] = idx++;
     }
 
     static void add(int a, int b, int c, int d) {

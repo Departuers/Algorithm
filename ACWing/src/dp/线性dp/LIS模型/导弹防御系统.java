@@ -32,15 +32,16 @@ public class 导弹防御系统 {
     //u代表遍历到哪一个元素,sup代表有多少个上升子序列
     //sdown代表有多少个下降子序列
     static void dfs(int u, int sup, int sdown) {
-        if (sup + sdown >= N) return;
+        if (sup + sdown >= ans) return;//最优剪枝
         if (u == N) {
+            //sup+sdown>=ans已经被判掉
             ans = sup + sdown;
             return;
         }
         //把当前数放在上升子序列里
         int k = 0;
         while (k < sup && up[k] >= arr[u]) k++;
-        int t = up[k];
+        int t = up[k];//存下来,因为需要搜索回溯,
         up[k] = arr[u];
         if (k < sup) dfs(u + 1, sup, sdown);
             //k<sup代表无需开辟一个新的上升子序列

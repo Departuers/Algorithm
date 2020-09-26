@@ -3,6 +3,7 @@ package dp.线性dp.LIS模型;
 import java.util.Scanner;
 
 /**
+ * 状态定义
  * 初始基德可以任选一个房子降落,跳只能越跳跃低
  * 还能选一个方向,不能换方向,
  * 当确定完方向和起点后,最长的距离是什么呢
@@ -30,10 +31,10 @@ public class 怪盗基德的滑翔翼 {
                 }
                 res = Math.max(res, dp[i]);
             }
-            //最长下降子序列!!!代码直接倒序就可以了
+            //最长下降子序列!!!枚举结尾的时候直接倒序就可以了
             for (int i = N; i >= 1; i--) {
                 dp[i] = 1;//无需重置dp数组
-                for (int j = N; j > i; j--) {
+                for (int j = N; j > i; j--) {//也要倒序
                     if (h[i] > h[j]) {
                         dp[i] = Math.max(dp[i], dp[j] + 1);
                         //倒序在求dp[i]时,dp[j]一定已经求出来了

@@ -3,7 +3,6 @@ package com.shiyu;
 /**
  * 二分查找，仅适用于有序的情况，有序！！！！！！！！！！！！！！
  */
-
 public class BinarySearch {
     public static int search(int[] data, int target) {
         int begin = 0;

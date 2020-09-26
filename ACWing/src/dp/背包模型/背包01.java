@@ -9,10 +9,11 @@ import java.util.Scanner;
  * f[i,j]存的是最大价值
  * 属性:Max 价值最大
  * 状态计算:分成2个部分
- * 不选选第i个物品的最大价值  自然是f[i-1,j]
+ * 划分依据:选不选第i个物品作为划分依据
+ * 不选选第i个物品的最大价值 ,结合状态定义是f[i-1,j]
  * 选第i个物品的最大价值:
  * 当前价值为j,最少要有w[i]的体积装第i个物品,
- * 那么体积为为j-w[i]的且能选前i-1个物品的状态为 f[i-1,j-w[i]+v[i]]
+ * 那么体积为为j-w[i]的且能选前i-1个物品的状态为 f[i-1,j-w[i]]+v[i]
  */
 public class 背包01 {
     public static void main(String[] args) {
@@ -45,7 +46,7 @@ public class 背包01 {
 
     static void you() {
         for (int i = 1; i <= N; i++) {
-            for (int j = V; j >= w[i]; j--) {
+            for (int j = V; j >= w[i]; j--) {//倒序
                 f[j] = Math.max(f[j], f[j - v[i]] + w[i]);
             }
         }

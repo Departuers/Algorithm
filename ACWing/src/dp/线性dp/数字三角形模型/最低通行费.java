@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 /**
  * 必须在(2N-1)的时间单位内穿过N*N的方格,求最小花费
- * 性质:N*N方格,走过去,最少需要2+2(n-1)也就是不走回头路,只能往右或者往下走
+ * 性质:N*N方格,走过去,最少需要1+2(n-1)=2n-1
+ * 也就是不走回头路,只能往右或者往下走
  */
 public class 最低通行费 {
     public static void main(String[] args) {
@@ -17,7 +18,7 @@ public class 最低通行费 {
         }
         for (int i = 1; i <= N; i++) {
             for (int j = 1; j <= N; j++) {
-                if (i == 1 && j == 1) dp[i][j] = arr[i][j];//左上角特判
+                if (i == 1 && j == 1) dp[i][j] = arr[i][j];//左上角特判,特判起点
                 else {
                     dp[i][j] = Integer.MAX_VALUE;
                     //判2次,是因为有条件

@@ -1,4 +1,4 @@
-package graph;
+package 最大流;
 
 import java.io.*;
 import java.util.ArrayDeque;
