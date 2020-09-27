@@ -42,60 +42,64 @@ import java.util.Scanner;
  * f[i,j,k]  k为二进制数,表示在哪里放了国王
  * 状态定义:所有只从前i行摆放,已经摆了j个国王,并且第i行的摆放状态是k的所有方案的集合
  * 属性count
+ * 状态是k要满足,
+ * 1.第i-1行内部不能有两个1相邻,   通过k&(k>>1)!=1代表合法
+ * 2.第i-1行和第i行也不能相互攻击到
+ * a代表i-1行,b代表i行,(a&b==0并且a|b也不能有相邻的1)代表合法
+ * 3.
  */
 public class 骑士 {
     public static void main(String[] args) {
+        for (int i = 0; i < head.length; i++) {
+            head[i] = new ArrayList<Integer>();
+        }
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         m = sc.nextInt();
         for (int i = 0; i < 1 << n; i++) {
             if (check(i)) {
-                a.add(i);//去除相邻的放置方法
-                cnt.add(count(i));//预处理i作为
+                state.add(i);//去除相邻的放置方法
+                cnt.add(count(i));//预处理i的1的数量
             }
         }
         int s = 0, t = 0, u = 0;
-        for (int i = 0; i < a.size(); i++) {
-            for (int j = 0; j < a.size(); j++) {
-                s = a.get(i);
-                t = a.get(j);
-                if ((s & t) == 0 && check(s | t)) b[s].add(t);
+        for (int i = 0; i < state.size(); i++) {
+            for (int j = 0; j < state.size(); j++) {
+                s = state.get(i);
+                t = state.get(j);
+                if ((s & t) == 0 && check(s | t)) head[s].add(t);
                 //去除s&t(i-1行&i)两行之内有相同元素
                 //check(s|t)把有1的全部置为1,如果有相邻1说明对角线为1
                 //预处理所有方案
             }
         }
         f[0][0][0] = 1;
-        for (int i = 1; i <= n; i++) {
+        for (int i = 1; i <= n + 1; i++) {
             for (int j = 0; j <= m; j++) {//枚举个数
-                for (int k = 0; k < a.size(); k++) {
-                    t = a.get(k);//取出作为第i行
-                    for (s = 0; s < b[t].size(); s++) {
-                        u = b[t].get(s); //枚举与t不冲突的u
+                for (int k = 0; k < state.size(); k++) {
+                    t = state.get(k);//取出作为第i行
+                    for (s = 0; s < head[t].size(); s++) {
+                        u = head[t].get(s); //枚举与t不冲突的u
                         if (j >= cnt.get(k))//第i行的骑士个数要合法
                             f[i][j][t] += f[i - 1][j - cnt.get(k)][u];
                     }
                 }
             }
         }
+        System.out.println(f[n + 1][m][0]);
         long res = 0;
-        for (int i = 0; i < a.size(); i++) {
-            res += f[n][m][a.get(i)];
+        for (int i = 0; i < state.size(); i++) {
+            res += f[n][m][state.get(i)];
         }
         System.out.println(res);
     }
 
     static int n, m;
     static long[][][] f = new long[12][105][1 << 12];
-    static ArrayList<Integer>[] b = new ArrayList[1 << 12];
+    static ArrayList<Integer>[] head = new ArrayList[1 << 12];
 
-    static {
-        for (int i = 0; i < b.length; i++) {
-            b[i] = new ArrayList<Integer>();
-        }
-    }
 
-    static ArrayList<Integer> a = new ArrayList<Integer>();
+    static ArrayList<Integer> state = new ArrayList<Integer>();
     static ArrayList<Integer> cnt = new ArrayList<Integer>();
 
     static boolean check(int st) {
@@ -104,11 +108,11 @@ public class 骑士 {
     }
 
     //计算该行有多少个1
-    static int count(int n) {
+    static int count(int state) {
         int res = 0;
-        while (n != 0) {
-            if ((n & 1) == 1) res++;
-            n >>= 1;
+        while (state != 0) {
+            res++;
+            state -= (state & -state);
         }
         return res;
     }
