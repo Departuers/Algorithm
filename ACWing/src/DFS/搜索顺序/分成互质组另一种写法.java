@@ -32,8 +32,9 @@ public class 分成互质组另一种写法 {
      * @param u
      */
     static void dfs(int u) {
+        if (len >= ans) return;
         if (u == n) {
-            ans = Math.min(ans, len);
+            ans = len;
             return;
         }
         for (int i = 0; i < len; i++) {

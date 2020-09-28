@@ -78,8 +78,8 @@ public class 单调队列 {
             q[++tt] = i;
             if (i >= k - 1) bw.write(a[q[hh]] + " ");
         }
-        hh = 0;
         bw.write("\n");
+        hh = 0;
         tt = -1;
         for (int i = 0; i < n; i++) {
             if (hh <= tt && q[hh] < i + k + 1) hh++;

@@ -17,11 +17,17 @@ public class 二分模板 {
         return false;
     }
 
+    /*
+     * 如果r=mid-1 那么mid使用l+r=1>>1
+     * @param l
+     * @param r
+     * @return
+     */
     static int bin(int l, int r) {
         while (l < r) {
             int mid = l + r + 1 >> 1;
             if (check(mid)) l = mid;
-            else r = mid;
+            else r = mid - 1;
         }
         return r;
     }

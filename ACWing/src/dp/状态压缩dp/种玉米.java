@@ -3,6 +3,7 @@ package dp.状态压缩dp;
 import java.util.Scanner;
 
 /**
+ * https://blog.csdn.net/qq_30277239/article/details/104206827
  * 农夫约翰的土地由M*N个小方格组成，现在他要在土地里种植玉米。
  * 非常遗憾，部分土地是不育的，无法种植。
  * 而且，相邻的土地不能同时种植玉米，也就是说种植玉米的所有方格之间都不会有公共边缘。
@@ -21,6 +22,7 @@ import java.util.Scanner;
  * 0 1 0
  * 输出样例：
  * 9
+ * 样例:种0块1种,种1块4种,种2块3种,种3块1种,一共9种
  * 本题要求种植玉米的方案数，没有种多少的限制。
  * 状态表示f[i][j]表示种了前i行玉米田且第i行的状态为j的方案数。
  * 题目给出了两个限制，第一个是相邻的土地不能同时种玉米，
@@ -63,7 +65,7 @@ public class 种玉米 {
                 if (judge(j) && (j & a[i]) == 0) {
                     for (int k = 0; k < 1 << n; k++) {
                         if (judge(k) && (k & a[i - 1]) == 0 && (j & k) == 0)
-                            f[i][j] =( f[i][j] + f[i - 1][k] )% (int) 1e8;
+                            f[i][j] = (f[i][j] + f[i - 1][k]) % (int) 1e8;
 
                     }
                 }
@@ -71,7 +73,7 @@ public class 种玉米 {
         }
         int res = 0;
         for (int i = 0; i < 1 << n; i++) {
-            res = (res + f[m][i] )% (int) 1e8;
+            res = (res + f[m][i]) % (int) 1e8;
         }
         System.out.println(res);
     }

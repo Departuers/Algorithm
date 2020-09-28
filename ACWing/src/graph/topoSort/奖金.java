@@ -40,14 +40,12 @@ import static java.lang.System.in;
  * 三角不等式
  * 求最长路,最小值
  * 所以用拓扑排序
- * <p>
  * 表示 a 比 b 的奖金高，按照此方法建立一个图出来
- * 为了方便理解，记umap[i] = 100表示员工 i 的奖金为 100100
- * 每次将入度为0 的点加入进队列时，需要将这些点的奖金设置为 100100
- * 然后取出对头点 nownow 所连接的点 v，它的奖金就应该是umap[v] = umap[now] + 1，
+ * 为了方便理解，记umap[i] = 100表示员工 i 的奖金为 100
+ * 每次将入度为0 的点加入进队列时，需要将这些点的奖金设置为 100
+ * 然后取出对头点 now 所连接的点 v，它的奖金就应该是umap[v] = umap[now] + 1，
  * 因为入度为 0 的点所指向的点 v，表示员工 now 比员工 v 的奖金低，
  * 由于奖金是整数，所以这里加 1。
- * <p>
  * 起始奖金为100,虚拟源点,连向其他点,边权为100
  * 初值设为100,dist[i]=100
  */
@@ -62,14 +60,14 @@ public class 奖金 {
             add(b, a);
             d[a]++;//入度
         }
-        if (toposort()) {
+        if (topo()) {
             for (int i = 1; i <= n; i++) {
                 dist[i] = 100;
             }//所有初始值为100
 
-            //拓扑图求最长路
+            //拓扑图求最长路,递推
             for (int i = 0; i < n; i++) {
-                int j = res.get(i);
+                int j = q[i];
                 for (int k = h[j]; k != 0; k = ne[k]) {
                     int tt = e[k];
                     dist[tt] = Math.max(dist[tt], dist[j] + 1);
@@ -88,23 +86,44 @@ public class 奖金 {
     private static boolean toposort() {
         for (int i = 1; i <= n; i++) {
             if (d[i] == 0) {
-                q.add(i);
+                queue.add(i);
                 res.add(i);
             }
         }
-        while (!q.isEmpty()) {
-            int t = q.poll();
+        while (!queue.isEmpty()) {
+            int t = queue.poll();
             for (int i = h[t]; i != 0; i = ne[i]) {
                 int j = e[i];
                 --d[j];
                 if (d[j] == 0) {
                     res.add(j);
-                    q.add(j);
+                    queue.add(j);
                 }
             }
         }
         return res.size() == n;
     }
+
+    static boolean topo() {
+        int hh = 0, tt = -1;
+        for (int i = 1; i <= n; i++) {
+            if (d[i] == 0) {
+                q[++tt] = i;
+            }
+        }
+        while (hh <= tt) {
+            int t = q[hh++];
+            for (int i = h[t]; i != 0; i = ne[i]) {
+                int j = e[i];
+                d[j]--;
+                if (d[j] == 0) {
+                    q[++tt] = j;
+                }
+            }
+        }
+        return tt == n - 1;
+    }
+
 
     static void add(int a, int b) {
         e[idx] = b;
@@ -118,10 +137,11 @@ public class 奖金 {
     static int[] ne = new int[M];
     static int[] d = new int[N];
     static int[] dist = new int[N];
-    static ArrayDeque<Integer> q = new ArrayDeque<Integer>();
+    static ArrayDeque<Integer> queue = new ArrayDeque<Integer>();
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
     static StringTokenizer tokenizer = new StringTokenizer("");
+    static int[] q = new int[M];
 
     static String nextLine() throws IOException {// 读取下一行字符串
         return reader.readLine();

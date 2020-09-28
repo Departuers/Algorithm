@@ -91,8 +91,7 @@ public class 费用流SPFA {
                 }
             }
         }
-        if (d[T] != inf) return true;
-        else return false;
+        return d[T] != inf;
     }
 
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

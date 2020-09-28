@@ -75,7 +75,6 @@ public class 迷宫 {
         for (int i = 0; i < 4; i++) {
             int nx = dir[i][0] + sx, ny = sy + dir[i][1];
             if (nx >= 0 && nx < n && ny >= 0 && ny < n && !st[nx][ny]) {
-                st[nx][ny] = true;
                 if (dfs(nx, ny)) return true;
             }
         }

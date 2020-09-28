@@ -22,7 +22,7 @@ import java.util.Scanner;
  */
 public class 北极通讯网络 {
     public static void main(String[] args) {
-        for (int i = 0; i < par.length; i++) {
+        for (int i = 1; i < par.length; i++) {
             par[i] = i;
         }
         Scanner sc = new Scanner(System.in);

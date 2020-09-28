@@ -15,10 +15,12 @@ public class 蛇形矩阵 {
         int m = sc.nextInt();
         int[] dx = {0, 1, 0, -1};
         int[] dy = {1, 0, -1, 0};
+        //右下左上
         for (int x = 0, y = 0, k = 1, d = 0; k <= n * m; k++) {
             res[x][y] = k;
             int a = dx[d] + x, b = dy[d] + y;
-            if (a < 0 || a >= n || b < 0 || b >= m || res[a][b] != 0) {
+
+            if (a < 0 || a >= n || b < 0 || b >= m || res[a][b] != 0) {//出界或者有值,咱们就换方向
                 d = (d + 1) % 4;
                 a = x + dx[d];
                 b = y + dy[d];
@@ -34,6 +36,7 @@ public class 蛇形矩阵 {
         }
         bw.flush();
     }
+
 
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static int[][] res = new int[100][100];

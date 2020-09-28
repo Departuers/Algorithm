@@ -12,8 +12,8 @@ public class EK {
     public static void main(String[] args) throws IOException {
         n = nextInt();
         m = nextInt();
-        s = nextInt();
-        t = nextInt();
+        s = 1;
+        t = n;
         int a, b, c;
         for (int i = 1; i <= m; i++) {
             a = nextInt();
@@ -44,14 +44,14 @@ public class EK {
 
     //加双向边
     static void add(int a, int b, int c) {
-       e[++cnt]=b;
-       w[cnt]=c;
-       ne[cnt]=h[a];
-       h[a]=cnt;
-       e[++cnt]=a;
-       w[cnt]=0;
-       ne[cnt]=h[b];
-       h[b]=cnt;
+        e[++cnt] = b;
+        w[cnt] = c;
+        ne[cnt] = h[a];
+        h[a] = cnt;
+        e[++cnt] = a;
+        w[cnt] = 0;
+        ne[cnt] = h[b];
+        h[b] = cnt;
     }
 
     static ArrayDeque<Integer> q = new ArrayDeque<Integer>();

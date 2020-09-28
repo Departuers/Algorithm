@@ -27,7 +27,7 @@ import static java.lang.System.in;
  * 4
  * https://blog.csdn.net/qq_30277239/article/details/104580927
  * f[i]表示前1~i且点燃第i个烽火台,
- * 属性:最小代价
+ * 属性:最小代价,min
  * f[i]找倒数第2个, i-1 i-2...i-m+1 i-m
  * f[i]=min(f[j] | i-m<=j<i )+w[i] 单调队列优化
  * 本题属于单调队列优化DP的简单问题，

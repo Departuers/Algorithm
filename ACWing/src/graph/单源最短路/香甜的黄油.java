@@ -32,7 +32,7 @@ public class 香甜的黄油 {
         p = sc.nextInt();
         m = sc.nextInt();
         for (int i = 0; i < n; i++) {
-            id[i] = sc.nextInt();
+            g[i] = sc.nextInt();
         }
         int a, b, c;
         for (int i = 0; i < m; i++) {
@@ -70,7 +70,7 @@ public class 香甜的黄油 {
         }
         //计算从0~n的距离和
         for (int i = 0; i < n; i++) {
-            int j = id[i];
+            int j = g[i];
             if (dis[j] == Integer.MAX_VALUE / 2) return Integer.MAX_VALUE / 2;
             //无法到达
             res += dis[j];
@@ -99,7 +99,7 @@ public class 香甜的黄油 {
             }
         }
         for (int i = 0; i < n; i++) {
-            int j = id[i];
+            int j = g[i];
             if (dis[j] == Integer.MAX_VALUE / 2) return Integer.MAX_VALUE / 2;
             //无法到达
             res += dis[j];
@@ -138,6 +138,6 @@ public class 香甜的黄油 {
     static int[] dis = new int[2560];
     static ArrayDeque<Integer> q = new ArrayDeque<Integer>();
     static int n, m, p, cnt = 1;
-    static int[] id = new int[2523];
+    static int[] g = new int[2523];
 
 }

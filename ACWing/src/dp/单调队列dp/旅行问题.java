@@ -36,6 +36,10 @@ import static java.lang.System.in;
  * NIE
  * TAK
  * 环展开成链
+ * 顺时针做一遍,逆时针做一遍
+ * 也就是链两条
+ * i~i+n-1   si-s(i-1)>=0
+ * 区间最值
  */
 public class 旅行问题 {
     public static void main(String[] args) throws IOException {
@@ -45,14 +49,27 @@ public class 旅行问题 {
             b[i] = nextInt();
         }
         for (int i = 1; i <= n; i++) {
-
+            s[i] = s[i + n] = a[i] - b[i];
+        }//两两差值
+        for (int i = 1; i <= n * 2; i++) {
+            s[i] += s[i - 1];
+        }
+        int hh = 0, tt = -1;
+        for (int i = n * 2; i != 0; i--) {
+            if (hh <= tt && q[hh] > i + n) hh++;
+            while (hh <= tt && s[q[tt]] >= s[i]) tt--;
+            q[++tt] = i;
+            if (i <= n) {
+                if (s[q[hh]] >= s[i - 1]) ans[i] = true;
+            }
         }
     }
 
+    static boolean[] ans = new boolean[(int) 2e6];
+    static long[] s = new long[(int) (2e6 + 10)];
     static int[] q = new int[(int) (2e6 + 10)];
     static long[] a = new long[(int) (2e6 + 10)];
     static long[] b = new long[(int) (2e6 + 10)];
-
     static int n;
 
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

@@ -57,25 +57,25 @@ public class AcWingEK {
         System.out.println(ek());
     }
 
-    static int cnt = 1, n, inf = (int) 1e9, t, s, m;
-    static int[] h = new int[1010];
-    static int[] e = new int[20010];
-    static int[] ne = new int[20010];
-    static int[] w = new int[20010];
-    static boolean[] st = new boolean[1202];
-    static int[] dis = new int[1202];
-    static int[] pre = new int[1010];
+    static int idx = 2, n, inf = (int) 1e9, t, s, m;
+    static int[] h = new int[2010];
+    static int[] e = new int[40010];
+    static int[] ne = new int[40010];
+    static int[] w = new int[40010];
+    static boolean[] st = new boolean[2202];
+    static int[] dis = new int[2202];
+    static int[] pre = new int[2010];
 
     //加双向边
     static void add(int a, int b, int c) {
-        e[++cnt] = b;
-        w[cnt] = c;
-        ne[cnt] = h[a];
-        h[a] = cnt;
-        e[++cnt] = a;
-        w[cnt] = 0;
-        ne[cnt] = h[b];
-        h[b] = cnt;
+        e[idx] = b;
+        w[idx] = c;
+        ne[idx] = h[a];
+        h[a] = idx++;
+        e[idx] = a;
+        w[idx] = 0;
+        ne[idx] = h[b];
+        h[b] = idx++;
     }
 
     static ArrayDeque<Integer> q = new ArrayDeque<Integer>();

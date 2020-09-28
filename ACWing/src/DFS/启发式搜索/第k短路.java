@@ -127,6 +127,8 @@ public class 第k短路 {
         he[a] = idx++;
     }
 
+    static int inf = 0x3f3f3f3f;
+
     //Dijkstra处理估价函数,从终点往前搜
     static void dijkstra() {
         PriorityQueue<node> q = new PriorityQueue<node>();
@@ -153,7 +155,7 @@ public class 第k短路 {
         boolean[] st = new boolean[N];
         ArrayDeque<Integer> q = new ArrayDeque<Integer>();
         q.add(T);
-        Arrays.fill(dist, 1 << 30);
+        Arrays.fill(dist, inf);
         dist[T] = 0;
         while (!q.isEmpty()) {
             int p = q.poll();
@@ -184,7 +186,7 @@ public class 第k短路 {
             int v = p.t.to, dis = p.t.dis;
             cnt[v]++;//出队次数+1
             if (cnt[v] > 100010) break;
-            if (cnt[T] == K) return dis;//第k短路,出队k次
+            if (cnt[T] == K) return dis;//pq的出队的第k次,就是第k短路,
             for (int i = h[v]; i != 0; i = ne[i]) {
                 int j = e[i];
                 q.add(new tem(dis + w[i] + dist[j], new node(dis + w[i], j)));
