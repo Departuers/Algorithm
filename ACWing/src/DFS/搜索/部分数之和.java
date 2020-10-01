@@ -27,7 +27,7 @@ public class 部分数之和 {
     }
 
     /**
-     * 如上
+     * 如上,状态压缩
      *
      * @param u     数组下标
      * @param sum   要求的和

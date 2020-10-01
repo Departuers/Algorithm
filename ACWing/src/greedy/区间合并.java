@@ -3,9 +3,9 @@ package greedy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-//https://blog.csdn.net/qq_30277239/article/details/100880649?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522158685398819724845039319%2522%252C%2522scm%2522%253A%252220140713.130056874..%2522%257D&request_id=158685398819724845039319&biz_id=0&utm_source=distribute.pc_search_result.none-task-blog-blog_SOOPENSEARCH-1
 
 /**
+ * https://blog.csdn.net/qq_30277239/article/details/100880649
  * 给定 n 个区间 [li,ri]，要求合并所有有交集的区间。
  * 注意如果在端点处相交，也算有交集。
  * 输出合并完成后的区间个数。

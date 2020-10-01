@@ -53,6 +53,11 @@ import java.util.*;
  * 第一次dfs后需要对和数组进行排序去重操作。第四，k = n / 2 + 2这样写之所以能ac，
  * 是样例比较水，当n比较小的时候，k就超过了n，所以第二次dfs的边界一定要写成u >= n，
  * 而不能写成u == n，不然不能处理n比较小的情况。
+ * <p>
+ * 使用双向dfs
+ * 用空间换时间
+ * 我们把n个物品看成一个区间
+ * 把前n/2+2个物品所有能组合出的礼物重量的集合是什么
  */
 public class 送礼物 {
     public static void main(String[] args) {
@@ -65,8 +70,8 @@ public class 送礼物 {
         }
         Collections.sort(w, new Comparator<Integer>() {
             @Override
-            public int compare(Integer integer, Integer t1) {
-                return t1 - integer;
+            public int compare(Integer t2, Integer t1) {
+                return t1 - t2;
             }
         });
         k = n / 2 + 2;
@@ -90,7 +95,7 @@ public class 送礼物 {
 
     static void dfs2(int u, int s) {
         if (u >= n) {
-            int l = 0, r = weight.size() - 1;
+            int l = 0, r = cnt - 1;//只有cnt个数据,最大索引为cnt-1
             while (l < r) {
                 int mid = l + r + 1 >> 1;
                 if (weight.get(mid) <= m - s) l = mid;

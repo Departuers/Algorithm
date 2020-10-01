@@ -1,5 +1,7 @@
 package UnionFind;
 
+import java.util.Scanner;
+
 /**
  * https://blog.csdn.net/weixin_44922845/article/details/104516620
  * Alice和Bob玩了一个古老的游戏：首先画一个 n×n 的点阵（下图 n=3 ）。
@@ -26,9 +28,60 @@ package UnionFind;
  * 2  2  D
  * 输出样例
  * 4
+ * 问有没有结束...则显然
+ * 问题在问第一次形成环在什么时候
+ * 输出在第几步结束
+ * 用tarjan双连通分量来做.没必要
+ * 如果两个点在连边之前已经在一个集合里,那么连接过后变成一个环
+ * 把二维坐标转化为一维坐标
+ * (x,y)-> x*n+y
+ * 前提是x和y都是从0开始的
+ * O(n+m)
  */
 public class 格子游戏 {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        m = sc.nextInt();
+        for (int i = 0; i < n * n; i++) {
+            p[i] = i;
+        }
 
+        int res = 0;
+        int a, b, x, y, pa, pb;
+        String s, t;
+        for (int i = 1; i <= m; i++) {
+            x = sc.nextInt();
+            y = sc.nextInt();
+            t = sc.next();
+            x--;//由于下标从1开始
+            y--;//下标也需要映射,对应
+
+            a = get(x, y);
+            if (t.charAt(0) == 'D') b = get(x + 1, y);
+            else b = get(x, y + 1);
+            pa = find(a);
+            pb = find(b);
+            if (pa == pb) {
+                res = i;
+                break;
+            }
+            p[pa] = pb;
+        }
+        if (res == 0) System.out.println("draw");
+        else System.out.println(res);
     }
+
+    static int get(int a, int b) {
+        return a * n + b;
+    }
+
+    static int n, m;
+    static int[] p = new int[40010];
+
+    static int find(int x) {
+        if (p[x] != x) p[x] = find(p[x]);
+        return p[x];
+    }
+
 }

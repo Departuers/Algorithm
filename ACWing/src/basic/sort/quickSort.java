@@ -7,12 +7,13 @@ package basic.sort;
  * 分界点右边部分都大于等于它
  * 第三步:递归的处理左右两个部分
  * 只要左边这个大区间排好序了,右边这个区间排好序了,就都排好序了
+ * 废弃跑不通
  */
 public class quickSort {
     public static void main(String[] args) {
         q[0] = 5;
         q[1] = 4;
-        quick(2, 5);
+        quick(1, 5);
         System.out.println(q[0]);
         System.out.println(q[1]);
 
@@ -22,8 +23,8 @@ public class quickSort {
     static int t;
 
     static void quick(int l, int r) {
-        if (l >= r) return;
-        int x = q[r], i = l - 1, j = r + 1;
+        if (l == r) return;
+        int x = q[(l + r + 1) / 2], i = l - 1, j = r + 1;
         while (i < j) {
             do {
                 i++;
@@ -37,7 +38,7 @@ public class quickSort {
                 q[j] = t;
             }
         }
-        quick(l, j);
-        quick(j+1, r);
+        quick(l, i - 1);
+        quick(i, r);
     }
 }

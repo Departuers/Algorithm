@@ -33,7 +33,6 @@ import static java.lang.System.in;
 public class 排列枚举 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(in);
-        n = sc.nextInt();
         long s = System.nanoTime();
         d(0,0);
         long t = System.nanoTime();
@@ -45,7 +44,7 @@ public class 排列枚举 {
 
     }
 
-    static int n = 3;
+    static int n = 10;
     static ArrayList<Integer> path = new ArrayList<Integer>();
 
     //u代表结果path有多少个

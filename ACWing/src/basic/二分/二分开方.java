@@ -1,15 +1,15 @@
-package basic.two;
+package basic.二分;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class 二分开方 {
     public static void main(String[] args) {
-        dk(new BigDecimal(1233L));
+//        dk(new BigDecimal(1233L));
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+        double n = sc.nextDouble();
         double l = 0, r = n;
-        while (r - l > 1e-9) {
+        while (r - l > 1e-10) {
             double mid = (l + r) / 2;
             if (mid * mid >= n) r = mid;
             else l = mid;

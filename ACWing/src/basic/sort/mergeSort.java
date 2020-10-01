@@ -20,15 +20,15 @@ import java.util.Arrays;
  */
 public class mergeSort {
     public static void main(String[] args) {
-        mergeSort(0, t.length - 1);
-        System.out.println(Arrays.toString(t));
+        mergeSort(0, q.length - 1);
+        System.out.println(Arrays.toString(q));
     }
 
-    static int[] t = {2, 4, 1, 5, 7, 2};
-    static int[] q = new int[1000];
+    static int[] q = {2, 4, 1, 5, 7, 2};
+    static int[] temp = new int[1000];
 
     static void mergeSort(int l, int r) {
-        if (l >= r) return;//如果只有1个数或者没有数,就不需要排序
+        if (l == r) return;//如果只有1个数或者没有数,就不需要排序
         int mid = l + r >> 1;
         mergeSort(l, mid);//合并左半部分
         mergeSort(mid + 1, r);//合并右半部分
@@ -37,19 +37,19 @@ public class mergeSort {
         //把排序后(不完全有序)的数组放进辅助数组
         int k = 0, i = l, j = mid + 1;
         while (i <= mid && j <= r) {
-            if (t[i] <= t[j]) {
-                q[k++] = t[i++];
+            if (q[i] <= q[j]) {
+                temp[k++] = q[i++];
             } else {
-                q[k++] = t[j++];
+                temp[k++] = q[j++];
             }
         }
         //左半部分如果还有元素,有且只有一个还有元素
-        while (i <= mid) q[k++] = t[i++];
+        while (i <= mid) temp[k++] = q[i++];
         //右半部分如果还有元素,有且只有一个还有元素
-        while (j <= r) q[k++] = t[j++];
+        while (j <= r) temp[k++] = q[j++];
         //放回原数组
         for (i = l, j = 0; i <= r; i++, j++) {
-            t[i] = q[j];
+            q[i] = temp[j];
         }
     }
 }
