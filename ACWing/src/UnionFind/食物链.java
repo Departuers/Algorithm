@@ -3,7 +3,7 @@ package UnionFind;
 import java.util.Scanner;
 
 /**
- * https://blog.csdn.net/lisong_jerry/article/details/80029967?utm_medium=distribute.pc_relevant.none-task-blog-baidulandingword-2&spm=1001.2101.3001.4242
+ * https://blog.csdn.net/lisong_jerry/article/details/80029967
  * 带权并查集
  * 精髓:只要两个元素在一个集合里面，
  * 通过它们与根节点的距离就能知道它们的相对关系
@@ -43,13 +43,13 @@ public class 食物链 {
             else {
                 int px = find(x), py = find(y);
                 if (t == 1) {
-                    if (px == py && (dir[x] - dir[y]) % 3 != 0) res++;
+                    if (px == py && Math.abs((dir[x] - dir[y])) % 3 != 0) res++;
                     else {
                         p[px] = py;
                         dir[px] = dir[y] - dir[x];
                     }
                 } else {
-                    if (px == py && (dir[x] - dir[y] - 1) % 3 != 0) res++;
+                    if (px == py && Math.abs((dir[x] - dir[y] - 1)) % 3 != 0) res++;
                     else if (px != py) {
                         p[px] = py;
                         dir[px] = dir[y] + 1 - dir[x];

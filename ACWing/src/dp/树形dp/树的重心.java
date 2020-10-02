@@ -1,6 +1,5 @@
 package dp.树形dp;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -27,7 +26,9 @@ public class 树的重心 {
         }
         dfs(1);
         System.out.println(ans);
-        System.out.println(Arrays.toString(count));
+        for (int i = 1; i <= n; i++) {
+            System.out.println(count[i]);
+        }
     }
 
     private static int dfs(int u) {

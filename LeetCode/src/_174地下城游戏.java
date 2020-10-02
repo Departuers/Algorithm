@@ -19,10 +19,10 @@ import java.util.Arrays;
  * f[i,j]表示从[i,j]走到[n,n]这个位置的最小花费,
  * 从终点走向起点
  * 属性min
- * 状态划分:f[i+1,j] 上面走过来
- * f[i,j+1] 左面走过来
+ * 状态划分:f[i+1,j] 下面走过来
+ * f[i,j+1] 右边走过来
  * 状态计算:f[i,j]=max( min(f[i+1,j],f[i,j+1]) - dungeon[i][j] , 1)
- * https://leetcode-cn.com/problems/dungeon-game/solution/cong-hui-su-dao-ji-yi-hua-sou-suo-dao-dong-tai-gui/
+ *      * * https://leetcode-cn.com/problems/dungeon-game/solution/cong-hui-su-dao-ji-yi-hua-sou-suo-dao-dong-tai-gui/
  */
 public class _174地下城游戏 {
     public static void main(String[] args) {
@@ -35,7 +35,7 @@ public class _174地下城游戏 {
         for (int i = 0; i <= n; ++i) {
             Arrays.fill(f[i], 1 << 30);
         }
-        f[n][n - 1] = f[n - 1][n] = 1;
+        f[n][n - 1] = f[n - 1][n] = 1;//均为非法方案,但可以作为初始条件
         for (int i = n - 1; i >= 0; i--) {
             for (int j = n - 1; j >= 0; j--) {
                 int min = Math.min(f[i + 1][j], f[i][j + 1]);
@@ -51,10 +51,9 @@ public class _174地下城游戏 {
         }
         int right = dfs(row, col + 1, mem);
         int down = dfs(row + 1, col, mem);
-        int needMin=Math.min(right,down);
+        int needMin = Math.min(right, down);
         return 1;
     }
-
 
 
 }

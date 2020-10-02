@@ -1,7 +1,6 @@
 /**
  * LeetCode 980
  * 在二维网格 grid 上，有 4 种类型的方格：
- * <p>
  * 1 表示起始方格。且只有一个起始方格。
  * 2 表示结束方格，且只有一个结束方格。
  * 0 表示我们可以走过的空方格。
@@ -64,11 +63,11 @@ public class 状态压缩哈密尔顿路径 {
         return dfs(visited, start, Left);
     }
 
-    private int dfs(int visited, int v, int left) {
-        visited += (1 << v);
+    private int dfs(int state, int v, int left) {
+        state += (1 << v);
         left--;
         if (left == 0 && v == end) {
-            visited -= (1 << v);//回溯,这道题需要找到全部哈密尔顿路径
+            state -= (1 << v);//回溯,这道题需要找到全部哈密尔顿路径
             return 1;
         }
         int x = v / C, y = v % C;
@@ -76,11 +75,11 @@ public class 状态压缩哈密尔顿路径 {
         for (int d = 0; d < 4; d++) {
             int nextx = dirs[d][0] + x, nexty = dirs[d][1] + y;
             int next = nextx * C + nexty;
-            if (inArea(nextx, nexty) && grid[nextx][nexty] == 0 && (visited & (1 << next)) == 0) {
-                res += dfs(visited, next, left);
+            if (inArea(nextx, nexty) && grid[nextx][nexty] == 0 && (state & (1 << next)) == 0) {
+                res += dfs(state, next, left);
             }
         }
-        visited -= (1 << v);
+        state -= (1 << v);
         return res;
     }
 

@@ -1,4 +1,4 @@
-package DFS;
+package basic.search;
 
 import java.util.Scanner;
 
@@ -31,48 +31,46 @@ public class 树的重心 {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         int a, b;
-        for (int i = 0; i < n - 1; i++) {
+        for (int i = 1; i < n; i++) {
             a = sc.nextInt();
             b = sc.nextInt();
             add(a, b);
             add(b, a);
         }
         dfs(1);
-
         System.out.println(ans);
         for (int i = 1; i < n; i++) {
             System.out.println(count[i]);
         }
     }
 
-    private static int dfs(int u) {
-        vis[u] = 1;
-        int size = 0, sum = 0;
-        for (int i = he[u]; i != 0; i = ne[i]) {
-            int j = e[i];
-            if (vis[j] == 1) continue;
-            int s = dfs(j);
-            vis[j] = 0;
-            size = Math.max(size, s);
-            //更新连通块的最值
-            sum += s;//加上孩子节点的个数
-        }
-        size = Math.max(size, n - sum - 1);
-        count[u] = size;
-        ans = Math.min(ans, size);
-        return sum + 1;
-    }
-
-    static int n, idx = 1, ans = Integer.MAX_VALUE;
-    static int[] he = new int[100100];
-    static int[] ne = new int[200100];
-    static int[] e = new int[200100];
-    static int[] vis = new int[100100];
-    static int[] count = new int[100100];
+    static int N = (int) (1e5 + 10), inf = 0x3f3f3f3f;
+    static int n, m, idx = 1, ans = inf;
+    static int[] h = new int[N];
+    static int[] ne = new int[N];
+    static int[] e = new int[N];
+    static boolean[] st = new boolean[N];
+    static int[] count = new int[N];
 
     static void add(int a, int b) {
         e[idx] = b;
-        ne[idx] = he[a];
-        he[a] = idx++;
+        ne[idx] = h[a];
+        h[a] = idx++;
+    }
+
+    static int dfs(int u) {
+        st[u] = true;
+        int size = 0, sum = 1;
+        for (int i = h[u]; i != 0; i = ne[i]) {
+            int j = e[i];
+            if (st[j])continue;
+            int s = dfs(j);
+            size = Math.max(s, size);
+            sum += s;
+        }
+        size = Math.max(size, n - sum);
+        count[u] = size;
+        ans = Math.min(ans, size);
+        return sum;
     }
 }

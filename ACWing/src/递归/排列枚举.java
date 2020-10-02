@@ -34,7 +34,7 @@ public class 排列枚举 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(in);
         long s = System.nanoTime();
-        d(0,0);
+        d(0, 0);
         long t = System.nanoTime();
         System.out.println((t - s) / 1e8);
         s = System.nanoTime();
@@ -44,7 +44,7 @@ public class 排列枚举 {
 
     }
 
-    static int n = 10;
+    static int n = 4;
     static ArrayList<Integer> path = new ArrayList<Integer>();
 
     //u代表结果path有多少个
@@ -70,6 +70,10 @@ public class 排列枚举 {
     //最快
     static void d(int u, int k) {
         if (u == n) {
+            for (int i = 0; i < n; i++) {
+                System.out.print(arr[i] + " ");
+            }
+            System.out.println();
             return;
         }
         for (int i = k; i < n; i++) {

@@ -62,6 +62,7 @@ public class 蒙德里安的梦想 {
             for (int i = 0; i < f.length; i++) {
                 Arrays.fill(f[i], 0);
             }
+            
             f[0][0] = 1;
             for (int i = 1; i <= m; i++) {
                 for (int j = 0; j < 1 << n; j++) {

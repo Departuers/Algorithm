@@ -61,7 +61,6 @@ public class HDoj4403组方程 {
         for (int k = plus; k <= start; k++) {
             dfsL(k + 1, ansL + pre[plus][k]);
         }
-        return;
     }
 
     static void dfsR(int plus, int ansR, int ansL) {
@@ -74,6 +73,5 @@ public class HDoj4403组方程 {
         for (int k = plus; k < len; k++) {
             dfsR(k + 1, ansR + pre[plus][k], ansL);
         }
-        return;
     }
 }

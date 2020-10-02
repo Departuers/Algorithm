@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 /**
  * 给定n个数,取出k个数使得和为sum,求方案数
+ * 枚举选不选,不考虑顺序,枚举排列需要顺序
  */
 public class m任取n满足 {
     public static void main(String[] args) {
@@ -27,7 +28,7 @@ public class m任取n满足 {
         System.out.println((e - a) / 1e8);
     }
 
-    static int ans, n = 30, k = 8, suma = 200;
+    static int ans, n = 30, k = 8, suma = 130;
     static int[] arr = new int[30];
 
     /**
@@ -38,7 +39,7 @@ public class m任取n满足 {
      * @param s   当前和
      */
     static void f(int u, int sum, int s) {
-        if (sum + n - u < k) return;//n-u是剩余可选的数,
+//        if (sum + n - u < k) return;//n-u是剩余可选的数,
         if (sum > k) return;
         if (u == n) {//枚举到最后一个元素
             if (sum == k && s == suma)
