@@ -52,7 +52,7 @@ public class 蒜头君家谱 {
             int j = e[i];
             cnt += dfs(j);
         }
-        ans[x] = cnt;
+        ans[x] = cnt;//直系亲属不带自己
         return cnt + 1;
     }
 
@@ -60,12 +60,12 @@ public class 蒜头君家谱 {
     static int[] ans = new int[100005];
 
     static void add(int a, int b) {
-        e[cnt] = b;
-        ne[cnt] = he[a];
-        he[a] = cnt++;
+        e[idx] = b;
+        ne[idx] = he[a];
+        he[a] = idx++;
     }
 
-    static int n, cnt = 1;
+    static int n, idx = 1;
     static int[] e = new int[200005];
     static int[] he = new int[100005];
     static int[] ne = new int[200005];

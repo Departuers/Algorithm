@@ -65,6 +65,7 @@ public class 素数环 {
 
     public static void main(String[] args) {
         init(9999);
+        System.out.println(primer);
         a[0] = 1;
         dfs(1);
         System.out.println(ans);

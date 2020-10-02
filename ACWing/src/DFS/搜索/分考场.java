@@ -44,7 +44,7 @@ public class 分考场 {
     static void dfs(int u) {
         if (list.size() >= ans) return;//最优性剪枝
         if (u == n) {
-            ans = Math.min(ans, list.size());
+            ans = list.size();
             return;
         }
         for (int i = 0; i < list.size(); i++) {
