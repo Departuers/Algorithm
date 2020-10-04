@@ -31,7 +31,15 @@ import java.util.Scanner;
  * 显然,u-v就是树的直径
  * 推导过程
  * https://blog.csdn.net/qq_30277239/article/details/104396460
- *
+ * 如果树中有负权边,正权边都有
+ * 树形dp,枚举所有的路径,找到边权和最大的一组路径
+ * 划分依据:按照点来分类,把所有直径分类
+ * f[i]所有直径中最高的点是这个点的所有路径,
+ * 每条直径都有唯一的最高点,把直径挂到最高点
+ * 如何求出挂到这个点上的路径的最大和呢
+ * 求出把这个点的子节点往下走的最大长度
+ * 或者直径穿过这个最高点
+ * 我们可以求出最高点往下走的最长路径,和次长路径
  */
 public class 树的直径 {
     public static void main(String[] args) {
@@ -50,7 +58,7 @@ public class 树的直径 {
     }
 
     static int dfs(int u, int fa) {
-        int d1 = 0, d2 = 0;
+        int d1 = 0, d2 = 0;//u节点作为最高点的,往下走的最长路径和,次长路径
         for (int i = he[u]; i != 0; i = ne[i]) {
             int j = e[i];
             if (j == fa) continue;
@@ -61,6 +69,22 @@ public class 树的直径 {
             } else if (d > d2) {
                 d2 = d;
             }
+        }
+        ans = Math.max(ans, d1 + d2);
+        return d1;
+    }
+
+
+    static int df(int u, int fa) {
+        int d1 = 0, d2 = 0;
+        for (int i = he[u]; i != 0; i = ne[i]) {
+            int j = e[i];
+            if (j == fa) continue;
+            int d = dfs(j, u) + w[i];
+            if (d > d1) {
+                d2 = d1;
+                d1 = d;
+            } else if (d > d2) d2 = d;
         }
         ans = Math.max(ans, d1 + d2);
         return d1;

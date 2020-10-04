@@ -33,20 +33,20 @@ public class 树的重心 {
 
     private static int dfs(int u) {
         vis[u] = true;
-        int size = 0, sum = 1;
+        int size = 0, sum = 1;//size是以u为根的所有子树的节点数总和
         //sum为以u节点为根的子树,节点数量
+        //u的每一棵子树都是一个联通块,
         for (int i = he[u]; i != 0; i = ne[i]) {
             int j = e[i];
             if (vis[j]) continue;//不用遍历父节点
-            int s = dfs(j);
-            size = Math.max(size, s);
-            sum += s;
+            int s = dfs(j);//u子树的连通块节点数量
+            size = Math.max(size, s);//跟其他子树取max
+            sum += s;//u为根节点加上子树的数量
         }
         size = Math.max(size, n - sum);
         count[u] = size;
         ans = Math.min(ans, size);
-        //   System.out.println(ans);
-        return sum;//返回sum,为以sum节点为根的子树,节点数量
+        return sum;//返回sum,为以sum节点为根的子树的节点数量
     }
 
     static int ans = Integer.MAX_VALUE;

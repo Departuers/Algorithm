@@ -58,6 +58,6 @@ public class 蒜头君开公司 {
     }
 
     static int[][] task = new int[1010][1010];
-    static int n, ans = Integer.MAX_VALUE;
+    static int n, ans = 0x3f3f3f3f;
     static boolean[] vis = new boolean[14];
 }

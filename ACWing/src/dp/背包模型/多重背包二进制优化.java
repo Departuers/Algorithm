@@ -27,18 +27,20 @@ public class 多重背包二进制优化 {
             s[i] = sc.nextInt();
         }
         for (int i = 1; i <= N; i++) {
-            for (int k = 1; k <= s[i]; k *= 2) {//直接变成01背包
-                for (int j = V; j >= v[i]; j--) {
-                    dp[j] = Math.max(dp[j - v[i]] + w[i], dp[j]);
+            for (int k = 1; k <= s[i]; k *= 2) {
+                for (int j = V; j >= k * v[i]; j--) {
+                    dp[j] = Math.max(dp[j - k * v[i]] + k * w[i], dp[j]);
                 }
                 s[i] -= k;
             }
+
+        }
+        for (int i = 1; i <= N; i++)
             if (s[i] > 0) {
-                for (int j = V; j >= v[i]; j--) {
-                    dp[j] = Math.max(dp[j - v[i]] + w[i], dp[j]);
+                for (int j = V; j >= s[i] * v[i]; j--) {
+                    dp[j] = Math.max(dp[j - s[i] * v[i]] + s[i] * w[i], dp[j]);
                 }
             }
-        }
         System.out.println(dp[V]);
     }
 
@@ -67,8 +69,8 @@ public class 多重背包二进制优化 {
         }//二进制预处理
         N = cnt;//二进制优化后,一共有n个物品,01背包
         for (int i = 1; i <= N; i++) {
-            for (int j = V; j >= v[i]; j--) {
-                dp[j] = Math.max(dp[j], dp[j - v[i]] + w[i]);
+            for (int j = V; j >= v[i] * s[i]; j--) {
+                dp[j] = Math.max(dp[j], dp[j - v[i] * s[i]] + s[i] * w[i]);
             }
         }
         System.out.println(dp[V]);
