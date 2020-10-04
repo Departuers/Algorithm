@@ -2,6 +2,35 @@ package dp.树形dp;
 
 import java.util.Scanner;
 
+/**
+ * https://blog.csdn.net/qq_30277239/article/details/104396460
+ * 给定一棵树，树中包含 n个结点（编号1~n）和 n−1 条无向边，每条边都有一个权值。
+ * 现在请你找到树中的一条最长路径。
+ * 换句话说，要找到一条路径，使得使得路径两端的点的距离最远。
+ * 注意：路径中可以只包含一个点。
+ * 输入格式
+ * 第一行包含整数 n。
+ * 接下来 n−1行，每行包含三个整数 ai,bi,ci，表示点
+ * ai和 bi 之间存在一条权值为 ci 的边。
+ * 输出格式
+ * 输出一个整数，表示树的最长路径的长度。
+ * 数据范围
+ * 1≤n≤10000
+ * 1≤ai,bi≤n,
+ * −10^5≤ci≤10^5
+ * 输入样例：
+ * 6
+ * 5 1 6
+ * 1 4 5
+ * 6 3 9
+ * 2 6 8
+ * 6 1 7
+ * 输出样例：
+ * 22
+ * 平凡做法:从一个点u,找离u的点v
+ * 再从v开始走,走到离v最远的点z
+ * 那么v,z就是直径
+ */
 public class 树的最长路径 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

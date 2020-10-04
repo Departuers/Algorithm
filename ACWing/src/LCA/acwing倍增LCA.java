@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 import static java.lang.System.in;
 
 /**
- * tle 3个 1.7秒,胜在好写,其实都差不多蛮...这个好写的多
+ * tle 3个 1.7秒,胜在好写,其实都差不多慢...这个好写的多
  */
 public class acwing倍增LCA {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

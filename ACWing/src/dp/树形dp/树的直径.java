@@ -39,7 +39,7 @@ import java.util.Scanner;
  * 如何求出挂到这个点上的路径的最大和呢
  * 求出把这个点的子节点往下走的最大长度
  * 或者直径穿过这个最高点
- * 我们可以求出最高点往下走的最长路径,和次长路径
+ * 我们可以求出每个点作为直径的最高点往下走的最长路径,和次长路径
  */
 public class 树的直径 {
     public static void main(String[] args) {
@@ -63,10 +63,10 @@ public class 树的直径 {
             int j = e[i];
             if (j == fa) continue;
             int d = dfs(j, u) + w[i];
-            if (d > d1) {
+            if (d >= d1) {//有可能出现最长路长度等于次长路
                 d2 = d1;
                 d1 = d;
-            } else if (d > d2) {
+            } else if (d > d2) {//如果等于就不用更新
                 d2 = d;
             }
         }
