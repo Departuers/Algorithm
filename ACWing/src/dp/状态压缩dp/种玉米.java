@@ -66,7 +66,6 @@ public class 种玉米 {
                     for (int k = 0; k < 1 << n; k++) {
                         if (judge(k) && (k & a[i - 1]) == 0 && (j & k) == 0)
                             f[i][j] = (f[i][j] + f[i - 1][k]) % (int) 1e8;
-
                     }
                 }
             }
@@ -78,7 +77,7 @@ public class 种玉米 {
         System.out.println(res);
     }
 
-    //如果没有相邻的两个一为true
+    //如果没有相邻的两个一为true,也就是判断相邻之间不能种玉米
     static boolean judge(int n) {
         return (n & (n >> 1)) == 0;
     }

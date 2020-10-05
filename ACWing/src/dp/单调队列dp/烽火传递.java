@@ -43,6 +43,12 @@ import static java.lang.System.in;
  * 即i - q[hh] > m时才需要出队头，不需要加等号，这里容易出错。
  * 第二点就是单调队列实现步骤中更新f[i]语句的位置，由于f[i]需要放进队列中，
  * 所以需要先计算完f[i]才能够再与队尾元素比较来决定f[i]在队列中的最终位置。具体实现见代码：
+ * <p>
+ * f[i]表示只看前i个烽火台,并且点燃第i个烽火台的所有方案
+ * 属性min
+ * 划分依据:找倒数第二个, f[i]找倒数第2个, i-1 i-2...i-m+1 i-m
+ * f[i]=min(f[j] | i-m <=j <i)+w[i]
+ * 用单调队列优化
  */
 public class 烽火传递 {
     public static void main(String[] args) throws IOException {

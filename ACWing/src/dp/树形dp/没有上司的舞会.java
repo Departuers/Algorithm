@@ -45,6 +45,7 @@ import java.util.Scanner;
  * f[u][0] = max(f[v1][0],f[v1][1]) + max(f[v2][0],f[v2][1])。
  * 我们用邻接表存储树形结构，然后从根节点对树做一次dfs，
  * 便可以计算出f[root][0]和f[root][1]了，二者中的较大者就是我们所要求的最大快乐指数。
+ * 最大独立集
  */
 public class 没有上司的舞会 {
     public static void main(String[] args) {

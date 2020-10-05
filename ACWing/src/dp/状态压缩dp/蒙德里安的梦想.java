@@ -39,6 +39,7 @@ import java.util.Scanner;
  * 状态表示：这里将二维压缩为一维，如果方格有五行，则第i列的状态可以表示为11011，
  * 其中1表示从该位置开始横向放置1*2的长方形，
  * 0则表示没有放置。则f[i][j]表示第i列状态为j的方案数。首先考虑状态转移的约束条件。
+ *
  */
 public class 蒙德里安的梦想 {
     public static void main(String[] args) {
