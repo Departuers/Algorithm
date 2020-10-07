@@ -42,6 +42,7 @@ package dp.数位dp;
  * 寻找其中的规律可大幅提高效率。设count（n，x）可以统计1到n中x出现的次数，
  * 则a到b中x出现的次数大于count(b) - count(a - 1)。
  * 下面要解决的问题就是如何求1到n中x出现的次数。
+ *  
  */
 public class 计数问题 {
     public static void main(String[] args) {

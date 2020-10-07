@@ -67,7 +67,6 @@ public class 烽火传递 {
 
         int[] q = new int[(int) (2e5 + 10)];
         for (int i = 1; i <= n; i++) {
-
             if (i - q[hh] > m) hh++;
             f[i] = f[q[hh]] + a[i];
             while (hh <= tt && f[i] <= f[q[tt]]) tt--;

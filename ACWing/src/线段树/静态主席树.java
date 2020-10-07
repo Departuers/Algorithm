@@ -81,15 +81,15 @@ public class 静态主席树 {
     public static int[] c = new int[maxn];
     public static int[] root = new int[maxn];
     public static int[] a = new int[maxn];
-    public static int cnt = 0;
+    public static int idx = 0;
     static int n, m, count;
 
     static int update(int l, int r, int pre, int now, int value) {
-        cnt++;
-        tree[cnt] = tree[pre];
-        lson[cnt] = lson[pre];
-        rson[cnt] = rson[pre];
-        now = cnt;
+        idx++;
+        tree[idx] = tree[pre];
+        lson[idx] = lson[pre];
+        rson[idx] = rson[pre];
+        now = idx;
         tree[now]++;
         if (l == r) return now;
         int mid = l + r >> 1;
