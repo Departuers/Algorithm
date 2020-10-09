@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
+ * https://www.cnblogs.com/gzh-red/p/13412664.html
  * https://blog.csdn.net/qq_30277239/article/details/104202667
  * 在 n×n 的棋盘上放 k 个国王，国王可攻击相邻的 8个格子，求使它们无法互相攻击的方案总数。
  * 输入格式

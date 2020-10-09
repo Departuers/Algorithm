@@ -106,17 +106,17 @@ public class 第k短路 {
     }
 
     static class tem implements Comparable<tem> {
-        int dis;
-        node t;
+        int gujia, dis, to;
 
-        public tem(int dis, node t) {
+        public tem(int gujia, int dis, int to) {
+            this.gujia = gujia;
             this.dis = dis;
-            this.t = t;
+            this.to = to;
         }
 
         @Override
         public int compareTo(tem tem) {
-            return dis - tem.dis;
+            return gujia - tem.gujia;
         }
     }
 
@@ -180,16 +180,16 @@ public class 第k短路 {
         PriorityQueue<tem> q = new PriorityQueue<tem>();
         //第一个参数是估价值=起点到当前点真实距离+起点到终点的估计距离  第二个node是当前点到起点的真实距离,当前点
         //起点到终点的真实距离是
-        q.add(new tem(dist[S], new node(0, S)));
+        q.add(new tem(dist[S], 0, S));
         while (!q.isEmpty()) {
             tem p = q.poll();
-            int v = p.t.to, dis = p.t.dis;
+            int v = p.to, dis = p.dis;
             cnt[v]++;//出队次数+1
-            if (cnt[v] > 100010) break;
             if (cnt[T] == K) return dis;//pq的出队的第k次,就是第k短路,
             for (int i = h[v]; i != 0; i = ne[i]) {
                 int j = e[i];
-                q.add(new tem(dis + w[i] + dist[j], new node(dis + w[i], j)));
+                if (cnt[j] < K)
+                    q.add(new tem(dis + w[i] + dist[j], dis + w[i], j));
             }
         }
         return -1;

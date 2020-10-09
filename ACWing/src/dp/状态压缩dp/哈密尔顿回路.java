@@ -30,7 +30,15 @@ import static java.lang.Math.min;
  * 状压dp
  * 该图是完全图
  * 2的整数次幂-1的二进制位全是1
- * f[i,j]状态表示为从0走到顶点j状态为i的所有走法
+ * f[i,j]状态表示为从0走到顶点j ,走过所有的点状态为i的所有走法
+ * 比如i为(11100111)第0~2个点走过了,第4~6个点走过了
+ * 属性:Min
+ * 划分依据 倒数第2个点是哪一个点来分类
+ * 状态计算: 0 1 2 ... n-1 不失一般性记为k
+ * 经过的点是i,且倒数第二个点是k
+ * 0->k->j 右边是k->j的边记为a(k,j)
+ * 0->k最短,
+ * 0->k->j  f(i-{j},k)+a(k,j)  取min
  */
 public class 哈密尔顿回路 {
     public static void main(String[] args) {
@@ -56,6 +64,18 @@ public class 哈密尔顿回路 {
                     for (int k = s; k < n; k++) {
                         if ((t >> k & 1) == 1) {
                             f[i][j] = min(f[i][j], f[t][k] + g[k][j]);
+                        }
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < 1 << n; i++) {
+            for (int j = 0; j < n; j++) {
+                if ((i >> j & 1) != 0) {
+                    for (int k = 0; k < n; k++) {
+                        if (((i - (1 << j)) >> k & 1) != 0) {
+                            
                         }
                     }
                 }

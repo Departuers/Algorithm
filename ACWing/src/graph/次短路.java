@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 /**
  * https://www.luogu.com.cn/blog/ONE-PIECE/solution-p2865
+ * https://www.jianshu.com/p/616f1bf28b0d
  * spfa做次短路
  * 更新次小距离的条件有三种：
  * 1.更新了最小距离，要把上次的最小距离先拿给次小距离（刚开始没想到这个条件，
@@ -37,14 +38,35 @@ public class 次短路 {
         Arrays.fill(dis[1], inf);
         dis[0][s] = 0;
         dis[1][s] = 0;
-        int t;
+        int u;
         q.add(s);
         while (!q.isEmpty()) {
-            t = q.poll();
-            st[t] = false;
-            for (int i = h[t]; i != 0; i = ne[i]) {
-                int j = e[i];
-
+            u = q.poll();
+            st[u] = false;
+            for (int i = h[u]; i != 0; i = ne[i]) {
+                int d = e[i];
+                if (dis[0][d] > dis[0][u] + w[i]) {
+                    dis[1][d] = dis[0][d];//次短路
+                    dis[0][d] = dis[0][u] + w[i];//最短路
+                    if (!st[d]) {
+                        st[d] = true;
+                        q.add(d);
+                    }
+                    if ((dis[1][d] > dis[0][d] + w[i] && dis[0][u] + w[i] > dis[0][d]) || (dis[1][d] == dis[0][d])) {
+                        dis[1][d] = dis[0][u] + w[i];
+                        if (!st[d]) {
+                            st[d] = true;
+                            q.add(d);
+                        }
+                    }
+                    if (dis[1][d] > dis[1][u] + w[i] && dis[1][u] + w[i] > dis[0][d]) {
+                        dis[1][d] = dis[1][u] + w[i];
+                        if (!st[d]) {
+                            st[d] = true;
+                            q.add(d);
+                        }
+                    }
+                }
             }
         }
     }

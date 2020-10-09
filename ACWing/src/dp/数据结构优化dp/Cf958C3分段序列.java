@@ -20,7 +20,7 @@ public class Cf958C3分段序列 {
         n = sc.nextInt();
         k = sc.nextInt();
         m = sc.nextInt();
-
+        
     }
 
     static int n, k, m;

@@ -82,7 +82,9 @@ public class 炮兵阵地 {
                         b = state.get(k);//第i-1行
                         c = state.get(u);//第i-2行
                         if ((a & b) != 0 | (b & c) != 0 || (a & c) != 0) continue;
+                        //炮兵不能相互攻击到
                         if ((g[i - 1] & b) != 0 | (g[i] & a) != 0) continue;
+                        //山地上不能有炮兵
                         f[i & 1][j][k] = max(f[i & 1][j][k], f[i - 1 & 1][k][u] + cnt.get(a));//加上第i行的炮数量
                     }
                 }

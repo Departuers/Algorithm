@@ -3,6 +3,7 @@ package graph.无向图双连通分量;
 import java.util.Scanner;
 
 /**
+ * https://www.cnblogs.com/gzh-red/p/11253230.html
  * https://www.acwing.com/problem/content/397/
  * 为了从F个草场中的一个走到另一个，奶牛们有时不得不路过一些她们讨厌的可怕的树。
  * 奶牛们已经厌倦了被迫走某一条路，所以她们想建一些新路，

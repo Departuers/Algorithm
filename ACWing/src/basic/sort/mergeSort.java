@@ -24,7 +24,7 @@ public class mergeSort {
         System.out.println(Arrays.toString(q));
     }
 
-    static int[] q = {2, 4, 1, 5, 7, 2};
+    static int[] q = {2, 4, 1, 5, 7, 2, 123, 12, 3, 1};
     static int[] temp = new int[1000];
 
     static void mergeSort(int l, int r) {

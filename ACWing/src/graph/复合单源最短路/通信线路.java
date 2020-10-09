@@ -7,12 +7,13 @@ import java.util.Scanner;
 /**
  * https://www.acwing.com/file_system/file/content/whole/index/content/533831/
  * https://www.cnblogs.com/wulichenai/p/12694599.html
+ * https://www.cnblogs.com/gzh-red/p/10999939.html
  * 从a到b,路径的长度定义为第k+1大值
  * 二分:定义在[0,1000001]区间性质为
  * 对于区间中的某一个点x
  * 求出1~N中最少经过几条长度大于x的边,假设最少经过y条,
  * (最少经过多少条大于x的边的数量是否小于等于k)
- * 把边长大于x的看做1,否则看做0,非常难
+ * 把边长大于x的看做1,否则看做0,
  * 用双端队列bfs
  */
 public class 通信线路 {
@@ -39,9 +40,10 @@ public class 通信线路 {
         System.out.println(r);
     }
 
+
     private static boolean check(int bound) {
         Arrays.fill(st, false);
-        Arrays.fill(dis, Integer.MAX_VALUE / 2);
+        Arrays.fill(dis, inf);
         dis[1] = 0;
         q.add(1);
         while (!q.isEmpty()) {
@@ -67,6 +69,7 @@ public class 通信线路 {
         he[a] = cnt++;
     }
 
+    static int inf = 0x3f3f3f3f;
     static int n, m, N = 1010, M = 20010, cnt = 1, k;
     static int[] he = new int[N];
     static int[] ne = new int[M];

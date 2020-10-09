@@ -30,6 +30,7 @@ import static java.lang.System.in;
  * 最好的版本!!!
  * 离线算法
  * https://www.luogu.com.cn/blog/qzh/lca-yang-xie
+ * https://www.cnblogs.com/gzh-red/p/11253230.html
  */
 public class Tarjan求LCA {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
