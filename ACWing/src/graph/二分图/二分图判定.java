@@ -72,7 +72,7 @@ public class 二分图判定 {
         for (int i = h[u]; i != 0; i = ne[i]) {
             int j = e[i];
             if (color[j] == 0) {//该点未被访问过,3-1=2 3-2=1 2和1为不同颜色
-                if (!dfs(j, 3 - c)) return true;
+                if (!dfs(j, 3 - c)) return false;
             } else if (color[j] == c) return false;
             //u点和j点,也就是一条边的两边的颜色相同,我们就说他不是二分图
         }

@@ -74,10 +74,10 @@ public class 数字游戏 {
         // last初始化为0,是因为第一位0~9都可以选,满足不降条件
         for (int i = num.size() - 1; i >= 0; i--) {
             int x = num.get(i);
-            for (int j = last; j < x; j++) {//枚举,last<=j<x的值
+            for (int j = last; j < x; j++) {//左侧分支,last<=j<x的值
                 res += f[i + 1][j];//最高位填j,且有i+1位
             }
-            if (x < last) break;
+            if (x < last) break;//右侧分支
             //如果该分支,不能构成下降数,就break
             last = x;//更新last
             if (i == 0) res++;//能安全到最后一个分支,说明每个数都大于前一个数,就是合法的

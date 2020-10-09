@@ -16,7 +16,7 @@ public class 家谱树 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
-        int s = 0;
+        s = 0;
         for (int i = 1; i <= n; i++) {
             while (true) {
                 s = sc.nextInt();
@@ -25,8 +25,11 @@ public class 家谱树 {
                 in[s]++;
             }
         }
+        top();
         topo();
     }
+
+    static int s;
 
     private static void topo() {
         ArrayList<Integer> g = new ArrayList<Integer>();//拓扑排序的结果
@@ -53,12 +56,37 @@ public class 家谱树 {
         }
     }
 
+    static void top() {
+        int hh = 0, tt = -1;
+        for (int i = 1; i <= n; i++) {
+            if (in[i] == 0) {
+                q[++tt] = i;
+            }
+        }
+
+        while (hh <= tt) {
+            int t = q[hh++];
+            for (int i = he[t]; i != 0; i = ne[i]) {
+                int j = e[i];
+                in[j]--;
+                if (in[j] == 0) {
+                    q[++tt] = j;
+                }
+            }
+        }
+        System.out.println();
+        for (int i = 0; i < n; i++) {
+            System.out.print(q[i] + " ");
+        }
+        System.out.println();
+    }
+
     static int N = 110, M = N * N / 2, n, cnt = 1;
     static int[] he = new int[N];
     static int[] ne = new int[M];
     static int[] e = new int[M];
     static int[] in = new int[N];
-//    static int[] out = new int[N];
+    static int[] q = new int[M];
 
     static void add(int a, int b) {
         e[cnt] = b;

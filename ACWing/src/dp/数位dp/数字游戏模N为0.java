@@ -34,8 +34,8 @@ public class 数字游戏模N为0 {
     }
 
     /**
-     * 假如第一位已经确定,第二位枚举x,后面的数随便填
-     * {A(n-2)+x+(...)}mod N=0
+     * f[i,j,k]表示:最高位是j,一共有i位,所有数
+     * { A(n-2)+x+(...) }mod N=0
      * 剩下的n-2位所有位数之和=(-A(n-2)-x)mod N
      * f[i,j,k]表示,i位数字,且最高位为j,余数为k的所有集合
      * 考虑last,x____假如第二位填k 0<=x<=9
@@ -46,10 +46,10 @@ public class 数字游戏模N为0 {
         for (int i = 0; i <= 9; i++) {
             f[1][i][i % P]++;
         }
-        for (int i = 2; i < N; i++) {
-            for (int j = 0; j <= 9; j++) {
-                for (int k = 0; k < P; k++) {
-                    for (int x = 0; x <= 9; x++) {
+        for (int i = 2; i < N; i++) {//一共有i位
+            for (int j = 0; j <= 9; j++) {//枚举最高位j
+                for (int k = 0; k < P; k++) {//枚举余数0~P
+                    for (int x = 0; x <= 9; x++) {//枚举倒数第二位填x
                         f[i][j][k] += f[i - 1][x][mod(k - j, P)];
                     }
                 }

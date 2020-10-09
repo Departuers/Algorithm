@@ -79,6 +79,7 @@ public class 奖金 {
             }
             System.out.println(res);
         } else System.out.println("Poor Xed");
+
     }
 
     static ArrayList<Integer> res = new ArrayList<Integer>();

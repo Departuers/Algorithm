@@ -45,8 +45,8 @@ public class Windy数 {
             f[1][i] = 1;
         }
         for (int i = 2; i < N; i++) {//从数字位数为2开始枚举
-            for (int j = 0; j <= 9; j++) {
-                for (int k = 0; k <= 9; k++) {//0~9可选,但满足绝对值之差大于等于2
+            for (int j = 0; j <= 9; j++) {//最高位为j
+                for (int k = 0; k <= 9; k++) {//枚举倒数第二位,0~9可选,但满足绝对值之差大于等于2
                     if (Math.abs(j - k) >= 2) f[i][j] += f[i - 1][k];
                 }
             }
