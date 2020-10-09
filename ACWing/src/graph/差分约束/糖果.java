@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 /**
  * https://blog.csdn.net/qq_42279796/article/details/105072757
+ * https://blog.csdn.net/qq_30277239/article/details/108966877
  * 幼儿园里有 N 个小朋友，老师现在想要给这些小朋友们分配糖果，
  * 要求每个小朋友都要分到糖果.
  * 但是小朋友们也有嫉妒心，总是会提出一些要求，
@@ -92,7 +93,7 @@ public class 糖果 {
     }
 
     private static boolean spfa() {//求负环改成栈!!!
-        Arrays.fill(dis, finf);
+        Arrays.fill(dis, inf);
         dis[0] = 0;
         q.clear();
         q.add(0);
@@ -116,7 +117,7 @@ public class 糖果 {
         return true;
     }
 
-    static int finf = Integer.MIN_VALUE / 2;
+    static int inf = 0x3f3f3f3f;
 
     static int n, m, N = 100010, M = 300010, count = 1;//最坏建3倍边,因为第一种双向边,每个点和超级源点的边
     static int[] h = new int[N];

@@ -57,7 +57,6 @@ public class 山峰和山谷 {
                     } else if (!vis[a][b]) {
                         //这一步最重要,进入队列的都是满足未访问过该节点且与拓展之前的节点值相同
                         //一遍bfs会把一个连通块权值相同的连通块都遍历到
-                        System.out.print(g[a][b] + " ");
                         q.add(a * n + b);
                     }
                 }

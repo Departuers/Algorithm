@@ -21,7 +21,7 @@ import java.util.Scanner;
  * 输出样例：
  * 2
  */
-public class 数字和余数 {
+public class 数字游戏模N为0 {
     static int l, r, N = 11, M = 110, P = 1;
 
     public static void main(String[] args) {

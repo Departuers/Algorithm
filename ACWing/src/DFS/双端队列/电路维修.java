@@ -67,14 +67,15 @@ public class 电路维修 {
         }
     }
 
+    static int inf = 0x3f3f3f3f;
+
     private static int bfs(int x, int y) {
         q.clear();
         for (boolean[] vi : vis) {
             Arrays.fill(vi, false);
         }
-        int t = Integer.MAX_VALUE / 2;
         for (int[] ints : dist) {
-            Arrays.fill(ints, t);
+            Arrays.fill(ints, inf);
         }
         q.add(new node(x, y));
         dist[x][y] = 0;

@@ -101,8 +101,6 @@ public class 骑士 {
     static int n, m;
     static long[][][] f = new long[12][105][1 << 12];
     static ArrayList<Integer>[] head = new ArrayList[1 << 12];
-
-
     static ArrayList<Integer> state = new ArrayList<Integer>();
     static ArrayList<Integer> cnt = new ArrayList<Integer>();
 

@@ -116,5 +116,4 @@ public class 计数问题 {
     static int pow(int i) {
         return (int) Math.pow(10, i);
     }
-
 }
