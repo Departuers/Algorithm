@@ -1,4 +1,4 @@
-package 递归;
+package DFS.递归;
 
 import java.util.Scanner;
 
@@ -46,13 +46,21 @@ public class 蒜头君家谱 {
         }
     }
 
-    static int dfs(int x) {
+    /**
+     * 树形 dp
+     *
+     * @param u x节点
+     * @return
+     */
+    static int dfs(int u) {
         int cnt = 0;//代表x点有多少子节点
-        for (int i = he[x]; i != 0; i = ne[i]) {
+        //以u为根,有多少个直系子节点
+        for (int i = he[u]; i != 0; i = ne[i]) {
             int j = e[i];
-            cnt += dfs(j);
+            int s = dfs(j);//子树s有多少子节点
+            cnt += s;//统计每棵子树的子节点之和,就是以u为根的子树的所有子节点之和
         }
-        ans[x] = cnt;//直系亲属不带自己
+        ans[u] = cnt;//直系亲属不带自己
         return cnt + 1;
     }
 

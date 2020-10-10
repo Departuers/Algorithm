@@ -1,4 +1,4 @@
-package 递归;
+package DFS.递归;
 
 /**
  * AcWing 95. 费解的开关

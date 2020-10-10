@@ -30,7 +30,6 @@ public class 逆序数 {
         n = sc.nextInt();
         for (int i = 1; i <= n; i++) {
             de[i] = new node(sc.nextInt(), i);
-//            max_value = Math.max(a[i], max_value);//记录数组最大值
         }
         Arrays.sort(de, 1, n + 1);
         /**
