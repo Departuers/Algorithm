@@ -44,7 +44,7 @@ public class 昂贵的聘礼 {
         m = sc.nextInt();
         n = sc.nextInt();
         for (int i = 0; i < w.length; i++) {
-            Arrays.fill(w[i], Integer.MAX_VALUE / 2);
+            Arrays.fill(w[i], 0x3f3f3f3f);
             w[i][i] = 0;
         }
         int price, cnt;
@@ -53,18 +53,20 @@ public class 昂贵的聘礼 {
             level[i] = sc.nextInt();
             cnt = sc.nextInt();
             w[0][i] = Math.min(price, w[0][i]);
+            //0 代表直接去买i号物品
             while (cnt-- != 0) {
                 int id, cost;
                 id = sc.nextInt();
                 cost = sc.nextInt();
                 w[id][i] = Math.min(w[id][i], cost);
+                //id物品去买i号物品需要
             }
         }
         /**
          * 因为最终要娶到公主,所以等级只能只能在level[1]也就是酋长的等级
          * level[1]-m ~ level[1]+m 这个区间内
          */
-        int res = Integer.MAX_VALUE / 2;
+        int res = 0x3f3f3f3f;
         for (int i = level[1] - m; i <= level[1]; i++) {
             res = Math.min(res, dijkstra(i, i + m));
         }

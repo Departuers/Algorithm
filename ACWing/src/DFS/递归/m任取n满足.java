@@ -33,6 +33,7 @@ public class m任取n满足 {
 
     /**
      * 枚举每一位选或者不选
+     * 枚举每个数选还是不选,加判断
      *
      * @param u   是当前第几位
      * @param sum 是当前选了几个
@@ -55,7 +56,7 @@ public class m任取n满足 {
     static boolean[] x = new boolean[30];
 
     /**
-     * 枚举
+     * 枚举每个数选还是不选,加判断
      *
      * @param u   当前选了多少个
      * @param sum 当前和

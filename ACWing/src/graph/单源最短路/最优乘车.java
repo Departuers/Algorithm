@@ -65,17 +65,17 @@ public class 最优乘车 {
                     g[stop[i]][stop[j]] = 1;
         }
         bfs();
-        if (dist[n] == Integer.MAX_VALUE / 2) System.out.println("NO");
+        if (dist[n] == inf) System.out.println("NO");
         else
             System.out.println(Math.max(dist[n] - 1, 0));
     }
 
     static int[][] g = new int[510][510];
     static int[] dist = new int[510];
-    static int n, m;
+    static int n, m, inf = 0x3f3f3f3f;
 
     static void bfs() {
-        Arrays.fill(dist, Integer.MAX_VALUE / 2);
+        Arrays.fill(dist, inf);
         ArrayDeque<Integer> q = new ArrayDeque<Integer>();
         q.add(1);
         dist[1] = 0;

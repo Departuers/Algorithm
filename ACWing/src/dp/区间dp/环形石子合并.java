@@ -15,8 +15,8 @@ public class 环形石子合并 {
             a[i + n] = a[i];
         }
         for (int i = 0; i < N; i++) {
-            Arrays.fill(f[i], Integer.MAX_VALUE / 2);
-            Arrays.fill(g[i], Integer.MIN_VALUE / 2);
+            Arrays.fill(f[i], inf);
+            Arrays.fill(g[i], inf);
         }
         for (int i = 1; i <= n * 2; i++) {
             s[i] += s[i - 1] + a[i];
@@ -33,7 +33,7 @@ public class 环形石子合并 {
                 }
             }
         }
-        int minv = Integer.MAX_VALUE / 2, maxv = Integer.MIN_VALUE / 2;
+        int minv = inf, maxv = inf;
         for (int i = 1; i <= n; i++) {
             minv = Math.min(f[i][i + n - 1], minv);
             maxv = Math.max(g[i][i + n - 1], maxv);
@@ -42,7 +42,7 @@ public class 环形石子合并 {
         System.out.println(maxv);
     }
 
-    static int n, N = 410;
+    static int n, N = 410, inf = 0x3f3f3f3f;
     static int[] s = new int[N];
     static int[] a = new int[N];
     static int[][] f = new int[N][N];

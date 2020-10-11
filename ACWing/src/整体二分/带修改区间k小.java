@@ -92,7 +92,7 @@ public class 带修改区间k小 {
         }
     }
 
-    static int M = 300100, n, idx, Z = 100100, m;
+    static int M = 200100, n, idx, Z = 100100, m;
     static int[] tree = new int[Z], ans = new int[Z], now = new int[Z];
     static node[] q = new node[M], lq = new node[M], rq = new node[M];
 

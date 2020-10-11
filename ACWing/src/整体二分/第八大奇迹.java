@@ -81,7 +81,7 @@ public class 第八大奇迹 {
         }
     }
 
-    static int M = 300100, n, m, idx, Z = 100100;
+    static int M = 200100, n, m, idx, Z = 100100;
     static int[] tree = new int[Z], ans = new int[Z], now = new int[Z];
     static node[] q = new node[M], lq = new node[M], rq = new node[M];
 

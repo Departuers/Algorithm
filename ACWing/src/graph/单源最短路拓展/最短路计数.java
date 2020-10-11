@@ -89,7 +89,7 @@ public class 最短路计数 {
         bw.flush();
     }
 
-    static int inf = Integer.MAX_VALUE / 2 - 199;
+    static int inf = 0x3f3f3f3f;
 
     static void bfs() {
         ArrayDeque<Integer> q = new ArrayDeque<Integer>();
@@ -120,7 +120,7 @@ public class 最短路计数 {
         }
     }
 
-    static int N = 100005,M = 400005, mod = 100003, n, m, idx=1;
+    static int N = 100005, M = 400005, mod = 100003, n, m, idx = 1;
     static int[] h = new int[N];
     static int[] e = new int[M];
     static int[] ne = new int[M];
