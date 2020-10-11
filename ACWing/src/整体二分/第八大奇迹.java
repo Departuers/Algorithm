@@ -17,11 +17,11 @@ import static java.lang.System.in;
 public class 第八大奇迹 {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-        L = nextInt();
         n = nextInt();
+        m = nextInt();
         char tem;
         int x, y;
-        for (int i = 1; i <= n; i++) {
+        for (int i = 1; i <= m; i++) {
             ans[i] = -1;
             tem = next().charAt(0);
             x = nextInt();
@@ -41,7 +41,7 @@ public class 第八大奇迹 {
             //查询[x,y]区间中的第8大
         }
         solve(0, (int) 1e9, 1, idx);
-        for (int i = 1; i <= n; i++) {
+        for (int i = 1; i <= m; i++) {
             if (ans[i] != -1) bw.write(ans[i] + "\n");
         }
         bw.flush();
@@ -81,12 +81,12 @@ public class 第八大奇迹 {
         }
     }
 
-    static int M = 500100, L, n, idx;
-    static int[] tree = new int[M], ans = new int[M], now = new int[M];
+    static int M = 300100, n, m, idx, Z = 100100;
+    static int[] tree = new int[Z], ans = new int[Z], now = new int[Z];
     static node[] q = new node[M], lq = new node[M], rq = new node[M];
 
     static void add(int x, int d) {
-        for (; x <= L; x += lowbit(x)) {
+        for (; x <= n; x += lowbit(x)) {
             tree[x] += d;
         }
     }
