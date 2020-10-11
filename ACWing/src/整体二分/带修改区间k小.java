@@ -8,25 +8,31 @@ import java.util.StringTokenizer;
 import static java.lang.System.in;
 
 /**
- * 区间第8大
+ * https://www.luogu.com.cn/problem/P2617
+ * 已经ac
+ * 区间第k小
  * 树状数组+整体二分
  * 带修改区间第k大，主席树不便于修改，此问题离线，
  * 而整体二分天然带修改，并且复杂度也很优秀O(nlog2n)O(nlog2n)
- * 用快速读写,快了3.5秒
  */
-public class 第八大奇迹 {
+public class 带修改区间k小 {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-        L = nextInt();
         n = nextInt();
-        char tem;
-        int x, y;
+        m = nextInt();
+        int x, y, z;
         for (int i = 1; i <= n; i++) {
+            x = nextInt();
+            q[++idx] = new node(1, i, x, 1);
+            now[i] = x;
+        }
+        char tem;
+        for (int i = 1; i <= m; i++) {
             ans[i] = -1;
             tem = next().charAt(0);
-            x = nextInt();
-            y = nextInt();
             if (tem == 'C') {
+                x = nextInt();
+                y = nextInt();
                 if (now[x] != 0) {
                     q[++idx] = new node(1, x, now[x], -1);
                     //k=-1  代表删除x位置
@@ -37,11 +43,16 @@ public class 第八大奇迹 {
                     q[++idx] = new node(1, x, y, 1);
                     now[x] = y;
                 }
-            } else q[++idx] = new node(2, x, y, 8, i);
-            //查询[x,y]区间中的第8大
+            } else {
+                x = nextInt();
+                y = nextInt();
+                z = nextInt();
+                q[++idx] = new node(2, x, y, z, i);
+            }
+            //查询[x,y]区间中的第k小
         }
-        solve(0, (int) 1e9, 1, idx);
-        for (int i = 1; i <= n; i++) {
+        solve(0, (int) 1e10, 1, idx);
+        for (int i = 1; i <= m; i++) {
             if (ans[i] != -1) bw.write(ans[i] + "\n");
         }
         bw.flush();
@@ -81,12 +92,12 @@ public class 第八大奇迹 {
         }
     }
 
-    static int M = 500100, L, n, idx;
+    static int M = 500100, n, m, idx;
     static int[] tree = new int[M], ans = new int[M], now = new int[M];
     static node[] q = new node[M], lq = new node[M], rq = new node[M];
 
     static void add(int x, int d) {
-        for (; x <= L; x += lowbit(x)) {
+        for (; x <= n; x += lowbit(x)) {
             tree[x] += d;
         }
     }
@@ -120,24 +131,25 @@ public class 第八大奇迹 {
         int mid = vl + vr >> 1, l = 0, r = 0;
         for (int i = ql; i <= qr; i++) {
             if (q[i].op == 1) {//是修改
-                if (q[i].y <= mid) lq[++l] = q[i];
-                else {
+                if (q[i].y <= mid) {
                     add(q[i].x, q[i].k);
+                    lq[++l] = q[i];
+                } else {
                     rq[++r] = q[i];
                 }
             } else {//是询问
                 long tem = query(q[i].y) - query(q[i].x - 1);
                 //查询区间有多少
                 if (q[i].k <= tem) {
-                    rq[++r] = q[i];//放到右边继续查询
+                    lq[++l] = q[i];
                 } else {//放到左边继续查询
                     q[i].k -= tem;
-                    lq[++l] = q[i];
+                    rq[++r] = q[i];//放到右边继续查询
                 }
             }
         }
         for (int i = ql; i <= qr; i++) {
-            if (q[i].op == 1 && q[i].y > mid) {
+            if (q[i].op == 1 && q[i].y <= mid) {
                 add(q[i].x, -q[i].k);
             }
         }//清空树状数组
