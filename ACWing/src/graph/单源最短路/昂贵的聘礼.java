@@ -88,7 +88,7 @@ public class 昂贵的聘礼 {
             int t = -1;
             for (int j = 0; j <= n; j++) {
                 if (!vis[j] && (t == -1 || dist[t] > dist[j])) t = j;
-            }
+            }//不用优先队列,直接找出最小的拓展,由于是邻接矩阵存储权值
             vis[t] = true;
             for (int j = 1; j <= n; j++) {
                 if (level[j] >= down && level[j] <= up) {

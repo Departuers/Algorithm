@@ -26,9 +26,13 @@ import static java.lang.System.in;
  * 输出样例：
  * 4
  * https://blog.csdn.net/qq_30277239/article/details/104580927
+ * 所有连续m个烽火台中其中必须至少要有一个发射信号
+ * 等价于,任意两个烽火台之间的距离不能大于等于m个烽火台
+ * <p>
  * f[i]表示前1~i且点燃第i个烽火台,
  * 属性:最小代价,min
- * f[i]找倒数第2个, i-1 i-2...i-m+1 i-m
+ * f[i]找倒数第2个需要点燃的烽火台, i-1 i-2...i-m+1 i-m ,
+ * 如果选i-m-1,那么[i-1,i-m-1]构成连续m个烽火台不点燃,状态非法
  * f[i]=min(f[j] | i-m<=j<i )+w[i] 单调队列优化
  * 本题属于单调队列优化DP的简单问题，
  * 状态表示：f[i]表示前i个烽火台中第i个烽火台发出了信号的最少代价。
@@ -63,8 +67,8 @@ public class 烽火传递 {
 
     //单调队列dp
     static void ydp() {
-        int hh = 0, tt = 0;
 
+        int hh = 0, tt = 0;//tt=0代表队列中有一个元素0
         int[] q = new int[(int) (2e5 + 10)];
         for (int i = 1; i <= n; i++) {
             if (i - q[hh] > m) hh++;
@@ -75,6 +79,7 @@ public class 烽火传递 {
         }
         System.out.println();
         int res = (int) 1e9;
+        //从最后m个烽火台里选
         for (int i = n - m + 1; i <= n; i++) {
             res = Math.min(res, f[i]);
         }

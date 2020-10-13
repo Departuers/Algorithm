@@ -98,7 +98,7 @@ public class 静态第k大数 {
         if (ql > qr || vl > vr) return;
         if (vl == vr) {
             for (int i = ql; i <= qr; i++) {
-                ans[q[i].id] = a[vl].x;
+                ans[q[i].id] = a[vl].x;//离散化对应的值
             }
             return;
         }

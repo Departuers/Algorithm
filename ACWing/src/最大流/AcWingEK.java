@@ -106,6 +106,7 @@ public class AcWingEK {
         int r = 0;
         while (bfs()) {
             r += dis[t];
+            //从终点往前找,沿途减去当前曾广路径的最大值
             for (int i = t; i != s; i = e[pre[i] ^ 1]) {
                 w[pre[i]] -= dis[t];
                 w[pre[i] ^ 1] += dis[t];

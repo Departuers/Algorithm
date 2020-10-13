@@ -27,7 +27,7 @@ import java.util.Scanner;
  * 1 2 2 2
  * 输出样例：
  * 1
- * 先预处理求每行的最值,在预处理列
+ * 先预处理求每行的长度为n的滑动窗口最值,在预处理列
  * 先对矩阵逐行求区间长度是n的滑动窗口的最大最小值，分别存进最大最小值数组。
  * 然后再对求出的最值数组按列再求一次最值，
  * 二者之差就是所有n*n正方形区域内的最大整数与最小整数差了。当然，求滑动区间的最值就是使用单调队列实现的。
@@ -37,38 +37,40 @@ import java.util.Scanner;
  * 再竖着对第一行求下长度为3区间的最值存到第一个单元格里，第一个单元格存储的就是整个正方形区域内的最值了。
  * 当然我们是先把初始矩形各行长度为n区间的最值存到一个新的数组，然后再对这个数组竖着求最值存入又一个数组来实现的，
  * 以避免值被覆盖。实现细节见代码：
+ * 二维滑动窗口
  */
 public class 理想的正方形 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        a = sc.nextInt();
+        b = sc.nextInt();
         n = sc.nextInt();
-        m = sc.nextInt();
-        k = sc.nextInt();
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
+        for (int i = 1; i <= a; i++) {
+            for (int j = 1; j <= b; j++) {
                 w[i][j] = sc.nextInt();
             }
         }
-        for (int i = 1; i <= n; i++) {
-            getMin(w[i], row_min[i], m);
-            getMax(w[i], row_max[i], m);
-        }
-        int[] a = new int[N];
-        int[] b = new int[N];
-        int[] c = new int[N];
+        for (int i = 1; i <= a; i++) {
+            getMin(w[i], row_min[i], b);
+            getMax(w[i], row_max[i], b);
+        }//求行最大值长度为n的滑动窗口
+        int[] ta = new int[N];
+        int[] tb = new int[N];
+        int[] tc = new int[N];
         int res = (int) 1e9;
-        for (int i = k; i <= m; i++) {
-            for (int j = 1; j <= n; j++) {
-                a[j] = row_min[j][i];
+        for (int i = n; i <= b; i++) {//由于长度是k*k的
+            for (int j = 1; j <= a; j++) {
+                ta[j] = row_min[j][i];
+            }//列上的不连续存到a[]中,把第i列,放成一行,到a[]中
+
+            getMin(ta, tb, a);//把列中的最小值放进b中
+            for (int j = 1; j <= a; j++) {
+                ta[j] = row_max[j][i];
             }
-            getMin(a, b, n);
-            for (int j = 1; j <= n; j++) {
-                a[j] = row_max[j][i];
-            }
-            getMax(a, c, n);
-            for (int j = k; j <= n; j++) {
-                res = Math.min(res, c[j] - b[j]);
-            }
+            getMax(ta, tc, a);//把列中的最大值放进c中
+            for (int j = n; j <= a; j++) {
+                res = Math.min(res, tc[j] - tb[j]);
+            }//最小的,最大值减最小值
         }
         System.out.println(res);
     }
@@ -76,7 +78,7 @@ public class 理想的正方形 {
     static void getMin(int[] a, int[] b, int tot) {
         int hh = 0, tt = -1;
         for (int i = 1; i <= tot; i++) {
-            if (hh <= tt && q[hh] <= i - k) hh++;
+            if (hh <= tt && q[hh] <= i - n) hh++;
             while (hh <= tt && a[q[tt]] >= a[i]) tt--;
             q[++tt] = i;
             b[i] = a[q[hh]];
@@ -86,14 +88,14 @@ public class 理想的正方形 {
     static void getMax(int[] a, int[] b, int tot) {
         int hh = 0, tt = -1;
         for (int i = 1; i <= tot; i++) {
-            if (hh <= tt && q[hh] <= i - k) hh++;
+            if (hh <= tt && q[hh] <= i - n) hh++;
             while (hh <= tt && a[q[tt]] <= a[i]) tt--;
             q[++tt] = i;
             b[i] = a[q[hh]];
         }
     }
 
-    static int n, m, k, N = 1010;
+    static int a, b, n, N = 1010;
     static int[] q = new int[N];
     static int[][] w = new int[N][N];
     static int[][] row_max = new int[N][N];

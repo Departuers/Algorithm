@@ -1,7 +1,7 @@
 package dp.单调队列dp;
 
 import java.util.Scanner;
-
+//https://www.acwing.com/blog/content/150/
 public class 滑动窗口 {
     static int M = 1000000;
     static int[] q = new int[M];

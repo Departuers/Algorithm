@@ -40,7 +40,9 @@ import static java.lang.System.in;
  * 也就是链两条
  * 维护一个从前到后长度为n的区间最小值,Sj-Si-1>=0
  * 最小值大于等于0,就是安全的,否则不安全
- * i~i+n-1   si-s(i-1)>=0
+ * 一共有n个点,展开环就有2n个点,对于任意小于等于n的区间,及其子区间都要大于等于0
+ * 找到一个区间最小值,看是不是大于等于0,如果最小的,所有的长度小于等于n的区间都大于等于0,那就是成功
+ * i~i+n-1   si-s(i-1)>=0,所有的区间和都是>=0
  * 区间最值
  */
 public class 旅行问题 {
@@ -58,21 +60,42 @@ public class 旅行问题 {
         }
         int hh = 0, tt = -1;
         for (int i = n * 2; i != 0; i--) {
-            if (hh <= tt && q[hh] > i + n) hh++;
+            if (hh <= tt && q[hh] >= i + n) hh++;//由于算本身,所以>=就要删掉
             while (hh <= tt && s[q[tt]] >= s[i]) tt--;
             q[++tt] = i;
             if (i <= n) {
                 if (s[q[hh]] >= s[i - 1]) ans[i] = true;
             }
         }
+        b[0] = b[n];
+        for (int i = 1; i <= n; i++) {
+            s[i] = s[i + n] = a[i] - b[i - 1];
+        }
+        for (int i = 1; i <= n * 2; i++) {
+            s[i] += s[i - 1];
+        }
+        hh = 0;
+        tt = -1;
+        for (int i = 1; i <= n * 2; i++) {
+            if (hh <= tt && q[hh] < i - n) hh++;
+            if (i > n) {
+                if (s[q[hh]] <= s[i]) ans[i - n] = true;
+            }
+            while (hh <= tt && s[q[tt]] <= s[i]) tt--;
+            q[++tt] = i;
+        }
+        for (int i = 1; i <= n; i++) {
+            if (ans[i]) System.out.println("TAK");
+            else System.out.println("NIE");
+        }
     }
 
-    static boolean[] ans = new boolean[(int) 2e6];
-    static long[] s = new long[(int) (2e6 + 10)];
-    static int[] q = new int[(int) (2e6 + 10)];
-    static long[] a = new long[(int) (2e6 + 10)];
-    static long[] b = new long[(int) (2e6 + 10)];
-    static int n;
+    static int n, N = (int) (2e6 + 10);
+    static boolean[] ans = new boolean[N];
+    static long[] s = new long[N];
+    static int[] q = new int[N];
+    static long[] a = new long[N];
+    static long[] b = new long[N];
 
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
