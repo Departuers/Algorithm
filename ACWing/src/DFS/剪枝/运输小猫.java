@@ -69,7 +69,6 @@ public class 运输小猫 {
         System.out.println(ans);
         ans = 20;
         f(0);
-
         System.out.println(ans);
     }
 

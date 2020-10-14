@@ -41,16 +41,18 @@ public class 城堡问题 {
                 g[i][j] = sc.nextInt();
             }
         }
-        int cnt = 0, area = 0;
+        int s = 0, area = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (!vis[i][j]) {
-                    area = Math.max(bfs(i, j), area);
-                    cnt++;
+                    ans = 0;
+                    dfs(i, j);
+                    area = Math.max(ans, area);
+                    s++;
                 }
             }
         }
-        System.out.println(cnt);
+        System.out.println(s);
         System.out.println(area);
     }
 

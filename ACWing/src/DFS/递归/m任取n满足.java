@@ -28,7 +28,7 @@ public class m任取n满足 {
         System.out.println((e - a) / 1e8);
     }
 
-    static int ans, n = 30, k = 8, suma = 130;
+    static int ans, n = 10, k = 2, suma = 10;
     static int[] arr = new int[30];
 
     /**
@@ -57,6 +57,8 @@ public class m任取n满足 {
 
     /**
      * 枚举每个数选还是不选,加判断
+     * 加上pos之后,有k个坑,第一个坑里有n种平行选择,第二个坑里有n-1种,....类推
+     * 显然不加pos,k个坑中,每个坑都有n种平行选择,然而这道题中是顺序无关的,会有重复搜索
      *
      * @param u   当前选了多少个
      * @param sum 当前和
@@ -66,13 +68,19 @@ public class m任取n满足 {
         if (sum > suma || u > k) return;
         if (sum == suma && u == k) {
             ans++;
+            for (int i = 0; i < n; i++) {
+                if (x[i]) {
+                    System.out.print(arr[i] + " ");
+                }
+            }
+            System.out.println();
             return;
         }
         for (int i = pos; i < n; i++) {
-            if (!x[u]) {
-                x[u] = true;
+            if (!x[i]) {
+                x[i] = true;
                 dfs(u + 1, sum + arr[i], i + 1);
-                x[u] = false;
+                x[i] = false;
             }
         }
     }

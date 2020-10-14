@@ -35,6 +35,17 @@ public class 蛇形矩阵 {
             bw.write("\n");
         }
         bw.flush();
+        for (int k = 0, x = 0, y = 0, d = 0; k <= n * m; k++) {
+            res[x][y] = k;
+            int a = dx[d] + x, b = y + dy[d];
+            if (a < 0 || a >= n || b < 0 || b >= m || res[a][b] != 0) {
+                d = (d + 1) % 4;
+                a = x + dx[d];
+                b = y + dy[d];
+            }
+            x = a;
+            y = b;
+        }
     }
 
 

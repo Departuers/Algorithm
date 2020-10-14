@@ -57,7 +57,7 @@ public class 排列枚举 {
             return;
         }
         for (int i = 0; i < n; i++) {//每一位枚举n种平行选择
-            if (((state >> i) & 1) != 1) {//如果这个数字没被选,就选
+            if ((state >> i & 1) != 1) {//如果这个数字没被选,就选
                 path.add(arr[i]);
                 dfs(u + 1, state | (1 << i));//选上
                 path.remove(path.size() - 1);//恢复状态
