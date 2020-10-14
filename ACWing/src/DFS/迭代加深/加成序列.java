@@ -73,9 +73,16 @@ public class 加成序列 {
         }
     }
 
+    /**
+     * path 可以记录递归的路径
+     *
+     * @param u     当前有几个元素
+     * @param depth 深度
+     * @return 是否成功
+     */
     static boolean dfs(int u, int depth) {
         if (u > depth) return false;//超过深度
-        if (path[u - 1] == n) return true;//最后一个数等于要求的数
+        if (path[u - 1] == n) return true;//显然,是到下一层递归判断上一层结果对不对,所以是u-1,最后一个数等于要求的数
         Arrays.fill(st, false);//在一层里面不能枚举相同元素,
 
         //显然每一层,可能整出

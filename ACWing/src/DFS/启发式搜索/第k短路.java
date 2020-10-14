@@ -152,7 +152,6 @@ public class 第k短路 {
 
     //spfa处理估价函数,从终点往前搜
     static void spfa() {
-        boolean[] st = new boolean[N];
         ArrayDeque<Integer> q = new ArrayDeque<Integer>();
         q.add(T);
         Arrays.fill(dist, inf);

@@ -57,7 +57,6 @@ import java.util.Scanner;
  */
 //@SuppressWarnings("all")
 public class 字串变换 {
-    static String A, B;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -65,11 +64,11 @@ public class 字串变换 {
         B = sc.next();
         n = 0;
         while (sc.hasNext()) {
-            aaa[n] = sc.next();
-            bbb[n] = sc.next();
+            a[n] = sc.next();
+            b[n] = sc.next();
             n++;
         }
-        int step = bfs(A, B);
+        int step = bfs();
         if (step > 10) System.out.println("NO ANSWER!");
         else {
             System.out.println(step);
@@ -77,51 +76,47 @@ public class 字串变换 {
     }
 
     static int n;
+    static String A, B;
+    static ArrayDeque<String> qa = new ArrayDeque<String>(), qb = new ArrayDeque<String>();
+    static HashMap<String, Integer> da = new HashMap<String, Integer>(), db = new HashMap<String, Integer>();
+    static String[] a = new String[6], b = new String[6];
 
-    private static int bfs(String a, String b) {
-        ArrayDeque<String> qa = new ArrayDeque<String>(), qb = new ArrayDeque<String>();
-        HashMap<String, Integer> da = new HashMap<String, Integer>();
-        HashMap<String, Integer> db = new HashMap<String, Integer>();
-        qa.add(a);//起点往终点搜的队列
-        qb.add(b);
-        da.put(a, 0);
-        db.put(b, 0);
+    private static int bfs() {
+        qa.add(A);//起点往终点搜的队列
+        qb.add(B);
+        da.put(A, 0);
+        db.put(B, 0);
         //两个数组不能为空,从A点拓展出来的所有的都拓展完了,但B点还可以拓展,说明A和B不连通
         while (!qa.isEmpty() && !qb.isEmpty()) {
             int t = 0;
             if (qa.size() <= qb.size()) {
-                t = extend(qa, da, db);//把a变成b
-            } else t = extend(qb, db, da);//把b变成a
+                t = extend(qa, da, db, a, b);//把a变成b
+            } else t = extend(qb, db, da, b, a);//把b变成a
             if (t <= 10) return t;
         }
         return 11;
     }
 
-    private static int extend(ArrayDeque<String> q, HashMap<String, Integer> da, HashMap<String, Integer> db) {
+    private static int extend(ArrayDeque<String> q, HashMap<String, Integer> da, HashMap<String, Integer> db, String[] aaa, String[] bbb) {
         int star = 0;
         int j = 0;
         for (int k = 0, sk = q.size(); k < sk; k++) {
             String t = q.pollFirst();
-            if (t != null) {
-
-                for (int i = 0; i < n; i++) {
-                    star = 0;
-                    j = 0;
-                    while ((j = t.indexOf(aaa[i], star)) != -1) {
-                        star = j + 1;
-                        String state = t.substring(0, j) + bbb[i] + t.substring(j + aaa[i].length());
-                        if (db.containsKey(state)) return da.get(t) + 1 + db.get(state);
-                        if (da.containsKey(state)) continue;
-                        da.put(state, da.get(t) + 1);
-                        q.push(state);
-                    }
+            for (int i = 0; i < n; i++) {
+                star = 0;
+                j = 0;
+                while ((j = t.indexOf(aaa[i], star)) != -1) {
+                    star = j + 1;
+                    String state = t.substring(0, j) + bbb[i] + t.substring(j + aaa[i].length());
+                    if (db.containsKey(state)) return da.get(t) + 1 + db.get(state);
+                    if (da.containsKey(state)) continue;
+                    da.put(state, da.get(t) + 1);
+                    q.push(state);
                 }
             }
         }
         return 11;
     }
 
-    static int e;
-    static int N = 7;
-    static String[] aaa = new String[N], bbb = new String[N];
+
 }

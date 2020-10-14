@@ -97,7 +97,7 @@ public class 单词接龙 {
     static void dfs(String s, int last) {
         ans = Math.max(s.length(), ans);
         vis[last]++;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {//枚举和上一个单词
             if (g[last][i] > 0 && vis[i] < 2) {
                 dfs(s + word[i].substring(g[last][i]), i);
             }

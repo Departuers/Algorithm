@@ -47,8 +47,14 @@ public class 排列枚举 {
     static int n = 4;
     static ArrayList<Integer> path = new ArrayList<Integer>();
 
-    //u代表结果path有多少个
-    static void dfs(int u, int state) {//state通过位运算作为vis数字,
+    /**
+     * 没有加pos,显然就是n个坑,每个坑里有n种平行选择
+     * 所以就是全排列,path记录顺序,顺序相关
+     *
+     * @param u     u代表结果path有多少个
+     * @param state state通过位运算作为vis数字,状态
+     */
+    static void dfs(int u, int state) {
         if (u == n) {
 //            for (Integer w : path) {
 //                System.out.print(w + " ");
