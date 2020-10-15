@@ -61,33 +61,32 @@ public class 电路维修 {
             if (((n + m) & 1) == 1) System.out.println("NO SOLUTION");//首先，由于只能斜着走，所以横纵坐标要么同时加1，要么同时减1，
                 // 要么一个加1一个减1。不论是那种，从起点（0,0）出发，能够到达的点的横纵坐标之和一定是偶数，所以当R + C是奇数时，就无解
             else {
-                bfs(0, 0);
+                bfs();
                 System.out.println(dist[n][m]);
             }
         }
     }
 
-    static int inf = 0x3f3f3f3f;
 
-    private static int bfs(int x, int y) {
-        q.clear();
-        for (boolean[] vi : vis) {
-            Arrays.fill(vi, false);
-        }
+    private static void bfs() {
         for (int[] ints : dist) {
             Arrays.fill(ints, inf);
         }
-        q.add(new node(x, y));
-        dist[x][y] = 0;
+        for (boolean[] w : st) {
+            Arrays.fill(w, false);
+        }
+        q.add(new node(0, 0));
+        dist[0][0] = 0;
         while (!q.isEmpty()) {
             node e = q.poll();
-            if (vis[e.x][e.y]) continue;
-            vis[e.x][e.y] = true;
+            if (st[e.x][e.y]) continue;
+            st[e.x][e.y] = true;
             for (int i = 0; i < 4; i++) {
                 int nx = e.x + dir[i][0], ny = e.y + dir[i][1];
                 if (nx < 0 || nx > n || ny < 0 || ny > m) continue;
-                int ex = e.x + idx[i][0], ey = e.y + idx[i][1];//在格子里的下标
-                int w = (g[nx][ny] != op.charAt(i) ? 1 : 0);
+                int ex = e.x + idx[i][0], ey = e.y + idx[i][1];//在格子里的下标,斜杠的位置
+                //ex代表往下扩展的点,所经过的边在地图,也就是g数组中的位置,得到的是方向
+                int w = (g[ex][ey] != op.charAt(i) ? 1 : 0);
                 int d = dist[e.x][e.y] + w;//4个方向,判断这条边有没有,没有就是边权为1的边
                 if (d < dist[nx][ny]) {//类似于Dijkstra的松弛,能够松弛才入队
                     dist[nx][ny] = d;
@@ -96,16 +95,16 @@ public class 电路维修 {
                 }
             }
         }
-        return -1;//一定不会被执行到,无解情况已经被奇偶性判掉
     }
 
     static String op = "\\/\\/";//4个方向
-    static int[][] dir = {{-1, -1}, {-1, 1}, {1, 1}, {1, -1}};
-    static int[][] idx = {{-1, -1}, {-1, 0}, {0, 0}, {0, -1}};
+    static int[][] dir = {{-1, -1}, {-1, 1}, {1, 1}, {1, -1}};//地图的位置
 
+    static int[][] idx = {{-1, -1}, {-1, 0}, {0, 0}, {0, -1}};
+    static int inf = 0x3f3f3f3f;
     static ArrayDeque<node> q = new ArrayDeque<node>();
     static int n, m, N = 510, M = N * N;
     static int[][] dist = new int[N][N];
     static char[][] g = new char[N][N];
-    static boolean[][] vis = new boolean[N][N];
+    static boolean[][] st = new boolean[N][N];
 }

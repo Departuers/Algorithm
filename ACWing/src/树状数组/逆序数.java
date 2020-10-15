@@ -8,6 +8,8 @@ import java.util.Scanner;
  * 离散化+树状数组求逆序对
  * 5
  * 13 6 9 11 5
+ * 每个数所对应的换位次数（逆序对）=前面比它大的+后面比它小的 咳咳，貌似又废话了一遍~~~
+ * 每次读入一个数就先把它放到树状数组中去，但这个树状数组保存的并不是这个数，而是这个数出现的次数。
  */
 public class 逆序数 {
     static class node implements Comparable<node> {
@@ -33,14 +35,14 @@ public class 逆序数 {
         }
         Arrays.sort(de, 1, n + 1);
         /**
-         * 正序循环,巧妙想法,也可以求逆序数
+         * 正序循环,巧妙想法,也可以求逆序数,而树状数组存储每个值出现的次数
          * res记录每个数左边有多少个比它大的,
          */
         int res = 0;
         for (int i = 1; i <= n; i++) {
             int y = de[i].index;
             res += ask(n) - ask(y);
-            add(y, 1);
+            add(y, 1);//存储每个值出现的次数
         }
         System.out.println(res);
     }

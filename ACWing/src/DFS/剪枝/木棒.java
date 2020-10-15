@@ -119,6 +119,8 @@ public class 木棒 {
     }
 
     /**
+     * 枚举组合数,比如枚举1,2,3只搜到1种情况而不是6种
+     * 显然
      * @param u     当前位置
      * @param s     当前长度
      * @param start 每次起始点
@@ -144,7 +146,7 @@ public class 木棒 {
             //如果是最后一根木棍失败了
             if (s + w[i] == len) return false;
 
-            //过滤相等的木棍
+            //过滤相等的木棍,显然
             int j = i;
             while (j < n && w[j].equals(w[i])) j++;
             i = j - 1;

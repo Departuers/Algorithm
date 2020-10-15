@@ -1,4 +1,4 @@
-package 尺取法;
+package doublePointer;
 
 /**
  * https://www.cnblogs.com/-Ackerman/p/11162833.html

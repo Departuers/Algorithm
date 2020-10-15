@@ -20,6 +20,7 @@ import java.util.Scanner;
  * 输出样例：
  * 2
  * 0
+ * 插入O(n)跟字符串长度有关  查询O(n)
  * 这里有个二维数组son，第一维p表示结点的编号，第二维s表示当前结点是什么字母，
  * 将a - z映射到0 - 25.son[p][s]的值表示其孩子结点的编号。
  * 这里格外要注意的是，除了第一次插入的字符外（比如插入abc，第一次插入的是a），
@@ -52,7 +53,9 @@ public class 前缀统计 {
 
 
     static int[][] son = new int[500000][26];
+    //m代表
     static int[] cnt = new int[500000];
+    //cnt[idx]以idx这个点单词结尾的个数
     static int n, m, idx = 1;
     static char[] str;
 
@@ -60,11 +63,11 @@ public class 前缀统计 {
      * son[p][s]  p代表节点编号, a~z映射到0~25
      */
     static void insert() {
-        int p = 0;
+        int p = 0;//tire一般根节点是0节点
         for (int i = 0; i < str.length; i++) {
-            int s = str[i] - 'a';
+            int s = str[i] - 'a';//每一个字母
             if (son[p][s] == 0) son[p][s] = idx++;
-            p = son[p][s];
+            p = son[p][s];//指向下一个位置
         }
         cnt[p]++;
     }
@@ -76,13 +79,14 @@ public class 前缀统计 {
      * 于是加上单词数1；接着发现c在字典树里也有，
      * 于是又加上了单词数，此次查询找到了abc的前缀ab和abc。第二次查询efg，
      * 因为son[0][4] = 0.不存在索引结点为e，所以查询终止。
+     *
      * @return
      */
     static int serch() {
         int p = 0, res = 0;
         for (int i = 0; i < str.length; i++) {
             int s = str[i] - 'a';
-            if (son[p][s] == 0) break;
+            if (son[p][s] == 0) break;//没有这个单词
             p = son[p][s];
             res += cnt[p];
         }
