@@ -27,7 +27,6 @@ public class 数星星 {
 
     static int N = 32001, n;
     static int[] tr = new int[N];
-    static int[] a = new int[N];
     static int[] level = new int[N];
 
     static void add(int a, int b) {

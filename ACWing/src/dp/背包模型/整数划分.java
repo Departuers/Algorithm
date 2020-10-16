@@ -20,11 +20,11 @@ import java.util.Scanner;
  * 7
  * 可以看成完全背包问题求方案数
  * 定义状态为:f[i,j]为前i个物品可选总和为j的方案数
- * 状态划分,考虑last
+ * 状态划分,考虑last,选不选第i个物品
  * 划分成两个部分:
  * 不选第i个物品:f[i-1,j]
  * 选上第i个物品k个:f[i-1,j]+f[i-1,j-i]+f[i-1,j-2i]+...f[i-1,j-ki]  (j>=ki)
- *              f[i-1,j-i]=          f[i-1,j-2i]+...f[i-1,j-ki]
+ *               f[i-1,j-i]=          f[i-1,j-2i]+...f[i-1,j-ki]
  * 则f[i,j]=f[i-1,j]+f[i-1,j-i]
  */
 public class 整数划分 {

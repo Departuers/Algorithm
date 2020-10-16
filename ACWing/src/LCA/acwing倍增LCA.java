@@ -52,7 +52,6 @@ public class acwing倍增LCA {
     static int[] e = new int[maxn << 1];
     static int[] h = new int[maxn];
     static int[] ne = new int[maxn << 1];
-    static int[] w = new int[maxn << 1];
     static int n, m, cnt = 1, root;
     static int[][] up = new int[maxn][20];
     static int[] depth = new int[maxn];

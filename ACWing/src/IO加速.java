@@ -1,8 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-import static java.lang.System.in;
-
 public class IO加速 {
     static void f() {
         long s = System.nanoTime();
@@ -109,7 +107,7 @@ public class IO加速 {
     }
 
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer tokenizer = new StringTokenizer("");
 
     static String nextLine() throws IOException {// 读取下一行字符串

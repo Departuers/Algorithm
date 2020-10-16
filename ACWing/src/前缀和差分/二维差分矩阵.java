@@ -6,9 +6,13 @@ import java.util.StringTokenizer;
 import static java.lang.System.in;
 
 /**
- *
+ * 假设原矩阵是Aij
+ * 构造差分矩阵 Bi,j
+ * 使得差分矩阵求了前缀和是Ai,j
+ * 考虑更新
  */
 public class 二维差分矩阵 {
+
     public static void main(String[] args) throws IOException {
         n = nextInt();
         m = nextInt();
@@ -30,18 +34,19 @@ public class 二维差分矩阵 {
         }
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= m; j++) {
-                bw.write(ca[i][j]+" ");
+                bw.write(ca[i][j] + " ");
             }
             bw.write("\n");
         }
         bw.flush();
     }
 
+    //给一个矩阵加上c,x1,y1是左上角的点坐标,x2,y2是右下角的坐标
     static void insert(int x1, int y1, int x2, int y2, int c) {
-        ca[x1][y1] += c;
-        ca[x1][y2 + 1] -= c;
-        ca[x2 + 1][y1] -= c;
-        ca[x2+1][y2+1] += c;
+        ca[x1][y1] += c;//右下角全部加上c
+        ca[x1][y2 + 1] -= c;//右边减去c
+        ca[x2 + 1][y1] -= c;//下方减去c
+        ca[x2 + 1][y2 + 1] += c;//重复减的加上c
     }
 
     static int[][] ca;

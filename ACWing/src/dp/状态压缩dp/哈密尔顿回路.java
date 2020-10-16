@@ -6,7 +6,7 @@ import java.util.Scanner;
 import static java.lang.Math.min;
 
 /**
- * * https://blog.csdn.net/qq_30277239/article/details/103992712
+ * https://blog.csdn.net/qq_30277239/article/details/103992712
  * 给定一张 n个点的带权无向图，点从 0~n-1 标号，求起点 0 到终点 n-1 的最短Hamilton路径。
  * Hamilton路径的定义是从 0 到 n-1 不重不漏地经过每个点恰好一次。
  * 输入格式
