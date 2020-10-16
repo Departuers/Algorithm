@@ -6,11 +6,11 @@ package 数学;
 public class 埃氏筛法 {
     public static void main(String[] args) {
         long s = System.nanoTime();
-        e(12345678);
+        e(32345678);
         long t = System.nanoTime();
         System.out.println((t - s) / 1e8);
         s = System.nanoTime();
-        euler(12345678);
+        euler(32345678);
 //        e(12345678);
         t = System.nanoTime();
         System.out.println((t - s) / 1e8);

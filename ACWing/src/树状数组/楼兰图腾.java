@@ -24,12 +24,12 @@ public class 楼兰图腾 {
          * lower记录左边有多少比它小的
          */
         for (int i = 1; i <= n; i++) {
-            int y=a[i];
+            int y = a[i];
             great[i] = ask(n) - ask(y);
-            lower[i] = ask(y-1);
+            lower[i] = ask(y - 1);
             add(y, 1);
         }
-        Arrays.fill(c, 0);
+        Arrays.fill(c, 0);//清空树状数组
         /**
          * 倒序循环这里great记录右边有多少个比它大的,
          * lower记录右边有多少比它小的

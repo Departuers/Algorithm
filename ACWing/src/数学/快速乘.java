@@ -60,5 +60,4 @@ public class 快速乘 {
         return res;
     }
 
-
 }

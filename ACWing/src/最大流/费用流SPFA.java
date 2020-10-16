@@ -21,8 +21,13 @@ public class 费用流SPFA {
         m = nextInt();
         S = nextInt();
         T = nextInt();
+        int a, b, xianzhi, feiyong;
         for (int i = 0; i < m; i++) {
-            add(nextInt(), nextInt(), nextInt(), nextInt());
+            a = nextInt();
+            b = nextInt();
+            xianzhi = nextInt();
+            feiyong = nextInt();
+            add(a, b, xianzhi, feiyong);
         }
         min_cost_flow();
         bw.write(maxflow + " " + mincost);
@@ -34,11 +39,11 @@ public class 费用流SPFA {
         maxflow = 0;
         while (spfa()) {
             for (int i = T; i != S; i = e[pre[i] ^ 1]) {
-                w[pre[i]] -= f[T];
-                w[pre[i] ^ 1] += f[T];
+                w[pre[i]] -= flow[T];
+                w[pre[i] ^ 1] += flow[T];
             }
-            maxflow += f[T];
-            mincost += f[T] * d[T];
+            maxflow += flow[T];
+            mincost += flow[T] * huafei[T];
         }
     }
 
@@ -48,8 +53,8 @@ public class 费用流SPFA {
     static int[] ne = new int[M];
     static int[] cost = new int[M];
 
-    static int[] f = new int[N];
-    static int[] d = new int[N];
+    static int[] flow = new int[N];
+    static int[] huafei = new int[N];
     static boolean[] st = new boolean[N];
     static int[] pre = new int[N];
 
@@ -70,28 +75,28 @@ public class 费用流SPFA {
 
     static boolean spfa() {
         q.clear();
-        Arrays.fill(d, inf);
+        Arrays.fill(huafei, inf);
         Arrays.fill(st, false);
-        d[S] = 0;
-        f[S] = inf;
+        huafei[S] = 0;
+        flow[S] = inf;
         q.add(S);
         while (!q.isEmpty()) {
             int u = q.poll();
             st[u] = false;
             for (int i = h[u]; i != 0; i = ne[i]) {
                 int j = e[i];
-                if (d[j] > d[u] + cost[i] && w[i] != 0) {
+                if (huafei[j] > huafei[u] + cost[i] && w[i] != 0) {
                     pre[j] = i;
-                    d[j] = d[u] + cost[i];
-                    f[j] = Math.min(f[u], w[i]);
-                    if (!st[j]) {
+                    huafei[j] = huafei[u] + cost[i];
+                    flow[j] = Math.min(flow[u], w[i]);//取流量限制最小的
+                    if (!st[j]) {//spfa
                         st[j] = true;
                         q.add(j);
                     }
                 }
             }
         }
-        return d[T] != inf;
+        return huafei[T] != inf;
     }
 
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

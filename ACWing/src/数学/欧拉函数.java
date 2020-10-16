@@ -25,6 +25,10 @@ public class 欧拉函数 {
     static int[] euler = new int[(int) 1e5];
     static int cnt = 0;
 
+    /**
+     * 筛法求欧拉函数
+     * @param n
+     */
     static void geteuler(int n) {
 
         euler[1] = 1;

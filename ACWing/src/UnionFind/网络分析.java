@@ -46,18 +46,18 @@ public class 网络分析 {
                     //两个数所在集合都向root连一条边
                     add(root, a);
                     add(root, b);
-                    root++;
+                    root++;//增加新的根节点
                 }
             } else {
                 a = find(a);
-                f[a] += b;
+                f[a] += b;//根节点增加b
             }
         }
         for (int i = n + 1; i < root; i++) {
             if (p[i] == i) dfs(i, 0);
         }
         for (int i = 1; i <= n; i++) {
-            bw.write(f[i]+" ");
+            bw.write(f[i] + " ");
         }
         bw.flush();
     }

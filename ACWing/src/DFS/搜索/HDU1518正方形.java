@@ -52,14 +52,14 @@ public class HDU1518正方形 {
      * @param u     u代表扫到了数组哪一个位置
      * @param sum   当前长度之和,等于half也就是总长度/4代表找完一组边可以组成边
      * @param edges 边数
-     * @param x     下一层的枚举起点
+     * @param pos   下一层的枚举起点
      */
-    static void dfs(int u, int sum, int edges, int x) {
+    static void dfs(int u, int sum, int edges, int pos) {
         if (f) return;
-        if (sum == half) {
+        if (sum == half) {//组成了一条边
             sum = 0;
             edges++;
-            x = 0;
+            pos = 0;
         }
         if (u == n) {
             if (edges == 4) {
@@ -67,7 +67,7 @@ public class HDU1518正方形 {
             }
             return;
         }
-        for (int i = x; i < n; i++) {
+        for (int i = pos; i < n; i++) {//枚举组合数,顺序无关
             if (!st[i] && sum + a[i] <= half) {
                 st[i] = true;
                 dfs(u + 1, sum + a[i], edges, i + 1);

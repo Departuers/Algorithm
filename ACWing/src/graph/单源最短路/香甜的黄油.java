@@ -50,7 +50,7 @@ public class 香甜的黄油 {
 
     static int spfa(int s) {
         int res = 0;
-        Arrays.fill(dis, Integer.MAX_VALUE / 2);
+        Arrays.fill(dis, inf);
         dis[s] = 0;
         q.add(s);
         vis[s] = true;
@@ -71,7 +71,7 @@ public class 香甜的黄油 {
         //计算从0~n的距离和
         for (int i = 0; i < n; i++) {
             int j = g[i];
-            if (dis[j] == Integer.MAX_VALUE / 2) return Integer.MAX_VALUE / 2;
+            if (dis[j] == inf) return inf;
             //无法到达
             res += dis[j];
         }
@@ -81,7 +81,7 @@ public class 香甜的黄油 {
     static int Dijkstra(int s) {
         int res = 0;
         PriorityQueue<node> q = new PriorityQueue<node>();
-        Arrays.fill(dis, Integer.MAX_VALUE / 2);
+        Arrays.fill(dis, inf);
         Arrays.fill(vis, false);
         dis[s] = 0;
         q.add(new node(0, s));
@@ -92,7 +92,7 @@ public class 香甜的黄油 {
             vis[p] = true;
             for (int i = he[p]; i != 0; i = ne[i]) {
                 int ed = e[i];
-                if (dis[p] != Integer.MAX_VALUE && dis[ed] > dis[p] + w[i]) {
+                if (dis[p] != inf&& dis[ed] > dis[p] + w[i]) {
                     dis[ed] = dis[p] + w[i];
                     q.add(new node(ed, dis[ed]));
                 }
@@ -100,7 +100,7 @@ public class 香甜的黄油 {
         }
         for (int i = 0; i < n; i++) {
             int j = g[i];
-            if (dis[j] == Integer.MAX_VALUE / 2) return Integer.MAX_VALUE / 2;
+            if (dis[j] == inf) return inf;
             //无法到达
             res += dis[j];
         }
@@ -121,7 +121,6 @@ public class 香甜的黄油 {
         }
     }
 
-    static int ans = Integer.MAX_VALUE;
 
     static void add(int a, int b, int c) {
         e[cnt] = b;
@@ -137,7 +136,7 @@ public class 香甜的黄油 {
     static boolean[] vis = new boolean[2560];
     static int[] dis = new int[2560];
     static ArrayDeque<Integer> q = new ArrayDeque<Integer>();
-    static int n, m, p, cnt = 1;
+    static int n, m, p, cnt = 1, inf = 0x3f3f3f3f,ans=inf;
     static int[] g = new int[2523];
 
 }
