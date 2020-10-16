@@ -34,19 +34,21 @@ public class 组合m个数 {
 //        n = sc.nextInt();
 //        m = sc.nextInt();
         long l = System.nanoTime();
-        dfs(0, 0, 0);
+//        dfs(0, 0, 0);
+        d(0, 0);
+
         long e = System.nanoTime();
         System.out.println((e - l) / 1e9);
         l = System.nanoTime();
-        dfs(0, 0);
+//        dfs(0, 0);
         e = System.nanoTime();
         System.out.println((e - l) / 1e9);
 
 
     }
 
-    static int m = 9, n = 12;
-    static int[] arr = {23, 1, 2, 4, 7, 3, 6, 8, 1, 5, 12,1};
+    static int m = 3, n = 5;
+    static int[] arr = {23, 1, 2, 4, 7, 3, 6, 8, 1, 5, 12, 1};
     static int[] vis = new int[120];
 
     //枚举到第u位 ,sum是当前选了几个,state是vis数组
@@ -84,5 +86,33 @@ public class 组合m个数 {
         dfs(u + 1, k + 1);//选第u个
         vis[u] = 0;
         dfs(u + 1, k);
+    }
+
+    static boolean[] st = new boolean[100000];
+
+    /**
+     * 组合m数
+     *
+     * @param u
+     * @param pos
+     */
+    static void d(int u, int pos) {
+        if (u > m) return;
+        if (u == m) {
+            for (int i = 0; i < n; i++) {
+                if (st[i]) {
+                    System.out.print(i + 1 + " ");
+                }
+            }
+            System.out.println();
+            return;
+        }
+        for (int i = pos; i < n; i++) {
+            if (!st[i]) {
+                st[i] = true;
+                d(u + 1, i + 1);
+                st[i] = false;
+            }
+        }
     }
 }
