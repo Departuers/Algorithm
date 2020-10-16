@@ -39,7 +39,7 @@ public class 整数小拼接 {
         int sum = 0;
         if (num != 0) {
             sum = 1;
-            while (num != 0) {
+            while (num != 0) {//阶乘...任意两个都可以构成小于k的
                 sum *= num;
                 num--;
             }
