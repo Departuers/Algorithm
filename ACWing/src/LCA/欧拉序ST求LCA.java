@@ -90,13 +90,13 @@ public class 欧拉序ST求LCA {
         }
         for (int j = 1; 1 << j <= len; j++) {
             for (int i = 1; i + (1 << j) - 1 <= len; i++) {
-                st[i][j] = calc(st[i][j - 1], st[i + (1 << (j - 1))][j - 1]);
+                st[i][j] = min(st[i][j - 1], st[i + (1 << (j - 1))][j - 1]);
                 //记录最浅的那个节点
             }
         }
     }
 
-    static int calc(int x, int y) {
+    static int min(int x, int y) {
         return depth[x] < depth[y] ? x : y;
     }
 
@@ -116,11 +116,9 @@ public class 欧拉序ST求LCA {
     static int query(int x, int y) {
         int l = first[x], r = first[y];
         if (l > r) {
-            int t = l;
-            l = r;
-            r = t;
+            return query(y, x);
         }
         int k = log[r - l + 1];
-        return euler[calc(st[l][k], st[r - (1 << k) + 1][k])];
+        return euler[min(st[l][k], st[r - (1 << k) + 1][k])];
     }
 }

@@ -3,11 +3,11 @@ package 线段树;
 import java.io.*;
 import java.util.*;
 
-import static java.lang.System.in;
-
 /**
  * https://oi-wiki.org/geometry/scanning/#_3
  * https://www.acwing.com/solution/content/20903/
+ * https://blog.csdn.net/narcissus2_/article/details/88418870
+ * https://blog.csdn.net/wucstdio/article/details/80064738
  * 积分思想
  * 分成几个小块扫描
  * 把纵坐标做成一个线段树
@@ -22,7 +22,7 @@ import static java.lang.System.in;
  */
 public class 亚特兰蒂斯扫描线 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer tokenizer = new StringTokenizer("");
 
     static String nextLine() throws IOException {// 读取下一行字符串
@@ -48,13 +48,13 @@ public class 亚特兰蒂斯扫描线 {
     public static void main(String[] args) throws IOException {
         int T = 1;
         double x1, y1, x2, y2;
-        for (int i = 0; i < 3; i++) {
-            System.out.println(seg[i].x);
-        }
         while (true) {
+            ys.clear();
             n = nextInt();
+            seg = new seg[n * 2];
             if (n == 0) break;
-            for (int i = 0, j = 0; i < n; i++) {
+            int j = 0;
+            for (int i = 0; i < n; i++) {
                 x1 = nextDouble();
                 y1 = nextDouble();
                 x2 = nextDouble();
@@ -65,17 +65,22 @@ public class 亚特兰蒂斯扫描线 {
                 ys.add(y2);
             }
             Collections.sort(ys);
-            int cnt = unique(ys);
-            build(1, 0, cnt - 2);
-            Arrays.sort(seg, 0, cnt);
+            unique(ys);
+            build(1, 0, ys.size() - 2);
+            Arrays.sort(seg, 0, j);
             double res = 0;
             for (int i = 0; i < n * 2; i++) {
-                if (i > 0) res += tr[1].len * (seg[i].x);
+                if (i > 0) res += tr[1].len * (seg[i].x - seg[i - 1].x);
+                up(1, query(seg[i].y1), query(seg[i].y2) - 1, seg[i].k);
             }
+            System.out.println("Test case #" + T);
+            T++;
+            System.out.printf("Total explored area: %.2f\n\n", res);
         }
     }
 
     static void build(int k, int l, int r) {
+
         tr[k] = new node(l, r, 0, 0);
         if (l != r) {
             int mid = l + r >> 1;
@@ -105,12 +110,10 @@ public class 亚特兰蒂斯扫描线 {
             pushup(k);
         } else {
             int mid = tr[k].l + tr[k].r >> 1;
-            if (l <= mid) {
+            if (l <= mid)
                 up(k << 1, l, r, d);
-            }
-            if (r > mid) {
+            if (r > mid)
                 up(k << 1 | 1, l, r, d);
-            }
             pushup(k);
         }
     }
@@ -128,41 +131,54 @@ public class 亚特兰蒂斯扫描线 {
 
         @Override
         public int compareTo(seg seg) {
-            return seg.x < x ? 1 : -1;
+            return x > seg.x ? 1 : -1;
         }
     }
 
     static class node {
+        int l, r;
+        int cnt = 0;//当前区间整个被覆盖的次数
+        double len; //不考虑祖先节点cnt的前提下， cnt > 0的区间总长
+
         public node(int l, int r, int cnt, double len) {
             this.l = l;
             this.r = r;
             this.cnt = cnt;
             this.len = len;
         }
-
-        int l, r;
-        int cnt = 0;//当前区间整个被覆盖的次数
-        double len; //不考虑祖先节点cnt的前提下， cnt > 0的区间总长
     }
 
     static int N = 100010, n;
-    static seg[] seg = new seg[N * 2];
+    static seg[] seg;
     static node[] tr = new node[N * 8];
     static ArrayList<Double> ys = new ArrayList<Double>();
 
     static int query(double target) {
-        int l = 0, r = ys.size();
-        return 0;
+        int l = 0, r = ys.size() - 1;
+        while (l < r) {
+            int mid = l + r >> 1;
+            if (ys.get(mid) >= target) r = mid;
+            else l = mid + 1;
+        }
+        return l;
     }
 
-    static int unique(ArrayList<Double> list) {
+    /**
+     * 去重
+     *
+     * @param list
+     */
+    static void unique(ArrayList<Double> list) {
         int j = 0;
+        int cnt = list.size();
         for (int i = 0; i < list.size(); i++) {
             if (i == 0 || !list.get(i - 1).equals(list.get(i))) {
                 list.set(j, list.get(i));
                 j++;
             }
         }
-        return j;
+        for (int i = j; i < cnt; i++) {
+            list.remove(list.size() - 1);
+        }
     }
 }

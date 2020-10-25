@@ -3,6 +3,7 @@ package dp.状态机模型;
 import java.util.Scanner;
 
 /**
+ * O(nk)
  * https://blog.csdn.net/qq_30277239/article/details/104159301
  * 给定一个长度为 N 的数组，数组中的第 i 个数字表示一个给定股票在第 i天的价格。
  * 设计一个算法来计算你所能获取的最大利润，你最多可以完成 k笔交易。
@@ -46,7 +47,7 @@ import java.util.Scanner;
  * 减去w表示买入股票扣了w元；若前一天的状态是1，则说明第i天未进行操作，
  * f[i][j][1] = f[i-1][j][1]，故f[i][j][1] = max(f[i-1][j][1],f[i-1][j-1][0]-w[i])。
  * 从而状态转移方程就求出来了，下面考虑边界状态，f[i][0][0]表示第i天都未进行交易，
- * 收益是0，除此之外，f[i][[j][0]与f[i][0][1]的初始状态都应该是不合法的，设置为-INF。
+ * 收益是0，除此之外，f[i][j][0]与f[i][0][1]的初始状态都应该是不合法的，设置为-INF。
  * <p>
  * 引入一层状态用来存交易次数
  */
@@ -64,7 +65,7 @@ public class 股票买卖4 {
 
     /**
      * f[i,j,0]表示第i天已经进行了j次交易且此时未持仓，
-     * f[i][j][1]表示到第i天已经进行了j次交易且此时持有仓位。
+     * f[i,j,1]表示到第i天已经进行了j次交易且此时持有仓位。
      */
     static void O3() {
         for (int i = 0; i <= n; i++) {
@@ -76,8 +77,8 @@ public class 股票买卖4 {
         }//初始化负无穷
         f[0][0][0] = 0;
         for (int i = 1; i <= n; i++) {
-            f[i][0][0] = 0;
-            for (int j = 1; j <= k; j++) {
+            f[i][0][0] = 0;//j=0的情况
+            for (int j = 1; j <= k; j++) {//j=1~k的情况
                 f[i][j][0] = Math.max(f[i - 1][j][0], f[i - 1][j][1] + a[i]);
                 //卖出不消耗次数
                 f[i][j][1] = Math.max(f[i - 1][j][1], f[i - 1][j - 1][0] - a[i]);
@@ -86,7 +87,7 @@ public class 股票买卖4 {
             }
         }
 
-        //查看进行i次交易能得到利润最大值
+        //查看进行i次交易,手中无货能得到利润最大值
         int res = 0;
         for (int i = 0; i <= k; i++) {
             res = Math.max(res, f[n][i][0]);
@@ -94,10 +95,11 @@ public class 股票买卖4 {
         System.out.println(res);
     }
 
+    // 优化空间为n^2
     static void o2() {
         for (int j = 0; j <= k; j++) {
             for (int l = 0; l < 2; l++) {
-                dp[j][l] = Integer.MIN_VALUE / 2;
+                dp[j][l] = -0x3f3f3f3f;
             }
         }
         dp[0][0] = 0;

@@ -6,6 +6,7 @@ import java.util.Scanner;
  * 给定一个序列
  * 最少可以拆分成多少个上升子序列与下降子序列
  * LIS+DFS
+ * DFS求最小步数,可以用迭代加深/全局变量最小值,一直更新
  * 每一个数字都有4种放法:
  * 1. 放在上升子序列的后面
  * 2. 开一个新的上升子序列
@@ -32,7 +33,8 @@ public class 导弹防御系统 {
     //u代表遍历到哪一个元素,sup代表有多少个上升子序列
     //sdown代表有多少个下降子序列
     static void dfs(int u, int sup, int sdown) {
-        if (sup + sdown >= ans) return;//最优剪枝
+        if (sup + sdown >= ans) return;//最优剪枝,约等于迭代加深
+        //dfs可以非常快找到一个合法解
         if (u == N) {
             //sup+sdown>=ans已经被判掉
             ans = sup + sdown;

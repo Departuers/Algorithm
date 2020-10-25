@@ -61,7 +61,6 @@ import java.util.Scanner;
  */
 public class 大盗阿福 {
     public static void main(String[] args) {
-        fin();
     }
 
     //dp.线性dp
@@ -89,9 +88,9 @@ public class 大盗阿福 {
      * f[i,0] f[i,1] 表示:所有走了i步,且当前位于状态j的所有走法
      * 属性:max
      * 状态0代表没偷,状态1代表偷了
-     * 0->0
-     * 0->1
-     * 1->0
+     * 0->0  上次没偷这次也不偷
+     * 0->1  上次没偷这次偷
+     * 1->0  上次偷了这次没偷
      * 只有这三种转移方式
      * 状态计算:f[i,0]   0->0  上一个不偷,这个一个也不偷, 对应就是f[i-1,0]
      * 1->0  上一个偷了,这个不偷  f[i-1,1]
@@ -112,6 +111,7 @@ public class 大盗阿福 {
                 //从上一个也不选,或者上一个选转移过来
                 f[i][0] = Math.max(f[i - 1][0], f[i - 1][1]);
                 f[i][1] = f[i - 1][0] + a[i];
+
                 //从上一个不选转移过来
             }
             System.out.println(Math.max(f[n][0], f[n][1]));

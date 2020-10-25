@@ -143,8 +143,8 @@ public class 秘密的牛奶运输 {
     }
 
     static int find(int a) {
-        if (p[a] != a) return p[a] = find(p[a]);
-        return a;
+        if (p[a] != a) p[a] = find(p[a]);
+        return p[a];
     }
 
     static class node implements Comparable<node> {

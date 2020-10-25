@@ -34,7 +34,7 @@ public class HDoj1978多少条路 {
     static int dfs(int x, int y) {
         int t = 0;
         if (dp[x][y] >= 0) return dp[x][y];
-        if (x == n && y == m) return 1;
+        if (x == n && y == m) return 1;//有一种方式
 
         for (int i = 0; i <= a[x][y]; i++) {
             for (int j = 0; j <= a[x][y] - i; j++) {

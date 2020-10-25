@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 import static java.lang.System.in;
 
 /**
- * 不能用废弃
+ * 不能用废弃,用树状数组+整体二分代替
  * https://www.acwing.com/blog/content/487/
  * 静态区间第k大
  * 我们可以建立一颗权值线段树，每个点存储的信息为该值域区间存在的数的个数。
@@ -57,12 +57,15 @@ public class 静态主席树结点版本 {
             d[i] = a[i];
         }
         Arrays.sort(d, 1, n + 1);
-        int len = unique(d, n);
+        int len = unique(d, n + 1);
         for (int i = 1; i <= n; i++) {
             a[i] = Arrays.binarySearch(d, 1, 1 + len, a[i]);
         }
-        T[0] = build(1, len);
-        for (int i = 1; i <=n; i++) {
+        for (int i = 0; i < tr.length; i++) {
+            tr[i] = new seg(0, 0, 0);
+        }
+        T[0] = build(1, len + 1);
+        for (int i = 1; i <= n; i++) {
             T[i] = update(T[i - 1], 1, len, a[i]);
         }
         int l, r, k;
@@ -83,7 +86,7 @@ public class 静态主席树结点版本 {
 
     static int unique(int[] t, int n) {
         int j = 1;
-        for (int i = 1; i <= n; i++) {
+        for (int i = 1; i < n; i++) {
             if (j == 1 || t[i] != t[i - 1]) {
                 t[j++] = t[i];
             }
@@ -99,8 +102,7 @@ public class 静态主席树结点版本 {
      * @return 根节点位置
      */
     static int build(int l, int r) {
-        int p = ++tot, mid = l + r >> 1;
-        tr[p] = new seg(l, r, 0);
+        int p = ++tot, mid = (l + r) >> 1;
         if (l < r) {
             tr[p].l = build(l, mid);
             tr[p].r = build(mid + 1, r);
