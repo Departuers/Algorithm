@@ -48,6 +48,7 @@ public class 机器分配 {
                 w[i][j] = sc.nextInt();
             }
         }
+
         for (int i = 1; i <= n; i++) {
             for (int j = 0; j <= m; j++) {
                 f[i][j] = f[i - 1][j];//一个都不选
