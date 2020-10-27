@@ -44,7 +44,6 @@ public class dijkstra {
 
 
     public static void main(String[] args) throws IOException {
-        //   Scanner sc = new Scanner(System.in);
         n = nextInt();
         m = nextInt();
         int s = nextInt();
@@ -59,14 +58,14 @@ public class dijkstra {
     }
 
     private static void dij(int s) throws IOException {
-        Arrays.fill(dis, Integer.MAX_VALUE);
+        Arrays.fill(dis, inf);
         q.add(new node(s, 0));
         dis[s] = 0;
         while (!q.isEmpty()) {
             int p = q.poll().to;
             //pq每次取出的边,就是算出最短路径的边
-            if (vis[p]) continue;
-            vis[p] = true;
+            if (st[p]) continue;
+            st[p] = true;
             for (int i = he[p]; i != 0; i = ne[i]) {
                 int ed = e[i];
                 if (dis[p] != Integer.MAX_VALUE && dis[ed] > dis[p] + w[i]) {
@@ -80,7 +79,9 @@ public class dijkstra {
         }
         bw.flush();
     }
+
     static int inf = 0x3f3f3f3f;
+
     static void add(int a, int b, int c) {
         e[cnt] = b;
         w[cnt] = c;
@@ -94,7 +95,7 @@ public class dijkstra {
     static int[] he = new int[500005];
     static int[] ne = new int[500005];
     static int[] w = new int[500005];
-    static boolean[] vis = new boolean[100005];
+    static boolean[] st = new boolean[100005];
     static PriorityQueue<node> q = new PriorityQueue<node>();
     static int[] dis = new int[100005];
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
