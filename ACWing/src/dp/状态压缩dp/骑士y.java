@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
+ * 每一层只跟上一层的状态有关系
  * https://blog.csdn.net/qq_30277239/article/details/104202667
  * f[i,j,k]状态表示:所有只摆在前i行,已经摆了j个国王,并且第i行的摆放状态是k所有方案的集合
  * 属性count

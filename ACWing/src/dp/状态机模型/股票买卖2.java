@@ -22,7 +22,11 @@ public class 股票买卖2 {
             a[i] = sc.nextInt();
         }
         int[][] f = new int[n + 2][2];
-        Arrays.fill(f, -0x3f3f3f3f);
+        for (int i = 0; i < n + 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                f[i][j] = -0x3f3f3f3f;
+            }
+        }
         f[0][0] = 0;
         f[0][1] = -a[0];
         for (int i = 1; i < n; i++) {
