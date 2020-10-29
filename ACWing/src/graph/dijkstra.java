@@ -46,8 +46,8 @@ public class dijkstra {
     public static void main(String[] args) throws IOException {
         n = nextInt();
         m = nextInt();
-        int s = nextInt();
         int a, b, c;
+        int s = 1;
         for (int i = 0; i < m; i++) {
             a = nextInt();
             b = nextInt();

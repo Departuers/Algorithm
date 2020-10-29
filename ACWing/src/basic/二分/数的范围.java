@@ -60,6 +60,7 @@ public class 数的范围 {
                 l = 0;
                 r = n - 1;
                 //二分性质<=x 左边部分都满足<=x 右边部分都满足>x  找出最后一个<=x的数的索引
+                //好深刻的性质
                 while (l < r) {
                     int mid = l + r + 1 >> 1;
                     if (q[mid] <= x) l = mid;

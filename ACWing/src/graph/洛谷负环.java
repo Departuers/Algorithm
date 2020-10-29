@@ -9,7 +9,6 @@ import static java.lang.System.in;
 
 /**
  * 从1开始到达,不能用那个模板!!!
- * 我错了,洛谷都不会错
  */
 public class 洛谷负环 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -36,15 +35,15 @@ public class 洛谷负环 {
     }
 
     public static void main(String[] args) throws IOException {
-        t = nextInt();
+        int t = nextInt();
         int a, b, c;
         while (t-- != 0) {
-            cnt = 1;
+            idx = 1;
             n = nextInt();
             m = nextInt();
             Arrays.fill(he, 0);
             Arrays.fill(ne, 0);
-            Arrays.fill(count, 0);
+            Arrays.fill(cnt, 0);
             for (int i = 0; i < m; i++) {
                 a = nextInt();
                 b = nextInt();
@@ -61,23 +60,23 @@ public class 洛谷负环 {
     }
 
     private static boolean spfa() {
-        Arrays.fill(vis, false);
+        Arrays.fill(st, false);
         q.clear();
-        Arrays.fill(dis, Integer.MAX_VALUE / 2);
+        Arrays.fill(dis, 0x3f3f3f3f);
         q.add(1);
         dis[1] = 0;
         int t = 0;
         while (!q.isEmpty()) {
             int v = q.pollLast();
-            vis[v] = false;
+            st[v] = false;
             for (int i = he[v]; i != 0; i = ne[i]) {
                 t = e[i];
                 if (dis[t] > dis[v] + w[i]) {
                     dis[t] = dis[v] + w[i];
-                    count[t] = count[v] + 1;
-                    if (count[t] >= n) return true;
-                    if (!vis[t]) {
-                        vis[t] = true;
+                    cnt[t] = cnt[v] + 1;
+                    if (cnt[t] >= n) return true;
+                    if (!st[t]) {
+                        st[t] = true;
                         q.add(t);
                     }
                 }
@@ -87,19 +86,19 @@ public class 洛谷负环 {
     }
 
     static ArrayDeque<Integer> q = new ArrayDeque<Integer>();
-    static boolean[] vis = new boolean[6005];
-    static int[] count = new int[6005];
+    static boolean[] st = new boolean[6005];
+    static int[] cnt = new int[6005];
     static int[] dis = new int[6005];
-    static int t, n, m, cnt = 1;
+    static int n, m, idx = 1;
     static int[] he = new int[6005];
     static int[] ne = new int[6005];
     static int[] e = new int[6005];
     static int[] w = new int[6005];
 
     static void add(int a, int b, int c) {
-        e[cnt] = b;
-        w[cnt] = c;
-        ne[cnt] = he[a];
-        he[a] = cnt++;
+        e[idx] = b;
+        w[idx] = c;
+        ne[idx] = he[a];
+        he[a] = idx++;
     }
 }

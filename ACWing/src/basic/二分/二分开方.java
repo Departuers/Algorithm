@@ -14,7 +14,7 @@ public class 二分开方 {
             if (mid * mid >= n) r = mid;
             else l = mid;
         }
-        System.out.printf("%.3f", l);
+        System.out.printf("%.6f", l);
     }
 
     static void dk(BigDecimal b) {

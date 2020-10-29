@@ -153,6 +153,12 @@ public class 亚特兰蒂斯扫描线 {
     static node[] tr = new node[N * 8];
     static ArrayList<Double> ys = new ArrayList<Double>();
 
+    /**
+     * 二分查找离散化后的值
+     *
+     * @param target
+     * @return
+     */
     static int query(double target) {
         int l = 0, r = ys.size() - 1;
         while (l < r) {

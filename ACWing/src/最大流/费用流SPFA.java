@@ -27,7 +27,8 @@ public class 费用流SPFA {
             b = nextInt();
             xianzhi = nextInt();
             feiyong = nextInt();
-            add(a, b, xianzhi, feiyong);
+            addEdge(a, b, xianzhi, feiyong);
+            addEdge(b, a, 0, -feiyong);
         }
         min_cost_flow();
         bw.write(maxflow + " " + mincost);
@@ -64,11 +65,6 @@ public class 费用流SPFA {
         cost[idx] = d;
         ne[idx] = h[a];
         h[a] = idx++;
-    }
-
-    static void add(int a, int b, int c, int d) {
-        addEdge(a, b, c, d);
-        addEdge(b, a, 0, -d);
     }
 
     static ArrayDeque<Integer> q = new ArrayDeque<Integer>();

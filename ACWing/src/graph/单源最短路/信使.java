@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * https://blog.csdn.net/chrisblogtk/article/details/51099957?utm_source=blogxgwz7
+ * https://blog.csdn.net/qq_30277239/article/details/106106290
  * 战争时期，前线有n 个哨所，每个哨所可能会与其他若干个哨所之间有通信联系。信使负责 在哨所之间传递信息，
  * 当然，这是要花费一定时间的（以天为单位）。指挥部设在第一个哨所。当指挥部下达一个命令后，
  * 指挥部就派出若干个信使向与指挥部相连的哨所送信。当一个哨所接到信后，
@@ -33,7 +33,8 @@ public class 信使 {
         m = sc.nextInt();
         int a, b, c;
         for (int i = 0; i < 110; i++) {
-            Arrays.fill(g[i], Integer.MAX_VALUE / 3);
+            Arrays.fill(g[i], 0x3f3f3f3f);
+            g[i][i] = 0;
         }
         for (int i = 0; i < m; i++) {
             a = sc.nextInt();
@@ -51,7 +52,7 @@ public class 信使 {
         }
         int res = 0;
         for (int i = 1; i <= n; i++) {
-            if (g[1][i] == Integer.MAX_VALUE / 2) {
+            if (g[1][i] == 0x3f3f3f3f) {
                 res = -1;
                 break;
             } else res = Math.max(res, g[1][i]);

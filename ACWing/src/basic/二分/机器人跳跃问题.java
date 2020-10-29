@@ -3,7 +3,7 @@ package basic.二分;
 import java.util.Scanner;
 
 /**
- * * https://www.acwing.com/solution/content/6888/
+ * https://www.acwing.com/solution/content/6888/
  * 机器人正在玩一个古老的基于DOS的游戏。
  * 游戏中有N+1座建筑——从0到N编号，从左到右排列。
  * 编号为0的建筑高度为0个单位，编号为 i 的建筑高度为H(i)个单位。

@@ -23,7 +23,7 @@ public class 山峰和山谷 {
         int peak = 0, valley = 0;//山峰,山谷
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (!vis[i][j]) {
+                if  (!vis[i][j]) {
                     High = false;
                     low = false;
                     bfs(i, j);

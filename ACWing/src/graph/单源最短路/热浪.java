@@ -6,7 +6,6 @@ import java.util.PriorityQueue;
 import java.util.Scanner;
 
 /**
- * http://blog.sina.com.cn/s/blog_83ac6af80102v0zj.html
  * https://blog.csdn.net/qq_30277239/article/details/106104598
  * 裸最短路
  */
@@ -25,7 +24,6 @@ public class 热浪 {
             add(a, b, c);
             add(b, a, c);
         }
-
         dijkstra();
         System.out.println(dis[t]);
     }
@@ -67,7 +65,7 @@ public class 热浪 {
 
     static void dijkstra() {
         PriorityQueue<node> q = new PriorityQueue<node>();
-        Arrays.fill(dis, Integer.MAX_VALUE / 2);
+        Arrays.fill(dis, 0x3f3f3f3f);
         dis[s] = 0;
         q.add(new node(0, s));
         while (!q.isEmpty()) {

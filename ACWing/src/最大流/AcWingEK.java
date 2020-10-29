@@ -108,8 +108,8 @@ public class AcWingEK {
             r += dis[t];
             //从终点往前找,沿途减去当前曾广路径的最大值
             for (int i = t; i != s; i = e[pre[i] ^ 1]) {
-                w[pre[i]] -= dis[t];
-                w[pre[i] ^ 1] += dis[t];
+                w[pre[i]] -= dis[t];//减去流量
+                w[pre[i] ^ 1] += dis[t];//增加反向边的流量
             }
         }
         return r;

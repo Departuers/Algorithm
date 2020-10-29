@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 /**
  * 坐标范围在10^9,需要使用离散化
- * 值域跨度非常大,但非常稀疏,可以用离散化
+ * 值域跨度非常大,但非常数值分布稀疏,可以用离散化
+ * 把所有用到的下标,全部存起来,映射成从1开始的自然数
+ * 原数组可以离散化,查询也可以离散化
  */
 public class 区间和 {
     public static void main(String[] args) {
@@ -17,14 +19,14 @@ public class 区间和 {
         for (int i = 0; i < n; i++) {
             x = sc.nextInt();
             c = sc.nextInt();
-            add.add(new node(x, c));
+            add.add(new node(x, c));//离线增加
             all.add(x);
         }
         int l, r;
         for (int i = 0; i < m; i++) {
             l = sc.nextInt();
             r = sc.nextInt();
-            query.add(new node(l, r));
+            query.add(new node(l, r));//记录查询
             all.add(l);
             all.add(r);
         }
@@ -56,6 +58,12 @@ public class 区间和 {
         }
     }
 
+    /**
+     * 找到离散化之后的值
+     *
+     * @param x
+     * @return
+     */
     static int find(int x) {
         int l = 0, r = all.size() - 1, mid;
         while (l < r) {

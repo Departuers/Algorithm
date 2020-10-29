@@ -9,7 +9,7 @@ import java.util.Scanner;
  * 5 4 0 0
  * 有多少种方式走满整个棋盘
  */
-public class    马走日 {
+public class  马走日 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         t = sc.nextInt();

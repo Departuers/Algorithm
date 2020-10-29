@@ -35,6 +35,7 @@ public class 静态主席树 {
         return Double.parseDouble(next());
     }
 
+    //查询离散化之后的值
     static int get(int x) {
         return Arrays.binarySearch(c, 1, count, x);
     }
@@ -62,7 +63,7 @@ public class 静态主席树 {
         count = unique(c, n + 1);
 
         for (int i = 1; i <= n; i++) {
-            root[i] = update(1, n, root[i - 1], root[i], get(a[i]));
+            root[i] = update(1, n, root[i - 1], root[i], get(a[i]));//离散化之后的值插入主席树
         }
         int l, r, k;
         while (m-- != 0) {
@@ -86,9 +87,11 @@ public class 静态主席树 {
 
     static int update(int l, int r, int pre, int now, int value) {
         idx++;
+        //指向前面的节点
         tree[idx] = tree[pre];
         lson[idx] = lson[pre];
         rson[idx] = rson[pre];
+
         now = idx;
         tree[now]++;
         if (l == r) return now;

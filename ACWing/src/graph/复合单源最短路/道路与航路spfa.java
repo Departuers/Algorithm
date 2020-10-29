@@ -56,12 +56,12 @@ public class 道路与航路spfa {
         dist[S] = 0;
         while (!q.isEmpty()) {
             int p = q.poll();
-            //SLF swap:每当队列改变时,如果队首距离大于队尾,则交换首尾。
-            if (q.size() > 2 && dist[q.peekFirst()] > dist[q.peekLast()]) {
-                int a = q.pollLast();
-                q.add(q.pollFirst());
-                q.addFirst(a);
-            }
+//            //SLF swap:每当队列改变时,如果队首距离大于队尾,则交换首尾。
+//            if (q.size() > 2 && dist[q.peekFirst()] > dist[q.peekLast()]) {
+//                int a = q.pollLast();
+//                q.add(q.pollFirst());
+//                q.addFirst(a);
+//            }
             st[p] = false;
             for (int i = h[p]; i != 0; i = ne[i]) {
                 int j = e[i];

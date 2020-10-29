@@ -48,8 +48,8 @@ public class 通信线路 {
         q.add(1);
         while (!q.isEmpty()) {
             int t = q.poll();
-            if (st[t]) continue;
-            st[t] = true;
+            if (st[t]) continue;//双端队列类比Dijkstra,每次出队可以确定最小值,
+            st[t] = true;//每个点不止入队一次
             for (int i = he[t]; i != 0; i = ne[i]) {
                 int j = e[i], v = w[i] > bound ? 1 : 0;
                 if (dis[j] > dis[t] + v) {

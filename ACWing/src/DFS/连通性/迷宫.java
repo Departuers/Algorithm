@@ -82,7 +82,6 @@ public class 迷宫 {
     }
 
     static int[][] dir = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
-
     static boolean[][] st = new boolean[110][110];
     static int n, t;
     static char[][] map = new char[110][110];
