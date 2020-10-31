@@ -33,7 +33,6 @@ public class 区间和 {
         Collections.sort(all);
 
         u();
-
         for (node t : add) {
             int at = find(t.x);
             a[at] += t.y;
@@ -98,11 +97,17 @@ public class 区间和 {
      * 满足该性质的即是去重后的元素
      */
     static void u() {
+        System.out.println(all);
         int j = 0;
         for (int i = 0; i < all.size(); i++) {
             if (i == 0 || !all.get(i).equals(all.get(i - 1))) {
                 all.set(j++, all.get(i));
             }
         }
+        int size = all.size();
+        for (int i = j; i < size; i++) {
+            all.remove(all.size() - 1);
+        }
+        System.out.println(all);
     }
 }

@@ -35,7 +35,7 @@ public class K倍区间 {
         int k = sc.nextInt();
         for (int i = 1; i <= n; i++) {
             s[i] = (s[i - 1] + sc.nextInt()) % k;
-        }//前缀和%k就考研
+        }//前缀和%k就可以
 
         long res = 0;
         cnt[0] = 1;//余数为0时，已经占一个

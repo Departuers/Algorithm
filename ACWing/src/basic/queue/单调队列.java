@@ -47,6 +47,9 @@ import static java.lang.System.in;
  * 那么无论在什么时候我们都不会取 a[i] 作为最小值了，
  * 所以可以直接将 a[i] 删掉；
  * 也就是下标小,存的值大,不选,因为起码都有2个
+ * <p>
+ * 先考虑用栈或者队列来暴力模拟这个问题再看有没有单调性,
+ * 取极值可以取两个端点,找一个值可以用二分
  */
 public class 单调队列 {
     public static void main(String[] args) throws IOException {
@@ -83,9 +86,10 @@ public class 单调队列 {
         tt = -1;
         for (int i = 0; i < n; i++) {
             if (hh <= tt && q[hh] < i + k + 1) hh++;
-            while (hh <= tt && a[q[tt]] <= a[i]) tt--;
+            while (hh <= tt && a[q[tt]] <= a[i]) tt--;//这个时候a[i],要进来,无关者快快退散
             q[++tt] = i;
             if (i >= k - 1) bw.write(a[q[hh]] + " ");
+            //最小值是队头
         }
         bw.flush();
     }

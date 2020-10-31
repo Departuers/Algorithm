@@ -3,7 +3,7 @@ package DFS.搜索;
 public class N皇后 {
     static int[] rec = new int[999];
 
-    static int n = 8, ans = 0;
+    static int n = 4, ans = 0;
 
     public static void main(String[] args) {
         df(0);
@@ -30,6 +30,5 @@ public class N皇后 {
                 df(row + 1);
             }
         }
-
     }
 }

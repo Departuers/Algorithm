@@ -68,7 +68,7 @@ public class dijkstra {
             st[p] = true;
             for (int i = he[p]; i != 0; i = ne[i]) {
                 int ed = e[i];
-                if (dis[p] != Integer.MAX_VALUE && dis[ed] > dis[p] + w[i]) {
+                if (dis[ed] > dis[p] + w[i]) {
                     dis[ed] = dis[p] + w[i];
                     q.add(new node(ed, dis[ed]));
                 }

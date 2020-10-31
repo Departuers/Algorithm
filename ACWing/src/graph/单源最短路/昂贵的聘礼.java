@@ -75,6 +75,7 @@ public class 昂贵的聘礼 {
 
     /**
      * 枚举等级区间!来实现等级差距过大无法交易
+     * n^2实现Dijkstra
      *
      * @param down
      * @param up
@@ -84,7 +85,7 @@ public class 昂贵的聘礼 {
         Arrays.fill(dist, 0x3f3f3f3f);
         Arrays.fill(vis, false);
         dist[0] = 0;
-        for (int i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {//一共有n个点
             int t = -1;
             for (int j = 0; j <= n; j++) {
                 if (!vis[j] && (t == -1 || dist[t] > dist[j])) t = j;

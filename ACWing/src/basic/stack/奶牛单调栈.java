@@ -1,5 +1,6 @@
 package basic.stack;
 
+import java.util.ArrayDeque;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -86,5 +87,5 @@ public class 奶牛单调栈 {
 
     static int n;
     static int[] s = new int[100005], a = new int[100005];
-    static Stack<node> st = new Stack<node>();
+    static ArrayDeque<node> st = new ArrayDeque<node>();
 }

@@ -5,20 +5,21 @@ public class IO加速 {
     static void f() {
         long s = System.nanoTime();
         LinkedList<Integer> l = new LinkedList<Integer>();
-        for (int i = 0; i < 3000000; i++) {
+        for (int i = 0; i < 5000000; i++) {
             l.add(i);
         }
-        for (int i = 0; i < 3000000; i++) {
-            l.poll();
+        for (int i = 0; i < 5000000; i++) {
+            if ((i & 1) == 1) l.pollLast();
+            else l.pollFirst();
         }
         long t = System.nanoTime();
         System.out.println((t - s) / 1e8);
         s = System.nanoTime();
-        ArrayDeque<Integer> r = new ArrayDeque<Integer>();
-        for (int i = 0; i < 3000000; i++) {
+        ArrayDeque<Integer> r = new ArrayDeque<Integer>(5000000);
+        for (int i = 0; i < 5000000; i++) {
             r.addFirst(i);
         }
-        for (int i = 0; i < 3000000; i++) {
+        for (int i = 0; i < 5000000; i++) {
             if ((i & 1) == 1) r.pollLast();
             else r.pollFirst();
         }

@@ -48,7 +48,6 @@ public class 蛇形矩阵 {
         }
     }
 
-
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static int[][] res = new int[100][100];
 }
