@@ -64,9 +64,9 @@ public class 香甜的黄油 {
     static int spfa(int s) {
         int res = 0;
         Arrays.fill(dis, inf);
+        Arrays.fill(vis, false);
         dis[s] = 0;
         q.add(s);
-        vis[s] = true;
         while (!q.isEmpty()) {
             int p = q.poll();
             vis[p] = false;
@@ -81,7 +81,7 @@ public class 香甜的黄油 {
                 }
             }
         }
-        //计算从0~n的距离和
+        //计算有奶牛的牧场到起点的距离
         for (int i = 0; i < n; i++) {
             int j = g[i];
             if (dis[j] == inf) return inf;
@@ -105,7 +105,7 @@ public class 香甜的黄油 {
             vis[p] = true;
             for (int i = he[p]; i != 0; i = ne[i]) {
                 int ed = e[i];
-                if (dis[p] != inf&& dis[ed] > dis[p] + w[i]) {
+                if (dis[p] != inf && dis[ed] > dis[p] + w[i]) {
                     dis[ed] = dis[p] + w[i];
                     q.add(new node(ed, dis[ed]));
                 }
@@ -149,7 +149,7 @@ public class 香甜的黄油 {
     static boolean[] vis = new boolean[2560];
     static int[] dis = new int[2560];
     static ArrayDeque<Integer> q = new ArrayDeque<Integer>();
-    static int n, m, p, cnt = 1, inf = 0x3f3f3f3f,ans=inf;
+    static int n, m, p, cnt = 1, inf = 0x3f3f3f3f, ans = inf;
     static int[] g = new int[2523];
 
 }

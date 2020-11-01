@@ -27,17 +27,6 @@ import static java.lang.System.in;
  * 4 8
  * 2 10
  * 4 9
- * 1
- * 2
- * 3
- * 4
- * 5
- * 6
- * 7
- * 8
- * 9
- * 10
- * 11
  * 输出样例：
  * 1
  * 6
@@ -73,6 +62,9 @@ import static java.lang.System.in;
  */
 public class 可达性统计 {
     public static void main(String[] args) throws IOException {
+        for (int i = 0; i < f.length; i++) {
+            f[i] = new BitSet();
+        }
         n = nextInt();
         m = nextInt();
         int a, b;
@@ -112,12 +104,6 @@ public class 可达性统计 {
     static int[] dist = new int[N];
     static BitSet[] f = new BitSet[N];//使用二进制记录集合
     static int[] q = new int[N];
-
-    static {
-        for (int i = 0; i < f.length; i++) {
-            f[i] = new BitSet();
-        }
-    }
 
     static void toposort() {
         int hh = 0, tt = -1;

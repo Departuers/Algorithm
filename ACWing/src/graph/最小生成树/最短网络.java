@@ -44,7 +44,7 @@ public class 最短网络 {
 
     static int prim() {
         int res = 0;
-        Arrays.fill(dis, Integer.MAX_VALUE / 2);
+        Arrays.fill(dis, inf);
         dis[1] = 0;
         for (int i = 0; i < n; i++) {
             int t = -1;
@@ -53,7 +53,7 @@ public class 最短网络 {
                     t = j;
                 }
             }
-            if (i != 0 && dis[t] == Integer.MAX_VALUE / 2) return Integer.MAX_VALUE / 2;
+            if (i != 0 && dis[t] == inf) return inf;
             //进行了一轮还是无穷,说明不联通,不存在最小生成树
             res += dis[t];
             vis[t] = true;
@@ -65,7 +65,7 @@ public class 最短网络 {
     }
 
     static int[][] g = new int[110][110];
-    static int n;
+    static int n, inf = 0x3f3f3f3f;
     static int[] dis = new int[110];
     static boolean[] vis = new boolean[110];
 }

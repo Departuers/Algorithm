@@ -69,7 +69,6 @@ public class 牛奶运输 {
             dfs(i, -1, 0, dis[i]);
         }
 
-
         long res = (long) 1e18;
         for (int i = 0; i < m; i++) {
             if (!edge.get(i).isShu) {//遍历非树边
@@ -81,10 +80,6 @@ public class 牛奶运输 {
                 }
             }
         }
-        System.out.println(res);
-        //
-
-
         {
             for (int i = 1; i <= n; i++) {
                 dubbo(i, -1, -1, -1, m1[i], m2[i]);

@@ -1,4 +1,4 @@
-package graph;
+package graph.负环;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;

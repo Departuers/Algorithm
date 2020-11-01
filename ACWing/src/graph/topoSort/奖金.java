@@ -65,7 +65,7 @@ public class 奖金 {
                 dist[i] = 100;
             }//所有初始值为100
 
-            //拓扑图求最长路,递推
+            //拓扑图求最长路,递推,求所有下界的最大值,所以最小值用最长路
             for (int i = 0; i < n; i++) {
                 int j = q[i];
                 for (int k = h[j]; k != 0; k = ne[k]) {
@@ -122,7 +122,7 @@ public class 奖金 {
                 }
             }
         }
-        return tt == n - 1;
+        return tt == n - 1;//是否存在正环
     }
 
 

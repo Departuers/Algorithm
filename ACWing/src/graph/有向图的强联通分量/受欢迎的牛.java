@@ -123,39 +123,3 @@ public class 受欢迎的牛 {
     static int[] size = new int[N];
     static int[] dout = new int[N];//出度
 }
-//    static void tarjar(int u) {
-//        dfu[u] = low[u] = ++time;
-//        stk[++top] = u;
-//        in_stk[u] = true;
-//        for (int i = he[u]; i != 0; i = ne[i]) {
-//            int j=e[i];
-//            if (!dfn[j]){
-//                tarjar(j);
-//                low[u]=Math.min(low[u],low[j]);
-//            }else if (in_stk[j])
-//                low[u]=Math.min(low[u],dfn[j]);
-//        }
-//        if (dfn[u]==low[u]){
-//            int y;
-//            ++scc_cnt;
-//            do {
-//                y=stk[top--];
-//                in_stk[y]=false;
-//                id[y]=scc_cnt;
-//            }while (y!=u);
-//        }
-//    }
-// 缩点:     for (int i = 1; i <= n; i++) {//遍历 所有点都是DAG,
-// 做完tarjan
-// 不需要拓扑排序,连通分量编号递减顺序就是拓扑序
-//            for (int j = h[i]; j != 0; j = ne[j]) {//遍历i所有的邻边
-//                int k = e[j];
-//                a = id[i];
-//                b = id[k];
-//                if (a != b) {
-//                   加一条新边id[i]->id[j]
-//                   显然:id[i]存的是强连通分量编号
-//                }
-//            }
-//        }
-//

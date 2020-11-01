@@ -77,7 +77,7 @@ public class 区间 {
     private static void spfa() {
         int inf = 0x3f3f3f3f;
         q.add(0);
-        Arrays.fill(dis, inf);
+        Arrays.fill(dis, -inf);
         //求最小值,所以初始化为负无穷,看三角不等式,更新规则,得出
         st[0] = true;
         dis[0] = 0;

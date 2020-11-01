@@ -8,6 +8,10 @@ import java.util.Scanner;
  * 你想娶酋长的女儿，但酋长要求你给一定数额金钱的聘礼。除了金钱外，酋长也允许你用部落里其他人的某物品加上一点钱作为聘礼。
  * 而其他人的物品也可以通过指定的另外一些人的某物品加上一些金钱获得。部落里的每个人有一个等级。
  * 你的整个交易过程涉及的人的等级只能在一个限定的差值内。问你最少需要多少金钱才能娶到酋长女儿。假定每个人只有一个物品。
+ * 为了方便起见，我们把所有的物品从1开始进行编号，酋长的允诺也看作一个物品，并且编号总是1。
+ * 每个物品都有对应的价格P，主人的地位等级L，以及一系列的替代品Ti和该替代品所对应的”优惠”Vi。
+ * 如果两人地位等级差距超过了M，就不能”间接交易”。
+ * 你必须根据这些数据来计算出探险家最少需要多少金币才能娶到酋长的女儿。
  * Input
  * 输入第一行是两个整数M，N（1 <= N <= 100），依次表示地位等级差距限制和物品的总数。接下来按照编号从小到大依次给出了N个物品的描述。
  * 每个物品的描述开头是三个非负整数P、L、X（X < N），依次表示该物品的价格、主人的地位等级和替代品总数。
@@ -36,6 +40,9 @@ import java.util.Scanner;
  * 都可以对应虚拟源点到到达终点的一条路径
  * 寻找最短路
  * 等级问题的话,枚举等级区间
+ * 非常难的题
+ * 先考虑起点和终点,显然终点是1号点
+ * 建立虚拟原点S,发现,任意一种购买方式都对应从S到1到一条路径
  */
 @SuppressWarnings("all")
 public class 昂贵的聘礼 {
@@ -52,11 +59,10 @@ public class 昂贵的聘礼 {
             price = sc.nextInt();
             level[i] = sc.nextInt();
             cnt = sc.nextInt();
-            w[0][i] = Math.min(price, w[0][i]);
-            //0 代表直接去买i号物品
+            w[0][i] = Math.min(price, w[0][i]);//0 代表直接去买i号物品
             while (cnt-- != 0) {
                 int id, cost;
-                id = sc.nextInt();
+                id = sc.nextInt();//需要的id号物品加上cost的钱,来换i号物品
                 cost = sc.nextInt();
                 w[id][i] = Math.min(w[id][i], cost);
                 //id物品去买i号物品需要
@@ -75,7 +81,7 @@ public class 昂贵的聘礼 {
 
     /**
      * 枚举等级区间!来实现等级差距过大无法交易
-     * n^2实现Dijkstra
+     * n^2实现朴素Dijkstra
      *
      * @param down
      * @param up
@@ -83,26 +89,26 @@ public class 昂贵的聘礼 {
      */
     static int dijkstra(int down, int up) {
         Arrays.fill(dist, 0x3f3f3f3f);
-        Arrays.fill(vis, false);
-        dist[0] = 0;
+        Arrays.fill(st, false);
+        dist[0] = 0;//起点
         for (int i = 1; i <= n; i++) {//一共有n个点
             int t = -1;
             for (int j = 0; j <= n; j++) {
-                if (!vis[j] && (t == -1 || dist[t] > dist[j])) t = j;
+                if (!st[j] && (t == -1 || dist[t] > dist[j])) t = j;
             }//不用优先队列,直接找出最小的拓展,由于是邻接矩阵存储权值
-            vis[t] = true;
+            st[t] = true;
             for (int j = 1; j <= n; j++) {
                 if (level[j] >= down && level[j] <= up) {
                     dist[j] = Math.min(dist[j], dist[t] + w[t][j]);
                 }
             }
         }
-        return dist[1];
+        return dist[1];//终点
     }
 
     static int[][] w = new int[110][110];
     static int[] level = new int[110];
     static int[] dist = new int[110];
-    static boolean[] vis = new boolean[110];
+    static boolean[] st = new boolean[110];
     static int n, m;
 }
