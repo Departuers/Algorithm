@@ -31,8 +31,12 @@ import java.util.Scanner;
  * 2
  * 考虑假如通过缩点变成DAG,会不会变得简单
  * 图中有P个起点(入度为0的点),Q个终点,(出度为0的点)
+ *
  * 给每个起点发信息,网络一定可以得到结果
- * 第一问答案是P
+ * 第一问答案是P,也就是入度为0的点的个数
+ * 显然对于一个点,一直找前驱,一定可以找到某一个起点,
+ * 给每一个起点点都发一个信息,一个可以使得所有的点都收到信息
+ *
  * 第二问,对于一张有向图,至少加几条边会变成强连通图,
  * 证明:设P<=Q,这个时候证明答案是Q
  * 如果P==1 起点必然可以走到每个终点,
@@ -41,15 +45,16 @@ import java.util.Scanner;
  * 反证可以退出矛盾...很难...
  * P1 -> Q1  P2->Q2   使Q1->P2 显然:使得PQ都减一,则答案为Q
  * 只需要加max(P,Q)条边,就可以变成强连通图
- * <p>
+ *
  * 先缩点,找出P,Q
+ * 实现复杂度是线性的O(n)
  */
 public class 学校网络 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         for (int i = 1; i <= n; i++) {
-            int t = 1;
+            int t ;
             while (true) {
                 t = sc.nextInt();
                 if (t == 0) break;
@@ -75,8 +80,8 @@ public class 学校网络 {
             if (dout[i] == 0) b++;
         }
         System.out.println(a);
-        if (scc_cnt == 1) System.out.println(0);
-        else System.out.println(Math.max(a, b));
+        if (scc_cnt == 1) System.out.println(0);//如果只有一个强连通分量,那么不需要加边
+        else System.out.println(Math.max(a, b));//否则加max(a,b)
     }
 
     static void tarjan(int u) {

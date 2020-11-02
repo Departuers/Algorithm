@@ -56,12 +56,18 @@ import java.util.PriorityQueue;
  * 输出样例：
  * 3
  * 2
- * 统计最短路径的条数
- * 统计次短路径的条数
+ * 两个问题
+ * 1.统计最短路径的条数
+ * 2.统计次短路径且只比最短路径的长度多1的条数
+ * 先求最短路径,和最短路径的条数
+ * 再求次短路径,和次短路径的条数
+ * <p>
  * :如果存在比最短路径长度恰好多1的路径,则再把这样的路径条数加上
+ * 最后统计一下,是不是次短路径只比最短路径多1
  * d[i,0]表示从1到i的最短路径
  * d[i,1]表示从1到i的次短路径
  * cnt[i,1] 表示从1到i的次短路
+ * 可以看成拆点的过程
  */
 public class 观光 {
     public static void main(String[] args) {
@@ -73,24 +79,44 @@ public class 观光 {
     static int[] e = new int[M];
     static int[] ne = new int[M];
     static int[] w = new int[M];
-    static int[][] dis = new int[N][2];
-    static int[][] cnt = new int[N][2];
-    static boolean[][] st = new boolean[N][2];
+    static int[][] dis = new int[2][N];
+    static int[][] cnt = new int[2][N];
+    static boolean[][] st = new boolean[2][N];
     static int inf = 0x3f3f3f3f;
     static PriorityQueue<node> q = new PriorityQueue<node>();
 
     static int dijkstra() {
         Arrays.fill(dis[0], inf);
         Arrays.fill(dis[1], inf);
-        Arrays.fill(cnt[0], 0);
-        Arrays.fill(cnt[1], 0);
-        Arrays.fill(st[0], false);
-        Arrays.fill(st[1], false);
-
+        dis[0][S] = 0;
+        cnt[0][S] = 1;
+        int res = 0;
         dis[S][0] = 0;
         cnt[S][0] = 1;
-        q.add(new node());
-        return 1;
+        q.add(new node(S, 0, 0));
+        while (!q.isEmpty()) {
+            node t = q.poll();
+            int ver = t.ver, type = t.type,
+                    dist = t.dis;
+            int count = cnt[type][ver];
+            if (st[type][ver]) continue;
+            st[type][ver] = true;
+            for (int i = h[ver]; i != 0; i = ne[i]) {
+                int j = e[i];
+                if (dis[0][j] > dist + w[i]) {
+                    dis[1][j] = dis[0][j];
+                    cnt[1][j] = cnt[0][j];
+                    q.add(new node(j, 1, dis[1][j]));
+                    dis[0][j] = dist + w[i];
+                    cnt[0][j] = count;
+                    q.add(new node(j, 0, dis[0][j]));
+                } else if (dis[j][0] == dist + w[i]) {
+
+                }
+            }
+        }
+
+        return res;
     }
 
     static void add(int a, int b, int c) {
@@ -102,12 +128,20 @@ public class 观光 {
 
 
     static class node implements Comparable<node> {
-        int dis, type, idx;
+        int ver, type, dis;
+
+        public node(int ver, int type, int dis) {
+            this.ver = ver;
+            this.type = type;
+            this.dis = dis;
+        }
 
         @Override
         public int compareTo(node node) {
             return dis - node.dis;
         }
+
+
     }
 
 }
