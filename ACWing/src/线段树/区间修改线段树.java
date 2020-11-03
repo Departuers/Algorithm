@@ -36,6 +36,12 @@ import static java.lang.System.in;
  * 55
  * 9
  * 15
+ * 满二叉树=>可以用一维数组存整棵树
+ * 编号是x 父节点是x/2   x>>1
+ * 左儿子 2x   x>>1
+ * 右儿子 2x+1  x>>1|1
+ * 倒数第二层最坏叶节点有n个,一共有2n-1个点,最后一层最坏2n个点
+ * 开4倍空间
  *
  */
 public class 区间修改线段树 {
@@ -86,6 +92,10 @@ public class 区间修改线段树 {
         }
     }
 
+    /**
+     * 把父节点的懒标记信息下传到叶节点
+     * @param k
+     */
     static void pushdown(int k) {
         if (tr[k].lazy != 0) {
             tr[k << 1].sum += (tr[k << 1].r - tr[k << 1].l + 1) * tr[k].lazy;
@@ -99,7 +109,7 @@ public class 区间修改线段树 {
 
     /**
      * 区间修改
-     *
+     * 区间修改需要懒标记
      * @param k 当前标记
      * @param l 左边界
      * @param r 右边界
@@ -128,6 +138,10 @@ public class 区间修改线段树 {
         return ans;
     }
 
+    /**
+     * 由子节点的信息 来更新父节点的信息
+     * @param k
+     */
     static void pushup(int k) {
         tr[k].sum = tr[k << 1].sum + tr[k << 1 | 1].sum;
     }

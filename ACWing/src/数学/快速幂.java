@@ -37,6 +37,7 @@ public class 快速幂 {
         System.out.println(ks(a, b, p));
     }
 
+    //O(log n)
     static long ks(long a, long b, long p) {
         long res = 1 % p;//初始化为1,因为0*任何数都为0
         //有一个很坑的数据,p为0就不会进入循环,则初始1就mod p
@@ -49,6 +50,22 @@ public class 快速幂 {
             tem *= tem % p;//自增
             tem %= p;//多次mod防越界
             b >>= 1;//去掉最低位
+        }
+        return res;
+    }
+
+    static long ksm(long a, long b, long p) {
+        long res = 1 % p;
+        while (b != 0) {
+            if ((b & 1) == 1) {
+                res %= p;
+                res = res * a;
+                res %= p;
+            }
+            a %= p;
+            a *= a;
+            a %= p;
+            b >>= 1;
         }
         return res;
     }
