@@ -5,8 +5,6 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-import static java.lang.System.in;
-
 public class EK {
 
     public static void main(String[] args) throws IOException {
@@ -33,7 +31,7 @@ public class EK {
     }
 
     static int[][] flag = new int[1001][1001];
-    static int cnt = 1, n, inf = Integer.MAX_VALUE / 2, t, s, ans = 0, m;
+    static int cnt = 1, n, inf = 0x3f3f3f3f, t, s, ans = 0, m;
     static int[] h = new int[1010];
     static int[] e = new int[20010];
     static int[] ne = new int[20010];
@@ -91,7 +89,7 @@ public class EK {
     }
 
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    static BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer tokenizer = new StringTokenizer("");
 
     static String nextLine() throws IOException {// 读取下一行字符串

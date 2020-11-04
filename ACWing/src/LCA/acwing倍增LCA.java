@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 import static java.lang.System.in;
 
 /**
+ * https://www.acwing.com/blog/content/2145/
  * tle 3个 1.7秒,胜在好写,其实都差不多慢...这个好写的多
  */
 public class acwing倍增LCA {

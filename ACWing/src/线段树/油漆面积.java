@@ -73,7 +73,7 @@ public class 油漆面积 {
         Arrays.sort(seg, 0, m);
         build(1, 0, 10000);
         int res = 0;
-        for (int i = 0; i < m; i++) {
+        for (int i = 0; i < m; i++) {//积分思想,从左往右竖着扫描
             if (i > 0) res += node[1].len * (seg[i].x - seg[i - 1].x);
             add(1, seg[i].y1, seg[i].y2 - 1, seg[i].k);
             //扫描线竖着扫
@@ -100,7 +100,7 @@ public class 油漆面积 {
         pushup(k);
     }
 
-    static void pushup(int k) {
+    static void pushup(int k) {//最重要的
         if (node[k].cnt > 0) {
             node[k].len = node[k].r - node[k].l + 1;
         } else if (node[k].r == node[k].l) {
@@ -115,7 +115,9 @@ public class 油漆面积 {
     static seg[] seg = new seg[N << 1];
 
     static class node {
-        int l, r, cnt, len;
+        int l, r;
+        int len;  // len代表至少被覆盖一次的区间长度,
+        int cnt;  // cnt代表当前区间被覆盖次数
 
         public node(int l, int r) {
             this.l = l;

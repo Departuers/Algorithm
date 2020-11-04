@@ -150,7 +150,6 @@ public class 递归简单例题 {
             System.out.println(N + from + to);
             han(N - 1, help, to, from);
         }
-
     }
 
     public static int binSearch(int[] arr, int left, int right, int key) {

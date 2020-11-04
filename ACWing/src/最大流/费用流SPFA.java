@@ -40,29 +40,28 @@ public class 费用流SPFA {
         maxflow = 0;
         while (spfa()) {
             for (int i = T; i != S; i = e[pre[i] ^ 1]) {
-                w[pre[i]] -= flow[T];
-                w[pre[i] ^ 1] += flow[T];
+                f[pre[i]] -= flow[T];
+                f[pre[i] ^ 1] += flow[T];
             }
             maxflow += flow[T];
-            mincost += flow[T] * huafei[T];
+            mincost += flow[T] * cost[T];
         }
     }
 
     static int[] h = new int[N];
-    static int[] w = new int[M];
+    static int[] f = new int[M];
     static int[] e = new int[M];
     static int[] ne = new int[M];
-    static int[] cost = new int[M];
-
+    static int[] cos = new int[M];
     static int[] flow = new int[N];
-    static int[] huafei = new int[N];
+    static int[] cost = new int[N];
     static boolean[] st = new boolean[N];
     static int[] pre = new int[N];
 
     static void addEdge(int a, int b, int c, int d) {
         e[idx] = b;
-        w[idx] = c;
-        cost[idx] = d;
+        f[idx] = c;
+        cos[idx] = d;
         ne[idx] = h[a];
         h[a] = idx++;
     }
@@ -71,9 +70,9 @@ public class 费用流SPFA {
 
     static boolean spfa() {
         q.clear();
-        Arrays.fill(huafei, inf);
+        Arrays.fill(cost, inf);
         Arrays.fill(st, false);
-        huafei[S] = 0;
+        cost[S] = 0;
         flow[S] = inf;
         q.add(S);
         while (!q.isEmpty()) {
@@ -81,10 +80,10 @@ public class 费用流SPFA {
             st[u] = false;
             for (int i = h[u]; i != 0; i = ne[i]) {
                 int j = e[i];
-                if (huafei[j] > huafei[u] + cost[i] && w[i] != 0) {
+                if (cost[j] > cost[u] + cos[i] && f[i] != 0) {
                     pre[j] = i;
-                    huafei[j] = huafei[u] + cost[i];
-                    flow[j] = Math.min(flow[u], w[i]);//取流量限制最小的
+                    cost[j] = cost[u] + cos[i];
+                    flow[j] = Math.min(flow[u], f[i]);//取流量限制最小的
                     if (!st[j]) {//spfa
                         st[j] = true;
                         q.add(j);
@@ -92,7 +91,7 @@ public class 费用流SPFA {
                 }
             }
         }
-        return huafei[T] != inf;
+        return cost[T] != inf;
     }
 
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

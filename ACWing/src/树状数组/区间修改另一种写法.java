@@ -28,7 +28,7 @@ public class 区间修改另一种写法 {
                 add(y + 1, -z);
             } else if (t == 2) {
                 x = nextInt();
-                bw.write(ask(x) + "\n");
+                bw.write(ask(x) + "\n");//已经是前缀和了,直接查询即可
             }
         }
         bw.flush();

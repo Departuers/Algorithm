@@ -32,9 +32,9 @@ import java.util.StringTokenizer;
  * 3
  * 1
  * 设A1 A2...An
- * 倒着往前推,
+ * 倒着往前推,因为是从0开始的
  * 那么第An位置,就是第An+1小的数
- * 第A(i)位置,有A(i)头比它少,就是剩下的第A(i)小的数
+ * 第A(i)位置,有A(i)头比它矮,就是剩下的排行第A(i)+1的数
  * (1)从剩余的数中找到第k小的数
  * (2)删除某个数
  * 树状数组优化!
@@ -42,6 +42,9 @@ import java.util.StringTokenizer;
  * 令树状数组每一个都等于1,代表这个数可用
  * sum(x)代表1~x有多少个可用
  * 则求第k小的数代表,可以二分求最小的sum(x)的x使得sum(x)=k
+ * 两个操作
+ * 1. 从剩余的数中找到第k小的数
+ * 2. 删除某个数
  */
 public class 谜一样的牛 {
     public static void main(String[] args) throws IOException {
@@ -51,22 +54,21 @@ public class 谜一样的牛 {
         }
         for (int i = 1; i <= n; i++) {
             add(i, 1);
-        }
-        for (int i = n; i != 0; i--) {
+        }//表示目前所有的身高可以用一次,用树状数组维护前缀和
+        for (int i = n; i != 0; i--) {//倒着推
             int l = 1, r = n, k = a[i] + 1;
-            while (l < r) {
+            while (l < r) {//找到最小的x,使得sum(x)=k
                 int mid = (l + r) / 2;
                 if (ask(mid) >= k) r = mid;
                 else l = mid + 1;
             }
-            ans[i] = r;
-            add(r, -1);
+            ans[i] = r;//答案
+            add(r, -1);//删除x
         }
         for (int i = 1; i <= n; i++) {
             bw.write(ans[i] + "\n");
         }
         bw.flush();
-
     }
 
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

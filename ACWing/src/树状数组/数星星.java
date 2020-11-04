@@ -22,7 +22,7 @@ public class 数星星 {
             level[ask(x)]++;//如下显然就是 ask(x)显然就是x的层级
             add(x, 1);//记录x出现的次数,离散化需要离线
         }
-
+        for (int i = 0; i < n; i++) System.out.println(level[i]);
     }
 
     static int N = 32001, n;

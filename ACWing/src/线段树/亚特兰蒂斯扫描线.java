@@ -66,7 +66,7 @@ public class 亚特兰蒂斯扫描线 {
             }
             Collections.sort(ys);
             unique(ys);
-            build(1, 0, ys.size() - 2);
+            build(1, 0, ys.size());
             Arrays.sort(seg, 0, j);
             double res = 0;
             for (int i = 0; i < n * 2; i++) {
