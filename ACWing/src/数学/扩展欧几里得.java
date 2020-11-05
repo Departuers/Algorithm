@@ -2,6 +2,7 @@ package 数学;
 
 public class 扩展欧几里得 {
     public static void main(String[] args) {
+        
     }
 
     static class Int {

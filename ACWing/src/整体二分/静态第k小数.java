@@ -93,37 +93,37 @@ public class 静态第k小数 {
         }
     }
 
-    static void solve(int L, int R, int l, int r) {
-        if (l > r || L > R) return;
-        if (L == R) {
-            for (int i = l; i <= r; i++) {
-                ans[q[i].id] = a[L].x;
+    static void solve(int vl, int vr, int ql, int qr) {
+        if (ql > qr || vl > vr) return;
+        if (vl == vr) {
+            for (int i = ql; i <= qr; i++) {
+                ans[q[i].id] = a[vl].x;
             }
             return;
         }
-        int mid = (L + R) >> 1;
-        for (int i = L; i <= mid; i++) {
+        int mid = (vl + vr) >> 1;
+        for (int i = vl; i <= mid; i++) {
             add(a[i].id, 1);
         }
-        int t, nl = 0, nr = 0;
-        for (int i = l; i <= r; i++) {
+        int t, l = 0, r = 0;
+        for (int i = ql; i <= qr; i++) {
             t = query(q[i].r) - query(q[i].l - 1);
-            if (q[i].k <= t) lq[++nl] = q[i];
+            if (q[i].k <= t) lq[++l] = q[i];
             else {
                 q[i].k -= t;
-                rq[++nr] = q[i];
+                rq[++r] = q[i];
             }
         }
-        for (int i = L; i <= mid; i++) {
+        for (int i = vl; i <= mid; i++) {
             add(a[i].id, -1);
         }
-        for (int i = 1; i <= nl; i++) {
-            q[i + l - 1] = lq[i];
+        for (int i = 1; i <= l; i++) {
+            q[i + ql - 1] = lq[i];
         }
-        for (int i = 1; i <= nr; i++) {
-            q[i + l + nl - 1] = rq[i];
+        for (int i = 1; i <= r; i++) {
+            q[i + ql + l - 1] = rq[i];
         }
-        solve(L, mid, l, nl + l - 1);
-        solve(mid + 1, R, nl + l, r);
+        solve(vl, mid, ql, l + ql - 1);
+        solve(mid + 1, vr, l + ql, qr);
     }
 }

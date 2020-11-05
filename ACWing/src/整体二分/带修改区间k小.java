@@ -51,7 +51,7 @@ public class 带修改区间k小 {
             }
             //查询[x,y]区间中的第k小
         }
-        solve(0, (int) 1e10, 1, idx);
+        solve(0, (int) 1e9, 1, idx);
         for (int i = 1; i <= m; i++) {
             if (ans[i] != -1) bw.write(ans[i] + "\n");
         }
