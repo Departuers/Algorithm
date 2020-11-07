@@ -52,7 +52,7 @@ public class 搭配购买 {
         k = sc.nextInt();//钱
         for (int i = 1; i <= n; i++) {
             p[i] = i;
-        }
+        }//维护并查集,同时维护总体积和总价值,绑定到根节点,当然和连通块中点的数量是一样的思路
         for (int i = 1; i <= n; i++) {
             v[i] = sc.nextInt();
             w[i] = sc.nextInt();

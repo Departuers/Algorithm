@@ -6,6 +6,7 @@ import java.util.StringTokenizer;
 import static java.lang.System.in;
 
 /**
+ * https://www.acwing.com/solution/content/11000/
  * 有一个划分为N列的星际战场，各列依次编号为1,2,…,N。
  * 有N艘战舰，也依次编号为1,2,…,N,其中第i号战舰处于第i列。
  * 有T条指令，每条指令格式为以下两种之一：
@@ -33,15 +34,16 @@ import static java.lang.System.in;
  * 1
  * 1. 如果只问是否在同一列,那么直接并查集就可以,
  * 如何维护相差多少战舰呢
- * 2.同时维护间隔多少战舰,绑定到根节点
+ * 2.同时维护间隔多少战舰,绑定到根节点,到排头的距离
  * 用前缀和的思想统一维护当前战舰和第一个的距离记为d[],显然...
- * 1.  |d(x)-d(y)|-1
+ * 1.  |d(x)-d(y)|-1,由于是间隔多少战舰,距离转化为间隔要-1
  * 2.  特判如果 x==y 返回-1
  * 如何维护呢,
  * 1. 让排头当根节点
  * 2. d[pa]=d[pb]
  * 3. size[pb]+=size[pa]
  * 这个可以维护到根节点的距离
+ *
  */
 public class 银河英雄传说 {
     public static void main(String[] args) throws IOException {
@@ -59,17 +61,20 @@ public class 银河英雄传说 {
             if (ne.charAt(0) == 'M') {
                 pa = find(a);
                 pb = find(b);
-                d[pa] = size[pb];//最重要
+                //pa指向pb,pa这颗树挂在pb上
+                //d[pa]初始化为pb这颗树的高度
+                d[pa] = size[pb];//d表示,该节点到根节点的距离
                 //pa这颗子树到pb的距离就是size[pb]
                 size[pb] += size[pa];//pb这一列的元素多了pa个
                 //pb这一列多了pa个元素
                 p[pa] = pb;
                 //pa指向pb
             } else {
-                pa = find(a);
+                pa = find(a);//a,b都直接指向根节点
                 pb = find(b);
                 if (pa != pb) System.out.println(-1);
                 else System.out.println(Math.max(Math.abs(d[a] - d[b]) - 1, 0));
+                //d[a],d[b]都是他们到根的距离,相等返回0,和0取max
             }
         }
     }

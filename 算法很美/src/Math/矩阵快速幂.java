@@ -14,7 +14,7 @@ public class 矩阵快速幂 {
 //
 //        System.out.println(ex(3, 3));
 //        System.out.println(3 >> 1);
-        for (int i = 1; i < 66; i++) {
+        for (int i = 1; i < 40; i++) {
             System.out.println(fib(i));
         }
     }
@@ -99,7 +99,7 @@ public class 矩阵快速幂 {
      */
     public static long fib(int n) {
         long[][] c = {{0, 1}, {1, 1}};//f(n)=f(n-1)+f(n-2)
-        long[][] res = matrixPower(c, n - 1);
+        long[][] res = matrixPower(c, n -2);
         res = multiply(new long[][]{{2, 3}}, res);//前2个基础数字,基本条件
         return res[0][0];
     }

@@ -34,6 +34,7 @@ import java.util.Scanner;
  * 5 7
  * 输出样例：
  * 2
+ *
  * 给定一个无向连通图,问最少加多少条边,可以将其变成一个边的双连通分量
  * 结论:对于有向图,最少加max(p,q),对于无向图(cnt+1)/2
  * <p>
@@ -42,11 +43,14 @@ import java.util.Scanner;
  * 边的双连通分量:不包含桥=>x到y存在路径,x到y中的路径上的任何一条边都不是桥,删完边是可以连通的
  * 缩点过后,(叶节点+1)/2
  * tarjan+缩点
+ * 缩点之后,叶子节点的数量+1的一半
  * 缩点过后,变成一颗树,所有的边都是桥
  * 对于树当中所有所有度数为1的点至少加上一条边
- * 两个叶节点相连,如果有富余,随便连,所以如下
+ * 两个叶节点相连,如果有单个剩余,随便连,所以如下
+ *
  * 假设度数为1的点有cnt个
  * 那么cnt/2上取整,=(cnt+1)/2下取整
+ * 为什么是(cnt+1)/2呢
  */
 public class 冗余路径 {
     public static void main(String[] args) {
@@ -61,9 +65,9 @@ public class 冗余路径 {
             add(b, a);
         }
         tarjan(1, -1);
-        for (int i = 2; i < idx; i++) {
-            if (isbirdge[i])
-                d[id[e[i]]]++;
+        for (int i = 2; i < idx; i++) {//枚举每条边
+            if (isbirdge[i])//这条边是桥
+                d[id[e[i]]]++;//出边所在的联通分量入度
         }
         int cnt = 0;
         for (int i = 1; i <= dccCnt; i++) {
@@ -93,10 +97,11 @@ public class 冗余路径 {
             if (dfn[j] == 0) {
                 tarjan(j, i);
                 low[u] = Math.min(low[u], low[j]);
-                if (dfn[u] < low[j]) {//是桥
+                if (dfn[u] < low[j]) {//是桥,
+                    //把双向边都标记为桥
                     isbirdge[i] = isbirdge[i ^ 1] = true;
                 }
-            } else if (i != (fa ^ 1)) {//不是父节点的
+            } else if (i != (fa ^ 1)) {//不是反向边
                 low[u] = Math.min(low[u], dfn[j]);
             }
         }

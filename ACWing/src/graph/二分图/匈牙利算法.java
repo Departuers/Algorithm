@@ -58,8 +58,7 @@ public class 匈牙利算法 {
             add(sc.nextInt(), sc.nextInt());
         }
         for (int i = 1; i <= n1; i++) {
-            Arrays.fill(vis, false);
-            if (find(i)) res++;
+            if (find(i,i)) res++;
         }
         System.out.println(res);
     }
@@ -72,22 +71,21 @@ public class 匈牙利算法 {
 
     static int res = 0;
 
-    static boolean find(int v) {
-        for (int i = he[v]; i != 0; i = ne[i]) {
-            int u = e[i];
-            if (!vis[u]) {
-                vis[u] = true;
-                if (match[u] == 0 || find(match[u])) {
-                    match[u] = v;
-                    return true;
-                }
+    static boolean find(int u, int tag) {
+        if (st[u] == tag) return false;
+        st[u] = tag;
+        for (int i = he[u]; i != 0; i = ne[i]) {
+            int j = e[i];
+            if (match[j] == 0 || find(match[j], tag)) {
+                match[j] = u;
+                return true;
             }
         }
         return false;
     }
 
     static int[] match = new int[10006];
-    static boolean[] vis = new boolean[10006];
+    static int[] st = new int[10005];
     static int n, m, cnt = 1;
     static int[] e = new int[20005];
     static int[] he = new int[10005];

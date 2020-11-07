@@ -50,7 +50,7 @@ public class 格子游戏 {
         int res = 0;
         int a, b, x, y, pa, pb;
         String s, t;
-        for (int i = 1; i <= m; i++) {
+        for (int i = 1; i <= m; i++) {//枚举操作步数
             x = sc.nextInt();
             y = sc.nextInt();
             t = sc.next();
@@ -60,6 +60,7 @@ public class 格子游戏 {
             a = get(x, y);
             if (t.charAt(0) == 'D') b = get(x + 1, y);
             else b = get(x, y + 1);
+
             pa = find(a);
             pb = find(b);
             if (pa == pb) {

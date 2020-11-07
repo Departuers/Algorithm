@@ -8,6 +8,7 @@ import static java.lang.System.in;
 
 /**
  * https://www.acwing.com/solution/content/7691/
+ * 利用快排的思想
  */
 public class 静态第k大数 {
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

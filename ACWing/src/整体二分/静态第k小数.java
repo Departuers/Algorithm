@@ -6,6 +6,8 @@ import java.util.*;
 
 /**
  * https://www.acwing.com/solution/content/7691/
+ * 利用快排的思想
+ * 整体二分
  */
 public class 静态第k小数 {
 

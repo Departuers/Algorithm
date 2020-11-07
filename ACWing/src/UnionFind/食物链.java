@@ -7,17 +7,18 @@ import java.util.Scanner;
  * 带权并查集
  * 精髓:只要两个元素在一个集合里面，
  * 通过它们与根节点的距离就能知道它们的相对关系
+ *
  */
 public class 食物链 {
 
-    static int[] p = new int[100005], dir = new int[1000005];
+    static int[] p = new int[100005], d = new int[1000005];
 
     static int find(int x) {
         if (p[x] != x) {
             int t = find(p[x]);
             //t代表最祖先节点
-            dir[x] += dir[p[x]];
-            //记录p[x]这个节点到祖先的距离
+            d[x] += d[p[x]];
+            //记录p[x]这个节点到祖先的距离,带权并查集精髓
             p[x] = t;
         }
         return p[x];
@@ -40,19 +41,20 @@ public class 食物链 {
             y = sc.nextInt();
             //如果没有这种动物,肯定就是假话
             if (x > n || y > n) res++;
+
             else {
                 int px = find(x), py = find(y);
                 if (t == 1) {
-                    if (px == py && Math.abs((dir[x] - dir[y])) % 3 != 0) res++;
+                    if (px == py && Math.abs((d[x] - d[y])) % 3 != 0) res++;
                     else {
                         p[px] = py;
-                        dir[px] = dir[y] - dir[x];
+                        d[px] = d[y] - d[x];
                     }
                 } else {
-                    if (px == py && Math.abs((dir[x] - dir[y] - 1)) % 3 != 0) res++;
+                    if (px == py && Math.abs((d[x] - d[y] - 1)) % 3 != 0) res++;
                     else if (px != py) {
                         p[px] = py;
-                        dir[px] = dir[y] + 1 - dir[x];
+                        d[px] = d[y] + 1 - d[x];
                     }
                 }
             }
