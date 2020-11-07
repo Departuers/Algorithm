@@ -131,9 +131,9 @@ public class 带修改区间k小 {
         int mid = vl + vr >> 1, l = 0, r = 0;
         for (int i = ql; i <= qr; i++) {
             if (q[i].op == 1) {//是修改
-                if (q[i].y <= mid) {
+                if (q[i].y <= mid) {//修改后的值在左边
                     add(q[i].x, q[i].k);
-                    lq[++l] = q[i];
+                    lq[++l] = q[i];//放在左边查询
                 } else {
                     rq[++r] = q[i];
                 }

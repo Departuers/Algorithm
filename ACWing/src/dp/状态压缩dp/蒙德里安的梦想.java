@@ -44,7 +44,6 @@ import java.util.Scanner;
 public class 蒙德里安的梦想 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int a, b;
         while (true) {
             n = sc.nextInt();
             m = sc.nextInt();
