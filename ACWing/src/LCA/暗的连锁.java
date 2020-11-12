@@ -145,6 +145,12 @@ public class 暗的连锁 {
         return fa[a][0];
     }
 
+    /**
+     * 树上前缀和
+     * @param u
+     * @param fa
+     * @return
+     */
     static int dfs(int u, int fa) {
         int res = d[u];
         for (int i = h[u]; i != 0; i = ne[i]) {

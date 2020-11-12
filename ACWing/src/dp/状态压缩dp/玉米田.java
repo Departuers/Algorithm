@@ -89,7 +89,7 @@ public class 玉米田 {
         System.out.println(f[m + 1][0]);
     }
 
-    static void fe() {
+    static void aheb() {
         int a, b;
         for (int i = 0; i < state.size(); i++) {
             for (int j = 0; j < state.size(); j++) {

@@ -42,7 +42,7 @@ public class 洛谷ST {
         bw.flush();
     }
 
-    private static void init() throws IOException {
+    static void init() throws IOException {
         log[1] = 0;
         for (int i = 2; i < 1e5; i++) {
             log[i] = log[i / 2] + 1;

@@ -58,7 +58,13 @@ public class 最大不相交区间数量 {
             no.add(new node(sc.nextInt(), sc.nextInt()));
         }
         Collections.sort(no);
-
+        int u = no.get(0).y, res = 0;
+        for (int i = 1; i < n; i++) {
+            if (no.get(i).x <= u) continue;
+            u = no.get(i).x;
+            res++;
+        }
+        System.out.println(res);
     }
 
     static int n, m;

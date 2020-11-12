@@ -46,7 +46,7 @@ public class Spfa {
             z = sc.nextInt();
             add(x, y, z);
         }
-        Arrays.fill(dis, Integer.MAX_VALUE);
+        Arrays.fill(dis, (int) 1e9);
         dis[1] = 0;
         ArrayDeque<Integer> q = new ArrayDeque<Integer>();
         q.add(1);
@@ -56,7 +56,7 @@ public class Spfa {
             vis[x] = false;
             for (int i = he[x]; i != 0; i = ne[i]) {
                 t = e[i];
-                if (dis[x] != Integer.MAX_VALUE && dis[t] > dis[x] + w[i]) {
+                if (dis[t] > dis[x] + w[i]) {
                     dis[t] = dis[x] + w[i];
                     if (!vis[t]) {
                         if (!q.isEmpty() && dis[t] < dis[q.peekFirst()]) {

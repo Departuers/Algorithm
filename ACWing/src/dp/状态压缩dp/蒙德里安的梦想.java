@@ -39,7 +39,6 @@ import java.util.Scanner;
  * 状态表示：这里将二维压缩为一维，如果方格有五行，则第i列的状态可以表示为11011，
  * 其中1表示从该位置开始横向放置1*2的长方形，
  * 0则表示没有放置。则f[i][j]表示第i列状态为j的方案数。首先考虑状态转移的约束条件。
- *
  */
 public class 蒙德里安的梦想 {
     public static void main(String[] args) {
@@ -48,6 +47,8 @@ public class 蒙德里安的梦想 {
             n = sc.nextInt();
             m = sc.nextInt();
             if (n == m && n == 0) break;
+
+            //预处理非法状态
             for (int i = 0; i <= 1 << n; i++) {
                 int cnt = 0;
                 vis[i] = true;
@@ -62,11 +63,11 @@ public class 蒙德里安的梦想 {
             for (int i = 0; i < f.length; i++) {
                 Arrays.fill(f[i], 0);
             }
-            
+
             f[0][0] = 1;
             for (int i = 1; i <= m; i++) {
-                for (int j = 0; j < 1 << n; j++) {
-                    for (int k = 0; k < 1 << n; k++) {
+                for (int j = 0; j < 1 << n; j++) {//枚举状态为j
+                    for (int k = 0; k < 1 << n; k++) {//枚举倒数第二行
                         if ((j & k) == 0 && vis[(j | k)]) f[i][j] += f[i - 1][k];
                     }
                 }

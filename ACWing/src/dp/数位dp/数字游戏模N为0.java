@@ -50,6 +50,7 @@ public class 数字游戏模N为0 {
             for (int j = 0; j <= 9; j++) {//枚举最高位j
                 for (int k = 0; k < P; k++) {//枚举余数0~P
                     for (int x = 0; x <= 9; x++) {//枚举倒数第二位填x
+                        //个位数字之和是k,后面的余数是(k-j)我们加上j之后modP的余数才是k
                         f[i][j][k] += f[i - 1][x][mod(k - j, P)];
                     }
                 }

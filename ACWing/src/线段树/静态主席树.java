@@ -79,6 +79,7 @@ public class 静态主席树 {
     public static int[] tree = new int[maxn * 32];
     public static int[] lson = new int[maxn * 32];
     public static int[] rson = new int[maxn * 32];
+
     public static int[] c = new int[maxn];
     public static int[] root = new int[maxn];
     public static int[] a = new int[maxn];
@@ -91,7 +92,6 @@ public class 静态主席树 {
         tree[idx] = tree[pre];
         lson[idx] = lson[pre];
         rson[idx] = rson[pre];
-
         now = idx;
         tree[now]++;
         if (l == r) return now;

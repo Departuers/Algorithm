@@ -70,17 +70,6 @@ public class 哈密尔顿回路 {
             }
         }
 
-        for (int i = 0; i < 1 << n; i++) {
-            for (int j = 0; j < n; j++) {
-                if ((i >> j & 1) != 0) {
-                    for (int k = 0; k < n; k++) {
-                        if (((i - (1 << j)) >> k & 1) != 0) {
-                            
-                        }
-                    }
-                }
-            }
-        }
         System.out.println(f[(1 << n) - 1][n - 1]);
         //从0走到j路径为1111111的最短路径,也就是经过所有点到达n-1这个点
 

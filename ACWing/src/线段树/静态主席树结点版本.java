@@ -61,9 +61,6 @@ public class 静态主席树结点版本 {
         for (int i = 1; i <= n; i++) {
             a[i] = Arrays.binarySearch(d, 1, 1 + len, a[i]);
         }
-        for (int i = 0; i < tr.length; i++) {
-            tr[i] = new seg(0, 0, 0);
-        }
         T[0] = build(1, len + 1);
         for (int i = 1; i <= n; i++) {
             T[i] = update(T[i - 1], 1, len, a[i]);

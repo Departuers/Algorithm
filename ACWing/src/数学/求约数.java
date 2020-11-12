@@ -33,6 +33,7 @@ public class 求约数 {
             for (int i = 1; i <= t / i; i++) {
                 if (t % i == 0) {
                     res.add(i);
+                    //不是完全平方数
                     if (i != t / i) res.add(t / i);//一个数约数是成对出现的,我们可以成对整进去
                 }
             }
